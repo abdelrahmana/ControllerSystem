@@ -3,4 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="black">#192435</color>
+    <color name="gray">#B6B6B6</color>
+    <color name="login_gray">#747f8e</color>
+    <color name="error_color">#d56976</color>
+    <color name="orange_color">#f2864d</color>
 </resources>
