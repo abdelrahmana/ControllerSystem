@@ -8,4 +8,13 @@
     <string name="login_text">تسجيل دخول</string>
     <string name="forget_password">نسيت كلمة المرور؟</string>
     <string name="password_text">كلمة المرور</string>
+    <string name="products_stores">المنتجات ومخازن</string>
+    <string name="reports">التقارير</string>
+    <string name="accountant_delegates">مندوبين و محاسبين</string>
+    <string name="delivery">توصيل</string>
+    <string name="make_order">انشاء طلبية</string>
+    <string name="special_customers">" عملاء مميزين"</string>
+    <string name="stores">مخازن</string>
+    <string name="products">منتجات</string>
+    <string name="add_product">اضف منتج</string>
 </resources>

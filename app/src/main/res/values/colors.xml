@@ -8,4 +8,9 @@
     <color name="login_gray">#747f8e</color>
     <color name="error_color">#d56976</color>
     <color name="orange_color">#f2864d</color>
+    <color name="colorOrange55">#8CDB7A59</color>
+    <color name="textColor">#192435</color>
+    <color name="textColor70">#B3192435</color>
+    <color name="selctedOrange">#f2864d</color>
+    <color name="white">#FFFFFF</color>
 </resources>

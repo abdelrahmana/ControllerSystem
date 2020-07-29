@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -35,7 +36,7 @@ object UtilKotlin {
     fun setLanguagePerActivity(activity : Activity, intent: Intent?){
         val currentLanguage = getSharedPrefs(
             activity
-        ).getString(PrefsModel.localLanguage, "en")?:"en"
+        ).getString(PrefsModel.localLanguage, "ar")?:"ar"
         //  if (UtilKotlin.getSharedPrefs(activity).getString(PrefsModel.localLanguage, "en").equals("en")) {
         val locale = Locale(currentLanguage)
         Locale.setDefault(locale)

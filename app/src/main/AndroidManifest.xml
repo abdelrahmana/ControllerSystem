@@ -9,24 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".admin.specialcustomers.AdminSpecialCustomersActivity"></activity>
+        <activity android:name=".admin.reports.AdminReportsActivity" />
+        <activity android:name=".admin.storesproducts.AdminStoresProductActivity" />
+        <activity android:name=".admin.makeorders.AdminMakeOrdersActivity" />
+        <activity android:name=".admin.delivery.AdminDeliveryActivity" />
+        <activity android:name=".admin.delegatesAccountants.AdminAccountantActivity" />
+        <activity android:name=".admin.AdminHomeActivity" />
         <activity android:name=".MainActivity">
-        <!--    <intent-filter>
+
+            <!--
+                <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
-
-        <activity android:name="com.example.controllersystemapp.common.ContainerActivityForFragment"
-           >
+        <activity android:name=".common.ContainerActivityForFragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.util.CommonActivity"
-           />
+        <activity android:name="com.example.util.CommonActivity" />
     </application>
 
 </manifest>
