@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.storesproducts.adapters.ViewPagerStoresProductAdapter
 import com.example.util.CommonActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -60,7 +61,10 @@ class AdminStoresProductActivity : CommonActivity(){
         titlesTabList.add(getString(R.string.products))
         titlesTabList.add(getString(R.string.stores))
         val viewPagerAdaptor =
-            ViewPagerStoresProductAdapter(supportFragmentManager, titlesTabList)
+            ViewPagerStoresProductAdapter(
+                supportFragmentManager,
+                titlesTabList
+            )
         viewPagerStoresProduct.adapter = viewPagerAdaptor
         productStoreTabLayout.setupWithViewPager(viewPagerStoresProduct)
         viewPagerStoresProduct.clipToPadding = false

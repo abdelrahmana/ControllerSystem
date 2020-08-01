@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_130sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="5dp"
+    android:layout_marginBottom="14dp"
+    app:cardElevation="5dp"
+    android:layout_marginStart="@dimen/_16sdp"
+    android:layout_marginEnd="@dimen/_16sdp"
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        >
+
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           android:layout_marginTop="@dimen/_20sdp"
+           android:id="@+id/imgContainer"
+
+           >
+
+           <ImageView
+               android:id="@+id/productImg"
+               android:layout_width="@dimen/_30sdp"
+               android:layout_height="@dimen/_30sdp"
+               android:layout_marginStart="@dimen/_16sdp"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:srcCompat="@drawable/ic_product_img" />
+
+           <TextView
+               android:id="@+id/productName"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="@dimen/_8sdp"
+               android:layout_marginEnd="@dimen/_4sdp"
+               android:textAlignment="viewStart"
+               android:text="سماعات"
+               android:fontFamily="@font/cairo_semibold"
+               android:textColor="@color/text_black"
+               android:textSize="15sp"
+               app:layout_constraintEnd_toStartOf="@+id/price"
+               app:layout_constraintStart_toEndOf="@+id/productImg"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <TextView
+               android:id="@+id/productDesc"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="@dimen/_8sdp"
+               android:text="مخزن الكترونيات / مخزن 1"
+               android:fontFamily="@font/cairo_regular"
+               android:textSize="12sp"
+               android:textColor="@color/text_black"
+               android:layout_marginEnd="@dimen/_4sdp"
+               android:textAlignment="viewStart"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toStartOf="@+id/quantity"
+               app:layout_constraintStart_toEndOf="@+id/productImg"
+               app:layout_constraintTop_toBottomOf="@+id/productName" />
+
+
+           <TextView
+               android:id="@+id/currancy"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="رس"
+               android:textSize="12sp"
+               android:layout_marginEnd="@dimen/_16sdp"
+               android:textColor="@color/text_grey"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <TextView
+               android:id="@+id/price"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="30"
+               android:textSize="16sp"
+               android:textStyle="bold"
+               app:layout_constraintStart_toEndOf="@+id/productName"
+               android:layout_marginEnd="@dimen/_3sdp"
+               android:textColor="@color/black_bold"
+               android:fontFamily="@font/ffshamelfamily_sansonebold"
+               app:layout_constraintEnd_toStartOf="@+id/currancy"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <TextView
+               android:id="@+id/quantity"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="2"
+               android:textColor="@color/text_black"
+               android:fontFamily="@font/ffshamelfamily_sansonebold"
+               android:textStyle="bold"
+               android:textSize="16sp"
+               app:layout_constraintBottom_toBottomOf="@id/piece_text"
+               android:layout_marginEnd="@dimen/_3sdp"
+               app:layout_constraintEnd_toStartOf="@+id/piece_text"
+               app:layout_constraintTop_toTopOf="@+id/piece_text" />
+
+           <TextView
+               android:id="@+id/piece_text"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/piece"
+               android:textSize="12sp"
+               android:layout_marginTop="@dimen/_5sdp"
+               android:textColor="@color/text_black"
+               android:layout_marginEnd="@dimen/_16sdp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/currancy" />
+
+
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImg"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@color/login_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/login_gray"
+            android:text="@string/product_status"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/circleImg"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer" />
+
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/un_selected"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/login_gray"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/status"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
+
+        <ImageView
+            android:id="@+id/arrowImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_arrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/more"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textSize="12sp"
+            android:textColor="@color/black_bold"
+            app:layout_constraintTop_toTopOf="@+id/arrowImg"
+            app:layout_constraintBottom_toBottomOf="@+id/arrowImg"
+            app:layout_constraintEnd_toStartOf="@+id/arrowImg"
+
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</com.google.android.material.card.MaterialCardView>

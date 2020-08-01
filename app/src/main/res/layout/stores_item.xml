@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_130sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="5dp"
+    android:layout_marginBottom="14dp"
+    app:cardElevation="5dp"
+    android:layout_marginStart="@dimen/_16sdp"
+    android:layout_marginEnd="@dimen/_16sdp"
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        >
+
+        <ImageView
+            android:id="@+id/storeImg"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_stores_img" />
+
+        <TextView
+            android:id="@+id/storeName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="مخزن 1"
+            android:textColor="@color/text_black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/cairo_semibold"
+            android:textAlignment="viewStart"
+            app:layout_constraintEnd_toStartOf="@+id/storeQuantity"
+            app:layout_constraintStart_toEndOf="@+id/storeImg"
+            app:layout_constraintTop_toTopOf="@+id/storeImg" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" متجر"
+            android:textSize="12sp"
+            android:textColor="@color/text_black"
+            android:layout_marginEnd="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/storeQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/black_bold"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView2"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+        <ImageView
+            android:id="@+id/locationIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/storeName"
+            app:layout_constraintTop_toBottomOf="@+id/storeName"
+            app:srcCompat="@drawable/ic_location" />
+
+        <TextView
+            android:id="@+id/storeAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="15sp"
+            android:textColor="@color/text_black"
+            app:layout_constraintEnd_toEndOf="@+id/storeName"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="الرياض ، عاصمة المملكة العربية السعودية "
+            app:layout_constraintStart_toEndOf="@+id/locationIcon"
+            app:layout_constraintTop_toBottomOf="@+id/storeName" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImg"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@color/green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/storeName"
+            app:layout_constraintTop_toBottomOf="@+id/storeAddress"
+            app:layout_constraintVertical_bias="0.186" />
+
+        <TextView
+            android:id="@+id/belongTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:textColor="@color/green"
+            android:text="@string/belong"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/circleImg"
+            app:layout_constraintTop_toTopOf="@+id/circleImg"
+             />
+
+
+        <TextView
+            android:id="@+id/belongName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="فيصل الرابحي"
+            android:textColor="@color/green"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/circleImg"
+            app:layout_constraintStart_toEndOf="@+id/belongTitle"
+
+            />
+
+        <ImageView
+            android:id="@+id/arrowImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/circleImg"
+            app:srcCompat="@drawable/ic_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/more"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textSize="12sp"
+            android:textColor="@color/black_bold"
+            app:layout_constraintTop_toTopOf="@+id/arrowImg"
+            app:layout_constraintBottom_toBottomOf="@+id/arrowImg"
+            app:layout_constraintEnd_toStartOf="@+id/arrowImg"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</com.google.android.material.card.MaterialCardView>

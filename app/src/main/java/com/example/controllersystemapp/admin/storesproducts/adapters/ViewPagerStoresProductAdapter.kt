@@ -1,8 +1,10 @@
-package com.example.controllersystemapp.admin.storesproducts
-import android.os.Bundle
+package com.example.controllersystemapp.admin.storesproducts.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.example.controllersystemapp.admin.storesproducts.fragments.ProductsFragment
+import com.example.controllersystemapp.admin.storesproducts.fragments.StoresFragment
+
 class ViewPagerStoresProductAdapter(fm:  FragmentManager,var arrayListFragmentName: ArrayList<String>)
     : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
@@ -44,9 +46,11 @@ class ViewPagerStoresProductAdapter(fm:  FragmentManager,var arrayListFragmentNa
         for (i in 0 until arrayListFragmentName.size) {
             when (position) {
                 0 ->
-                    fragment = ProductsFragment()
+                    fragment =
+                        ProductsFragment()
                 1 ->
-                    fragment = StoresFragment()
+                    fragment =
+                        StoresFragment()
 
             }
         }

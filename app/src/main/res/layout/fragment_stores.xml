@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".admin.storesproducts.StoresFragment">
+    tools:context=".admin.storesproducts.fragments.StoresFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -14,85 +14,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/storesRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_16sdp"
+                />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
     <LinearLayout
+        android:id="@+id/noStoresData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/stores"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-            /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stores"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_24sdp"
-        />
+        android:visibility="gone">
+        <include layout="@layout/no_stores" />
     </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,4 +17,14 @@
     <string name="stores">مخازن</string>
     <string name="products">منتجات</string>
     <string name="add_product">اضف منتج</string>
+    <string name="piece">قطعة</string>
+    <string name="product_status">"حالة الطلب / "</string>
+    <string name="more">المزيد</string>
+    <string name="selected">تم تحديد</string>
+    <string name="un_selected">غير محدد</string>
+    <string name="no_products">"  لا توجد منتجات متاحه "</string>
+    <string name="plz_add_prod">من فضلك اضف منتج</string>
+    <string name="belong">ذمة /</string>
+    <string name="no_stores">"  لا توجد مخان متاحه "</string>
+    <string name="plz_add_store">من فضلك اضف مخزن</string>
 </resources>

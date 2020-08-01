@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.storesproducts.ProductsFragment">
+    tools:context=".admin.storesproducts.fragments.ProductsFragment">
 
 
     <androidx.core.widget.NestedScrollView
@@ -16,107 +16,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/products"
-                android:textSize="@dimen/_20sdp"
-                android:layout_margin="@dimen/_24sdp"
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/productsRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_16sdp"
                 />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/products"
-                android:textSize="@dimen/_20sdp"
-                android:layout_margin="@dimen/_24sdp"
-
-                />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            android:textSize="@dimen/_20sdp"
-            android:layout_margin="@dimen/_24sdp"
-
-            />
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/noProductData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <include layout="@layout/no_products" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
