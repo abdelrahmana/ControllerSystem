@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.AdminHomeActivity
-import com.example.controllersystemapp.admin.storesproducts.AdminStoresProductActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {

@@ -42,4 +42,26 @@
         android:visibility="gone">
         <include layout="@layout/no_stores" />
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:visibility="gone"
+        android:id="@+id/addProductBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        app:backgroundTint="@color/orange_color"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:cornerRadius="5dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="@string/add_store"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

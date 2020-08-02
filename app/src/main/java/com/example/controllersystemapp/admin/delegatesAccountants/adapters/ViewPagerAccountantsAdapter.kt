@@ -1,11 +1,13 @@
-package com.example.controllersystemapp.admin.storesproducts.adapters
+package com.example.controllersystemapp.admin.delegatesAccountants.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AccountantsFragment
+import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DelegatesFragment
 import com.example.controllersystemapp.admin.storesproducts.fragments.ProductsFragment
 import com.example.controllersystemapp.admin.storesproducts.fragments.StoresFragment
 
-class ViewPagerStoresProductAdapter(fm:  FragmentManager,var arrayListFragmentName: ArrayList<String>)
+class ViewPagerAccountantsAdapter(fm:  FragmentManager, var arrayListFragmentName: ArrayList<String>)
     : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
 
@@ -18,10 +20,10 @@ class ViewPagerStoresProductAdapter(fm:  FragmentManager,var arrayListFragmentNa
             when (position) {
                 0 ->
                     fragment =
-                        ProductsFragment()
+                        DelegatesFragment()
                 1 ->
                     fragment =
-                        StoresFragment()
+                        AccountantsFragment()
 
             }
         }

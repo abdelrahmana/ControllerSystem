@@ -1,7 +1,6 @@
 package com.example.controllersystemapp.admin
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,13 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.delegatesAccountants.AdminAccountantActivity
-import com.example.controllersystemapp.admin.delivery.AdminDeliveryActivity
-import com.example.controllersystemapp.admin.makeorders.AdminMakeOrdersActivity
-import com.example.controllersystemapp.admin.reports.AdminReportsActivity
-import com.example.controllersystemapp.admin.specialcustomers.AdminSpecialCustomersActivity
-import com.example.controllersystemapp.admin.storesproducts.AdminStoresProductActivity
 import com.example.util.CommonActivity
+import com.example.util.NameUtils.delegatesAccountantsFragmet
+import com.example.util.NameUtils.deliveryFragmet
+import com.example.util.NameUtils.makeOrderFragmet
+import com.example.util.NameUtils.redirectFragmet
+import com.example.util.NameUtils.reporstFragmet
+import com.example.util.NameUtils.specialCustomersFragmet
+import com.example.util.NameUtils.storeProductsFragmet
 import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.activity_admin_home.*
 
@@ -50,37 +50,55 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
 
                 removeCardSelection()
                 setCardSelection(productsStoreCard , productStoreImg , productStoreImgText ,R.drawable.ic_products_store_selected)
-                startActivity(Intent(this , AdminStoresProductActivity::class.java))
+                val intent = Intent(this , RedirectFragmentsActivity::class.java)
+                intent.putExtra(redirectFragmet , storeProductsFragmet)
+                startActivity(intent)
+                //startActivity(Intent(this , AdminStoresProductActivity::class.java))
             }
 
             R.id.accountantDelegatCard -> {
                 removeCardSelection()
                 setCardSelection(accountantDelegatCard , accountantDelegatImage , accountantDelegatText ,R.drawable.ic_accountant_selected)
-                startActivity(Intent(this , AdminAccountantActivity::class.java))
+                //startActivity(Intent(this , AdminAccountantActivity::class.java))
+                val intent = Intent(this , RedirectFragmentsActivity::class.java)
+                intent.putExtra(redirectFragmet , delegatesAccountantsFragmet)
+                startActivity(intent)
             }
 
             R.id.reportsCard -> {
                 removeCardSelection()
                 setCardSelection(reportsCard , reportsImg , reportsText ,R.drawable.ic_reporst_selected)
-                startActivity(Intent(this , AdminReportsActivity::class.java))
+                //startActivity(Intent(this , AdminReportsActivity::class.java))
+                val intent = Intent(this , RedirectFragmentsActivity::class.java)
+                intent.putExtra(redirectFragmet , reporstFragmet)
+                startActivity(intent)
             }
 
             R.id.deliveryCard -> {
                 removeCardSelection()
                 setCardSelection(deliveryCard , deliveryImg , deliveryText ,R.drawable.ic_delivery_selected)
-                startActivity(Intent(this , AdminDeliveryActivity::class.java))
+                //startActivity(Intent(this , AdminDeliveryActivity::class.java))
+                val intent = Intent(this , RedirectFragmentsActivity::class.java)
+                intent.putExtra(redirectFragmet , deliveryFragmet)
+                startActivity(intent)
             }
 
             R.id.makeOrderCard -> {
                 removeCardSelection()
                 setCardSelection(makeOrderCard , makeOrderImg , makeOrderText ,R.drawable.ic_order_selected)
-                startActivity(Intent(this , AdminMakeOrdersActivity::class.java))
+                //startActivity(Intent(this , AdminMakeOrdersActivity::class.java))
+                val intent = Intent(this , RedirectFragmentsActivity::class.java)
+                intent.putExtra(redirectFragmet , makeOrderFragmet)
+                startActivity(intent)
             }
 
             R.id.customersCard -> {
                 removeCardSelection()
                 setCardSelection(customersCard , customerImg , customerText ,R.drawable.ic_customers_selected)
-                startActivity(Intent(this , AdminSpecialCustomersActivity::class.java))
+                //startActivity(Intent(this , AdminSpecialCustomersActivity::class.java))
+                val intent = Intent(this , RedirectFragmentsActivity::class.java)
+                intent.putExtra(redirectFragmet , specialCustomersFragmet)
+                startActivity(intent)
             }
 
         }
