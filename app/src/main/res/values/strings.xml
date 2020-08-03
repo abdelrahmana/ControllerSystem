@@ -29,5 +29,9 @@
     <string name="plz_add_store">من فضلك اضف مخزن</string>
     <string name="add_store">اضف مخزن</string>
     <string name="delegates">مندوبين</string>
-    <string name="accounatnt">محاسبين</string>
+    <string name="accounatnts">محاسبين</string>
+    <string name="delegate">" مندوب"</string>
+    <string name="accounatnt">محاسب</string>
+    <string name="orders">الطلبات</string>
+    <string name="portfolio">المحفظة</string>
 </resources>

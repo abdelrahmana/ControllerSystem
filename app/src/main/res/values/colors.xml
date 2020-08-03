@@ -17,5 +17,8 @@
     <color name="text_grey">#737373</color>
     <color name="black_bold">#141414</color>
     <color name="green">#69c193</color>
+    <color name="grey_bg">#f3f1f1</color>
+
+
 
 </resources>

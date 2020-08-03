@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/_70sdp"
     tools:context=".admin.delegatesAccountants.fragments.DelegatesFragment">
 
 
@@ -18,73 +17,43 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:background="@color/grey_bg"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/delegatesCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ffshamelfamily_sansonebold"
+                    android:text="800"
+                    android:textColor="@color/black_bold"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/delegateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="@string/delegate"
+                    android:textColor="@color/text_black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/delegatesRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_24sdp"
-                android:text="@string/delegates"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_24sdp"
-                android:text="@string/delegates"
-                />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />  <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_24sdp"
-            android:text="@string/delegates"
-            />
+                android:layout_marginTop="@dimen/_14sdp" />
 
 
         </LinearLayout>

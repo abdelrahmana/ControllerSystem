@@ -5,8 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
+import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.util.PrefsUtil.getSharedPrefs
@@ -69,5 +72,33 @@ object UtilKotlin {
 
          */
         res.updateConfiguration(conf, dm)
+    }
+
+    fun replaceFragmentWithBack(
+        context: Context, currentFragment: Fragment, newFragment: Fragment,
+        bundle: Bundle?, id: Int, requestCode: Int, flag: Boolean?, back: Boolean?
+    ) {
+        //(context as FragmentActivity)
+        Handler().post {
+            val manager =
+                (context as FragmentActivity).supportFragmentManager// newFragment.fragmentManager
+            val ft = manager!!.beginTransaction()
+            if (bundle != null) {
+                newFragment.arguments = bundle
+            }
+            if (flag!!) {
+                /*   ft.setCustomAnimations(R.anim.slide_in_right,
+                           R.anim.slide_out_right, R.anim.translat_right,
+                           R.anim.translat_left)*/
+            } else {
+                ft.setCustomAnimations(0, 0)
+            }
+            ft.replace(id, newFragment, newFragment.javaClass.getName())
+            if (back!!) {
+                ft.addToBackStack(null)
+                newFragment.setTargetFragment(currentFragment, requestCode)
+            }
+            ft.commit()
+        }
     }
 }
