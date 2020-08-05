@@ -9,16 +9,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.interfaces.OnItemClickListener
-import com.example.controllersystemapp.admin.storesproducts.adapters.ProductsAdapter
+import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.storesproducts.adapters.StoresAdapter
-import com.example.controllersystemapp.admin.storesproducts.models.ProductsModel
 import com.example.controllersystemapp.admin.storesproducts.models.StoresModel
-import kotlinx.android.synthetic.main.fragment_products.*
 import kotlinx.android.synthetic.main.fragment_stores.*
 
 
-class StoresFragment : Fragment() , OnItemClickListener {
+class StoresFragment : Fragment() , OnRecyclerItemClickListener {
 
     lateinit var rootView: View
     var storeList = ArrayList<StoresModel>()

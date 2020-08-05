@@ -34,4 +34,6 @@
     <string name="accounatnt">محاسب</string>
     <string name="orders">الطلبات</string>
     <string name="portfolio">المحفظة</string>
+    <string name="delivered">تم التوصيل</string>
+    <string name="waiting">في الانتظار</string>
 </resources>

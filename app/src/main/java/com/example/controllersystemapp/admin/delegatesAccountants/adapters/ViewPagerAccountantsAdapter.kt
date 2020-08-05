@@ -11,15 +11,10 @@ import com.example.controllersystemapp.admin.delegatesAccountants.fragments.Dele
 class ViewPagerAccountantsAdapter(activity: FragmentActivity, fm:  FragmentManager, var arrayListFragmentName: ArrayList<String>)
     : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    init {
 
-        Log.d("back" , "initAdapter")
-
-    }
-
-    override fun getItemPosition(`object`: Any): Int {
-        return super.getItemPosition(`object`)
-    }
+//    override fun getItemPosition(`object`: Any): Int {
+//        return super.getItemPosition(`object`)
+//    }
 
     private var fragment: Fragment? = null
     // adaptor his views is a fragment

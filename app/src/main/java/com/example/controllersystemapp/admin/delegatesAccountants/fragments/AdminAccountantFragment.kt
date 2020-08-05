@@ -83,7 +83,6 @@ class AdminAccountantFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Log.d("back" , "onResume")
-
         setupTabLayout()
         tapClickChangeTextBold()
     }
@@ -130,7 +129,7 @@ class AdminAccountantFragment : Fragment() {
                     titlesTab
                 )
             }
-        viewPagerAdaptor?.notifyDataSetChanged()
+       // viewPagerAdaptor?.notifyDataSetChanged()
         viewPagerDelegatesAccountant?.adapter = viewPagerAdaptor
         delegatesAccountantTab?.setupWithViewPager(viewPagerDelegatesAccountant)
         viewPagerDelegatesAccountant?.clipToPadding = false

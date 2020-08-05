@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.admin.storesproducts.adapters
+package com.example.controllersystemapp.admin.delegatesAccountants.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,18 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsModel
-import kotlinx.android.synthetic.main.products_item.view.*
+import kotlinx.android.synthetic.main.delegate_order_item.view.*
 
-class ProductsAdapter(
+class DelegateOrdersAdapter(
     var context: Context,
     var productList: ArrayList<ProductsModel> ,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
-    RecyclerView.Adapter<ProductsAdapter.ViewHolder>(){
+    RecyclerView.Adapter<DelegateOrdersAdapter.ViewHolder>(){
 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.products_item , parent , false)
+        val view = LayoutInflater.from(context).inflate(R.layout.delegate_order_item , parent , false)
         return ViewHolder(view)
     }
 
@@ -43,24 +43,22 @@ class ProductsAdapter(
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-            itemView.productName.text = productsModel.name
-            itemView.productDesc.text = productsModel.desc
-            itemView.price.text = productsModel.price
-            itemView.quantity.text = productsModel.quantity.toString()
+            itemView.orderNumber.text = productsModel.desc
+            itemView.orderName.text = productsModel.name
+            itemView.orderPrice.text = productsModel.price
+            itemView.orderQuantity.text = productsModel.quantity.toString()
 
 
             if (productsModel.isSelected == 0)
             {
-                itemView.statusText.text = itemView.context.getString(R.string.un_selected)
-                itemView.status.setTextColor(ContextCompat.getColor(itemView.context , R.color.login_gray))
-                itemView.statusText.setTextColor(ContextCompat.getColor(itemView.context , R.color.login_gray))
-                itemView.circleImg.setImageDrawable(ContextCompat.getDrawable(itemView.context , R.color.login_gray))
+                itemView.statusDesc.text = itemView.context.getString(R.string.waiting)
+                itemView.statusDesc.setTextColor(ContextCompat.getColor(itemView.context , R.color.orange_light))
+                itemView.statusImg.setImageDrawable(ContextCompat.getDrawable(itemView.context , R.color.orange_light))
             }
             else{
-                itemView.statusText.text = itemView.context.getString(R.string.selected)
-                itemView.status.setTextColor(ContextCompat.getColor(itemView.context , R.color.green))
-                itemView.statusText.setTextColor(ContextCompat.getColor(itemView.context , R.color.green))
-                itemView.circleImg.setImageDrawable(ContextCompat.getDrawable(itemView.context , R.color.green))
+                itemView.statusDesc.text = itemView.context.getString(R.string.delivered)
+                itemView.statusDesc.setTextColor(ContextCompat.getColor(itemView.context , R.color.text_green))
+                itemView.statusImg.setImageDrawable(ContextCompat.getDrawable(itemView.context , R.color.text_green))
 
             }
 

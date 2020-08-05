@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.DelegatesAdapter
 import com.example.controllersystemapp.admin.delegatesAccountants.models.DelegatesModel
-import com.example.controllersystemapp.admin.interfaces.OnItemClickListener
+import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.util.UtilKotlin
-import kotlinx.android.synthetic.main.fragment_accountant.*
 import kotlinx.android.synthetic.main.fragment_delegates.*
 
-class DelegatesFragment : Fragment(), OnItemClickListener {
+class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 
     lateinit var delegatesAdapter: DelegatesAdapter
     var delegatesList = ArrayList<DelegatesModel>()

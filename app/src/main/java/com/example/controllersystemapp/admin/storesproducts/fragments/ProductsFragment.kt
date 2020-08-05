@@ -6,17 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.interfaces.OnItemClickListener
+import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.storesproducts.adapters.ProductsAdapter
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsModel
 import kotlinx.android.synthetic.main.fragment_products.*
 
 
-class ProductsFragment : Fragment()  , OnItemClickListener {
+class ProductsFragment : Fragment()  , OnRecyclerItemClickListener {
 
 
     lateinit var rootView: View

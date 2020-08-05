@@ -10,14 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.AccountantAdapter
-import com.example.controllersystemapp.admin.delegatesAccountants.adapters.DelegatesAdapter
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantModel
-import com.example.controllersystemapp.admin.delegatesAccountants.models.DelegatesModel
-import com.example.controllersystemapp.admin.interfaces.OnItemClickListener
+import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import kotlinx.android.synthetic.main.fragment_accountant.*
-import kotlinx.android.synthetic.main.fragment_delegates.*
 
-class AccountantsFragment : Fragment() , OnItemClickListener{
+class AccountantsFragment : Fragment() , OnRecyclerItemClickListener{
 
 
     lateinit var accountantAdapter: AccountantAdapter

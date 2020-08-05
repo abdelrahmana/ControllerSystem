@@ -6,30 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantModel
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import kotlinx.android.synthetic.main.delegate_item.view.*
+import com.example.controllersystemapp.admin.storesproducts.models.ProductsModel
+import kotlinx.android.synthetic.main.delegate_wallet_item.view.*
 
-class AccountantAdapter(
+class DelegateWalletAdapter(
     var context: Context,
-    var accountantsList: ArrayList<AccountantModel>,
+    var delegateWalletList: ArrayList<ProductsModel> ,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
-    RecyclerView.Adapter<AccountantAdapter.ViewHolder>(){
+    RecyclerView.Adapter<DelegateWalletAdapter.ViewHolder>(){
 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.delegate_item , parent , false)
+        val view = LayoutInflater.from(context).inflate(R.layout.delegate_wallet_item , parent , false)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return accountantsList.size
+        return delegateWalletList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bindView(accountantsList[position], onRecyclerItemClickListener)
+        holder.bindView(delegateWalletList[position], onRecyclerItemClickListener)
 
 
     }
@@ -38,15 +38,15 @@ class AccountantAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            accountantModel: AccountantModel,
+            productsModel: ProductsModel,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-            itemView.delegateName.text = accountantModel.name
-            itemView.delegatePhone.text = accountantModel.phone
-           // Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.delegateImg)
-
-
+            itemView.walletProdName.text = productsModel.name
+            itemView.walletProdDesc.text = productsModel.desc
+            itemView.walletProdPrice.text = productsModel.price
+            itemView.walletProdQuantity.text = productsModel.quantity.toString()
+            itemView.walletProdCurrancy.text = productsModel.currancy
             itemView.setOnClickListener {
 
                 onRecyclerItemClickListener.onItemClick(adapterPosition)

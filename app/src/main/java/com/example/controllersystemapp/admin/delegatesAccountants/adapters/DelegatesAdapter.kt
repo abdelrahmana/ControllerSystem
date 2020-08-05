@@ -4,20 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.models.DelegatesModel
-import com.example.controllersystemapp.admin.interfaces.OnItemClickListener
-import com.example.controllersystemapp.admin.storesproducts.models.ProductsModel
+import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import kotlinx.android.synthetic.main.delegate_item.view.*
-import kotlinx.android.synthetic.main.products_item.view.*
 
 class DelegatesAdapter(
     var context: Context,
     var delegateList: ArrayList<DelegatesModel>,
-    var onItemClickListener: OnItemClickListener) :
+    var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<DelegatesAdapter.ViewHolder>(){
 
 
@@ -33,7 +29,7 @@ class DelegatesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bindView(delegateList[position], onItemClickListener)
+        holder.bindView(delegateList[position], onRecyclerItemClickListener)
 
 
     }
@@ -43,7 +39,7 @@ class DelegatesAdapter(
     {
         fun bindView(
             delegatesModel: DelegatesModel,
-            onItemClickListener: OnItemClickListener
+            onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
             itemView.delegateName.text = delegatesModel.name
@@ -53,7 +49,7 @@ class DelegatesAdapter(
 
             itemView.setOnClickListener {
 
-                onItemClickListener.onItemClick(adapterPosition)
+                onRecyclerItemClickListener.onItemClick(adapterPosition)
 
             }
 

@@ -1,6 +1,6 @@
 package com.example.controllersystemapp.admin.interfaces
 
-interface OnItemClickListener {
+interface OnRecyclerItemClickListener {
 
     fun onItemClick(position : Int)
 

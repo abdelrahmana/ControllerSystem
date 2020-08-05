@@ -4,19 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.interfaces.OnItemClickListener
-import com.example.controllersystemapp.admin.storesproducts.models.ProductsModel
+import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.storesproducts.models.StoresModel
-import kotlinx.android.synthetic.main.products_item.view.*
 import kotlinx.android.synthetic.main.stores_item.view.*
 
 class StoresAdapter(
     var context: Context,
     var storeList: ArrayList<StoresModel> ,
-    var onItemClickListener: OnItemClickListener) :
+    var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<StoresAdapter.ViewHolder>(){
 
 
@@ -32,7 +29,7 @@ class StoresAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bindView(storeList[position], onItemClickListener)
+        holder.bindView(storeList[position], onRecyclerItemClickListener)
 
 
     }
@@ -42,7 +39,7 @@ class StoresAdapter(
     {
         fun bindView(
             storesModel: StoresModel,
-            onItemClickListener: OnItemClickListener
+            onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
             itemView.storeName.text = storesModel.name
@@ -52,7 +49,7 @@ class StoresAdapter(
 
             itemView.setOnClickListener {
 
-                onItemClickListener.onItemClick(adapterPosition)
+                onRecyclerItemClickListener.onItemClick(adapterPosition)
 
             }
 
