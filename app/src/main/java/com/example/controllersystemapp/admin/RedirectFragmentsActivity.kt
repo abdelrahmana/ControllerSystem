@@ -32,6 +32,7 @@ class RedirectFragmentsActivity : AppCompatActivity() {
 
         val fragment = intent.getStringExtra(redirectFragmet) ?: ""
         val bundle = Bundle()
+        var tag = ""
 
         when (fragment) {
             storeProductsFragmet -> {
@@ -66,7 +67,7 @@ class RedirectFragmentsActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout_direction, fragment, tag)
         //transaction.addToBackStack(tag)
-        transaction.addToBackStack(null)
+        transaction.addToBackStack(tag)
         transaction.commit()
 
     }

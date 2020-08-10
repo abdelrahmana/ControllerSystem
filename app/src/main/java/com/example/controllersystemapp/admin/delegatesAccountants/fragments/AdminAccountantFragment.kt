@@ -124,7 +124,6 @@ class AdminAccountantFragment : Fragment() {
         val viewPagerAdaptor =
             activity?.supportFragmentManager?.let {
                 ViewPagerAccountantsAdapter(
-                    activity!!,
                     it,
                     titlesTab
                 )

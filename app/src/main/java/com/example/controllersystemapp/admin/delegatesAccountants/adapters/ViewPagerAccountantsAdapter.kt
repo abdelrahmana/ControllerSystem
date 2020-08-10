@@ -5,16 +5,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AccountantsFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DelegatesFragment
 
-class ViewPagerAccountantsAdapter(activity: FragmentActivity, fm:  FragmentManager, var arrayListFragmentName: ArrayList<String>)
+class ViewPagerAccountantsAdapter(fm:  FragmentManager, var arrayListFragmentName: ArrayList<String>)
     : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-
-//    override fun getItemPosition(`object`: Any): Int {
-//        return super.getItemPosition(`object`)
-//    }
 
     private var fragment: Fragment? = null
     // adaptor his views is a fragment
@@ -37,6 +34,7 @@ class ViewPagerAccountantsAdapter(activity: FragmentActivity, fm:  FragmentManag
 
     }
 
+
     override fun getCount(): Int {
         return arrayListFragmentName.size;
     }
@@ -57,3 +55,11 @@ class ViewPagerAccountantsAdapter(activity: FragmentActivity, fm:  FragmentManag
         public val  fragmentType = "which_fragment_Tab" // get the current item
     }
 }
+
+
+
+
+
+
+
+
