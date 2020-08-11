@@ -10,16 +10,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.ViewPagerAccountantsAdapter
+import com.example.util.UtilKotlin
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_admin_home.*
 import kotlinx.android.synthetic.main.fragment_admin_accountant.*
 
 class AdminAccountantFragment : Fragment() {
 
-    var titlesTab = ArrayList<String>()
+   // var titlesTab = ArrayList<String>()
     lateinit var roorView: View
+    lateinit var viewPagerAdaptor : ViewPagerAccountantsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +41,18 @@ class AdminAccountantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewPagerAdaptor = ViewPagerAccountantsAdapter(this@AdminAccountantFragment)
+        viewPagerDelegatesAccountant?.adapter = viewPagerAdaptor
 
-        Log.d("back" , "onViewCreated")
+        TabLayoutMediator(delegatesAccountantTab, viewPagerDelegatesAccountant) { tab, position ->
+            when(position)
+            {
+                0 -> tab.text = getString(R.string.delegates)
+
+                1 -> tab.text = getString(R.string.accounatnts)
+            }
+
+        }.attach()
 
         backImgAccountant?.setOnClickListener {
 
@@ -56,34 +70,45 @@ class AdminAccountantFragment : Fragment() {
         }
 
         addAccountantBtn?.setOnClickListener {
-            Toast.makeText(context , "addAccountant" , Toast.LENGTH_LONG).show()
-            //go to addAccountant Screen
+            UtilKotlin.changeFragmentBack(activity!! ,AddAccountantFragment() , "AddAccountant" )
         }
 
-        viewPagerDelegatesAccountant.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(i: Int, v: Float, i1: Int) {}
-            override fun onPageSelected(i: Int) {
-
-                if (i == 0)
-                {
+        viewPagerDelegatesAccountant.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                if (position == 0) {
                     addAccountantBtn?.visibility = View.GONE
                 }
-                else if (i == 1)
-                {
+                else if (position == 1) {
                     addAccountantBtn?.visibility = View.VISIBLE
                 }
 
+                super.onPageSelected(position)
             }
-
-            override fun onPageScrollStateChanged(i: Int) {}
         })
+//        viewPagerDelegatesAccountant.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+//            override fun onPageScrolled(i: Int, v: Float, i1: Int) {}
+//            override fun onPageSelected(i: Int) {
+//
+//                if (i == 0)
+//                {
+//                    addAccountantBtn?.visibility = View.GONE
+//                }
+//                else if (i == 1)
+//                {
+//                    addAccountantBtn?.visibility = View.VISIBLE
+//                }
+//
+//            }
+//
+//            override fun onPageScrollStateChanged(i: Int) {}
+//        })
     }
 
 
     override fun onResume() {
         super.onResume()
         Log.d("back" , "onResume")
-        setupTabLayout()
+        //setupTabLayout()
         tapClickChangeTextBold()
     }
 
@@ -118,26 +143,20 @@ class AdminAccountantFragment : Fragment() {
     private fun setupTabLayout() {
 
 
-        titlesTab.clear()
-        titlesTab.add(getString(R.string.delegates))
-        titlesTab.add(getString(R.string.accounatnts))
-        val viewPagerAdaptor =
-            activity?.supportFragmentManager?.let {
-                ViewPagerAccountantsAdapter(
-                    it,
-                    titlesTab
-                )
-            }
-       // viewPagerAdaptor?.notifyDataSetChanged()
-        viewPagerDelegatesAccountant?.adapter = viewPagerAdaptor
-        delegatesAccountantTab?.setupWithViewPager(viewPagerDelegatesAccountant)
-        viewPagerDelegatesAccountant?.clipToPadding = false
-        for (i in 0 until titlesTab.size) {
-            Log.d("back" , "sizr ${titlesTab[i]}")
+//        titlesTab.clear()
+//        titlesTab.add(getString(R.string.delegates))
+//        titlesTab.add(getString(R.string.accounatnts))
 
-            // these maybe not categorize
-            delegatesAccountantTab?.getTabAt(i)!!.text = titlesTab[i]
-        }
+       // viewPagerAdaptor?.notifyDataSetChanged()
+//        viewPagerDelegatesAccountant?.adapter = viewPagerAdaptor
+//        delegatesAccountantTab?.setupWithViewPager(viewPagerDelegatesAccountant)
+//        viewPagerDelegatesAccountant?.clipToPadding = false
+//        for (i in 0 until titlesTab.size) {
+//            Log.d("back" , "sizr ${titlesTab[i]}")
+//
+//            // these maybe not categorize
+//            delegatesAccountantTab?.getTabAt(i)!!.text = titlesTab[i]
+//        }
 
 
     }

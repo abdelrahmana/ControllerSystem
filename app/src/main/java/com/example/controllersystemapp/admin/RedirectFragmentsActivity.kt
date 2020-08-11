@@ -64,6 +64,7 @@ class RedirectFragmentsActivity : AppCompatActivity() {
 
 
     private fun changeFragment(fragment: Fragment, tag: String) {
+
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout_direction, fragment, tag)
         //transaction.addToBackStack(tag)

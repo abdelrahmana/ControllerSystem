@@ -69,9 +69,10 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 
         Log.d("clickDelegate" , "${delegatesList[position].Id}")
 
-        UtilKotlin.replaceFragmentWithBack(context!!, this, DelegateDetailsFragment(),
-            null, R.id.frameLayout_direction, 120, false, true)
+//        UtilKotlin.replaceFragmentWithBack(context!!, this, DelegateDetailsFragment(),
+//            null, R.id.frameLayout_direction, 120, false, true)
 
+        UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , "" )
     }
 
 }

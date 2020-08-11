@@ -12,6 +12,7 @@ import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.DelegateOrdersAdapter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsModel
+import com.example.util.UtilKotlin
 import kotlinx.android.synthetic.main.fragment_delegates_orders.*
 
 class DelegatesOrdersFragment : Fragment(), OnRecyclerItemClickListener {
@@ -67,5 +68,10 @@ class DelegatesOrdersFragment : Fragment(), OnRecyclerItemClickListener {
     override fun onItemClick(position: Int){
 
         Log.d("clickOrder" , "${ordersList[position].name}")
+
+//        UtilKotlin.replaceFragmentWithBack(context!!, this, OrdersDeliveryFragment(),
+//            null, R.id.frameLayout_direction, 120, false, true)
+        UtilKotlin.changeFragmentBack(activity!! ,OrdersDeliveryFragment() , "" )
+
     }
 }

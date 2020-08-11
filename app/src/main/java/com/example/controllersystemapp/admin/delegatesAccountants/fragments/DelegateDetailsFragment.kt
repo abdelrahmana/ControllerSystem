@@ -15,13 +15,15 @@ import com.example.controllersystemapp.admin.RedirectFragmentsActivity
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.ViewPagerDelegateDetailsAdapter
 import com.example.util.NameUtils
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_delegate_details.*
 
 
 class DelegateDetailsFragment : Fragment() {
 
-    var titlesTab = ArrayList<String>()
+    //var titlesTab = ArrayList<String>()
     lateinit var rootView: View
+    lateinit var viewPagerAdaptor : ViewPagerDelegateDetailsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,27 +32,6 @@ class DelegateDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
 
         rootView =inflater.inflate(R.layout.fragment_delegate_details, container, false)
-
-        rootView.setFocusableInTouchMode(true)
-        rootView.requestFocus()
-        rootView.setOnKeyListener(object : View.OnKeyListener {
-            override fun onKey(
-                v: View?,
-                keyCode: Int,
-                event: KeyEvent?
-            ): Boolean {
-                return if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    activity?.finish()
-                    val intent = Intent(context , RedirectFragmentsActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    intent.putExtra(NameUtils.redirectFragmet, NameUtils.delegatesAccountantsFragmet)
-                    startActivity(intent)
-                    true
-                } else false
-            }
-        })
-
         return rootView
     }
 
@@ -59,59 +40,46 @@ class DelegateDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupTabLayout()
+        viewPagerAdaptor = ViewPagerDelegateDetailsAdapter(this@DelegateDetailsFragment)
+        viewPagerDelegatesDetails?.adapter = viewPagerAdaptor
+
+        TabLayoutMediator(delegatesDetailsTab, viewPagerDelegatesDetails) { tab, position ->
+            when(position)
+            {
+                0 -> tab.text = getString(R.string.orders)
+
+                1 -> tab.text = getString(R.string.portfolio)
+            }
+
+        }.attach()
+
+        //setupTabLayout()
         tapClickChangeTextBold()
 
 
         backDelegate?.setOnClickListener {
-            activity?.finish()
-            val intent = Intent(context , RedirectFragmentsActivity::class.java)
-            intent.putExtra(NameUtils.redirectFragmet, NameUtils.delegatesAccountantsFragmet)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
+            activity?.supportFragmentManager?.popBackStack()
+        }
 
-         //   activity?.supportFragmentManager?.popBackStack()
-//            activity?.let {
+
+
+    }
+
+//    private fun setupTabLayout() {
+//        titlesTab.clear()
+//        titlesTab.add(getString(R.string.orders))
+//        titlesTab.add(getString(R.string.portfolio))
+//        val viewPagerAdaptor = ViewPagerDelegateDetailsAdapter(activity?.supportFragmentManager!!, titlesTab)
+//        viewPagerDelegatesDetails.adapter = viewPagerAdaptor
+//        delegatesDetailsTab.setupWithViewPager(viewPagerDelegatesDetails)
+//        viewPagerDelegatesDetails.clipToPadding = false
+//        for (i in 0 until titlesTab.size) {
+//            // these maybe not categorize
+//            delegatesDetailsTab.getTabAt(i)!!.text = titlesTab[i]
+//        }
 //
-//                it.supportFragmentManager.popBackStack()
-////                if (it.supportFragmentManager.backStackEntryCount == 1)
-////                {
-////                    it.finish()
-////                }
-////                else{
-////                    it.supportFragmentManager.popBackStack()
-////                }
-//            }
-
-
-        }
-
-
-
-    }
-
-    private fun setupTabLayout() {
-        titlesTab.clear()
-        titlesTab.add(getString(R.string.orders))
-        titlesTab.add(getString(R.string.portfolio))
-        val viewPagerAdaptor =
-            activity?.supportFragmentManager?.let {
-                ViewPagerDelegateDetailsAdapter(
-                    it,
-                    titlesTab
-                )
-            }
-        viewPagerDelegatesDetails.adapter = viewPagerAdaptor
-        delegatesDetailsTab.setupWithViewPager(viewPagerDelegatesDetails)
-        viewPagerDelegatesDetails.clipToPadding = false
-        for (i in 0 until titlesTab.size) {
-            // these maybe not categorize
-            delegatesDetailsTab.getTabAt(i)!!.text = titlesTab[i]
-        }
-
-
-    }
+//
+//    }
 
     private fun tapClickChangeTextBold() {
         delegatesDetailsTab?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

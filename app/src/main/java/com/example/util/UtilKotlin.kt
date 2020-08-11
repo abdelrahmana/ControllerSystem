@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.controllersystemapp.R
 import com.example.util.PrefsUtil.getSharedPrefs
 import java.util.*
 
@@ -100,5 +101,16 @@ object UtilKotlin {
             }
             ft.commit()
         }
+    }
+
+
+    fun changeFragmentBack(activity: FragmentActivity, fragment: Fragment, tag: String) {
+
+        val transaction = activity?.supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameLayout_direction, fragment, tag)
+        //transaction.addToBackStack(tag)
+        transaction.addToBackStack(null)
+        transaction.commit()
+
     }
 }

@@ -36,4 +36,14 @@
     <string name="portfolio">المحفظة</string>
     <string name="delivered">تم التوصيل</string>
     <string name="waiting">في الانتظار</string>
+    <string name="feeValue">"قيمة رسوم "</string>
+    <string name="shipping_fee">رسوم الشحن</string>
+    <string name="total_price">إجمالي السعر</string>
+    <string name="add_accountant">اضف محاسب</string>
+    <string name="confirmation">تآكيد</string>
+    <string name="accountant_name">اسم المحاسب</string>
+    <string name="delegate_name">اسم مندوب</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="country_name">اسم المحافظة</string>
+    <string name="passwordText">كلمة سر</string>
 </resources>
