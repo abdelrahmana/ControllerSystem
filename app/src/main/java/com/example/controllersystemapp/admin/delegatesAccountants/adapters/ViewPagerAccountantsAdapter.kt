@@ -11,7 +11,7 @@ import com.example.controllersystemapp.admin.delegatesAccountants.fragments.Acco
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AdminAccountantFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DelegatesFragment
 
-class ViewPagerAccountantsAdapter(fragment: AdminAccountantFragment)
+class ViewPagerAccountantsAdapter(fragment: Fragment)
     : FragmentStateAdapter(fragment)  {
 
 

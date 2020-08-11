@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import com.example.controllersystemapp.R
 import com.example.util.PrefsUtil.getSharedPrefs
 import java.util.*
@@ -26,6 +27,10 @@ object UtilKotlin {
             .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
 
+    }
+
+    fun declarViewModel(activity: Fragment?): ViewModelHandleChangeFragmentclass? { // listen life cycle to fragment only
+        return ViewModelProvider(activity!!).get(ViewModelHandleChangeFragmentclass::class.java)
     }
     fun getLocalLanguage(context: Context): String? {
         val locale: Locale

@@ -9,15 +9,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.storesproducts.adapters.ViewPagerStoresProductAdapter
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.fragment_admin_accountant.*
 import kotlinx.android.synthetic.main.fragment_admin_stores_products.*
 
 
 class AdminStoresProductsFragment : Fragment() {
 
-    var titlesTabList = ArrayList<String>()
+    //var titlesTabList = ArrayList<String>()
+    lateinit var viewPagerAdaptor : ViewPagerStoresProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +35,22 @@ class AdminStoresProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupTabLayout()
+        //setupTabLayout()
+
+        viewPagerAdaptor = ViewPagerStoresProductAdapter(this@AdminStoresProductsFragment)
+        viewPagerStoresProduct?.adapter = viewPagerAdaptor
+
+        TabLayoutMediator(productStoreTabLayout, viewPagerStoresProduct) { tab, position ->
+            when(position)
+            {
+                0 -> tab.text = getString(R.string.products)
+
+                1 -> tab.text = getString(R.string.stores)
+            }
+
+        }.attach()
+
+
         tapClickChangeTextBold()
 
         addProductBtn?.setOnClickListener {
@@ -66,23 +85,40 @@ class AdminStoresProductsFragment : Fragment() {
 
         }
 
-        viewPagerStoresProduct.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(i: Int, v: Float, i1: Int) {}
-            override fun onPageSelected(i: Int) {
 
-                if (i == 0)
-                {
+        viewPagerStoresProduct.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                if (position == 0) {
                     addProductBtn?.text = getString(R.string.add_product)
                 }
-                else if (i == 1)
-                {
+                else if (position == 1) {
                     addProductBtn?.text = getString(R.string.add_store)
                 }
 
+                super.onPageSelected(position)
             }
-
-            override fun onPageScrollStateChanged(i: Int) {}
         })
+
+//        viewPagerStoresProduct.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+//            override fun onPageScrolled(i: Int, v: Float, i1: Int) {}
+//            override fun onPageSelected(i: Int) {
+//
+//                if (i == 0)
+//                {
+//                    addProductBtn?.text = getString(R.string.add_product)
+//                }
+//                else if (i == 1)
+//                {
+//                    addProductBtn?.text = getString(R.string.add_store)
+//                }
+//
+//            }
+//
+//            override fun onPageScrollStateChanged(i: Int) {}
+//        })
+
+
+
 
     }
 
@@ -115,26 +151,20 @@ class AdminStoresProductsFragment : Fragment() {
 
     }
 
-    private fun setupTabLayout() {
-        titlesTabList.clear()
-        titlesTabList.add(getString(R.string.products))
-        titlesTabList.add(getString(R.string.stores))
-        val viewPagerAdaptor =
-            activity?.supportFragmentManager?.let {
-                ViewPagerStoresProductAdapter(
-                    it,
-                    titlesTabList
-                )
-            }
-        viewPagerStoresProduct.adapter = viewPagerAdaptor
-        productStoreTabLayout.setupWithViewPager(viewPagerStoresProduct)
-        viewPagerStoresProduct.clipToPadding = false
-        for (i in 0 until titlesTabList.size) {
-            // these maybe not categorize
-            productStoreTabLayout.getTabAt(i)!!.text = titlesTabList[i]
-        }
-
-
-    }
+//    private fun setupTabLayout() {
+//        titlesTabList.clear()
+//        titlesTabList.add(getString(R.string.products))
+//        titlesTabList.add(getString(R.string.stores))
+//        val viewPagerAdaptor =  ViewPagerStoresProductAdapter(activity?.supportFragmentManager!!, titlesTabList)
+//        viewPagerStoresProduct.adapter = viewPagerAdaptor
+//        productStoreTabLayout.setupWithViewPager(viewPagerStoresProduct)
+//        viewPagerStoresProduct.clipToPadding = false
+//        for (i in 0 until titlesTabList.size) {
+//            // these maybe not categorize
+//            productStoreTabLayout.getTabAt(i)!!.text = titlesTabList[i]
+//        }
+//
+//
+//    }
 
 }

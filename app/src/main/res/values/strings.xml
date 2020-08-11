@@ -46,4 +46,12 @@
     <string name="phone_number">رقم الهاتف</string>
     <string name="country_name">اسم المحافظة</string>
     <string name="passwordText">كلمة سر</string>
+    <string name="congrate">تهانيا</string>
+    <string name="done_add_accountant">تم اضافة المحاسب</string>
+    <string name="store_name">اسم المخزن</string>
+    <string name="store_address">عنوان المخزن</string>
+    <string name="store_number">تحديد عدد المتجر</string>
+    <string name="product_category">تصنيف المنتج</string>
+    <string name="gwalat">الجوالات</string>
+    <string name="responsible_person">تحديد مسئول الذمة</string>
 </resources>

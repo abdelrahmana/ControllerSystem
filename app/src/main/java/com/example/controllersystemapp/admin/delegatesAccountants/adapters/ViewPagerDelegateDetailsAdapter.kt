@@ -7,7 +7,7 @@ import com.example.controllersystemapp.admin.delegatesAccountants.fragments.*
 import com.example.controllersystemapp.admin.storesproducts.fragments.ProductsFragment
 import com.example.controllersystemapp.admin.storesproducts.fragments.StoresFragment
 
-class ViewPagerDelegateDetailsAdapter(fragment: DelegateDetailsFragment)
+class ViewPagerDelegateDetailsAdapter(fragment: Fragment)
     : FragmentStateAdapter(fragment) {
 
 
