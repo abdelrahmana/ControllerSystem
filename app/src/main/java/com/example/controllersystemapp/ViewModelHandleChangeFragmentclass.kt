@@ -23,7 +23,7 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
 
     var stringNameData = MutableLiveData<ModelStringID>()
     fun setStringData(modelStringID: ModelStringID?) {
-        stringNameData.value = modelStringID
+        this.stringNameData.postValue(modelStringID)
     }
 
     var intIdData = MutableLiveData<Int>()
@@ -31,7 +31,9 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
         intIdData.value = intData
     }
 
-
+    val stringData: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
     var productDetailsId = MutableLiveData<Int>()
     fun setProductDetailsId(productDetails: Int?) {

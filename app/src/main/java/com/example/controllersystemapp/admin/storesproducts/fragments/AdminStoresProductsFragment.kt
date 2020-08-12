@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.storesproducts.adapters.ViewPagerStoresProductAdapter
+import com.example.util.UtilKotlin
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_admin_accountant.*
@@ -62,7 +63,9 @@ class AdminStoresProductsFragment : Fragment() {
             }
             else if (viewPagerStoresProduct.currentItem == 1)
             {
-                Toast.makeText(context , "addStores" , Toast.LENGTH_LONG).show()
+               // Toast.makeText(context , "addStores" , Toast.LENGTH_LONG).show()
+                UtilKotlin.changeFragmentBack(activity!! , AddStoreFragment() , "AddStore" )
+
                 //go to adStore Screen
 
             }

@@ -267,6 +267,7 @@
                     />
 
                 <EditText
+                    android:focusable="false"
                     android:id="@+id/responsiblePersonEditText"
                     android:textAlignment="viewStart"
                     app:backgroundTint="@color/text_grey"
