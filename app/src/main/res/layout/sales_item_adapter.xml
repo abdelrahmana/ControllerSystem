@@ -103,7 +103,8 @@
         <TextView
             android:id="@+id/moreText"
             android:text="@string/more"
-            android:drawableStart="@drawable/"
+            android:drawableStart="@drawable/ic_more"
+            android:drawablePadding="5dp"
             android:layout_marginTop="@dimen/_10sdp"
             android:textAlignment="viewStart"
             app:layout_constraintStart_toStartOf="@+id/salesImage"

@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.sales_item_adapter.view.*
+import kotlinx.android.synthetic.main.sales_container_item.view.*
 
-class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
-                       val arrayListOfTutorials:ArrayList<Any>//this method is returning the view for each item in the list
-) : RecyclerView.Adapter<SalesItemAdapter.ViewHolder>()  {
+class SalesAdapterContainer(val modelData: ViewModelHandleChangeFragmentclass,
+                            val arrayListOfTutorials:ArrayList<Any>//this method is returning the view for each item in the list
+) : RecyclerView.Adapter<SalesAdapterContainer.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.sales_item_adapter, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.sales_container_item, parent, false)
         return ViewHolder(v)
     }
 
@@ -59,7 +59,7 @@ class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
                   itemView.divider.visibility = View.GONE
               }*/
 
-            itemView.cardContainer.setOnClickListener{
+            itemView.cardReportsContainer.setOnClickListener{
 
                   onItemClicked(modelData,adapterPosition) // go to details please
               }

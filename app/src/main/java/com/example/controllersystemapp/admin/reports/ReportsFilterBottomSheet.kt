@@ -5,9 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
@@ -77,7 +74,7 @@ class ReportsFilterBottomSheet : BottomSheetDialogFragment()/*, CommonPresenter.
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v = inflater.inflate(R.layout.countries_currency_sheet, container, false)
+        val v = inflater.inflate(R.layout.filterbottom_sheet, container, false)
 
         model = UtilKotlin.declarViewModel(activity!!)!!
             // t his is used to update sign up fragment with user data
@@ -228,63 +225,4 @@ class ReportsFilterBottomSheet : BottomSheetDialogFragment()/*, CommonPresenter.
         super.onDestroyView()
     }
 
-/*    override fun getCitiesList(cityResponse: CitiesResponse) { // when cities come back
-        Handler(Looper.getMainLooper()).post {
-
-            var cities = ArrayList<CitiesResponse.Data>()
-            if (!cityResponse.data.isEmpty()) {
-                cities.clear()
-                cities.addAll(cityResponse.data)
-                hideLoader()
-            }
-            var cityAdaptor = CityAdaptor(model, cities)
-            miniviewHeight?.visibility = View.INVISIBLE
-            rec?.setAdapter(cityAdaptor)
-
-            /* citySpinner.setAdapter(object : HintSpinnerAdapter<AreasResponse.DataBean>(
-            context,
-            cities,
-            getString(R.string.choose_city)
-        ) {
-            override fun getLabelFor(`object`: AreasResponse.DataBean): String {
-                return `object`.city_name
-            }
-        })*/
-
-        }
-    }
-
-
-
-    override fun getAreas(areasResponse: AreasResponse) {
-        Handler(Looper.getMainLooper()).post {
-
-            var countries = ArrayList<AreasResponse.Data>()
-            if (!areasResponse.data.isEmpty()) {
-                countries.clear()
-                countries.addAll(areasResponse.data)
-                hideLoader()
-            }
-            var countryAdaptor = AreasAdaptor(model, countries)
-
-            miniviewHeight?.visibility = View.INVISIBLE
-            rec?.setAdapter(countryAdaptor)  // when user click on it we use the result to send it to registeration form
-        }
-    }
-
-    override fun getMedicalCompanys(medicalCompanyResponse: MedicalCompanyResponse) {
-         // when getting data of bottom sheet
-      Handler(Looper.getMainLooper()).post {
-            hideLoader()
-            try {
-
-                val companyAdaptor = MedicalInsuranceAdaptor(context!!, medicalCompanyResponse.data?.companies ?: ArrayList(), model)
-                UtilKotlin.setRecycleView(rec, companyAdaptor, RecyclerView.VERTICAL, context!!, null)
-                miniviewHeight?.visibility = View.INVISIBLE
-            }catch (e : Exception){
-
-            }
-        }
-
-    }*/
 }
