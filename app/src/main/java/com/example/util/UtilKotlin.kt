@@ -110,9 +110,12 @@ object UtilKotlin {
     }
 
 
-    fun changeFragmentBack(activity: FragmentActivity, fragment: Fragment, tag: String) {
+    fun changeFragmentBack(activity: FragmentActivity, fragment: Fragment, tag: String ,bundle: Bundle?) {
 
         val transaction = activity?.supportFragmentManager.beginTransaction()
+        if (bundle != null) {
+            fragment.arguments = bundle
+        }
         transaction.replace(R.id.frameLayout_direction, fragment, tag)
         //transaction.addToBackStack(tag)
         transaction.addToBackStack(null)

@@ -70,7 +70,7 @@ class AdminAccountantFragment : Fragment() {
         }
 
         addAccountantBtn?.setOnClickListener {
-            UtilKotlin.changeFragmentBack(activity!! ,AddAccountantFragment() , "AddAccountant" )
+            UtilKotlin.changeFragmentBack(activity!! ,AddAccountantFragment() , "AddAccountant"  , null)
         }
 
         viewPagerDelegatesAccountant.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

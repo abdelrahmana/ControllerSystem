@@ -71,7 +71,7 @@ class DelegatesOrdersFragment : Fragment(), OnRecyclerItemClickListener {
 
 //        UtilKotlin.replaceFragmentWithBack(context!!, this, OrdersDeliveryFragment(),
 //            null, R.id.frameLayout_direction, 120, false, true)
-        UtilKotlin.changeFragmentBack(activity!! ,OrdersDeliveryFragment() , "" )
+        UtilKotlin.changeFragmentBack(activity!! ,OrdersDeliveryFragment() , "" , null)
 
     }
 }

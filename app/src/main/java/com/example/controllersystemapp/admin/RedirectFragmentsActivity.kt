@@ -9,14 +9,17 @@ import com.example.controllersystemapp.admin.delegatesAccountants.fragments.Admi
 import com.example.controllersystemapp.admin.delivery.AdminDeliveryFragment
 import com.example.controllersystemapp.admin.makeorders.AdminMakeOrderFragment
 import com.example.controllersystemapp.admin.reports.AdminReportsFragment
+import com.example.controllersystemapp.admin.settings.SettingsFragment
 import com.example.controllersystemapp.admin.specialcustomers.AdminSpecicalCustomersragment
 import com.example.controllersystemapp.admin.storesproducts.fragments.AdminStoresProductsFragment
+import com.example.util.NameUtils
 import com.example.util.NameUtils.categoriesFragmet
 import com.example.util.NameUtils.delegatesAccountantsFragmet
 import com.example.util.NameUtils.deliveryFragmet
 import com.example.util.NameUtils.makeOrderFragmet
 import com.example.util.NameUtils.redirectFragmet
 import com.example.util.NameUtils.reporstFragmet
+import com.example.util.NameUtils.settingsFragmet
 import com.example.util.NameUtils.specialCustomersFragmet
 import com.example.util.NameUtils.storeProductsFragmet
 
@@ -62,6 +65,11 @@ class RedirectFragmentsActivity : AppCompatActivity() {
             categoriesFragmet -> {
                 changeFragment(CategoriesFragment(), fragment)
             }
+
+            settingsFragmet-> {
+                changeFragment(SettingsFragment(), fragment)
+            }
+
 
         }
 

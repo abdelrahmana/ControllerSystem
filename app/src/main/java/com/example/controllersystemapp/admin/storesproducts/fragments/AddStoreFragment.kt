@@ -45,7 +45,7 @@ class AddStoreFragment : Fragment() {
 
         responsiblePersonContainer?.setOnClickListener {
 
-            UtilKotlin.changeFragmentBack(activity!! , ResponsiblePersonFragment() , "ResponsiblePerson" )
+            UtilKotlin.changeFragmentBack(activity!! , ResponsiblePersonFragment() , "ResponsiblePerson"  , null)
 
         }
 

@@ -28,7 +28,7 @@ class AddAccountantFragment : Fragment() {
         }
 
         confirmAddAccountantBtn?.setOnClickListener {
-            UtilKotlin.changeFragmentBack(activity!! ,DoneDialogFragment() , "DoneAddAccountant" )
+            UtilKotlin.changeFragmentBack(activity!! ,DoneDialogFragment() , "DoneAddAccountant" , null)
         }
     }
 }

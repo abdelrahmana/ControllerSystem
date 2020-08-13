@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".admin.AdminHomeActivity">
 
 
@@ -49,6 +50,7 @@
                 />
 
             <ImageView
+                android:padding="@dimen/_5sdp"
                 android:id="@+id/settingIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

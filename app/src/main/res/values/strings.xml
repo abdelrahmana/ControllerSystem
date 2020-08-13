@@ -68,4 +68,16 @@
     <string name="email_address">البريد الالكتروني</string>
     <string name="setting">الاعدادات</string>
     <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="admin">الادمن</string>
+    <string name="msrofat">المصروفات</string>
+    <string name="editPassword">تعديل كلمة المرور</string>
+    <string name="getNotification">استقبال اشعارات</string>
+    <string name="logOut">تسجيل خروج</string>
+    <string name="payments">المدفوعات</string>
+    <string name="appInfo">تطبيق الحل التقني الجديد والاسهل\n لإدارة المبيعات</string>
+    <string name="versionNumb">اصدار نسخة</string>
+    <string name="name">الاسم</string>
+    <string name="save">حفظ</string>
+    <string name="choose_from_mobile_pic">اختار من صور الهاتف</string>
+    <string name="take_photo">إلتقاط صورة من الكامير</string>
 </resources>

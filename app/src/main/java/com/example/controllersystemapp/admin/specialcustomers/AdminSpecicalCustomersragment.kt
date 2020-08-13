@@ -46,7 +46,7 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
         }
 
         addCustomerBtn?.setOnClickListener {
-            UtilKotlin.changeFragmentBack(activity!! , AddCustomerFragment() , "AddCustomer" )
+            UtilKotlin.changeFragmentBack(activity!! , AddCustomerFragment() , "AddCustomer"  , null)
         }
     }
 

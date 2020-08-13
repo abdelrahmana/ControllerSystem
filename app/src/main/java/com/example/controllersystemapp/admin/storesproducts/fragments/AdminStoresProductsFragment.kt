@@ -64,7 +64,7 @@ class AdminStoresProductsFragment : Fragment() {
             else if (viewPagerStoresProduct.currentItem == 1)
             {
                // Toast.makeText(context , "addStores" , Toast.LENGTH_LONG).show()
-                UtilKotlin.changeFragmentBack(activity!! , AddStoreFragment() , "AddStore" )
+                UtilKotlin.changeFragmentBack(activity!! , AddStoreFragment() , "AddStore"  , null)
 
                 //go to adStore Screen
 
