@@ -8,4 +8,10 @@
     <color name="login_gray">#747f8e</color>
     <color name="error_color">#d56976</color>
     <color name="orange_color">#f2864d</color>
+    <color name="light_red">#DDAB99</color>
+    <color name="light_orange">#ff6d3c</color>
+    <color name="add_product_gray">#737373</color>
+    <color name="light_gray">#dadada</color>
+    <color name="material_card">#c6c6c6</color>
+    <color name="search">#3acdd3e0</color>
 </resources>

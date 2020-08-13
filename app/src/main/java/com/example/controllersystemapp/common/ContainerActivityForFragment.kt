@@ -2,6 +2,7 @@ package com.example.controllersystemapp.common
 
 import android.os.Bundle
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.AddProductFragment
 import com.example.controllersystemapp.common.login.LoginFragment
 import com.example.util.CommonActivity
 import com.example.util.UtilKotlin
@@ -14,7 +15,7 @@ class ContainerActivityForFragment : CommonActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_container_for_fragment)
        // when(intent.getStringExtra(whichFragment,))
-             UtilKotlin.changeFragment(LoginFragment(),supportFragmentManager,R.id.container)
+             UtilKotlin.changeFragment(AddProductFragment(),supportFragmentManager,R.id.container)
       //  UtilKotlin.changeFragment(RequestOfferProfileFragment(),supportFragmentManager,R.id.container)
         StatusBarUtil.setTransparent(this)
 
