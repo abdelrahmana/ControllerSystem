@@ -9,6 +9,7 @@ object NameUtils {
     val reporstFragmet = "Reporst"
     val deliveryFragmet = "Delivery"
     val makeOrderFragmet = "makeOrder"
+    val categoriesFragmet = "Categories"
     val specialCustomersFragmet = "specialCustomers"
 
 

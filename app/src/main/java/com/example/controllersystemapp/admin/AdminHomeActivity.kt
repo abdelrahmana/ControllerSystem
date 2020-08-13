@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.controllersystemapp.R
 import com.example.util.CommonActivity
+import com.example.util.NameUtils.categoriesFragmet
 import com.example.util.NameUtils.delegatesAccountantsFragmet
 import com.example.util.NameUtils.deliveryFragmet
 import com.example.util.NameUtils.makeOrderFragmet
@@ -28,7 +29,7 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
         accountantDelegatCard?.setOnClickListener(this)
         reportsCard?.setOnClickListener(this)
         deliveryCard?.setOnClickListener(this)
-        makeOrderCard?.setOnClickListener(this)
+        categoriesCard?.setOnClickListener(this)
         customersCard?.setOnClickListener(this)
 
         //setSingleEvent(gridLayout)
@@ -83,12 +84,12 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
                 startActivity(intent)
             }
 
-            R.id.makeOrderCard -> {
+            R.id.categoriesCard -> {
                 removeCardSelection()
-                setCardSelection(makeOrderCard , makeOrderImg , makeOrderText ,R.drawable.ic_order_selected)
+                setCardSelection(categoriesCard , makeOrderImg , makeOrderText ,R.drawable.ic_category_selected)
                 //startActivity(Intent(this , AdminMakeOrdersActivity::class.java))
                 val intent = Intent(this , RedirectFragmentsActivity::class.java)
-                intent.putExtra(redirectFragmet , makeOrderFragmet)
+                intent.putExtra(redirectFragmet , categoriesFragmet)
                 startActivity(intent)
             }
 
@@ -133,8 +134,8 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
         deliveryImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_delivery))
         deliveryText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
-        makeOrderCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
-        makeOrderImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_order_icon))
+        categoriesCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
+        makeOrderImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_category))
         makeOrderText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
         customersCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))

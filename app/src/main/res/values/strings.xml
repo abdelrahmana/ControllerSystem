@@ -55,4 +55,17 @@
     <string name="gwalat">الجوالات</string>
     <string name="responsible_person">تحديد مسئول الذمة</string>
     <string name="search">بحث</string>
+    <string name="categories">التصنيفات</string>
+    <string name="add_category">اضف تصنيف</string>
+    <string name="total">اجمالي:</string>
+    <string name="receipt">استلام:</string>
+    <string name="creditor">دائن:</string>
+    <string name="add_customer">اضافة عميل</string>
+    <string name="create_customer">انشاء عميل مميز</string>
+    <string name="customer_name">اسم العميل</string>
+    <string name="mobileNumber">رقم الموبيل</string>
+    <string name="address">العنوان</string>
+    <string name="email_address">البريد الالكتروني</string>
+    <string name="setting">الاعدادات</string>
+    <string name="edit_profile">تعديل الملف الشخصي</string>
 </resources>

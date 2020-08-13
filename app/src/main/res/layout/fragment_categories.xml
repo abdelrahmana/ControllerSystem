@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.storesproducts.fragments.ResponsiblePersonFragment">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".admin.categories.fragments.CategoriesFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topDetailsContainer"
+        android:id="@+id/topContainer"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,23 +19,23 @@
 
 
         <ImageView
-            android:id="@+id/close"
+            android:id="@+id/back"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_width="wrap_content"
             android:padding="@dimen/_5sdp"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_close_light"
+            app:srcCompat="@drawable/ic_ab_back_light"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-           />
+            />
 
         <TextView
             android:textAlignment="viewStart"
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/responsible_person"
+            android:text="@string/categories"
             android:layout_marginStart="@dimen/_24sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:textColor="@color/textColor"
@@ -48,80 +47,35 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/close"
-         />
+            app:layout_constraintTop_toBottomOf="@+id/back"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/topDetailsContainer"
+        app:layout_constraintTop_toBottomOf="@+id/topContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
+        <!--
+        add this when add btn
+        android:layout_marginBottom="@dimen/_70sdp"
+        -->
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:paddingBottom="@dimen/_70sdp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/searchCard"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="@dimen/_14sdp"
-                android:layout_marginEnd="@dimen/_14sdp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoriesRecycler"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                app:cardCornerRadius="10dp"
-                android:background="@color/card_background"
-                >
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:background="@color/card_background"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/searchIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_btn_search_bar"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        />
-
-                    <TextView
-                        android:textAlignment="viewStart"
-                        android:text="@string/search"
-                        android:textSize="14sp"
-                        android:textColor="@color/search_text"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/searchIcon"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/responsiblePersonRecycler"
-                android:layout_marginTop="@dimen/_24sdp"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/searchCard"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -134,14 +88,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
     </androidx.core.widget.NestedScrollView>
 
-
-
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/confirmResponsiblePersonBtn"
+        android:visibility="gone"
+        android:id="@+id/addCategoryBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         app:backgroundTint="@color/orange_color"
@@ -153,11 +104,12 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:text="@string/confirmation"
+        android:text="@string/add_category"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
 
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.categories.fragments.CategoriesFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AdminAccountantFragment
 import com.example.controllersystemapp.admin.delivery.AdminDeliveryFragment
 import com.example.controllersystemapp.admin.makeorders.AdminMakeOrderFragment
 import com.example.controllersystemapp.admin.reports.AdminReportsFragment
 import com.example.controllersystemapp.admin.specialcustomers.AdminSpecicalCustomersragment
 import com.example.controllersystemapp.admin.storesproducts.fragments.AdminStoresProductsFragment
+import com.example.util.NameUtils.categoriesFragmet
 import com.example.util.NameUtils.delegatesAccountantsFragmet
 import com.example.util.NameUtils.deliveryFragmet
 import com.example.util.NameUtils.makeOrderFragmet
@@ -55,6 +57,10 @@ class RedirectFragmentsActivity : AppCompatActivity() {
             }
             specialCustomersFragmet -> {
                 changeFragment(AdminSpecicalCustomersragment(), fragment)
+            }
+
+            categoriesFragmet -> {
+                changeFragment(CategoriesFragment(), fragment)
             }
 
         }

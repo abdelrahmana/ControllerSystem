@@ -176,7 +176,7 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_product_store"
+                            app:srcCompat="@drawable/ic_product_store"
 
                             />
 
@@ -229,7 +229,7 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_accountant_icon"
+                            app:srcCompat="@drawable/ic_accountant_icon"
 
                             />
 
@@ -285,7 +285,7 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_reports_icon"
+                            app:srcCompat="@drawable/ic_reports_icon"
 
                             />
 
@@ -338,7 +338,7 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_delivery"
+                            app:srcCompat="@drawable/ic_delivery"
 
                             />
 
@@ -370,7 +370,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="133dp"
-                    android:id="@+id/makeOrderCard"
+                    android:id="@+id/categoriesCard"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
                     app:cardCornerRadius="5dp"
@@ -395,7 +395,7 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_order_icon"
+                            app:srcCompat="@drawable/ic_category"
 
                             />
 
@@ -409,7 +409,7 @@
                             android:textStyle="bold"
                             android:textSize="14sp"
                             android:textColor="@color/textColor"
-                            android:text="@string/make_order"
+                            android:text="@string/categories"
                             android:layout_marginTop="7dp"
                             android:layout_marginBottom="6dp"
                             />
@@ -449,7 +449,7 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_customers_icon"
+                            app:srcCompat="@drawable/ic_customers_icon"
 
                             />
 

@@ -49,6 +49,12 @@ class AddStoreFragment : Fragment() {
 
         }
 
+        backImgAddStore?.setOnClickListener {
+
+            activity?.supportFragmentManager?.popBackStack()
+
+        }
+
         increaseCountBtn?.setOnClickListener {
 
             val count = (counter?.text.toString()).toInt()
