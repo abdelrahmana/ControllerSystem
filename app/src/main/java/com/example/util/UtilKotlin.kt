@@ -7,15 +7,16 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.util.PrefsUtil.getSharedPrefs
-import com.example.controllersystemapp.ViewModelHandleChangeFragmentclass
 import java.util.*
 
 object UtilKotlin {
@@ -33,6 +34,10 @@ object UtilKotlin {
     fun declarViewModel(activity: Fragment?): ViewModelHandleChangeFragmentclass? { // listen life cycle to fragment only
         return ViewModelProvider(activity!!).get(ViewModelHandleChangeFragmentclass::class.java)
     }
+    fun declarViewModel(activity: FragmentActivity?): ViewModelHandleChangeFragmentclass? {
+        return ViewModelProvider(activity!!).get(ViewModelHandleChangeFragmentclass::class.java)
+    }
+
     fun getLocalLanguage(context: Context): String? {
         val locale: Locale
         locale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -42,7 +47,41 @@ object UtilKotlin {
         }
         return locale.language
     }
+    fun setRecycleView(recyclerView: RecyclerView?, adaptor: RecyclerView.Adapter<*>,
+                       verticalOrHorizontal: Int?, context:Context, gridModel: GridModel?, includeEdge : Boolean) {
+        var layoutManger : RecyclerView.LayoutManager? = null
+        if (gridModel==null) // normal linear
+            layoutManger = LinearLayoutManager(context, verticalOrHorizontal!!,false)
+        else
+        {
+            layoutManger = GridLayoutManager(context, gridModel.numberOfItems)
+            layoutManger.isAutoMeasureEnabled = true
+            if (recyclerView?.itemDecorationCount==0)
+                recyclerView?.addItemDecoration(SpacesItemDecoration(gridModel.numberOfItems, gridModel.space, includeEdge))
+        }
+        recyclerView?.apply {
+            setLayoutManager(layoutManger)
+            setHasFixedSize(true)
+            adapter = adaptor
 
+        }
+    }
+
+    fun changeFragmentWithBack(activity: FragmentActivity?, containerBottomNav: Int, fragment: Fragment, bundle: Bundle?) {
+
+        val transaction = activity!!.supportFragmentManager.beginTransaction()
+        if (bundle != null) {
+            fragment.arguments = bundle
+        }
+        transaction.replace(
+            containerBottomNav ,
+            fragment
+        )
+        transaction.addToBackStack(null)
+        transaction.commit()
+
+
+    }
     fun setLanguagePerActivity(activity : Activity, intent: Intent?){
         val currentLanguage = getSharedPrefs(
             activity

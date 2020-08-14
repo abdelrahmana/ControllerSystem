@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.settings.RedirectSettingdActivity"></activity>
         <activity
             android:name=".admin.RedirectFragmentsActivity"
             android:windowSoftInputMode="adjustResize" />

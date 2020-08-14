@@ -1,14 +1,14 @@
-package com.example.controllersystemapp
+package com.example.util
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.controllersystemapp.ModelStringID
 
 // this viewpager is used within fragment
 // specifically when running new fragment and notifying fragment with this change
 class ViewModelHandleChangeFragmentclass  : ViewModel() {
     // this basically used to notify changefragment with new
     var notifyChangeFragment = MutableLiveData<Int>()
-    var errorMessage = MutableLiveData<String>()
 
     // handle the back of fragments within activty
     var handleClickBack = MutableLiveData<Boolean>()
@@ -18,21 +18,25 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     var onFragmentChangesHandleResult = MutableLiveData<HandleResultsOfApiModel>()
     // open the loader or shimmer animation while data is coming between parent fragment and child and close it if it false
     var loaderOrShimmerStatus = MutableLiveData<Boolean>()
-    var responseDataCode = MutableLiveData<Any>() // lets make this generic to use it with all apis
-    var loginDeviceId = MutableLiveData<String>()
 
+    var loadPreviousNavBottom = MutableLiveData<Int>()
+    var screenShotOfActivity = MutableLiveData<Any>() //bitmap
+
+    var showLoader = MutableLiveData<Boolean>()
+    fun setShowLoader(boolean: Boolean?)
+    {
+        showLoader.postValue(boolean)
+    }
     var stringNameData = MutableLiveData<ModelStringID>()
+
+    var responseDataCode = MutableLiveData<Any>() // lets make this generic to use it with all apis
+    var notifyItemSelected = MutableLiveData<Any>() // lets make this for sharing data overall application
     fun setStringData(modelStringID: ModelStringID?) {
         this.stringNameData.postValue(modelStringID)
     }
-
     var intIdData = MutableLiveData<Int>()
     fun setStringData(intData: Int?) {
         intIdData.value = intData
-    }
-
-    val stringData: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
     }
 
     var productDetailsId = MutableLiveData<Int>()
@@ -40,18 +44,21 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
         productDetailsId.value = productDetails
     }
 
+    fun setNotifyItemSelected(responseBody : Any?) { // lets post this to our listener places
 
-    var loadPreviousNavBottom = MutableLiveData<HandleBottomNavBack>()
-    fun responseCodeDataSetter(responseBody : Any?) { // lets post this to our listener places
-
-        this.responseDataCode.postValue(responseBody)
+        this.notifyItemSelected.value =responseBody
     }
-    fun setPreviousNavBottom (handleId:HandleBottomNavBack) // id of what item need to change
+    fun setScreenShot (screentShot:Any) // id of what item need to change
     {
-        this.loadPreviousNavBottom.value = handleId
+        this.screenShotOfActivity.value = screentShot
 
     }
-    fun setOnFragmentChangesHandleResults(item: HandleResultsOfApiModel?) {
+    fun setPreviousNavBottom (id:Int) // id of what item need to change
+    {
+        this.loadPreviousNavBottom.value = id
+
+    }
+    fun setOnFragmentChangesHandleResults(item:HandleResultsOfApiModel?) {
         this.onFragmentChangesHandleResult.value = item
     }
     fun setHandleClickBack(item:Boolean?) {
@@ -68,22 +75,13 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     fun setNotifyChange(item:Int?) {
         this.notifyChangeFragment.value = item
     }
-
-    fun onError(onError: String?) {
-        errorMessage.postValue(onError)
-    }
-    fun setFingerPrintDevice(deviceId: String?) {
-        loginDeviceId.value = deviceId
-    }
-
-    class HandleResultsOfApiModel {
+     class HandleResultsOfApiModel {
         var isThisSuccess : Boolean? = null
         var errorResult :String ? = null
         var setResult : Any ? = null // this the most generic item to use in  the entire  application
     }
+    fun responseCodeDataSetter(responseBody : Any?) { // lets post this to our listener places
 
-    class HandleBottomNavBack(var id : Int = 0 , var changeSelection : Boolean = false){
-
-
+        this.responseDataCode.postValue(responseBody)
     }
 }

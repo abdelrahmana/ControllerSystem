@@ -9,6 +9,7 @@ import com.example.controllersystemapp.admin.delegatesAccountants.fragments.Admi
 import com.example.controllersystemapp.admin.delivery.AdminDeliveryFragment
 import com.example.controllersystemapp.admin.makeorders.AdminMakeOrderFragment
 import com.example.controllersystemapp.admin.reports.AdminReportsFragment
+import com.example.controllersystemapp.admin.reports.reportcontainerfragment.ReportContainerFragment
 import com.example.controllersystemapp.admin.settings.SettingsFragment
 import com.example.controllersystemapp.admin.specialcustomers.AdminSpecicalCustomersragment
 import com.example.controllersystemapp.admin.storesproducts.fragments.AdminStoresProductsFragment
@@ -56,7 +57,7 @@ class RedirectFragmentsActivity : AppCompatActivity() {
                 changeFragment(AdminMakeOrderFragment(), fragment)
             }
             reporstFragmet -> {
-                changeFragment(AdminReportsFragment(), fragment)
+                changeFragment(ReportContainerFragment(), fragment)
             }
             specialCustomersFragmet -> {
                 changeFragment(AdminSpecicalCustomersragment(), fragment)

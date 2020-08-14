@@ -11,13 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.ModelStringID
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.ViewModelHandleChangeFragmentclass
-import com.example.controllersystemapp.admin.delegatesAccountants.adapters.AccountantAdapter
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantModel
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.storesproducts.adapters.ResponsiblePersonAdapter
-import com.example.util.UtilKotlin
-import kotlinx.android.synthetic.main.fragment_accountant.*
+import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.fragment_responsible_person.*
 
 

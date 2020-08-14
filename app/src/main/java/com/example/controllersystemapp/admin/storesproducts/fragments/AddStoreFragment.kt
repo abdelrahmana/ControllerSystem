@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.controllersystemapp.ModelStringID
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.ViewModelHandleChangeFragmentclass
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AddAccountantFragment
 import com.example.util.UtilKotlin
+import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.fragment_add_store.*
 
 
@@ -113,4 +113,14 @@ class AddStoreFragment : Fragment() {
         responsiblePersonEditText?.setText(personName)
 
     }
+
+    override fun onDestroyView() {
+        model.let {
+            it.stringNameData.removeObservers(activity!!)
+
+        }
+        super.onDestroyView()
+
+    }
+
 }

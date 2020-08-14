@@ -1,17 +1,467 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".admin.makeorders.AdminMakeOrderFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/make_order"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topContainer"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorOrange55"
+        >
+
+
+        <ImageView
+            android:id="@+id/backImageOrder"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_width="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_ab_back_light"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:textAlignment="viewStart"
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/make_order"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:textColor="@color/textColor"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backImageOrder"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/topContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/confirmMakeOrderBtn"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_marginTop="@dimen/_23sdp"
+                android:textSize="14sp"
+                android:text="@string/customerSelect"
+                android:textColor="@color/black_bold"
+                android:textAlignment="viewStart"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.card.MaterialCardView
+                app:layout_constraintTop_toBottomOf="@+id/description_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/customerSelectCard"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:minHeight="@dimen/_32sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@color/orange_color"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:drawableStart="@drawable/ic_side_arrow"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="@string/customerSelect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+            <TextView
+                android:layout_marginTop="@dimen/_23sdp"
+                android:textSize="14sp"
+                android:text="@string/product"
+                android:textColor="@color/black_bold"
+                android:textAlignment="viewStart"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.card.MaterialCardView
+                app:layout_constraintTop_toBottomOf="@+id/description_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/productCard"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:minHeight="@dimen/_32sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@color/orange_color"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:drawableStart="@drawable/ic_side_arrow"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="@string/product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TextView
+                android:layout_marginTop="@dimen/_23sdp"
+                android:textSize="14sp"
+                android:text="@string/store"
+                android:textColor="@color/black_bold"
+                android:textAlignment="viewStart"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.card.MaterialCardView
+                app:layout_constraintTop_toBottomOf="@+id/description_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/storeCard"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:minHeight="@dimen/_32sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@color/orange_color"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:drawableStart="@drawable/ic_side_arrow"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="@string/store"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/shippingFeeContainer"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/shippingFeeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/shipping_fee"
+                    android:textSize="14sp"
+                    android:textColor="@color/black_bold"
+                    />
+
+                <EditText
+                    android:textSize="15sp"
+                    android:textColorHint="@color/add_product_gray"
+                    android:id="@+id/shoppingFeeEdt"
+                    android:textAlignment="viewStart"
+                    app:backgroundTint="@color/text_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/shipping_fee"
+                    app:layout_constraintTop_toBottomOf="@+id/shippingFeeText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/orderPriceContainer"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/orderPriceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/price"
+                    android:textSize="14sp"
+                    android:textColor="@color/black_bold"
+                    />
+
+                <EditText
+                    android:textSize="15sp"
+                    android:textColorHint="@color/add_product_gray"
+                    android:id="@+id/orderPriceEdt"
+                    android:textAlignment="viewStart"
+                    app:backgroundTint="@color/text_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/price"
+                    app:layout_constraintTop_toBottomOf="@+id/orderPriceText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:layout_marginTop="@dimen/_15sdp"
+                android:textColor="@color/login_gray"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/barcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:textColor="@color/login_gray"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/current_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:minWidth="@dimen/_100sdp"
+                android:minHeight="@dimen/_90sdp"
+                android:layout_width="wrap_content"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center"
+                app:strokeColor="@color/light_gray"
+                app:strokeWidth="1dp"
+                android:layout_marginTop="@dimen/_13sdp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:minWidth="@dimen/_100sdp"
+                    android:minHeight="@dimen/_90sdp"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:tint="@color/login_gray"
+                        app:srcCompat="@drawable/ic_photo"
+                        android:textColor="@color/light_orange"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                    <TextView
+                        android:textAlignment="center"
+                        android:textColor="@color/login_gray"
+                        android:layout_marginTop="@dimen/_13sdp"
+                        android:textSize="@dimen/_18sdp"
+                        android:text="@string/photo_camera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="50dp"
+                android:id="@+id/creditorCheckContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/creditorCheckImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:srcCompat="@drawable/ic_radio_not_check"
+                    />
+
+                <TextView
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:textSize="15sp"
+                    android:textColor="@color/black_bold"
+                    android:text="@string/creditorr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/creditorCheckImg"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
+                android:id="@+id/valuePaidContainer"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/valuePaidText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/valuePaidNow"
+                    android:textSize="14sp"
+                    android:textColor="@color/black_bold"
+                    />
+
+                <EditText
+                    android:textSize="15sp"
+                    android:textColorHint="@color/add_product_gray"
+                    android:id="@+id/valuePaidEdt"
+                    android:textAlignment="viewStart"
+                    app:backgroundTint="@color/text_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/price"
+                    app:layout_constraintTop_toBottomOf="@+id/valuePaidText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:id="@+id/cashCheckContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/cashCheckImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:srcCompat="@drawable/ic_radio_not_check"
+                    />
+
+                <TextView
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:textSize="15sp"
+                    android:textColor="@color/black_bold"
+                    android:text="@string/cash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/cashCheckImg"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/confirmMakeOrderBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:fontFamily="@font/ffshamelfamily_sansonebold"
+        android:gravity="center"
+        android:text="@string/confirmation"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/orange_color"
+        app:cornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

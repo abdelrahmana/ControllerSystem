@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/_15sdp"
+    android:id="@+id/cardContainer"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="3dp"
+    android:minHeight="@dimen/_80sdp"
+    app:cardBackgroundColor="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:id="@+id/itemContainer"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <ImageView
+            android:id="@+id/salesImage"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/sales_reports_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/deliveryNumberText"
+            android:text="توصيل رقم"
+            app:layout_constraintEnd_toStartOf="@+id/textKeyRsom"
+            android:textAlignment="viewStart"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintStart_toEndOf="@+id/salesImage"
+            app:layout_constraintTop_toTopOf="@+id/salesImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:text="ahmed Hazem"
+            app:layout_constraintEnd_toStartOf="@+id/piecesTextView"
+            android:textAlignment="viewStart"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintStart_toEndOf="@+id/salesImage"
+            app:layout_constraintTop_toBottomOf="@+id/deliveryNumberText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/rsomText"
+            android:text="2000"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAlignment="viewStart"
+            android:layout_marginEnd="@dimen/_7sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/salesImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/textKeyRsom"
+            android:text="رسوم"
+            android:textAlignment="viewStart"
+            android:layout_marginEnd="@dimen/_3sdp"
+            app:layout_constraintEnd_toStartOf="@+id/rsomText"
+            app:layout_constraintTop_toTopOf="@+id/salesImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/piecesTextView"
+            android:text="2"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textAlignment="viewStart"
+            android:layout_marginEnd="@dimen/_7sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deliveryNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/picecesKeyRsom"
+            android:text="قطعة"
+            android:textAlignment="viewStart"
+            android:layout_marginEnd="@dimen/_3sdp"
+            app:layout_constraintEnd_toStartOf="@+id/piecesTextView"
+            app:layout_constraintTop_toTopOf="@+id/piecesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/date"
+            android:text="10 محرم 1450"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textAlignment="viewStart"
+            android:layout_marginEnd="@dimen/_7sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/piecesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/moreText"
+            android:text="@string/more"
+            android:drawableStart="@drawable/ic_more"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textAlignment="viewStart"
+            app:layout_constraintStart_toStartOf="@+id/salesImage"
+            app:layout_constraintTop_toBottomOf="@+id/piecesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
