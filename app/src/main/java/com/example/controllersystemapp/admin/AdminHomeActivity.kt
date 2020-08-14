@@ -12,6 +12,7 @@ import com.example.util.CommonActivity
 import com.example.util.NameUtils.categoriesFragmet
 import com.example.util.NameUtils.delegatesAccountantsFragmet
 import com.example.util.NameUtils.deliveryFragmet
+import com.example.util.NameUtils.makeOrderFragmet
 import com.example.util.NameUtils.redirectFragmet
 import com.example.util.NameUtils.reporstFragmet
 import com.example.util.NameUtils.settingsFragmet
@@ -31,6 +32,7 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
         deliveryCard?.setOnClickListener(this)
         categoriesCard?.setOnClickListener(this)
         customersCard?.setOnClickListener(this)
+        makeOrderCard?.setOnClickListener(this)
 
         //setSingleEvent(gridLayout)
 
@@ -90,7 +92,7 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
 
             R.id.categoriesCard -> {
                 removeCardSelection()
-                setCardSelection(categoriesCard , makeOrderImg , makeOrderText ,R.drawable.ic_category_selected)
+                setCardSelection(categoriesCard , categoriesImg , categoryText ,R.drawable.ic_category_selected)
                 //startActivity(Intent(this , AdminMakeOrdersActivity::class.java))
                 val intent = Intent(this , RedirectFragmentsActivity::class.java)
                 intent.putExtra(redirectFragmet , categoriesFragmet)
@@ -103,6 +105,15 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
                 //startActivity(Intent(this , AdminSpecialCustomersActivity::class.java))
                 val intent = Intent(this , RedirectFragmentsActivity::class.java)
                 intent.putExtra(redirectFragmet , specialCustomersFragmet)
+                startActivity(intent)
+            }
+
+            R.id.makeOrderCard -> {
+                removeCardSelection()
+                setCardSelection(makeOrderCard , makeOrderImg , makeOrderText ,R.drawable.ic_order_selected)
+                //startActivity(Intent(this , AdminSpecialCustomersActivity::class.java))
+                val intent = Intent(this , RedirectFragmentsActivity::class.java)
+                intent.putExtra(redirectFragmet , makeOrderFragmet)
                 startActivity(intent)
             }
 
@@ -139,13 +150,16 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
         deliveryText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
         categoriesCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
-        makeOrderImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_category))
-        makeOrderText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
+        categoriesImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_category))
+        categoryText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
         customersCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
         customerImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_customers_icon))
         customerText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
+        makeOrderCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
+        makeOrderImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_order_icon))
+        makeOrderText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
     }
 }

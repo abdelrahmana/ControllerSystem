@@ -139,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
-                android:rowCount="3"
+                android:rowCount="4"
                 android:alignmentMode="alignMargins"
                 android:columnOrderPreserved="false"
                 android:orientation="horizontal"
@@ -372,7 +372,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="133dp"
-                    android:id="@+id/categoriesCard"
+                    android:id="@+id/makeOrderCard"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
                     app:cardCornerRadius="5dp"
@@ -397,7 +397,7 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_category"
+                            app:srcCompat="@drawable/ic_order_icon"
 
                             />
 
@@ -411,7 +411,7 @@
                             android:textStyle="bold"
                             android:textSize="14sp"
                             android:textColor="@color/textColor"
-                            android:text="@string/categories"
+                            android:text="@string/make_order"
                             android:layout_marginTop="7dp"
                             android:layout_marginBottom="6dp"
                             />
@@ -476,6 +476,69 @@
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
+
+
+                <!-- Row 4 -->
+
+                <!-- Column 1 -->
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="133dp"
+                    android:id="@+id/categoriesCard"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginBottom="19dp"
+                    android:layout_marginEnd="@dimen/_7sdp"                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/categoriesImg"
+                            android:maxHeight="80dp"
+                            android:maxWidth="@dimen/_80sdp"
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_category"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/categoryText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:fontFamily="@font/ffshamelfamily_sansonebold"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="@color/textColor"
+                            android:text="@string/categories"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="6dp"
+                            />
+
+
+
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+
 
 
 
