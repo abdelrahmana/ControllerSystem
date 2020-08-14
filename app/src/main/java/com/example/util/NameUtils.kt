@@ -11,6 +11,7 @@ object NameUtils {
     val makeOrderFragmet = "makeOrder"
     val categoriesFragmet = "Categories"
     val settingsFragmet = "Settings"
+    val notificationsFragmet = "Notification"
     var WHICH_ADDED = "WhichAdded"
 
     val specialCustomersFragmet = "specialCustomers"

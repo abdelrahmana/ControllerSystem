@@ -61,7 +61,7 @@ class AdminMakeOrderFragment : Fragment() {
 
         customerSelectCard?.setOnClickListener {
 
-            UtilKotlin.changeFragmentBack(activity!! , ResponsiblePersonFragment() , "ResponsiblePerson"  , null)
+            UtilKotlin.changeFragmentBack(activity!! , ResponsiblePersonFragment() , "ResponsiblePerson"  , null,R.id.frameLayout_direction)
 
 
         }

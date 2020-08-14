@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.AdminHomeActivity
+import com.example.controllersystemapp.admin.reports.ReportsDetailsFragment
+import com.example.controllersystemapp.common.forgetpassword.ForgetPassword
+import com.example.util.UtilKotlin
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
@@ -34,6 +37,12 @@ class LoginFragment : Fragment() {
 
         }
 
+        forgetPassword?.setOnClickListener {
+            UtilKotlin.changeFragmentBack(activity!! , ForgetPassword() , "ForgetPassword"  , null , R.id.container)
+
+            //UtilKotlin.changeFragment(ForgetPassword(), activity?.supportFragmentManager!!, R.id.container)
+
+        }
     }
 
     companion object {

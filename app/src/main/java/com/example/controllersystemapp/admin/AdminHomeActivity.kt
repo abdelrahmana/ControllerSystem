@@ -13,6 +13,7 @@ import com.example.util.NameUtils.categoriesFragmet
 import com.example.util.NameUtils.delegatesAccountantsFragmet
 import com.example.util.NameUtils.deliveryFragmet
 import com.example.util.NameUtils.makeOrderFragmet
+import com.example.util.NameUtils.notificationsFragmet
 import com.example.util.NameUtils.redirectFragmet
 import com.example.util.NameUtils.reporstFragmet
 import com.example.util.NameUtils.settingsFragmet
@@ -43,6 +44,14 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
 
             val intent = Intent(this , RedirectFragmentsActivity::class.java)
             intent.putExtra(redirectFragmet , settingsFragmet)
+            startActivity(intent)
+
+        }
+
+        notificationIcon?.setOnClickListener{
+
+            val intent = Intent(this , RedirectFragmentsActivity::class.java)
+            intent.putExtra(redirectFragmet , notificationsFragmet)
             startActivity(intent)
 
         }

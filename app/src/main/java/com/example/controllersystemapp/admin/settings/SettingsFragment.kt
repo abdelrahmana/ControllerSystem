@@ -43,30 +43,30 @@ class SettingsFragment : Fragment() {
         editProfileCard?.setOnClickListener{
 
             UtilKotlin.changeFragmentBack(activity!! ,
-                EditProfileFragment(), "EditProfile" , null)
+                EditProfileFragment(), "EditProfile" , null,R.id.frameLayout_direction)
 
 
         }
 
         adminCard?.setOnClickListener{
             UtilKotlin.changeFragmentBack(activity!! ,
-                AdminFragment(), "Admin" , null)
+                AdminFragment(), "Admin" , null,R.id.frameLayout_direction)
         }
 
         msrofatCard?.setOnClickListener{
             UtilKotlin.changeFragmentBack(activity!! ,
-                MasrufatFragment(), "Fees" , null)
+                MasrufatFragment(), "Fees" , null,R.id.frameLayout_direction)
         }
 
         paymentsCard?.setOnClickListener{
             UtilKotlin.changeFragmentBack(activity!! ,
-                PaymentsFragment(), "Payments" , null)
+                PaymentsFragment(), "Payments" , null,R.id.frameLayout_direction)
         }
 
         editPasswordCard?.setOnClickListener{
 
             UtilKotlin.changeFragmentBack(activity!! ,
-                EditPasswordFragment(), "EditPassword" , null)
+                EditPasswordFragment(), "EditPassword" , null,R.id.frameLayout_direction)
 
 
         }

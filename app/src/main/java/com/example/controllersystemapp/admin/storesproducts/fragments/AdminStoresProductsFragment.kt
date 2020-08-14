@@ -60,13 +60,13 @@ class AdminStoresProductsFragment : Fragment() {
             if (viewPagerStoresProduct.currentItem == 0)
             {
                 //go to adProduct Screen
-                UtilKotlin.changeFragmentBack(activity!! , AddProductFragment() , "AddProduct"  , null)
+                UtilKotlin.changeFragmentBack(activity!! , AddProductFragment() , "AddProduct"  , null,R.id.frameLayout_direction)
 
             }
             else if (viewPagerStoresProduct.currentItem == 1)
             {
                // Toast.makeText(context , "addStores" , Toast.LENGTH_LONG).show()
-                UtilKotlin.changeFragmentBack(activity!! , AddStoreFragment() , "AddStore"  , null)
+                UtilKotlin.changeFragmentBack(activity!! , AddStoreFragment() , "AddStore"  , null,R.id.frameLayout_direction)
 
                 //go to adStore Screen
 

@@ -69,7 +69,7 @@ class MasrufatFragment : Fragment() , ClickAcceptRejectListener {
 
     override fun onItemListClick(position: Int) {
         UtilKotlin.changeFragmentBack(activity!! ,
-            FeesDetailsFragment(), "FeesDetails" , null)
+            FeesDetailsFragment(), "FeesDetails" , null,R.id.frameLayout_direction)
 
     }
 

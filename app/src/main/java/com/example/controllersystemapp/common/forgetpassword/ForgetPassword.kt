@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
+import kotlinx.android.synthetic.main.fragment_forget_password.*
 
 class ForgetPassword : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,5 +23,11 @@ class ForgetPassword : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        backButton?.setOnClickListener {
+
+            activity?.supportFragmentManager?.popBackStack()
+
+        }
     }
 }

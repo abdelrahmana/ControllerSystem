@@ -31,10 +31,10 @@ class AddStoreFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_add_store, container, false)
-       // model = UtilKotlin.declarViewModel(this)!!
-        activity?.run {
-            model = ViewModelProviders.of(activity!!).get(ViewModelHandleChangeFragmentclass::class.java)
-        }
+        model =UtilKotlin.declarViewModel(activity!!)!!
+//        activity?.run {
+//            model = ViewModelProviders.of(activity!!).get(ViewModelHandleChangeFragmentclass::class.java)
+//        }
         return rootView
     }
 
@@ -45,7 +45,7 @@ class AddStoreFragment : Fragment() {
 
         responsiblePersonContainer?.setOnClickListener {
 
-            UtilKotlin.changeFragmentBack(activity!! , ResponsiblePersonFragment() , "ResponsiblePerson"  , null)
+            UtilKotlin.changeFragmentBack(activity!! , ResponsiblePersonFragment() , "ResponsiblePerson"  , null,R.id.frameLayout_direction)
 
         }
 

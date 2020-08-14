@@ -41,7 +41,7 @@ class PaymentsFragment : Fragment() {
         addPaymentBtn?.setOnClickListener {
 
             UtilKotlin.changeFragmentBack(activity!! ,
-                AddPaymentFragment(), "AddPayment" , null)
+                AddPaymentFragment(), "AddPayment" , null,R.id.frameLayout_direction)
 
         }
     }

@@ -39,6 +39,18 @@ class ReportContainerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        backButtonReport?.setOnClickListener {
+            if (activity?.supportFragmentManager?.backStackEntryCount == 1)
+            {
+                activity?.finish()
+            }
+            else{
+                activity?.supportFragmentManager?.popBackStack()
+            }
+        }
+
+
         setRecycleViewData()// when data is coming
         setViewModelListener()
     }
@@ -64,7 +76,7 @@ class ReportContainerFragment : Fragment() {
                     val bundle = Bundle()
                     //     bundle.putInt(EXITENCEIDPACKAGE,availableServiceList.get(position).id?:-1)
                     //UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , SalesFragment() , bundle)
-                    UtilKotlin.changeFragmentBack(activity!! , SalesFragment() , "SalesFragment"  , null)
+                    UtilKotlin.changeFragmentBack(activity!! , SalesFragment() , "SalesFragment"  , null,R.id.frameLayout_direction)
 
                 }
 

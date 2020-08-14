@@ -72,7 +72,7 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 //        UtilKotlin.replaceFragmentWithBack(context!!, this, DelegateDetailsFragment(),
 //            null, R.id.frameLayout_direction, 120, false, true)
 
-        UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , ""  , null)
+        UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , ""  , null,R.id.frameLayout_direction)
     }
 
 }

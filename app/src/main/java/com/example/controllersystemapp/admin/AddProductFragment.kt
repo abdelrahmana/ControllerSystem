@@ -36,11 +36,13 @@ class AddProductFragment : Fragment() {
         }
 
         materialProduct?.setOnClickListener {
-         UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassification() , "productClassification"  , null)
+         UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassification() , "productClassification"  ,
+             null , R.id.frameLayout_direction)
         }
 
         materialSave?.setOnClickListener {
-            UtilKotlin.changeFragmentBack(activity!! , StoreClassificationFragment() , "storeClassification"  , null)
+            UtilKotlin.changeFragmentBack(activity!! , StoreClassificationFragment() , "storeClassification"  ,
+                null , R.id.frameLayout_direction)
         }
     }
 

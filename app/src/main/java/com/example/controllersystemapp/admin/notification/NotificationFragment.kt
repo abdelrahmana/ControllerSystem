@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.admin.specialcustomers
+package com.example.controllersystemapp.admin.notification
 
 import android.os.Bundle
 import android.util.Log
@@ -10,17 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.AccountantAdapter
-import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DoneDialogFragment
+import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantModel
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import com.example.util.UtilKotlin
-import com.example.util.UtilKotlin.changeFragment
 import kotlinx.android.synthetic.main.fragment_accountant.*
-import kotlinx.android.synthetic.main.fragment_admin_specical_customersragment.*
+import kotlinx.android.synthetic.main.fragment_notification.*
 
-class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
 
-    lateinit var specialCustomerAdapter: SpecialCustomerAdapter
-    var customerList = ArrayList<Any>()
+class NotificationFragment : Fragment() , OnRecyclerItemClickListener {
+
+
+    lateinit var notificationAdapter: NotificationAdapter
+    var notificationList = ArrayList<Any>()
 
 
     override fun onCreateView(
@@ -28,14 +28,13 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_specical_customersragment, container, false)
+        return inflater.inflate(R.layout.fragment_notification, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        backImage?.setOnClickListener {
-
+        backImageAdmin?.setOnClickListener {
             if (activity?.supportFragmentManager?.backStackEntryCount == 1)
             {
                 activity?.finish()
@@ -44,41 +43,34 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
-
-        addCustomerBtn?.setOnClickListener {
-            UtilKotlin.changeFragmentBack(activity!! , AddCustomerFragment() , "AddCustomer"  , null,R.id.frameLayout_direction)
-        }
     }
 
     override fun onResume() {
         super.onResume()
 
-        getCustomersData()
-
+        getNotificationData()
     }
 
-    private fun getCustomersData() {
+    private fun getNotificationData() {
 
-        customerList.clear()
-
-        for (i in 0..6)
+        notificationList.clear()
+        for (i in 0..3)
         {
-            customerList.add("")
+            notificationList.add("")
         }
 
-        specialCustomerAdapter = SpecialCustomerAdapter(customerList , this)
-        specialCustomersRecycler?.apply {
+        notificationAdapter = NotificationAdapter(notificationList , this)
+        notificationRecycler?.apply {
+
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
-            adapter = specialCustomerAdapter
+            adapter = notificationAdapter
         }
 
 
     }
 
     override fun onItemClick(position: Int) {
-
-        Log.d("click" , "customers")
-
+        Log.d("click" , "notification")
     }
 }

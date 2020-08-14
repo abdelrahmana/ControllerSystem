@@ -36,6 +36,16 @@ class SalesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        filterButton?.setOnClickListener {
+            showBottomSheet(null)
+        }
+
+        backButtonSales?.setOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
+        }
+
+
         setRecycleViewData()// when data is coming
         setViewModelListener()
     }
@@ -66,7 +76,8 @@ class SalesFragment : Fragment() {
                     val bundle = Bundle()
                     //     bundle.putInt(EXITENCEIDPACKAGE,availableServiceList.get(position).id?:-1)
                   //  UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , ReportsDetailsFragment() , bundle)
-                    UtilKotlin.changeFragmentBack(activity!! , ReportsDetailsFragment() , "ReportsDetailsFragment"  , null)
+                    UtilKotlin.changeFragmentBack(activity!! , ReportsDetailsFragment() , "ReportsDetailsFragment"  ,
+                        null,R.id.frameLayout_direction)
 
                 }
 
@@ -74,6 +85,16 @@ class SalesFragment : Fragment() {
 
             }
         })
+    }
+
+
+    private fun showBottomSheet(bundle: Bundle?) { // show bottom sheet
+        val reportsFilterBottomSheet = ReportsFilterBottomSheet()
+        reportsFilterBottomSheet.arguments = bundle
+        reportsFilterBottomSheet.show(
+            activity!!.supportFragmentManager,
+            "reports_sheet"
+        )
     }
     companion object {
     }

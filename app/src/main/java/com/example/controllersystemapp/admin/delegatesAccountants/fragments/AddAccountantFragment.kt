@@ -33,7 +33,7 @@ class AddAccountantFragment : Fragment() {
             val bundle = Bundle()
             bundle.putString(WHICH_ADDED , getString(R.string.done_add_accountant))
 
-            UtilKotlin.changeFragmentBack(activity!! ,DoneDialogFragment() , "DoneAddAccountant" , bundle)
+            UtilKotlin.changeFragmentBack(activity!! ,DoneDialogFragment() , "DoneAddAccountant" , bundle,R.id.frameLayout_direction)
         }
     }
 }

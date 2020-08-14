@@ -31,7 +31,7 @@ class AddAdminFragment : Fragment() {
             bundle.putString(NameUtils.WHICH_ADDED, getString(R.string.done_add_admin))
 
             UtilKotlin.changeFragmentBack(activity!! ,
-                DoneDialogFragment() , "DoneAddAccountant" , bundle)
+                DoneDialogFragment() , "DoneAddAccountant" , bundle,R.id.frameLayout_direction)
         }
 
         backProfile?.setOnClickListener {

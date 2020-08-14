@@ -44,7 +44,7 @@ class AdminFragment : Fragment(), OnRecyclerItemClickListener {
         addAdminBtn?.setOnClickListener {
 
             UtilKotlin.changeFragmentBack(activity!! ,
-                AddAdminFragment(), "AddAdmin" , null)
+                AddAdminFragment(), "AddAdmin" , null,R.id.frameLayout_direction)
 
         }
 
