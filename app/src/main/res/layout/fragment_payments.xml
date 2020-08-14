@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".admin.settings.admin.AdminFragment">
+    tools:context=".admin.settings.payments.PaymentsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topContainer"
@@ -19,7 +18,7 @@
 
 
         <ImageView
-            android:id="@+id/backImageAdmin"
+            android:id="@+id/backImagePayment"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_width="wrap_content"
@@ -35,7 +34,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/admin"
+            android:text="@string/payments"
             android:layout_marginStart="@dimen/_24sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:textColor="@color/textColor"
@@ -47,26 +46,30 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/backImageAdmin"
+            app:layout_constraintTop_toBottomOf="@+id/backImagePayment"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/topContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topContainer"
+        app:layout_constraintVertical_bias="1.0">
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:paddingBottom="@dimen/_70sdp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/_70sdp">
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/adminRecycler"
+                android:visibility="gone"
+                android:id="@+id/paymentsRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_14sdp"
@@ -76,14 +79,28 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
 
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topContainer"
+        android:id="@+id/noPaymentsData"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/addPaymentBtn"
+        >
+        <include
+            layout="@layout/no_fees" />
+    </LinearLayout>
+
+
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/addAdminBtn"
+        android:id="@+id/addPaymentBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         app:backgroundTint="@color/orange_color"
@@ -97,10 +114,12 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:fontFamily="@font/ffshamelfamily_sansonebold"
-        android:text="@string/add_admin"
+        android:text="@string/addition"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
+import com.example.util.NameUtils.WHICH_ADDED
 import com.example.util.UtilKotlin
 import kotlinx.android.synthetic.main.fragment_add_accountant.*
 
@@ -28,7 +29,11 @@ class AddAccountantFragment : Fragment() {
         }
 
         confirmAddAccountantBtn?.setOnClickListener {
-            UtilKotlin.changeFragmentBack(activity!! ,DoneDialogFragment() , "DoneAddAccountant" , null)
+
+            val bundle = Bundle()
+            bundle.putString(WHICH_ADDED , getString(R.string.done_add_accountant))
+
+            UtilKotlin.changeFragmentBack(activity!! ,DoneDialogFragment() , "DoneAddAccountant" , bundle)
         }
     }
 }

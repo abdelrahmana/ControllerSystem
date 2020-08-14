@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.BuildConfig
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AddAccountantFragment
+import com.example.controllersystemapp.admin.settings.admin.AdminFragment
+import com.example.controllersystemapp.admin.settings.editprofile.EditProfileFragment
+import com.example.controllersystemapp.admin.settings.masrufat.MasrufatFragment
+import com.example.controllersystemapp.admin.settings.payments.PaymentsFragment
 import com.example.util.UtilKotlin
 import kotlinx.android.synthetic.main.fragment_settings.*
 
@@ -39,13 +42,33 @@ class SettingsFragment : Fragment() {
 
         editProfileCard?.setOnClickListener{
 
-            UtilKotlin.changeFragmentBack(activity!! , EditProfileFragment() , "EditProfile" , null)
+            UtilKotlin.changeFragmentBack(activity!! ,
+                EditProfileFragment(), "EditProfile" , null)
 
 
         }
 
         adminCard?.setOnClickListener{
-            UtilKotlin.changeFragmentBack(activity!! , AdminFragment() , "Admin" , null)
+            UtilKotlin.changeFragmentBack(activity!! ,
+                AdminFragment(), "Admin" , null)
+        }
+
+        msrofatCard?.setOnClickListener{
+            UtilKotlin.changeFragmentBack(activity!! ,
+                MasrufatFragment(), "Fees" , null)
+        }
+
+        paymentsCard?.setOnClickListener{
+            UtilKotlin.changeFragmentBack(activity!! ,
+                PaymentsFragment(), "Payments" , null)
+        }
+
+        editPasswordCard?.setOnClickListener{
+
+            UtilKotlin.changeFragmentBack(activity!! ,
+                EditPasswordFragment(), "EditPassword" , null)
+
+
         }
 
         versionNumber?.text = "${versionNumber?.text} ${BuildConfig.VERSION_NAME}"

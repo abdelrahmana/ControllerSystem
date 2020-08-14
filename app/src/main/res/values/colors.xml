@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="black">#192435</color>
+    <color name="blackColor">#000000</color>
     <color name="gray">#B6B6B6</color>
     <color name="login_gray">#747f8e</color>
     <color name="error_color">#d56976</color>
@@ -27,6 +28,10 @@
     <color name="switch_green">#00ad2a</color>
     <color name="logout_red">#d0021b</color>
     <color name="grey_version">#5a5a5a</color>
+    <color name="black36">#5C000000</color>
+    <color name="blockColor">#d75858</color>
+    <color name="card_color">#f1f1f1</color>
+    <color name="hintColorCard">#2b000000</color>
 
 
 

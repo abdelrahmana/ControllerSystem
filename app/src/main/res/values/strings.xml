@@ -80,4 +80,20 @@
     <string name="save">حفظ</string>
     <string name="choose_from_mobile_pic">اختار من صور الهاتف</string>
     <string name="take_photo">إلتقاط صورة من الكامير</string>
+    <string name="add_admin">اضف ادمن</string>
+    <string name="deleteAdmin">مسح الادمن</string>
+    <string name="blockAdmin">حظر الادمن</string>
+    <string name="adminName">اسم الادمن</string>
+    <string name="done_add_admin">تم اضافة الادمن</string>
+    <string name="feesRequest">طلب سحب المصروفات:</string>
+    <string name="accept">قبول</string>
+    <string name="reject">رفض</string>
+    <string name="no_fees">"  لا توجد مصروفات متاحه "</string>
+    <string name="price">" السعر"</string>
+    <string name="currantPassword">كلمة المرور الحالية</string>
+    <string name="newPassword">كلمة المرور الجديدة</string>
+    <string name="confirmPassword">تآكيد كلمة المرور الجديدة</string>
+    <string name="addition">اضافة</string>
+    <string name="no_payment_exist">"  لا توجد مدفوعات متاحه "</string>
+    <string name="addDescrption">اكتب وصف</string>
 </resources>
