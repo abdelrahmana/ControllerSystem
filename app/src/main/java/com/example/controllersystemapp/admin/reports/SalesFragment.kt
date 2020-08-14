@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.productclassification.lastsubcategory.FragmentLastSubProductclassification
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.photonect.photographerapp.notificationphotographer.DonePackgae.ProductClassificationAdaptor
@@ -35,6 +37,7 @@ class SalesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRecycleViewData()// when data is coming
+        setViewModelListener()
     }
     var salesItemAdapter : SalesItemAdapter?=null
     private fun setRecycleViewData() {
@@ -45,6 +48,30 @@ class SalesFragment : Fragment() {
         salesItemAdapter = SalesItemAdapter(model,arrayList)
         UtilKotlin.setRecycleView(salesRecycleView,salesItemAdapter!!,
             RecyclerView.VERTICAL,context!!, null, true)
+    }
+
+
+    override fun onDestroyView() {
+        model.notifyItemSelected.removeObservers(activity!!)
+        super.onDestroyView()
+    }
+
+    fun setViewModelListener() {
+        model?.notifyItemSelected?.observe(activity!!, Observer<Any> { modelSelected ->
+            if (modelSelected != null) { // if null here so it's new service with no any data
+                if (modelSelected is Any) {
+                    // if (modelSelected.isItCurrent) {
+                    // initSlider(modelSelected.pictures)
+                    // }
+                    val bundle = Bundle()
+                    //     bundle.putInt(EXITENCEIDPACKAGE,availableServiceList.get(position).id?:-1)
+                    UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , ReportsDetailsFragment() , bundle)
+                }
+
+                model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
+
+            }
+        })
     }
     companion object {
     }

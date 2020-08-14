@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -14,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.controllersystemapp.R
 import com.example.util.PrefsUtil.getSharedPrefs
 import java.util.*
 
@@ -27,6 +30,10 @@ object UtilKotlin {
             .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
 
+    }
+
+    fun declarViewModel(activity: Fragment?): ViewModelHandleChangeFragmentclass? { // listen life cycle to fragment only
+        return ViewModelProvider(activity!!).get(ViewModelHandleChangeFragmentclass::class.java)
     }
     fun declarViewModel(activity: FragmentActivity?): ViewModelHandleChangeFragmentclass? {
         return ViewModelProvider(activity!!).get(ViewModelHandleChangeFragmentclass::class.java)
@@ -79,7 +86,7 @@ object UtilKotlin {
     fun setLanguagePerActivity(activity : Activity, intent: Intent?){
         val currentLanguage = getSharedPrefs(
             activity
-        ).getString(PrefsModel.localLanguage, "en")?:"en"
+        ).getString(PrefsModel.localLanguage, "ar")?:"ar"
         //  if (UtilKotlin.getSharedPrefs(activity).getString(PrefsModel.localLanguage, "en").equals("en")) {
         val locale = Locale(currentLanguage)
         Locale.setDefault(locale)
@@ -112,5 +119,47 @@ object UtilKotlin {
 
          */
         res.updateConfiguration(conf, dm)
+    }
+
+    fun replaceFragmentWithBack(
+        context: Context, currentFragment: Fragment, newFragment: Fragment,
+        bundle: Bundle?, id: Int, requestCode: Int, flag: Boolean?, back: Boolean?
+    ) {
+        //(context as FragmentActivity)
+        Handler().post {
+            val manager =
+                (context as FragmentActivity).supportFragmentManager// newFragment.fragmentManager
+            val ft = manager!!.beginTransaction()
+            if (bundle != null) {
+                newFragment.arguments = bundle
+            }
+            if (flag!!) {
+                /*   ft.setCustomAnimations(R.anim.slide_in_right,
+                           R.anim.slide_out_right, R.anim.translat_right,
+                           R.anim.translat_left)*/
+            } else {
+                ft.setCustomAnimations(0, 0)
+            }
+            ft.replace(id, newFragment, newFragment.javaClass.getName())
+            if (back!!) {
+                ft.addToBackStack(null)
+                newFragment.setTargetFragment(currentFragment, requestCode)
+            }
+            ft.commit()
+        }
+    }
+
+
+    fun changeFragmentBack(activity: FragmentActivity, fragment: Fragment, tag: String ,bundle: Bundle?) {
+
+        val transaction = activity?.supportFragmentManager.beginTransaction()
+        if (bundle != null) {
+            fragment.arguments = bundle
+        }
+        transaction.replace(R.id.frameLayout_direction, fragment, tag)
+        //transaction.addToBackStack(tag)
+        transaction.addToBackStack(null)
+        transaction.commit()
+
     }
 }

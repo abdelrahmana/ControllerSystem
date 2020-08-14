@@ -19,6 +19,7 @@ class ContainerActivityForFragment : CommonActivity() {
       //  UtilKotlin.changeFragment(RequestOfferProfileFragment(),supportFragmentManager,R.id.container)
         StatusBarUtil.setTransparent(this)
 
+
     }
     companion object {
         val whichFragment = "current_fragment"

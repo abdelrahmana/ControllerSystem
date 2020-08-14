@@ -14,4 +14,28 @@
     <color name="light_gray">#dadada</color>
     <color name="material_card">#c6c6c6</color>
     <color name="search">#3acdd3e0</color>
+    <color name="colorOrange55">#8CDB7A59</color>
+    <color name="textColor">#192435</color>
+    <color name="textColor70">#B3192435</color>
+    <color name="selctedOrange">#f2864d</color>
+    <color name="white">#FFFFFF</color>
+    <color name="text_black">#4a4a4a</color>
+    <color name="text_grey">#737373</color>
+    <color name="black_bold">#141414</color>
+    <color name="green">#69c193</color>
+    <color name="grey_bg">#f3f1f1</color>
+    <color name="orange_light">#d2a244</color>
+    <color name="text_green">#48b07a</color>
+    <color name="green_background">#1569c193</color>
+    <color name="search_text">#9b9b9b</color>
+    <color name="card_background">#3acdd3e0</color>
+    <color name="pink_color">#ea5f72</color>
+    <color name="switch_green">#00ad2a</color>
+    <color name="logout_red">#d0021b</color>
+    <color name="grey_version">#5a5a5a</color>
+
+
+
+
+
 </resources>

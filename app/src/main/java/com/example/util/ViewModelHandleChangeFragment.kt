@@ -2,6 +2,7 @@ package com.example.util
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.controllersystemapp.ModelStringID
 
 // this viewpager is used within fragment
 // specifically when running new fragment and notifying fragment with this change
@@ -26,9 +27,22 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     {
         showLoader.postValue(boolean)
     }
+    var stringNameData = MutableLiveData<ModelStringID>()
 
     var responseDataCode = MutableLiveData<Any>() // lets make this generic to use it with all apis
     var notifyItemSelected = MutableLiveData<Any>() // lets make this for sharing data overall application
+    fun setStringData(modelStringID: ModelStringID?) {
+        this.stringNameData.postValue(modelStringID)
+    }
+    var intIdData = MutableLiveData<Int>()
+    fun setStringData(intData: Int?) {
+        intIdData.value = intData
+    }
+
+    var productDetailsId = MutableLiveData<Int>()
+    fun setProductDetailsId(productDetails: Int?) {
+        productDetailsId.value = productDetails
+    }
 
     fun setNotifyItemSelected(responseBody : Any?) { // lets post this to our listener places
 
