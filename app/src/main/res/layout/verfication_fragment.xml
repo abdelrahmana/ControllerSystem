@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgetPassImage"
         android:id="@+id/forgetPassHeader"
-        android:text="@string/forget_pass_header"
+        android:text="@string/confirms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -53,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgetPassHeader"
         android:id="@+id/secondHeader"
-        android:text="@string/dont_worry"
+        android:text="@string/dont_get_code"
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>
 
@@ -67,73 +67,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:textSize="@dimen/_12sdp"
-            android:drawableStart="@drawable/ic_username"
-            android:text="@string/reset_phone"
-            android:textColor="@color/login_gray"
-            android:textAlignment="viewStart"
-            android:drawablePadding="@dimen/_7sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/containerPhone"
-            android:layout_width="match_parent"
+        <com.alahammad.otp_view.OtpView
+            android:id="@+id/otp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginEnd="28dp"
-            >
-            <!-- android:drawableStart="@drawable/ic_person_icon"-->
-            <EditText
-                android:id="@+id/phoneNumberEditText"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:theme="@style/adding_loginstate"
-                android:drawablePadding="16dp"
-                android:textSize="@dimen/_12sdp"
-                android:hint="@string/mobile_number"
-                android:imeOptions="actionNext"
-                android:inputType="phone"
-                android:padding="8dp"
-                android:textAlignment="viewStart"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!--  <ImageView
-                  android:id="@+id/checked_image_ev"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:visibility="gone"
-                  android:layout_marginEnd="@dimen/_10sdp"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintTop_toTopOf="parent"
-                  app:srcCompat="@drawable/ic_x" /> -->
-
-            <TextView
-                android:visibility="gone"
-                android:drawableStart="@drawable/ic_error_input"
-                android:drawablePadding="@dimen/_5sdp"
-                android:id="@+id/errorPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="17dp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_5sdp"
-                android:textColor="@color/error_color"
-                app:layout_constraintStart_toStartOf="@+id/phoneNumberEditText"
-                app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            android:inputType="number"
+            app:otp_number="4" />
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/sendButton"
+        android:id="@+id/confirmButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/phoneContainer"
@@ -152,4 +97,30 @@
         android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"/>
+
+    <TextView
+        android:textColor="@color/login_gray"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="@dimen/_13sdp"
+        app:layout_constraintStart_toStartOf="@id/confirmButton"
+        app:layout_constraintTop_toBottomOf="@+id/confirmButton"
+        android:id="@+id/not_recieved"
+        android:text="@string/send_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textColor="@color/light_red"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_13sdp"
+        app:layout_constraintStart_toEndOf="@id/not_recieved"
+        app:layout_constraintTop_toBottomOf="@+id/confirmButton"
+        android:id="@+id/sendAgain"
+        android:text="@string/send_ramz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

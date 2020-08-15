@@ -127,4 +127,9 @@
     <string name="valuePaidNow">" قيمة المدفوعه الان"</string>
     <string name="cash">كاش</string>
     <string name="notification">اشعارات</string>
+    <string name="about_account">كل ما تحتاجه لإدارة الحسابات الخاصة بك</string>
+    <string name="confirms">التاكيد</string>
+    <string name="dont_get_code">أدخل رمز التحقق الذي نرسله لك على رقم الهاتف</string>
+    <string name="send_again">إذا لم تستلم رمزًا</string>
+    <string name="send_ramz"><u>ارسال الرمز مرة أخرى</u></string>
 </resources>

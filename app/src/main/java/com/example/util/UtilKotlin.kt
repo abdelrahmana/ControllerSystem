@@ -7,6 +7,9 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -15,9 +18,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.controllersystemapp.R
 import com.example.util.PrefsUtil.getSharedPrefs
 import java.util.*
+
 
 object UtilKotlin {
     fun changeFragment(targetFragment: Fragment, fragmentManger : FragmentManager, id : Int) { // fragment no back
@@ -160,6 +163,13 @@ object UtilKotlin {
         //transaction.addToBackStack(tag)
         transaction.addToBackStack(null)
         transaction.commit()
+
+    }
+
+    fun setUnderLine(textValues: String, textView: TextView?) {
+        val content = SpannableString(textValues)
+        content.setSpan(UnderlineSpan(), 0, content.length, 0)
+        textView?.setText(content)
 
     }
 }

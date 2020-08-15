@@ -5,7 +5,7 @@
     android:layout_margin="@dimen/_15sdp"
     android:id="@+id/cardContainer"
     app:cardElevation="10dp"
-    app:cardCornerRadius="3dp"
+    app:cardCornerRadius="7dp"
     android:minHeight="@dimen/_80sdp"
     app:cardBackgroundColor="@color/white"
     android:layout_width="match_parent"
@@ -17,16 +17,17 @@
         android:id="@+id/itemContainer"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto">
-
-        <ImageView
-            android:id="@+id/salesImage"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:src="@drawable/image_delivery_item"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#166e6e6e"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_15sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/sales_reports_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:id="@+id/userImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
         <TextView
             android:id="@+id/deliveryNumberText"
             android:text="توصيل رقم"
@@ -34,10 +35,10 @@
             app:layout_constraintEnd_toStartOf="@+id/rsomText"
             android:textAlignment="viewStart"
             android:layout_marginStart="@dimen/_5sdp"
-            app:layout_constraintStart_toEndOf="@+id/salesImage"
-            app:layout_constraintTop_toTopOf="@+id/salesImage"
+            app:layout_constraintStart_toEndOf="@+id/userImage"
+            app:layout_constraintTop_toTopOf="@+id/userImage"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="25dp"/>
 
         <TextView
             android:textColor="@color/black"
@@ -46,7 +47,7 @@
             app:layout_constraintEnd_toStartOf="@+id/piecesTextView"
             android:textAlignment="viewStart"
             android:layout_marginStart="@dimen/_5sdp"
-            app:layout_constraintStart_toEndOf="@+id/salesImage"
+            app:layout_constraintStart_toEndOf="@+id/userImage"
             app:layout_constraintTop_toBottomOf="@+id/deliveryNumberText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
@@ -59,7 +60,7 @@
             app:layout_constraintEnd_toStartOf="@+id/textKeyRsom"
             android:textAlignment="viewStart"
             android:layout_marginEnd="@dimen/_7sdp"
-            app:layout_constraintTop_toTopOf="@+id/salesImage"
+            app:layout_constraintTop_toTopOf="@+id/userImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
@@ -68,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:textAlignment="viewStart"
             android:layout_marginEnd="@dimen/_7sdp"
-            app:layout_constraintTop_toTopOf="@+id/salesImage"
+            app:layout_constraintTop_toTopOf="@+id/userImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
@@ -92,27 +93,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:id="@+id/date"
-            android:text="10 محرم 1450"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:id="@+id/deliveryNumber"
+            android:textColor="@color/text_green"
+            android:textStyle="bold"
+            android:text="أمر توصيل رقم 135655"
+            android:paddingBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:textAlignment="viewStart"
-            app:layout_constraintStart_toStartOf="@+id/salesImage"
+            app:layout_constraintStart_toStartOf="@+id/userImage"
             app:layout_constraintTop_toBottomOf="@+id/piecesTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/moreText"
-            android:text="@string/more"
-            android:paddingBottom="@dimen/_7sdp"
-            android:drawableStart="@drawable/ic_more"
-            android:drawablePadding="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_7sdp"
-            android:textAlignment="viewStart"
-            app:layout_constraintTop_toBottomOf="@+id/piecesTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

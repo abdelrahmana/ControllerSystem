@@ -243,7 +243,7 @@
                 android:layout_marginStart="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_24sdp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_80sdp"
+                android:layout_height="wrap_content"
                 app:cardElevation="5dp"
 
                 >
@@ -280,7 +280,6 @@
                         android:textColor="@color/black_bold"
                         android:textStyle="bold"
                         android:fontFamily="@font/ffshamelfamily_sansonebold"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/nameCard" />
 
@@ -293,9 +292,19 @@
                         android:textColor="@color/text_grey"
                         android:text="رس"
                         app:layout_constraintTop_toBottomOf="@+id/nameCard"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/priceCard"
                         />
+
+                    <ImageView
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/currancyCard"
+                        android:src="@drawable/image_samsung"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:scaleType="centerCrop"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -303,44 +312,93 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/userCard"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                >
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/statusImageOrder"
+                    android:layout_width="10dp"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_height="11dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:src="@color/green"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:src="@drawable/ic_img_placeholer_side"
-                app:civ_border_width="1dp"
-                app:civ_border_color="#166e6e6e"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/_4sdp"
-                android:id="@+id/userImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/statusTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:textColor="@color/green"
+                    android:text="@string/product_status"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/statusImageOrder"
+                    app:layout_constraintStart_toEndOf="@+id/statusImageOrder"
+                    app:layout_constraintTop_toTopOf="@+id/statusImageOrder" />
 
-            <TextView
-                android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@+id/userImage"
-                app:layout_constraintTop_toTopOf="@+id/userImage"
-                android:id="@+id/userNameText"
-                android:text="Abdelrahman Salah"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"/>
 
-            <TextView
-                app:layout_constraintStart_toStartOf="@+id/userNameText"
-                app:layout_constraintTop_toBottomOf="@+id/userNameText"
-                android:id="@+id/phoneNumberText"
-                android:text="+201286617935"
-                android:textColor="@color/text_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/statusTextValues"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/waiting"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:textColor="@color/green"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/statusImageOrder"
+                    app:layout_constraintStart_toEndOf="@+id/statusTextView"
+                    app:layout_constraintTop_toTopOf="@id/statusImageOrder"
+
+                    />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:src="@drawable/ic_img_placeholer_side"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#166e6e6e"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/statusImageOrder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:id="@+id/userImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toEndOf="@+id/userImage"
+                    app:layout_constraintTop_toTopOf="@+id/userImage"
+                    android:id="@+id/userNameText"
+                    android:text="Abdelrahman Salah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"/>
+
+                <TextView
+                    app:layout_constraintStart_toStartOf="@+id/userNameText"
+                    app:layout_constraintTop_toBottomOf="@+id/userNameText"
+                    android:id="@+id/phoneNumberText"
+                    android:text="+201286617935"
+                    android:textColor="@color/text_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+            </com.google.android.material.card.MaterialCardView>
             <TextView
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phoneNumberText"
