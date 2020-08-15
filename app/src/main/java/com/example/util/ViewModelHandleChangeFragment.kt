@@ -35,9 +35,9 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
         this.stringNameData.postValue(modelStringID)
     }
     var intIdData = MutableLiveData<Int>()
-    fun setStringData(intData: Int?) {
-        intIdData.value = intData
-    }
+//    fun setStringData(intData: Int?) {
+//        intIdData.value = intData
+//    }
 
     var productDetailsId = MutableLiveData<Int>()
     fun setProductDetailsId(productDetails: Int?) {

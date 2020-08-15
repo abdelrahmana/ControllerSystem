@@ -31,10 +31,10 @@ class AddStoreFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_add_store, container, false)
-        model =UtilKotlin.declarViewModel(activity!!)!!
-//        activity?.run {
-//            model = ViewModelProviders.of(activity!!).get(ViewModelHandleChangeFragmentclass::class.java)
-//        }
+        //model =UtilKotlin.declarViewModel(activity!!)!!
+        activity?.run {
+            model = ViewModelProviders.of(activity!!).get(ViewModelHandleChangeFragmentclass::class.java)
+        }
         return rootView
     }
 
@@ -111,6 +111,7 @@ class AddStoreFragment : Fragment() {
         super.onResume()
         Log.d("model" , "resume")
         responsiblePersonEditText?.setText(personName)
+        model.setStringData(null)
 
     }
 

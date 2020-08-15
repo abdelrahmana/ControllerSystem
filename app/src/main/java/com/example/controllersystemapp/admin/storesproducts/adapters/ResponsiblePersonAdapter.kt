@@ -42,9 +42,12 @@ class ResponsiblePersonAdapter(
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
+
+
             if (selctedPosition == adapterPosition)
             {
                 itemView.doneImg.visibility = View.VISIBLE
+                selctedPosition = -1
             }
             else{
                 itemView.doneImg.visibility = View.GONE

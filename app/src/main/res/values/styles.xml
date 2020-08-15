@@ -52,6 +52,15 @@
     </style>
 
 
+    <style name="FullScreen" parent="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        //this is the statusbar color
+        <item name="android:textColorHint">#A09E9E</item>
+    </style>
+
+
 
 
 </resources>

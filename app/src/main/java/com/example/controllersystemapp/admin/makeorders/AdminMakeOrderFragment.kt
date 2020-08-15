@@ -76,6 +76,8 @@ class AdminMakeOrderFragment : Fragment() {
                     //setData(personName)
                     Log.d("modelOrder" , "name ${modeStringId.name}")
                     Log.d("modelOrder" , "id ${modeStringId.id}")
+                    model.setStringData(null)
+
                 }
 
             })
