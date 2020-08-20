@@ -64,10 +64,9 @@ class StoreClassificationFragment : Fragment() {
                    // if (modelSelected.isItCurrent) {
                    // initSlider(modelSelected.pictures)
                    // }
-                   model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
-                   val bundle = Bundle()
+                 //  val bundle = Bundle()
               //     bundle.putInt(EXITENCEIDPACKAGE,availableServiceList.get(position).id?:-1)
-                   UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , FragmentSubProductclassification() , bundle)
+                //   UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , FragmentSubProductclassification() , bundle)
                    addProductButton?.visibility = View.VISIBLE
                    this.modelSelected = modelSelected
                }
@@ -83,6 +82,8 @@ class StoreClassificationFragment : Fragment() {
                      //getData(datamodel) // move data to here please
                  }
  */
+               model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
+
            }
        })
    }
