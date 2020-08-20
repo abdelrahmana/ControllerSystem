@@ -66,6 +66,7 @@ android:layout_height="wrap_content">
     android:layout_height="wrap_content"/>
 
 <ImageView
+    android:id="@+id/plusImage"
     app:srcCompat="@drawable/ic_plus"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
@@ -81,6 +82,7 @@ android:layout_height="wrap_content">
     android:layout_marginStart="@dimen/_10sdp"
     android:layout_height="@dimen/_30sdp">
     <TextView
+        android:id="@+id/increasementText"
         android:layout_gravity="center"
         android:textSize="@dimen/_12sdp"
         android:text="1"
@@ -90,6 +92,7 @@ android:layout_height="wrap_content">
         android:layout_height="wrap_content"/>
 </com.google.android.material.card.MaterialCardView>
 <ImageView
+    android:id="@+id/decreaseImage"
     android:layout_marginStart="@dimen/_10sdp"
     app:srcCompat="@drawable/ic_minus"
     android:layout_width="wrap_content"

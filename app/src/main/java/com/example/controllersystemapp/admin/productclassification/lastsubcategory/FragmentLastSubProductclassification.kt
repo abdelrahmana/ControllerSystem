@@ -89,6 +89,7 @@ class FragmentLastSubProductclassification : Fragment() {
                       //getData(datamodel) // move data to here please
                   }
   */
+
             }
         })
     }

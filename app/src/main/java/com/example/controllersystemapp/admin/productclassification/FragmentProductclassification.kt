@@ -48,7 +48,13 @@ class FragmentProductclassification : Fragment() {
             RecyclerView.VERTICAL,context!!, null, true)
     }
 
-   fun setViewModelListener() {
+    override fun onDestroyView() {
+        model?.notifyItemSelected?.removeObservers(activity!!)
+        super.onDestroyView()
+    }
+
+    fun setViewModelListener() {
+       //
        model?.notifyItemSelected?.observe(activity!!, Observer<Any> { modelSelected ->
            if (modelSelected != null) { // if null here so it's new service with no any data
                if (modelSelected is Any) {
@@ -58,7 +64,7 @@ class FragmentProductclassification : Fragment() {
                    model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
                    val bundle = Bundle()
               //     bundle.putInt(EXITENCEIDPACKAGE,availableServiceList.get(position).id?:-1)
-                   UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , FragmentSubProductclassification() , bundle)
+                   UtilKotlin.changeFragmentWithBack(activity!! , R.id.frameLayout_direction , FragmentSubProductclassification() , bundle)
                }
                /* else if (modelSelected is ImageModelData) // if it is object of this model
                  {

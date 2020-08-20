@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.product_item_adaptor.view.*
+import kotlinx.android.synthetic.main.stored_item_adaptor.view.*
 
 class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentclass,
                                   val arrayListOfTutorials:ArrayList<Any>//this method is returning the view for each item in the list
@@ -59,6 +59,18 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
                   itemView.divider.visibility = View.GONE
               }*/
 
+            if (adapterPositionChecked ==adapterPosition) {
+                itemView?.checked?.visibility = View.VISIBLE
+                itemView?.containerNumber.visibility = View.VISIBLE
+            }
+
+            itemView?.decreaseImage.setOnClickListener{
+                if (Integer.parseInt(itemView?.increasementText?.text.toString())>1)
+                    itemView?.increasementText?.text = (Integer.parseInt(itemView?.increasementText?.text.toString())-1).toString()
+            }
+            itemView?.plusImage.setOnClickListener{
+                    itemView?.increasementText?.text = (Integer.parseInt(itemView?.increasementText?.text.toString())+1).toString()
+            }
             itemView.itemContainer.setOnClickListener{
 
                   onItemClicked(modelData,adapterPosition) // go to details please
@@ -76,5 +88,6 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
           }
 
     }
+    val adapterPositionChecked = -1 // this is the checked item to use
 
 }
