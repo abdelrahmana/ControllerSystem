@@ -60,8 +60,11 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
               }*/
 
             if (adapterPositionChecked ==adapterPosition) {
-                itemView?.checked?.visibility = View.VISIBLE
-                itemView?.containerNumber.visibility = View.VISIBLE
+                showHideViews(itemView,View.VISIBLE)
+
+            }
+            else {
+                showHideViews(itemView,View.GONE)
             }
 
             itemView?.decreaseImage.setOnClickListener{
@@ -79,15 +82,22 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
 
         }
 
+        private fun showHideViews(itemView: View, showGone: Int) {
+            itemView?.checked?.visibility = showGone
+            itemView?.containerNumber.visibility = showGone
+        }
 
-         private fun onItemClicked(model: ViewModelHandleChangeFragmentclass,position: Int) {
+
+        private fun onItemClicked(model: ViewModelHandleChangeFragmentclass,position: Int) {
+             adapterPositionChecked = adapterPosition
               // send this item please
               model.setNotifyItemSelected(arrayListOfTutorials.get(position)?:"") // update sign up fragment please
+             notifyDataSetChanged()
 
 
           }
 
     }
-    val adapterPositionChecked = -1 // this is the checked item to use
+    var adapterPositionChecked = -1 // this is the checked item to use
 
 }
