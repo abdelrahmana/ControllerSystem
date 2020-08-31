@@ -70,10 +70,10 @@ class FragmentSubProductclassification : Fragment() {
                     // if (modelSelected.isItCurrent) {
                     // initSlider(modelSelected.pictures)
                     // }
-                    model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
+                //    model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
                     val bundle = Bundle()
                     //     bundle.putInt(EXITENCEIDPACKAGE,availableServiceList.get(position).id?:-1)
-                    UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , FragmentLastSubProductclassification() , bundle)
+                    UtilKotlin.changeFragmentWithBack(activity!! , R.id.frameLayout_direction , FragmentLastSubProductclassification() , bundle)
                 }
                 /* else if (modelSelected is ImageModelData) // if it is object of this model
                   {
@@ -87,6 +87,7 @@ class FragmentSubProductclassification : Fragment() {
                       //getData(datamodel) // move data to here please
                   }
   */
+                model?.setNotifyItemSelected(null)
             }
         })
     }

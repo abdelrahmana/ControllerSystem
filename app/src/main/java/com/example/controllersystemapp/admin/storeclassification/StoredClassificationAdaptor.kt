@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.product_item_adaptor.view.*
+import kotlinx.android.synthetic.main.stored_item_adaptor.view.*
 
 class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentclass,
                                   val arrayListOfTutorials:ArrayList<Any>//this method is returning the view for each item in the list
@@ -59,6 +59,21 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
                   itemView.divider.visibility = View.GONE
               }*/
 
+            if (adapterPositionChecked ==adapterPosition) {
+                showHideViews(itemView,View.VISIBLE)
+
+            }
+            else {
+                showHideViews(itemView,View.GONE)
+            }
+
+            itemView?.decreaseImage.setOnClickListener{
+                if (Integer.parseInt(itemView?.increasementText?.text.toString())>1)
+                    itemView?.increasementText?.text = (Integer.parseInt(itemView?.increasementText?.text.toString())-1).toString()
+            }
+            itemView?.plusImage.setOnClickListener{
+                    itemView?.increasementText?.text = (Integer.parseInt(itemView?.increasementText?.text.toString())+1).toString()
+            }
             itemView.itemContainer.setOnClickListener{
 
                   onItemClicked(modelData,adapterPosition) // go to details please
@@ -67,14 +82,22 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
 
         }
 
+        private fun showHideViews(itemView: View, showGone: Int) {
+            itemView?.checked?.visibility = showGone
+            itemView?.containerNumber.visibility = showGone
+        }
 
-         private fun onItemClicked(model: ViewModelHandleChangeFragmentclass,position: Int) {
+
+        private fun onItemClicked(model: ViewModelHandleChangeFragmentclass,position: Int) {
+             adapterPositionChecked = adapterPosition
               // send this item please
               model.setNotifyItemSelected(arrayListOfTutorials.get(position)?:"") // update sign up fragment please
+             notifyDataSetChanged()
 
 
           }
 
     }
+    var adapterPositionChecked = -1 // this is the checked item to use
 
 }

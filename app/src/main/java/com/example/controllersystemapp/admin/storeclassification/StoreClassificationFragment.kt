@@ -12,6 +12,7 @@ import com.example.controllersystemapp.admin.productclassification.productsubcla
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.photonect.photographerapp.notificationphotographer.DonePackgae.ProductClassificationAdaptor
+import com.photonect.photographerapp.notificationphotographer.DonePackgae.StoredClassificationAdaptor
 import kotlinx.android.synthetic.main.fragment_product_classification.*
 
 class StoreClassificationFragment : Fragment() {
@@ -36,29 +37,38 @@ class StoreClassificationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setRecycleViewData()
         setViewModelListener()
+        setClickListener()
     }
-    var productAdaptor : ProductClassificationAdaptor?=null
+    var storedAdapter : StoredClassificationAdaptor?=null
     private fun setRecycleViewData() {
         val arrayList = ArrayList<Any>()
         arrayList.add("مخزن 1")
         arrayList.add("مخزن 2")
         arrayList.add("مخزن 3")
-        productAdaptor = ProductClassificationAdaptor(model,arrayList)
-        UtilKotlin.setRecycleView(productList,productAdaptor!!,
+        storedAdapter = StoredClassificationAdaptor(model,arrayList)
+        UtilKotlin.setRecycleView(productList,storedAdapter!!,
             RecyclerView.VERTICAL,context!!, null, true)
     }
 
-   fun setViewModelListener() {
+    override fun onDestroyView() {
+      model?.notifyItemSelected?.removeObservers(activity!!)
+        super.onDestroyView()
+
+    }
+
+    fun setViewModelListener() {
+       // please add the item you want to add in arraylist here
        model?.notifyItemSelected?.observe(activity!!, Observer<Any> { modelSelected ->
            if (modelSelected != null) { // if null here so it's new service with no any data
                if (modelSelected is Any) {
                    // if (modelSelected.isItCurrent) {
                    // initSlider(modelSelected.pictures)
                    // }
-                   model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
-                   val bundle = Bundle()
+                 //  val bundle = Bundle()
               //     bundle.putInt(EXITENCEIDPACKAGE,availableServiceList.get(position).id?:-1)
-                   UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , FragmentSubProductclassification() , bundle)
+                //   UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , FragmentSubProductclassification() , bundle)
+                   addProductButton?.visibility = View.VISIBLE
+                   this.modelSelected = modelSelected
                }
                /* else if (modelSelected is ImageModelData) // if it is object of this model
                  {
@@ -72,7 +82,17 @@ class StoreClassificationFragment : Fragment() {
                      //getData(datamodel) // move data to here please
                  }
  */
+               model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
+
            }
        })
    }
+
+    var modelSelected : Any?=null
+    private fun setClickListener() {
+        addProductButton?.setOnClickListener{
+            // modelselected is the model of tasnef ma5sn
+
+        }
+    }
 }

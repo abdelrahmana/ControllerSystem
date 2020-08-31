@@ -34,10 +34,10 @@ class FragmentLastSubProductclassification : Fragment() {
     var subProductAdaptor : LastSubProductClassificationAdaptor?=null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subCategroyHeader?.text = arguments?.getString(productId)?:"الكترونيات"
+        subCategroyHeader?.text = arguments?.getString(productId)?:"العاب"
            setRecycleViewData() // set recycleView
         setViewModelListener() // last item clicked now we need to go to the add product fragment and no back please
-        activity!!.supportFragmentManager.popBackStack()
+       // activity!!.supportFragmentManager.popBackStack()
     }
 
     override fun onDestroyView() {
@@ -89,6 +89,8 @@ class FragmentLastSubProductclassification : Fragment() {
                       //getData(datamodel) // move data to here please
                   }
   */
+
+                model?.setNotifyItemSelected(null)
             }
         })
     }
