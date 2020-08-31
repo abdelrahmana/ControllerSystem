@@ -67,6 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content">
 
+
         <com.alahammad.otp_view.OtpView
             android:id="@+id/otp"
             android:layout_gravity="center"
@@ -75,6 +76,8 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             app:otp_number="4" />
+
+
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton

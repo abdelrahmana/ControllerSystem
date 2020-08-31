@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.common.verficationfragment.VerficationFragment
 import com.example.util.UtilKotlin
 import kotlinx.android.synthetic.main.fragment_forget_password.*
 
@@ -25,7 +26,8 @@ class ForgetPassword : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sendButton?.setOnClickListener{
-            UtilKotlin.changeFragmentBack(activity!! , ForgetPassword() , "verficationFragment"  , null , R.id.container)
+
+            UtilKotlin.changeFragmentBack(activity!! , VerficationFragment() , "verficationFragment"  , null , R.id.container)
 
         }
 
