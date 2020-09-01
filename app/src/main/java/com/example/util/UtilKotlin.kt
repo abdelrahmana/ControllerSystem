@@ -1,14 +1,23 @@
 package com.example.util
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
+import android.util.Log
+import android.view.View
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -18,7 +27,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.andrognito.flashbar.Flashbar
+import com.andrognito.flashbar.anim.FlashAnim
+import com.example.controllersystemapp.R
+import com.example.util.ApiConfiguration.ErrorBodyResponse
 import com.example.util.PrefsUtil.getSharedPrefs
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.loader_layout.*
+import okhttp3.ResponseBody
 import java.util.*
 
 
@@ -32,6 +49,16 @@ object UtilKotlin {
             .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
 
+    }
+    fun ProgressDialog(context: Context): Dialog {
+        val dialog = Dialog(context)
+        val view = (context as Activity).layoutInflater.inflate(R.layout.loader_layout, null)
+        dialog.setCancelable(false)
+        dialog.setContentView(view)
+        dialog.loaderContainer?.visibility = View.VISIBLE
+        dialog.getWindow()!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.getWindow()!!.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        return dialog
     }
 
     fun declarViewModel(activity: Fragment?): ViewModelHandleChangeFragmentclass? { // listen life cycle to fragment only
@@ -172,4 +199,106 @@ object UtilKotlin {
         textView?.setText(content)
 
     }
+
+
+    fun hideKeyboard(view: View) {
+        val input = view.context
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        input.hideSoftInputFromWindow(
+            view.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
+
+    }
+
+    fun hideKeyboardEditText(editText: EditText, view: View) {
+
+        val hide: InputMethodManager? =
+            view.context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        hide!!.hideSoftInputFromWindow(editText.windowToken, 0)
+
+    }
+
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        var netstate = false
+        val connectivity = context
+            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivity != null) {
+            val info = connectivity.allNetworkInfo
+            if (info != null) {
+                for (i in info.indices) {
+                    if (info[i].state == NetworkInfo.State.CONNECTED) {
+                        netstate = true
+                        break
+                    }
+                }
+            }
+        }
+        return netstate
+    }
+
+    fun showSnackErrorInto(
+        activity: Activity?,
+        error: String?
+    ) {
+        if (activity != null) {
+            Flashbar.Builder(activity)
+                .gravity(Flashbar.Gravity.TOP)
+                .title(activity.getString(R.string.error))
+                .message(error!!)
+                .backgroundColorRes(R.color.md_red_600)
+                .dismissOnTapOutside()
+                .duration(2500)
+                .enableSwipeToDismiss()
+                .enterAnimation(
+                    FlashAnim.with(activity)
+                        .animateBar()
+                        .duration(550)
+                        .alpha()
+                        .overshoot()
+                )
+                .exitAnimation(
+                    FlashAnim.with(activity)
+                        .animateBar()
+                        .duration(200)
+                        .anticipateOvershoot()
+                )
+                .build().show()
+        }
+    }
+
+    fun getDeviceId(context: Context): String? {
+        return Settings.Secure.getString(
+            context.contentResolver,
+            Settings.Secure.ANDROID_ID
+        )
+    }
+
+
+    fun getErrorBodyResponse(errorBody: ResponseBody?, context: Context): String {
+        var errortext = ""
+        val gson = Gson()
+        val type = object : TypeToken<ErrorBodyResponse>() {}.type
+        var errorResponse: ErrorBodyResponse? = gson.fromJson(errorBody?.charStream(), type)?:(ErrorBodyResponse())
+//            .also {
+//            it.msg.add(context.getString(R.string.error))
+//
+//
+//        })
+
+        for (i in errorResponse?.msg!!.indices) {
+            Log.e("ResponseForError", "${errorResponse?.msg?.get(i)}")
+
+            errortext = errortext + errorResponse?.msg?.get(i) + "\n"
+
+        }
+        // var error =errorResponse?.msg?.toString()
+        //  error = error?.substring(1,error.length- 1)
+        //var error= errorResponse?.message
+        return errortext?:"" /*errorResponse?.msg.toString().apply{
+      replace("[\\[\\](){}]","")/*replace("[","")
+          .replace("]","")*/}*/
+    }
+
 }

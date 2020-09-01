@@ -2,10 +2,18 @@ package com.example.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.controllersystemapp.BuildConfig
+import android.util.Log
+import androidx.multidex.BuildConfig
+import com.example.controllersystemapp.common.login.User
+import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.ErrorBodyResponse
 import com.example.util.NameUtils.LANGUAGE
 import com.example.util.PrefsModel.TOKEN
 import com.example.util.PrefsModel.shareredPrefName
+import com.example.util.PrefsModel.userModel
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import okhttp3.ResponseBody
 
 object PrefsUtil {
 
@@ -56,21 +64,21 @@ object PrefsUtil {
         sp.edit().putString(TOKEN, encrypted).apply()
     }
 
-  /*  fun setUserModel(context: Context, responseLogin: ResponseLogin.Client?) {
+    fun setUserModel(context: Context, responseLogin: User?) {
 
         val gson = Gson()
-        getSharedPrefs(context).edit().putString(userModel, gson.toJson(responseLogin ?: ResponseLogin.Client())
+        getSharedPrefs(context).edit().putString(userModel, gson.toJson(responseLogin ?: User())
         ).apply()
     }
 
-    fun getUserModel(ctx: Context): ResponseLogin.Client? { // this should return the object
+    fun getUserModel(ctx: Context): User? { // this should return the object
         val jso = getSharedPrefs(ctx).getString(userModel, "") // get the overall object please
         val gson = Gson()
-        val typeToken = object : TypeToken<ResponseLogin.Client?>() {}.type
-        val obj = gson.fromJson<ResponseLogin.Client>(jso, typeToken) ?:ResponseLogin.Client() //ResponseLogin(Data("", null))
+        val typeToken = object : TypeToken<User?>() {}.type
+        val obj = gson.fromJson<User>(jso, typeToken) ?: User() //ResponseLogin(Data("", null))
         return obj
 
-    } */
+    }
 
     fun isLoggedIn(ctx: Context): Boolean {
         val sp = ctx.getSharedPreferences(
@@ -106,4 +114,25 @@ object PrefsUtil {
         }
         return value
     }
+
+    fun setString(
+        ctx: Context,
+        key: String?,
+        value: String?
+    ) {
+//        val sp = ctx.getSharedPreferences(
+//            PREF_NAME,
+//            Context.MODE_PRIVATE
+//        )
+        var encrypted = value
+        try {
+            encrypted = AESUtils.encrypt(value!!)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+        getSharedPrefs(ctx).edit().putString(key, value).apply()
+    }
+
+
+
 }

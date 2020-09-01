@@ -187,8 +187,8 @@ class ApiManagerDefault {
                 .build()
         }*/
       val  NETWORK_TIMEOUT :Long = 30
-        val BASE_URL = "https://photonect.org/api/v1/"
-        val LIVE_BASE_URL = "https://photonect.org/api/v1/"
+        val BASE_URL = "https://al-aseyl.com/api/"
+        val LIVE_BASE_URL = "https://al-aseyl.com/api/"
     }
 
 }

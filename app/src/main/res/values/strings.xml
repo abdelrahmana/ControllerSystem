@@ -2,9 +2,9 @@
     <string name="app_name">Admin Control</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="mobile_number">mobile number</string>
+    <string name="mobile_number">رقم الهاتف</string>
     <string name="login_phone">تسجيل دخول عن طريق رقم الهاتف</string>
-    <string name="password">Enter Password</string>
+    <string name="password">كلمة المرور</string>
     <string name="login_text">تسجيل دخول</string>
     <string name="forget_password">نسيت كلمة المرور؟</string>
     <string name="password_text">كلمة المرور</string>
@@ -132,4 +132,12 @@
     <string name="dont_get_code">أدخل رمز التحقق الذي نرسله لك على رقم الهاتف</string>
     <string name="send_again">إذا لم تستلم رمزًا</string>
     <string name="send_ramz"><u>ارسال الرمز مرة أخرى</u></string>
+    <string name="phone_required">الهاتف مطلوب</string>
+    <string name="phone_not_valid">الهاتف غير صالح</string>
+    <string name="password_required">كلمة المرور مطلوبة</string>
+    <string name="password_not_valid">كلمة المرور غير صالحة</string>
+    <string name="loader" translatable="false">BallSpinFadeLoaderIndicator</string>
+    <string name="error">خطأ</string>
+    <string name="no_connect">لايوجد إتصال بالانترنت</string>
+
 </resources>
