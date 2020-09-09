@@ -9,6 +9,7 @@ import com.example.controllersystemapp.ModelStringID
 class ViewModelHandleChangeFragmentclass  : ViewModel() {
     // this basically used to notify changefragment with new
     var notifyChangeFragment = MutableLiveData<Int>()
+    var errorMessage = MutableLiveData<String>()
 
     // handle the back of fragments within activty
     var handleClickBack = MutableLiveData<Boolean>()
@@ -44,6 +45,9 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
         productDetailsId.value = productDetails
     }
 
+    fun onError(onError: String?) {
+        errorMessage.postValue(onError)
+    }
     fun setNotifyItemSelected(responseBody : Any?) { // lets post this to our listener places
 
         this.notifyItemSelected.value =responseBody

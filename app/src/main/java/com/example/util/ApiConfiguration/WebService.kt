@@ -1,6 +1,7 @@
 package com.example.util.ApiConfiguration
 
 
+import com.example.controllersystemapp.admin.storesproducts.models.ProductsListResponse
 import com.example.controllersystemapp.common.login.LoginRequest
 import com.example.controllersystemapp.common.login.LoginResponse
 import io.reactivex.Observable
@@ -15,6 +16,11 @@ interface WebService {
     @Headers("Accept: application/json")
     @POST("auth/login")
     fun login(@Body loginRequest: LoginRequest): Observable<Response<LoginResponse>>
+
+
+    @Headers("Accept: application/json")
+    @POST("admin/products/list")
+    fun productsList(): Observable<Response<ProductsListResponse>>
 
 
 

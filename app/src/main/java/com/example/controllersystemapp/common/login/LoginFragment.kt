@@ -3,14 +3,15 @@ package com.example.controllersystemapp.common.login
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.AdminHomeActivity
-import com.example.controllersystemapp.admin.reports.ReportsDetailsFragment
 import com.example.controllersystemapp.common.AuthPresenter
 import com.example.controllersystemapp.common.forgetpassword.ForgetPassword
 import com.example.util.ApiConfiguration.ApiManagerDefault
@@ -23,6 +24,7 @@ import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.fragment_login.*
 import retrofit2.Response
 
+
 class LoginFragment : Fragment() {
 
 
@@ -32,6 +34,7 @@ class LoginFragment : Fragment() {
     lateinit var rootView : View
     lateinit var progressDialog : Dialog
     var webService: WebService? = null
+    var ischeck = false
 
 
 
@@ -61,7 +64,10 @@ class LoginFragment : Fragment() {
 
             UtilKotlin.hideKeyboard(rootView)
             //checkValidation()
-            makeLoginLogic()
+            startActivity(Intent(context , AdminHomeActivity::class.java))
+            activity!!.finish()
+
+          //  makeLoginLogic()
         }
 
 
@@ -69,6 +75,38 @@ class LoginFragment : Fragment() {
             UtilKotlin.changeFragmentBack(activity!! , ForgetPassword() , "ForgetPassword"  , null , R.id.container)
 
             //UtilKotlin.changeFragment(ForgetPassword(), activity?.supportFragmentManager!!, R.id.container)
+
+        }
+
+        show_password?.setOnClickListener {
+
+            Log.d("showPass" , "$ischeck")
+            if (ischeck)
+            {
+                show_password.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_show_pass))
+                password_edit_text.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                //password_edit_text.transformationMethod = PasswordTransformationMethod()
+               // password_edit_text.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+
+                ischeck = false
+                password_edit_text.setSelection(password_edit_text.length())
+
+            }
+            else{
+                show_password.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_show_pressed))
+               // password_edit_text.setTransformationMethod(null);
+                password_edit_text.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+
+                //password_edit_text.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+
+                ischeck = true
+                password_edit_text.setSelection(password_edit_text.length())
+
+
+            }
+
+
+
 
         }
     }
