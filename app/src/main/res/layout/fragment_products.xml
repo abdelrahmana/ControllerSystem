@@ -7,8 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".admin.storesproducts.fragments.ProductsFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginBottom="@dimen/_70sdp"
+        android:visibility="gone"
+        android:id="@+id/productsRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <androidx.core.widget.NestedScrollView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,7 +38,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:visibility="gone"
-                android:id="@+id/productsRecycler"
+                android:id="@+id/productsRecyclerd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_16sdp"

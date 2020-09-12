@@ -14,11 +14,11 @@ import retrofit2.Response
 object ProductsPresenter {
 
 
-    fun getProductsList(webService: WebService, activity: Activity, model: ViewModelHandleChangeFragmentclass)
+    fun getProductsList(webService: WebService, categoryID : Int? ,activity: Activity, model: ViewModelHandleChangeFragmentclass)
     {
 
         Log.d("testApi" , "getData")
-        webService.productsList()
+        webService.productsList(categoryID)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableObserver<Response<ProductsListResponse>>() {
@@ -44,11 +44,8 @@ object ProductsPresenter {
                             else{
                                 Log.d("testApi" , "responseError")
                                 //model.setShowLoader(false)
-                                model.onError(response.errorBody().toString())
+                                model.onError(response.errorBody())
                             }
-
-
-
 
 
 

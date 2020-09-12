@@ -17,6 +17,8 @@ android {
         renderscriptSupportModeEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+
     }
 
     buildTypes {
@@ -69,7 +71,8 @@ dependencies {
     implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
 
     implementation 'com.daimajia.slider:library:1.1.5@aar'
-    implementation 'com.android.support:multidex:1.0.3'
+    //implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.developer-shivam:Crescento:1.2.1'
@@ -123,5 +126,11 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     implementation 'com.github.alahammad:android-OTP-View:1.0.2'
+
+    implementation 'com.google.zxing:core:3.3.3'
+    implementation 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
+
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    implementation 'me.dm7.barcodescanner:zxing:1.9.13'
 
 }

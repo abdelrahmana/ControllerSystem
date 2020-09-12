@@ -1,15 +1,19 @@
 package com.example.util
 
+import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.provider.MediaStore
 import android.provider.Settings
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
@@ -30,12 +34,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andrognito.flashbar.Flashbar
 import com.andrognito.flashbar.anim.FlashAnim
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.addproduct.AddProductFragment.Companion.GALLERY
 import com.example.util.ApiConfiguration.ErrorBodyResponse
 import com.example.util.PrefsUtil.getSharedPrefs
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.loader_layout.*
 import okhttp3.ResponseBody
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -49,6 +58,98 @@ object UtilKotlin {
             .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
 
+    }
+
+    val permissionForImageAndFile = 200
+    val submitPermssion = 190 // when user submit check this permssion before creating file and go to update profile
+
+    fun getCreatedFileFromBitmap(fileName: String, bitmapUpdatedImage: Bitmap, typeOfFile : String?, context:Context) : File {
+        val bytes =  ByteArrayOutputStream()
+        bitmapUpdatedImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        /*   val f = new File(Environment.getExternalStorageDirectory()
+                   + File.separator + "testimage.jpg");*/
+        val f =  initFile(fileName,typeOfFile?:"jpg",context)
+        f?.createNewFile()
+        val fo =  FileOutputStream(f)
+        fo.write(bytes.toByteArray())
+        fo.close()
+
+        return f!!
+    }
+
+    fun performImgPicAction(which: Int, fragment: Fragment?, context: Activity) {
+        var intent: Intent?
+        Log.d("which" , "$which")
+        if (which == GALLERY) {  // in case we need to get image from gallery
+            intent = Intent(
+                Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+
+        } else {
+            // in case we need camera
+            intent = Intent()
+            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE)
+        }
+        if (fragment != null)
+        {
+            fragment.startActivityForResult(intent, which)
+        }
+        else
+        {
+            context.startActivityForResult(intent, which)
+        }
+    }
+
+    fun checkPermssionGrantedForImageAndFile(context: Activity,requestCode :Int,fragment: Fragment?) : Boolean {
+        var allow = false
+        // imageView.setOnClickListener {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (context.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+                context.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (fragment!=null) // in fragment
+                    fragment.requestPermissions(arrayOf(
+                        Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        , Manifest.permission.READ_EXTERNAL_STORAGE),
+                        requestCode) // request permission now
+                else // in activity
+                    context.requestPermissions(arrayOf(
+                        Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        , Manifest.permission.READ_EXTERNAL_STORAGE),
+                        requestCode) // request permission now
+            }else{
+                allow = true
+
+            }
+        } else {
+            // startCameraNow()
+            allow =  true
+
+        }
+
+        //  }
+        return allow
+    }
+
+    fun getCreatedFileMultiPartFromBitmap(fileName: String, bitmapUpdatedImage: Bitmap?, typeOfFile : String?, context:Context) : File {
+        val bytes =  ByteArrayOutputStream()
+        bitmapUpdatedImage?.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        /*   val f = new File(Environment.getExternalStorageDirectory()
+                   + File.separator + "testimage.jpg");*/
+        val f =  initFile(fileName,typeOfFile?:"jpg",context)
+        f?.createNewFile()
+        val fo =  FileOutputStream(f)
+        fo.write(bytes.toByteArray())
+        fo.close()
+
+        return f!!
+    }
+
+    fun initFile(name :String,type : String,context: Context): File? {  // to delete file you need to get the absoloute paths for it and it's directory
+        var file : File? = null // creating file for video
+        file = File( context.cacheDir.absolutePath, SimpleDateFormat(
+            "'$name'yyyyMMddHHmmss'.$type'").format(Date()))
+        //}
+        return file
     }
     fun ProgressDialog(context: Context): Dialog {
         val dialog = Dialog(context)
@@ -300,5 +401,40 @@ object UtilKotlin {
       replace("[\\[\\](){}]","")/*replace("[","")
           .replace("]","")*/}*/
     }
+
+    fun showSnackMessage(activity: Activity?,  messageBody: String) {
+        if (messageBody.equals("timeout", ignoreCase = true)) {
+            return
+        }
+        activity?.let {
+
+            /*    if (error.contains("resolve")) {
+                error = activity.getString(R.string.network_error_value)
+            }*/
+            //.title(title ?: "")
+            Flashbar.Builder(activity)
+                .gravity(Flashbar.Gravity.TOP)
+                .message(messageBody)
+                .backgroundColorRes(R.color.green)
+                .duration(2500)
+                .dismissOnTapOutside()
+                .enableSwipeToDismiss()
+                .enterAnimation(
+                    FlashAnim.with(activity)
+                        .animateBar()
+                        .duration(550)
+                        .alpha()
+                        .overshoot()
+                )
+                .exitAnimation(
+                    FlashAnim.with(activity)
+                        .animateBar()
+                        .duration(200)
+                        .anticipateOvershoot()
+                )
+                .build().show()
+        }
+    }
+
 
 }

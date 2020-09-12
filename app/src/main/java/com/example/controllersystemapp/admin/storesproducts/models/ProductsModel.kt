@@ -1,5 +1,6 @@
 package com.example.controllersystemapp.admin.storesproducts.models
 
+//not used
 data class ProductsModel(
     var name: String?,
     var price : String?,

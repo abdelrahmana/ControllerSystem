@@ -48,7 +48,7 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
         storesRecycler?.visibility = View.VISIBLE
         //noStoresData.visibility = View.VISIBLE
         storeList.clear()
-        for (i in 0..3)
+        for (i in 0..7)
         {
             storeList.add(StoresModel("مخزن ${i+1}" , "الرياض ، عاصمة المملكة العربية السعودية " , "فيصل الرابحي" , i+1))
         }

@@ -3,14 +3,10 @@ package com.example.controllersystemapp.common
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.core.content.ContextCompat
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.AddProductFragment
-import com.example.controllersystemapp.common.forgetpassword.ForgetPassword
 import com.example.controllersystemapp.common.login.LoginFragment
 import com.example.util.CommonActivity
 import com.example.util.UtilKotlin
-import com.jaeger.library.StatusBarUtil
 
 // this actiivity is used to add fragments inside it
 class ContainerActivityForFragment : CommonActivity() {

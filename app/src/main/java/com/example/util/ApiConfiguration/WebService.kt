@@ -19,10 +19,13 @@ interface WebService {
 
 
     @Headers("Accept: application/json")
-    @POST("admin/products/list")
-    fun productsList(): Observable<Response<ProductsListResponse>>
+    @GET("admin/products/list")
+    fun productsList(@Query("category_id") categoryId : Int?): Observable<Response<ProductsListResponse>>
 
 
 
+    @Headers("Accept: application/json")
+    @POST("admin/products/create")
+    fun addProduct(@Body requestBody : RequestBody): Observable<Response<SuccessModel>>
 
 }

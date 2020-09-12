@@ -3,13 +3,14 @@ package com.example.util
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.controllersystemapp.ModelStringID
+import okhttp3.ResponseBody
 
 // this viewpager is used within fragment
 // specifically when running new fragment and notifying fragment with this change
 class ViewModelHandleChangeFragmentclass  : ViewModel() {
     // this basically used to notify changefragment with new
     var notifyChangeFragment = MutableLiveData<Int>()
-    var errorMessage = MutableLiveData<String>()
+    var errorMessage = MutableLiveData<ResponseBody>()
 
     // handle the back of fragments within activty
     var handleClickBack = MutableLiveData<Boolean>()
@@ -30,11 +31,18 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     }
     var stringNameData = MutableLiveData<ModelStringID>()
 
+    var stringDataVar = MutableLiveData<String>() // lets make this for sharing data overall application
+
     var responseDataCode = MutableLiveData<Any>() // lets make this generic to use it with all apis
     var notifyItemSelected = MutableLiveData<Any>() // lets make this for sharing data overall application
     fun setStringData(modelStringID: ModelStringID?) {
         this.stringNameData.postValue(modelStringID)
     }
+
+    fun setStringVar(stringDataVar: String?) {
+        this.stringDataVar.postValue(stringDataVar)
+    }
+
     var intIdData = MutableLiveData<Int>()
 //    fun setStringData(intData: Int?) {
 //        intIdData.value = intData
@@ -45,7 +53,7 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
         productDetailsId.value = productDetails
     }
 
-    fun onError(onError: String?) {
+    fun onError(onError: ResponseBody?) {
         errorMessage.postValue(onError)
     }
     fun setNotifyItemSelected(responseBody : Any?) { // lets post this to our listener places

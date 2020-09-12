@@ -14,6 +14,7 @@ import com.example.controllersystemapp.admin.reports.reportcontainerfragment.Rep
 import com.example.controllersystemapp.admin.settings.SettingsFragment
 import com.example.controllersystemapp.admin.specialcustomers.AdminSpecicalCustomersragment
 import com.example.controllersystemapp.admin.storesproducts.fragments.AdminStoresProductsFragment
+import com.example.util.CommonActivity
 import com.example.util.NameUtils
 import com.example.util.NameUtils.categoriesFragmet
 import com.example.util.NameUtils.delegatesAccountantsFragmet
@@ -26,7 +27,7 @@ import com.example.util.NameUtils.settingsFragmet
 import com.example.util.NameUtils.specialCustomersFragmet
 import com.example.util.NameUtils.storeProductsFragmet
 
-class RedirectFragmentsActivity : AppCompatActivity() {
+class RedirectFragmentsActivity : CommonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_redirect_fragments)

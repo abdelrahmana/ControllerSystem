@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".admin.AddProductFragment">
+    tools:context=".admin.addproduct.AddProductFragment">
 
 
     <LinearLayout
@@ -81,6 +81,7 @@
         android:layout_height="@dimen/_90sdp">
 
         <LinearLayout
+            android:id="@+id/openGalleryLayout"
             android:background="@android:color/transparent"
             android:orientation="vertical"
             android:gravity="center"
@@ -126,6 +127,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/openCamLayout"
                 android:minWidth="@dimen/_100sdp"
                 android:minHeight="@dimen/_90sdp"
                 android:background="@android:color/transparent"
@@ -252,6 +254,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_marginTop="@dimen/_20sdp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -443,6 +446,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/openScanCamera"
         android:minWidth="@dimen/_100sdp"
         android:minHeight="@dimen/_90sdp"
         android:layout_width="wrap_content"

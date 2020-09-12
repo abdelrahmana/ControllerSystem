@@ -139,5 +139,7 @@
     <string name="loader" translatable="false">BallSpinFadeLoaderIndicator</string>
     <string name="error">خطأ</string>
     <string name="no_connect">لايوجد إتصال بالانترنت</string>
+    <string name="cant_add_image">لا يمكنك إضافة صورة</string>
+    <string name="selection_option">إختر خيارا</string>
 
 </resources>

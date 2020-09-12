@@ -7,16 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.AddProductFragment
+import com.example.controllersystemapp.admin.addproduct.AddProductFragment
 import com.example.controllersystemapp.admin.storesproducts.adapters.ViewPagerStoresProductAdapter
 import com.example.util.UtilKotlin
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.fragment_admin_accountant.*
 import kotlinx.android.synthetic.main.fragment_admin_stores_products.*
 
 
@@ -60,7 +57,8 @@ class AdminStoresProductsFragment : Fragment() {
             if (viewPagerStoresProduct.currentItem == 0)
             {
                 //go to adProduct Screen
-                UtilKotlin.changeFragmentBack(activity!! , AddProductFragment() , "AddProduct"  , null,R.id.frameLayout_direction)
+                UtilKotlin.changeFragmentBack(activity!! ,
+                    AddProductFragment(), "AddProduct"  , null,R.id.frameLayout_direction)
 
             }
             else if (viewPagerStoresProduct.currentItem == 1)

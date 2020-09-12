@@ -105,6 +105,7 @@ class FragmentLastSubProductclassification : Fragment() {
                 activity!!.supportFragmentManager!!.getBackStackEntryAt(index - 3)
             activity!!.supportFragmentManager.popBackStack(previous.id,0)*/
 
+            model?.responseCodeDataSetter(1)
             activity!!.supportFragmentManager.popBackStack()
             activity!!.supportFragmentManager.popBackStack()
             activity!!.supportFragmentManager.popBackStack()
