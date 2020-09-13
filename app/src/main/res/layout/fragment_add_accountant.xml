@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -85,11 +86,12 @@
                     />
 
                 <EditText
+                    android:id="@+id/nameEdt"
                     android:textAlignment="viewStart"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/delegate_name"
+                    android:hint="@string/accountant_name"
                     app:layout_constraintTop_toBottomOf="@+id/accountantNameText"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -123,6 +125,8 @@
                     />
 
                 <EditText
+                    android:inputType="phone"
+                    android:id="@+id/accountantPhoneEdt"
                     android:textAlignment="viewStart"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
@@ -168,10 +172,11 @@
                     app:layout_constraintTop_toTopOf="@+id/countryNameText"
                     app:layout_constraintBottom_toBottomOf="@+id/countryNameText"
                     app:srcCompat="@drawable/ic_drop_down"
-
                     />
 
                 <EditText
+                    android:focusable="false"
+                    android:id="@+id/cityEditText"
                     android:textAlignment="viewStart"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
@@ -211,12 +216,105 @@
                     />
 
                 <EditText
+                    android:inputType="textPassword"
+                    android:id="@+id/accountantPasswordEdt"
                     android:textAlignment="viewStart"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/passwordText"
                     app:layout_constraintTop_toBottomOf="@+id/passwordText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/confirmPasswordContainer"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+
+                <TextView
+                    android:id="@+id/confirmPassText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/confirmPasswordOnly"
+                    android:textSize="14sp"
+                    android:textColor="@color/black_bold"
+                    />
+
+                <EditText
+                    android:inputType="textPassword"
+                    android:id="@+id/confirmPassEdt"
+                    android:textAlignment="viewStart"
+                    app:backgroundTint="@color/text_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/confirmPasswordOnly"
+                    app:layout_constraintTop_toBottomOf="@+id/confirmPassText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
+                android:id="@+id/roleIdContainer"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/confirmPasswordContainer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+
+                <TextView
+                    android:id="@+id/roleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/role"
+                    android:textSize="14sp"
+                    android:textColor="@color/black_bold"
+                    />
+
+                <ImageView
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/roleText"
+                    app:layout_constraintBottom_toBottomOf="@+id/roleText"
+                    app:srcCompat="@drawable/ic_drop_down"
+                    />
+
+                <EditText
+                    android:focusable="false"
+                    android:id="@+id/roleIdEdt"
+                    android:textAlignment="viewStart"
+                    app:backgroundTint="@color/text_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/role"
+                    app:layout_constraintTop_toBottomOf="@+id/roleText"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -246,7 +344,7 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintVertical_bias="1.0"
-                app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
+                app:layout_constraintTop_toBottomOf="@+id/roleIdContainer"
                 />
 
 

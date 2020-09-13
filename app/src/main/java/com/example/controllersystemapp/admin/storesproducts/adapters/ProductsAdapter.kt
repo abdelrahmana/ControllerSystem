@@ -26,6 +26,13 @@ class ProductsAdapter(
         return ViewHolder(view)
     }
 
+    fun removeItemFromList(position: Int) {
+        productList?.let {
+            productList?.removeAt(position)
+            notifyDataSetChanged()
+        }
+    }
+
     override fun getItemCount(): Int {
         return productList.size
     }

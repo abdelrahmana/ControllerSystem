@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
+import com.example.controllersystemapp.admin.storesproducts.models.StoresData
 import com.example.controllersystemapp.admin.storesproducts.models.StoresModel
 import kotlinx.android.synthetic.main.stores_item.view.*
 
 class StoresAdapter(
     var context: Context,
-    var storeList: ArrayList<StoresModel> ,
+    var storeList: ArrayList<StoresData>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<StoresAdapter.ViewHolder>(){
 
@@ -38,14 +39,16 @@ class StoresAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            storesModel: StoresModel,
+            storesModel: StoresData,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
             itemView.storeName.text = storesModel.name
             itemView.storeAddress.text = storesModel.address
-            itemView.storeQuantity.text = storesModel.quantity.toString()
-            itemView.belongName.text = storesModel.personName.toString()
+            //itemView.storeQuantity.text = storesModel.quantity.toString() //not return in api
+
+            itemView.belongName.text = storesModel.accountant?.name?:""
+
 
             itemView.setOnClickListener {
 

@@ -5,14 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantData
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantModel
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import kotlinx.android.synthetic.main.delegate_item.view.*
 
 class AccountantAdapter(
     var context: Context,
-    var accountantsList: ArrayList<AccountantModel>,
+    var accountantsList: ArrayList<AccountantData>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<AccountantAdapter.ViewHolder>(){
 
@@ -38,13 +40,13 @@ class AccountantAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            accountantModel: AccountantModel,
+            accountantModel: AccountantData,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
             itemView.delegateName.text = accountantModel.name
             itemView.delegatePhone.text = accountantModel.phone
-           // Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.delegateImg)
+            Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.delegateImg)
 
 
             itemView.setOnClickListener {

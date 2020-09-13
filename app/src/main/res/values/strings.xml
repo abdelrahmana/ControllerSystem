@@ -141,5 +141,19 @@
     <string name="no_connect">لايوجد إتصال بالانترنت</string>
     <string name="cant_add_image">لا يمكنك إضافة صورة</string>
     <string name="selection_option">إختر خيارا</string>
+    <string name="close">اغلاق</string>
+    <string name="role">الوظيفة</string>
+    <string name="choose_admin">ادمن</string>
+    <string name="callCenter">خدمه عملاء</string>
+    <string name="confirmPasswordOnly">تآكيد كلمة المرور</string>
+    <string name="accountant_name_required">اسم المحاسب مطلوب</string>
+    <string name="city_name_required">اسم المحافظه مطلوب</string>
+    <string name="confirm_pass_required">تآكيد كلمة المرور مطلوب</string>
+    <string name="job_required">الوظيفه مطلوبه</string>
+    <string name="password_confirm">تاكد من تطابق كلمه المرور</string>
+    <string name="store_name_required">اسم المخزن مطلوب</string>
+    <string name="store_address_required">عنوان المخزن مطلوب</string>
+    <string name="product_classified_required">تصنيف المنتج مطلوب</string>
+    <string name="responsible_person_required">تحديد مسئول الذمة مطلوب</string>
 
 </resources>

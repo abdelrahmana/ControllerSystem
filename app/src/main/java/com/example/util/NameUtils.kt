@@ -16,7 +16,17 @@ object NameUtils {
 
     val specialCustomersFragmet = "specialCustomers"
 
+    val WHICH_ADD_DETAILS = "whicjAddDetails"
+    val ADD_ACCOUNTANT = "addAccountant"
+    val ACCOUNTANT_DETAILS = "accountantDetails"
 
+
+    val WHICH_ADD_PRD_STORE = "whichAddProdStore"
+    val ADD_PRODUCT = "addProduct"
+    val ADD_STORE = "addStore"
+
+
+    val ACCOUNTANT_ID = "accountantId"
 
     val productName = "product_name"
     val productId = "product_id"

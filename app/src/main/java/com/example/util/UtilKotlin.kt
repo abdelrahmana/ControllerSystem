@@ -415,7 +415,7 @@ object UtilKotlin {
             Flashbar.Builder(activity)
                 .gravity(Flashbar.Gravity.TOP)
                 .message(messageBody)
-                .backgroundColorRes(R.color.green)
+                .backgroundColorRes(R.color.green_message)
                 .duration(2500)
                 .dismissOnTapOutside()
                 .enableSwipeToDismiss()

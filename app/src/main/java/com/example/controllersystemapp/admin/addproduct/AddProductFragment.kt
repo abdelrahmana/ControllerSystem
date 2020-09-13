@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,9 @@ import com.example.controllersystemapp.admin.storeclassification.StoreClassifica
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils
+import com.example.util.NameUtils.ADD_PRODUCT
+import com.example.util.NameUtils.WHICH_ADD_PRD_STORE
 import com.example.util.UtilKotlin
 import com.example.util.UtilKotlin.performImgPicAction
 import com.example.util.UtilKotlin.permissionForImageAndFile
@@ -43,6 +47,8 @@ class AddProductFragment : Fragment() {
     var webService: WebService? = null
     lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
+
+    var categoryID = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +78,8 @@ class AddProductFragment : Fragment() {
         }
 
         materialProduct?.setOnClickListener {
+//            val bundle = Bundle()
+//            bundle.putString(WHICH_ADD_PRD_STORE , ADD_PRODUCT)
          UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassification() , "productClassification"  ,
              null , R.id.frameLayout_direction)
         }
@@ -154,9 +162,26 @@ class AddProductFragment : Fragment() {
                     getAddProductData(datamodel)
                 }
 
-                if (datamodel is Int) {
+                if (datamodel is Int) {//when choose category return categoryID
                     Log.d("observeData", "dd $datamodel")
+                    categoryID = datamodel
+                }
 
+                if (datamodel is StoreIdQuantity) {//when choose category return categoryID
+                    Log.d("observeData", "quantityId ${datamodel.quantityId.size}")
+                    Log.d("observeData", "storeId ${datamodel.storeId.size}")
+                    quantityList?.clear()
+                    warehouse_id?.clear()
+
+                    for (i in 0 until datamodel.quantityId.size)
+                    {
+                        quantityList?.add(datamodel.quantityId[i])
+                    }
+
+                    for (i in 0 until datamodel.storeId.size)
+                    {
+                        warehouse_id?.add(datamodel.storeId[i])
+                    }
                 }
 
                 model.responseCodeDataSetter(null) // start details with this data please
@@ -189,31 +214,43 @@ class AddProductFragment : Fragment() {
 
         if (successModel?.msg?.isNullOrEmpty() == false)
         {
-            Log.d("success", "error ${successModel?.msg.get(0)}")
-            UtilKotlin.showSnackMessage(activity , successModel?.msg.get(0))
+            UtilKotlin.showSnackMessage(activity , successModel?.msg[0])
+            Handler().postDelayed(Runnable {
+                activity?.let {
+                    it.supportFragmentManager.popBackStack()
+                }
+            }, 1000)
         }
-
-
 
     }
 
     private fun makeRequest() {
-        quantityList?.clear()
-        warehouse_id?.clear()
+//        quantityList?.clear()
+//        warehouse_id?.clear()
+        Log.d("sizeeeeeee", "quantityId ${quantityList?.size}")
+        Log.d("sizeeeeeee", "storeId ${warehouse_id?.size}")
 
         Log.d("testSize" , "${productImagesList?.size}")
         //Log.d("testSize" , "${productImagesList?.get(0)}")
+        var quantity = 0
+        for (i in 0 until quantityList?.size!!)
+        {
+            quantity += quantityList!![i]
+        }
+        Log.d("quantytyyyyy" , "$quantity")
 
-        quantityList?.add(50)
-        warehouse_id?.add(1)
+//        quantityList?.add(50)
+//        warehouse_id?.add(1)
 
         Log.d("codeData" , "$BARCODE")
+        Log.d("categoryID", "$categoryID")
+
 
         val addProductRequest = AddProductRequest(productNameEditText?.text?.toString() ,
             describeProductEditText?.text?.toString() , priceEditText?.text?.toString() , BARCODE ,
             1 , quantityList , warehouse_id , productImagesList)
 
-       // AddProductsPresenter.getAddProduct(webService!! , addProductRequest , activity!! , model)
+        AddProductsPresenter.getAddProduct(webService!! , addProductRequest , activity!! , model)
 
     }
 

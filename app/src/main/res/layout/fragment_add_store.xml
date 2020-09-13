@@ -80,6 +80,7 @@
                     />
 
                 <EditText
+                    android:id="@+id/storeNameEdt"
                     android:textAlignment="viewStart"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
@@ -114,6 +115,7 @@
                     />
 
                 <EditText
+                    android:id="@+id/storeAddressEdt"
                     android:textAlignment="viewStart"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
@@ -221,11 +223,13 @@
                     />
 
                 <EditText
+                    android:focusable="false"
+                    android:id="@+id/categoryProdTxt"
+                    android:minHeight="@dimen/_50sdp"
                     android:textAlignment="viewStart"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/gwalat"
                     app:layout_constraintTop_toBottomOf="@+id/productCategory"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

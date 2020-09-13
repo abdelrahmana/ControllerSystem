@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:behavior_peekHeight="@dimen/_600sdp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    android:id="@+id/lang_card"
+    app:cardBackgroundColor="@color/white"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/closeRoleSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            app:srcCompat="@drawable/ic_close_light"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:id="@+id/adminText"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:textAlignment="viewStart"
+            android:text="@string/choose_admin"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:id="@+id/accountantText"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:textAlignment="viewStart"
+            android:text="@string/accounatnt"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:id="@+id/callCenterText"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:textAlignment="viewStart"
+            android:text="@string/callCenter"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:id="@+id/delegateText"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:textAlignment="viewStart"
+            android:text="@string/delegate"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_24sdp"
+
+
+            />
+
+
+
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+

@@ -13,6 +13,9 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.ViewPagerAccountantsAdapter
+import com.example.util.NameUtils
+import com.example.util.NameUtils.ADD_ACCOUNTANT
+import com.example.util.NameUtils.WHICH_ADD_DETAILS
 import com.example.util.UtilKotlin
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator

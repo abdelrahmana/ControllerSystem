@@ -81,6 +81,7 @@
             app:srcCompat="@drawable/ic_location" />
 
         <TextView
+            android:textAlignment="viewStart"
             android:id="@+id/storeAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -122,7 +123,7 @@
             android:id="@+id/belongName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="فيصل الرابحي"
+            android:text=" "
             android:textColor="@color/green"
             android:textSize="12sp"
             app:layout_constraintTop_toTopOf="@+id/circleImg"

@@ -58,6 +58,15 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        removeCardSelection()
+
+    }
+
+
+
+
     override fun onClick(v: View?) {
 
         when(v?.id)

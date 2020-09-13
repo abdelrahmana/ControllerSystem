@@ -1,15 +1,17 @@
 package com.photonect.photographerapp.notificationphotographer.DonePackgae
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.product_item_adaptor.view.*
 
 class ProductClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentclass,
-                                   val arrayListOfTutorials:ArrayList<Any>//this method is returning the view for each item in the list
+                                   val arrayListOfTutorials:ArrayList<Data>//this method is returning the view for each item in the list
 ) : RecyclerView.Adapter<ProductClassificationAdaptor.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,10 +39,13 @@ class ProductClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentc
 
 
         fun bindItems(
-            itemData: Any,
+            itemData: Data,
             /*model: ViewModelData,*/
-            arrayListOffersValues: ArrayList<Any>
+            arrayListOffersValues: ArrayList<Data>
         ) {
+
+
+           itemView.category_name.text = itemData.name?:""
 
             /*   itemView.costText.text = itemData.modelCost
                 if (itemData.modelStatus==myOrdersModel.doneOrder) {
@@ -70,7 +75,7 @@ class ProductClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentc
 
          private fun onItemClicked(model: ViewModelHandleChangeFragmentclass,position: Int) {
               // send this item please
-              model.setNotifyItemSelected(arrayListOfTutorials.get(position)?:"") // update sign up fragment please
+              model.setNotifyItemSelected(arrayListOfTutorials.get(position)) // update sign up fragment please
 
 
           }

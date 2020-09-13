@@ -63,9 +63,9 @@ class LoginFragment : Fragment() {
             //startActivity(Intent(context , AdminHomeActivity::class.java))
 
             UtilKotlin.hideKeyboard(rootView)
-           // checkValidation()
-            startActivity(Intent(context , AdminHomeActivity::class.java))
-            activity!!.finish()
+            checkValidation()
+//            startActivity(Intent(context , AdminHomeActivity::class.java))
+//            activity!!.finish()
 
           //  makeLoginLogic()
         }
