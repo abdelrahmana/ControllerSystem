@@ -23,6 +23,7 @@ import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
+import com.example.util.NameUtils.ACCOUNTANT_ROLE_ID
 import com.example.util.NameUtils.WHICH_ADDED
 import com.example.util.UtilKotlin
 import com.example.util.Validation
@@ -159,7 +160,7 @@ class AddAccountantFragment : Fragment() {
                 accountantPhoneEdt?.text?.toString(),
                 accountantPasswordEdt?.text?.toString(),
                 confirmPassEdt?.text?.toString(),
-                2 , cityId
+                ACCOUNTANT_ROLE_ID , cityId
             )
 
             AccountantPresenter.getAddAccountant(webService!!, addAccountantRequest, activity!!, model)
@@ -176,7 +177,7 @@ class AddAccountantFragment : Fragment() {
 
     private fun observeData() {
 
-        model.responseDataCode?.observe(activity!!, Observer { datamodel ->
+             model.responseDataCode?.observe(activity!!, Observer { datamodel ->
             Log.d("testApi", "observe")
 
             if (datamodel != null) {

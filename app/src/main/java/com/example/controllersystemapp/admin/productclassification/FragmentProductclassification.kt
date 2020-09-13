@@ -158,9 +158,12 @@ class FragmentProductclassification : Fragment() {
     }
 
     fun setViewModelListener() {
-        //
+        Log.d("paretnId" , "jj")
+
         model?.notifyItemSelected?.observe(activity!!, Observer<Any> { modelSelected ->
             if (modelSelected != null) { // if null here so it's new service with no any data
+                Log.d("paretnId" , "observeParent")
+
                 if (modelSelected is Data) {
                     // if (modelSelected.isItCurrent) {
                     // initSlider(modelSelected.pictures)
@@ -177,25 +180,13 @@ class FragmentProductclassification : Fragment() {
                         activity!!,
                         R.id.frameLayout_direction,
                         FragmentSubProductclassification(),
-                        bundle
-                    )
-
+                        bundle)
                 }
-                /* else if (modelSelected is ImageModelData) // if it is object of this model
-                  {
-                      /*  val pictures = ArrayList<Picture>()
-                        datamodel.image?.forEach{
-                            pictures.add(Picture(it))
-
-                        }*/
-
-                      //  initSlider(pictures) // add these services to image
-                      //getData(datamodel) // move data to here please
-                  }
-  */
                 model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
 
             }
+
+            Log.d("paretnId" , "j22j")
         })
 
 

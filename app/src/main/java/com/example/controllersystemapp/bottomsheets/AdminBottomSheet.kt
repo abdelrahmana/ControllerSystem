@@ -1,13 +1,26 @@
 package com.example.controllersystemapp.bottomsheets
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
+import androidx.lifecycle.Observer
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
+import com.example.controllersystemapp.admin.settings.admin.AdminListResponse
+import com.example.controllersystemapp.admin.settings.admin.AdminPresenter
+import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.SuccessModel
+import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils.ADMIN_ID
+import com.example.util.UtilKotlin
+import com.example.util.ViewModelHandleChangeFragmentclass
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_admin_bottom_sheet.*
 
@@ -15,11 +28,19 @@ import kotlinx.android.synthetic.main.fragment_admin_bottom_sheet.*
 class AdminBottomSheet : BottomSheetDialogFragment() {
 
 
+    var webService: WebService? = null
+    lateinit var model: ViewModelHandleChangeFragmentclass
+    lateinit var progressDialog : Dialog
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        webService = ApiManagerDefault(context!!).apiService
+        model = UtilKotlin.declarViewModel(activity)!!
+        progressDialog = UtilKotlin.ProgressDialog(context!!)
+
         return inflater.inflate(R.layout.fragment_admin_bottom_sheet, container, false)
     }
 
@@ -35,7 +56,8 @@ class AdminBottomSheet : BottomSheetDialogFragment() {
 
         deleteAdminText?.setOnClickListener{
 
-            dismiss()
+            remveAdmin()
+            //dismiss()
         }
         blockAdminText?.setOnClickListener{
             dismiss()
@@ -44,6 +66,89 @@ class AdminBottomSheet : BottomSheetDialogFragment() {
             dismiss()
 
         }
+
+        observeData()
+    }
+
+    private fun observeData() {
+
+        model.responseDataCode?.observe(activity!!, Observer { datamodel ->
+            Log.d("testApi", "observe")
+
+            if (datamodel != null) {
+                progressDialog?.hide()
+                dismiss()
+                Log.d("testApi", "responseNotNull")
+
+                if (datamodel is SuccessModel) {
+                    Log.d("testApi", "isForyou")
+                    successRemove(datamodel)
+                }
+
+                model.responseCodeDataSetter(null) // start details with this data please
+            }
+
+        })
+
+
+        model.errorMessage.observe(activity!! , Observer { error ->
+
+            if (error != null)
+            {
+                progressDialog?.hide()
+                val errorFinal = UtilKotlin.getErrorBodyResponse(error, context!!)
+                UtilKotlin.showSnackErrorInto(activity!!, errorFinal)
+
+                model.onError(null)
+            }
+
+        })
+
+
+
+
+    }
+
+    private fun successRemove(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            activity?.let {
+                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
+            }
+
+//            productsAdapter.let {
+//                it?.removeItemFromList(removePosition)
+//            }
+//            productsAdapter?.notifyDataSetChanged()
+
+            dismiss()
+
+        }
+
+    }
+
+    private fun remveAdmin() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            AdminPresenter.deleteAdminPresenter(webService!! ,
+                arguments?.getInt(ADMIN_ID)?:-1 ,  activity!! , model)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+
+        model.setStringVar("remove")
+
+        super.onDismiss(dialog)
     }
 
     companion object {

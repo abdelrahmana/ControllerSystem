@@ -19,6 +19,7 @@ import com.example.util.NameUtils.reporstFragmet
 import com.example.util.NameUtils.settingsFragmet
 import com.example.util.NameUtils.specialCustomersFragmet
 import com.example.util.NameUtils.storeProductsFragmet
+import com.example.util.PrefsUtil
 import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.activity_admin_home.*
 
@@ -26,6 +27,10 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_home)
+
+
+        setUserData()
+
 
         productsStoreCard?.setOnClickListener(this)
         accountantDelegatCard?.setOnClickListener(this)
@@ -55,6 +60,12 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
             startActivity(intent)
 
         }
+    }
+
+    private fun setUserData() {
+
+        name?.text = PrefsUtil.getUserModel(this)?.name?:""
+
     }
 
 

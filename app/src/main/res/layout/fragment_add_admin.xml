@@ -135,6 +135,7 @@
                 />
 
             <EditText
+                android:inputType="phone"
                 android:id="@+id/adminMobileEdt"
                 app:backgroundTint="@color/text_grey"
                 android:layout_width="match_parent"
@@ -153,7 +154,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/countryContainer"
+            android:id="@+id/passwordContainer"
             app:layout_constraintTop_toBottomOf="@+id/adminMobileContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -164,6 +165,95 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/passwordText"
+                android:textAlignment="viewStart"
+                android:textSize="14sp"
+                android:textColor="@color/black_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/passwordText"
+                />
+
+            <EditText
+                android:inputType="textPassword"
+                android:id="@+id/passwordTextEdt"
+                app:backgroundTint="@color/text_grey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/passwordText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:hint="@string/passwordText"
+                android:textAlignment="viewStart"
+                android:textSize="16sp"
+                android:textColor="@color/text_grey"
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/confirmPasswordContainer"
+            app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/confirmPasswordText"
+                android:textAlignment="viewStart"
+                android:textSize="14sp"
+                android:textColor="@color/black_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/passwordText"
+                />
+
+            <EditText
+                android:inputType="textPassword"
+                android:id="@+id/confirmPasswordTextEdt"
+                app:backgroundTint="@color/text_grey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/confirmPasswordText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:hint="@string/passwordText"
+                android:textAlignment="viewStart"
+                android:textSize="16sp"
+                android:textColor="@color/text_grey"
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/countryContainer"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPasswordContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:focusable="false"
                 android:id="@+id/countryNameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

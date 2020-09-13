@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.delegatesAccountants.models.DelegatesModel
+import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import kotlinx.android.synthetic.main.delegate_item.view.*
+import kotlinx.android.synthetic.main.categories_item.view.*
 
 class CategoriesAdapter(
-    var cateogriesList: ArrayList<Any>,
+    var cateogriesList: ArrayList<Data>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<CategoriesAdapter.ViewHolder>(){
 
@@ -37,13 +37,12 @@ class CategoriesAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            delegatesModel: Any,
+            categoryModel: Data,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-//            itemView.delegateName.text = delegatesModel.name
-//            itemView.delegatePhone.text = delegatesModel.phone
-           // Glide.with(itemView.context!!).load(delegatesModel.image).into(itemView.delegateImg)
+            itemView.categoryName.text = categoryModel.name?:""
+            itemView.categoryCount.text = categoryModel.products_count?:""
 
 
             itemView.setOnClickListener {

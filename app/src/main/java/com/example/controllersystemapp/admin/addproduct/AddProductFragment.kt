@@ -15,6 +15,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.REQUEST_BARCODE
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.RES_CODE_B
@@ -23,6 +25,7 @@ import com.example.controllersystemapp.admin.storeclassification.StoreClassifica
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.GridModel
 import com.example.util.NameUtils
 import com.example.util.NameUtils.ADD_PRODUCT
 import com.example.util.NameUtils.WHICH_ADD_PRD_STORE
@@ -32,6 +35,7 @@ import com.example.util.UtilKotlin.permissionForImageAndFile
 import com.example.util.UtilKotlin.showSnackErrorInto
 import com.example.util.UtilKotlin.submitPermssion
 import com.example.util.ViewModelHandleChangeFragmentclass
+import kotlinx.android.synthetic.main.fragment_add_accountant.*
 import kotlinx.android.synthetic.main.fragment_add_product.*
 import java.io.IOException
 
@@ -40,7 +44,10 @@ class AddProductFragment : Fragment() {
 
 
     var whichOpen : Int = 0
+
+    lateinit var imagesListAdaptor: ImagesListAdaptor
     var productImagesList: ArrayList<String>? = ArrayList()
+
     var quantityList: ArrayList<Int>? = ArrayList()
     var warehouse_id: ArrayList<Int>? = ArrayList()
 
@@ -73,6 +80,10 @@ class AddProductFragment : Fragment() {
 
         Log.d("viewCreated", "true")
 
+        observeImagesData()
+
+        setAdaptorItem()
+
         backButton?.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
         }
@@ -90,10 +101,10 @@ class AddProductFragment : Fragment() {
         }
 
         openCamLayout?.setOnClickListener{
+            whichOpen = 0
 
             if (UtilKotlin.checkPermssionGrantedForImageAndFile(activity!!, permissionForImageAndFile,this)){
                 // if the result ok go submit else on
-                whichOpen = 0
                 performImgPicAction(0 , this , activity!!)
 
 
@@ -101,8 +112,20 @@ class AddProductFragment : Fragment() {
 
         }
 
-        openScanCamera?.setOnClickListener {
 
+        openGalleryLayout?.setOnClickListener{
+            whichOpen = 1
+
+            if (UtilKotlin.checkPermssionGrantedForImageAndFile(activity!!, permissionForImageAndFile,this)){
+                // if the result ok go submit else on
+                performImgPicAction(1 , this , activity!!)
+
+
+            }
+
+        }
+
+        openScanCamera?.setOnClickListener {
 
            //IntentIntegrator(activity!!).initiateScan() // `this` is the current Activity
 
@@ -112,28 +135,118 @@ class AddProductFragment : Fragment() {
 
         }
 
-        openGalleryLayout?.setOnClickListener{
 
-            if (UtilKotlin.checkPermssionGrantedForImageAndFile(activity!!, permissionForImageAndFile,this)){
-                // if the result ok go submit else on
-                whichOpen = 1
-                performImgPicAction(1 , this , activity!!)
-
-
-            }
-
-        }
 
         addProductButton?.setOnClickListener {
 
-            if (UtilKotlin.isNetworkAvailable(context!!)) {
-                progressDialog?.show()
-                makeRequest()
-            } else {
-                progressDialog?.dismiss()
-                showSnackErrorInto(activity, getString(R.string.no_connect))
-            }
+            checkValidation()
+
         }
+
+
+
+    }
+
+    private fun checkValidation() {
+
+        var errorMessage = ""
+
+        if (productImagesList?.isNullOrEmpty() == true) {
+            errorMessage += getString(R.string.select_product_image)
+            errorMessage += "\n"
+        }
+
+        if (productNameEditText.text.isNullOrBlank()) {
+            errorMessage += getString(R.string.product_name_required)
+            errorMessage += "\n"
+        }
+
+        if (describeProductEditText.text.isNullOrBlank()) {
+            errorMessage += getString(R.string.product_desc_required)
+            errorMessage += "\n"
+        }
+
+        if (categoryID == 0) {
+            errorMessage += getString(R.string.product_classify_required)
+            errorMessage += "\n"
+        }
+
+        if (warehouse_id?.isNullOrEmpty() == true && quantityList?.isNullOrEmpty() == true) {
+            errorMessage += getString(R.string.select_store_classify)
+            errorMessage += "\n"
+        }
+
+        if (priceEditText.text.isNullOrBlank()) {
+            errorMessage += getString(R.string.price_required)
+            errorMessage += "\n"
+        }
+
+        if (BARCODE == "") {
+            errorMessage += getString(R.string.barecode_required)
+            errorMessage += "\n"
+        }
+
+        if (!errorMessage.isNullOrBlank()) {
+            UtilKotlin.showSnackErrorInto(activity!!, errorMessage)
+        } else {
+
+
+            requestAddProduct()
+
+        }
+
+
+
+
+
+    }
+
+    private fun requestAddProduct() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+            makeRequest()
+        } else {
+            progressDialog?.dismiss()
+            showSnackErrorInto(activity, getString(R.string.no_connect))
+        }
+
+
+    }
+
+    private fun observeImagesData() {
+
+        model?.notifyItemSelected?.observe(activity!!, Observer<Any> { datamodel ->
+            // calls
+            if (datamodel != null) { // lets use this as share please
+                if (datamodel is String) // if it is object of this model
+                {
+                    //imageModel = datamodel
+                    setAdaptorItem()
+
+                    //getData(datamodel) // move data to here please
+                }
+                // when result is coming
+                // here we should set every thing related to this details activity
+                model?.setNotifyItemSelected(null)
+
+            }
+        })
+
+
+
+
+    }
+
+    private fun setAdaptorItem() {
+
+        imagesListAdaptor = ImagesListAdaptor(UtilKotlin.declarViewModel(activity!!)!!,
+            productImagesList?:ArrayList())
+
+        val linearLayoutManager: LinearLayoutManager? = LinearLayoutManager(context, RecyclerView.HORIZONTAL,false)
+        imagesListRecycler.layoutManager = linearLayoutManager
+        imagesListRecycler.setHasFixedSize(true)
+        imagesListRecycler.adapter = imagesListAdaptor
 
 
 
@@ -145,6 +258,7 @@ class AddProductFragment : Fragment() {
 
         Log.d("viewCreated", "resume")
         Log.d("code", "$BARCODE")
+        barCodeTxt?.text = BARCODE?:""
 
     }
 
@@ -225,30 +339,10 @@ class AddProductFragment : Fragment() {
     }
 
     private fun makeRequest() {
-//        quantityList?.clear()
-//        warehouse_id?.clear()
-        Log.d("sizeeeeeee", "quantityId ${quantityList?.size}")
-        Log.d("sizeeeeeee", "storeId ${warehouse_id?.size}")
-
-        Log.d("testSize" , "${productImagesList?.size}")
-        //Log.d("testSize" , "${productImagesList?.get(0)}")
-        var quantity = 0
-        for (i in 0 until quantityList?.size!!)
-        {
-            quantity += quantityList!![i]
-        }
-        Log.d("quantytyyyyy" , "$quantity")
-
-//        quantityList?.add(50)
-//        warehouse_id?.add(1)
-
-        Log.d("codeData" , "$BARCODE")
-        Log.d("categoryID", "$categoryID")
-
 
         val addProductRequest = AddProductRequest(productNameEditText?.text?.toString() ,
             describeProductEditText?.text?.toString() , priceEditText?.text?.toString() , BARCODE ,
-            1 , quantityList , warehouse_id , productImagesList)
+            categoryID , quantityList , warehouse_id , productImagesList)
 
         AddProductsPresenter.getAddProduct(webService!! , addProductRequest , activity!! , model)
 
@@ -259,6 +353,7 @@ class AddProductFragment : Fragment() {
             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 //  uploadNewImageFirst()
                // performImgPicAction(whichOpen , this , activity!!)
+                //performImgPicAction(whichOpen , this , activity!!)
 
             } else {
                 showSnackErrorInto(activity, getString(R.string.cant_add_image))
@@ -314,7 +409,7 @@ class AddProductFragment : Fragment() {
         Log.d("Size" , "${productImagesList?.get(0)}")
         // lets notify adaptor now
         //model?.setNotifyItemSelected(imageModel) // update other lists
-
+        model?.setNotifyItemSelected("select") // update other lists
     }
 
 
@@ -329,6 +424,8 @@ class AddProductFragment : Fragment() {
         model.let {
             it?.errorMessage?.removeObservers(activity!!)
             it?.responseDataCode?.removeObservers(activity!!)
+            it?.notifyItemSelected?.removeObservers(activity!!)
+
 
         }
         super.onDestroyView()

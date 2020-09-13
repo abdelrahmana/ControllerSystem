@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantModel
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import kotlinx.android.synthetic.main.delegate_item.view.*
+import kotlinx.android.synthetic.main.special_customer_item.view.*
 
 class SpecialCustomerAdapter(
-    var accountantsList: ArrayList<Any>,
+    var accountantsList: ArrayList<ClientsData>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<SpecialCustomerAdapter.ViewHolder>(){
 
@@ -37,13 +38,21 @@ class SpecialCustomerAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            accountantModel: Any,
+            clientsModel: ClientsData,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-//            itemView.delegateName.text = accountantModel.name
-//            itemView.delegatePhone.text = accountantModel.phone
-           // Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.delegateImg)
+            itemView.customerName.text = clientsModel.name?:""
+            itemView.customerPhone.text = clientsModel.phone?:""
+            itemView.receiptPrice.text = clientsModel.receipt_amount?.toString()?:""
+            itemView.creditorPrice.text = clientsModel.creditor_amount?.toString()?:""
+            itemView.receiptCurrancy.text = clientsModel.currency?:""
+            itemView.creditorCurrancy.text = clientsModel.currency?:""
+            itemView.currancyCustomer.text = clientsModel.currency?:""
+            itemView.totalPriceCustomer.text = clientsModel.total_amount?.toString()?:""
+
+
+            //Glide.with(itemView.context!!).load(clientsModel.).into(itemView.customerImg)
 
 
             itemView.setOnClickListener {

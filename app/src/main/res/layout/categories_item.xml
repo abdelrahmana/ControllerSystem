@@ -47,7 +47,7 @@
             android:id="@+id/categoryDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="موبيل / الكترونيات"
+            android:text=" "
             android:textSize="12sp"
             android:textAlignment="viewStart"
             android:fontFamily="@font/cairo_regular"

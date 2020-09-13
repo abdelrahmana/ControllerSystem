@@ -79,7 +79,7 @@ object UtilKotlin {
 
     fun performImgPicAction(which: Int, fragment: Fragment?, context: Activity) {
         var intent: Intent?
-        Log.d("which" , "$which")
+        Log.d("which" , "fun $which")
         if (which == GALLERY) {  // in case we need to get image from gallery
             intent = Intent(
                 Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

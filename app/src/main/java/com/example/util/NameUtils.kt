@@ -13,6 +13,12 @@ object NameUtils {
     val settingsFragmet = "Settings"
     val notificationsFragmet = "Notification"
     var WHICH_ADDED = "WhichAdded"
+    var ADMIN_ID = "adminId"
+    var ADMIN_ROLE_ID = 1
+    var ACCOUNTANT_ROLE_ID = 2
+    var CALLCENTER_ROLE_ID = 3
+    var DELEGATE_ROLE_ID = 4
+
 
     val specialCustomersFragmet = "specialCustomers"
 

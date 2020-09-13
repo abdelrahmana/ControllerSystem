@@ -113,7 +113,7 @@
                 android:id="@+id/status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ادمن ١"
+                android:text="ادمن"
                 android:textAlignment="viewStart"
                 android:textColor="@color/textColor"
                 android:textSize="12sp"

@@ -86,6 +86,8 @@
                     />
 
                 <EditText
+                    android:inputType="text"
+                    android:id="@+id/clientNameEdt"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -121,6 +123,8 @@
                     />
 
                 <EditText
+                    android:inputType="phone"
+                    android:id="@+id/clientPhoneEdt"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -156,6 +160,8 @@
                     />
 
                 <EditText
+                    android:inputType="text"
+                    android:id="@+id/clientAddressEdt"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -192,6 +198,8 @@
                     />
 
                 <EditText
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/clientEmailEdt"
                     app:backgroundTint="@color/text_grey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

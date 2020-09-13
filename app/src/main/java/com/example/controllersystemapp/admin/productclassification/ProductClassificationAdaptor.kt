@@ -1,12 +1,17 @@
 package com.photonect.photographerapp.notificationphotographer.DonePackgae
 
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.categories.models.Data
+import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
+import com.example.controllersystemapp.admin.productclassification.productsubclassification.FragmentSubProductclassification
+import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.product_item_adaptor.view.*
 
@@ -75,7 +80,20 @@ class ProductClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentc
 
          private fun onItemClicked(model: ViewModelHandleChangeFragmentclass,position: Int) {
               // send this item please
-              model.setNotifyItemSelected(arrayListOfTutorials.get(position)) // update sign up fragment please
+             Log.d("paretnId" , "clickAdapter")
+
+//             val bundle = Bundle()
+//             //bundle.putInt(EXITENCEIDPACKAGE, availableServiceList.get(position).id?:-1)
+//             bundle.putInt(FragmentProductclassification.PARENT_ID, arrayListOfTutorials[position].id?:-1)
+//             bundle.putString(FragmentProductclassification.PARENT_NAME, arrayListOfTutorials[position].name?:"")
+//
+//             UtilKotlin.changeFragmentWithBack(
+//                 (itemView.context as FragmentActivity?)!!,
+//                 R.id.frameLayout_direction,
+//                 FragmentSubProductclassification(),
+//                 bundle
+//             )
+             model.setNotifyItemSelected(arrayListOfTutorials.get(position)?:"") // update sign up fragment please
 
 
           }

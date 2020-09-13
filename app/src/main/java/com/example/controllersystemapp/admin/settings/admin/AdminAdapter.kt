@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantModel
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import kotlinx.android.synthetic.main.admin_item.view.*
-import kotlinx.android.synthetic.main.delegate_item.view.*
 
-class AdminAdapter(var adminList: ArrayList<Any>,
+class AdminAdapter(var adminList: ArrayList<Admin>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<AdminAdapter.ViewHolder>(){
 
@@ -36,16 +35,16 @@ class AdminAdapter(var adminList: ArrayList<Any>,
     }
 
 
-    class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
+    inner class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            accountantModel: Any,
+            adminModel: Admin,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-//            itemView.delegateName.text = accountantModel.name
-//            itemView.delegatePhone.text = accountantModel.phone
-           // Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.delegateImg)
+            itemView.adminNameList.text = adminModel.name
+            itemView.delegatePhone.text = adminModel.phone
+            Glide.with(itemView.context!!).load(adminModel.image).into(itemView.delegateImg)
 
 
             itemView.optionIcon?.setOnClickListener {

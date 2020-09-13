@@ -155,5 +155,17 @@
     <string name="store_address_required">عنوان المخزن مطلوب</string>
     <string name="product_classified_required">تصنيف المنتج مطلوب</string>
     <string name="responsible_person_required">تحديد مسئول الذمة مطلوب</string>
+    <string name="client_name_required">اسم العميل مطلوب</string>
+    <string name="client_address_required">العنوان مطلوب</string>
+    <string name="email_name_reuqired">البريد الالكتروني مطلوب</string>
+    <string name="email_invalid">البريد الإلكتروني غير صالح ، يجب أن يكون مثل: ex.email@address.com</string>
+    <string name="select_product_image">اختر صورة المنتج من فضلك</string>
+    <string name="product_name_required">اسم المنتج مطلوب</string>
+    <string name="product_desc_required">وصف المنتج مطلوب</string>
+    <string name="product_classify_required">تصنيف المنتج مطلوب</string>
+    <string name="select_store_classify">تصنيف مخزن مطلوب</string>
+    <string name="price_required">السعر مطلوب</string>
+    <string name="barecode_required">باركود مطلوب</string>
+
 
 </resources>

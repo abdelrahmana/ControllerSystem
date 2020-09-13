@@ -5,6 +5,9 @@ import com.example.controllersystemapp.admin.categories.models.CategoriesListRes
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AddAccountantRequest
+import com.example.controllersystemapp.admin.settings.admin.AdminListResponse
+import com.example.controllersystemapp.admin.specialcustomers.AddClientRequest
+import com.example.controllersystemapp.admin.specialcustomers.ClientsListResponse
 import com.example.controllersystemapp.admin.storesproducts.models.AddStoreRequest
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsListResponse
 import com.example.controllersystemapp.admin.storesproducts.models.StoresListResponse
@@ -82,6 +85,39 @@ interface WebService {
     @Headers("Accept: application/json")
     @DELETE("admin/ware-house/delete")
     fun deleteStore(@Query("id") productId : Int): Observable<Response<SuccessModel>>
+
+
+    @Headers("Accept: application/json")
+    @GET("admin/admin/list")
+    fun adminsList(): Observable<Response<AdminListResponse>>
+
+
+    @Headers("Accept: application/json")
+    @DELETE("admin/admin/delete")
+    fun deleteAdmin(@Query("id") adminId : Int): Observable<Response<SuccessModel>>
+
+
+    @Headers("Accept: application/json")
+    @POST("admin/admin/create")
+    fun addAdmin(@Body addAccountantRequest : AddAccountantRequest): Observable<Response<SuccessModel>>
+
+
+    @Headers("Accept: application/json")
+    @GET("admin/clients/list")
+    fun clientsList(): Observable<Response<ClientsListResponse>>
+
+    @Headers("Accept: application/json")
+    @DELETE("admin/clients/delete")
+    fun deleteClient(@Query("id") clientId : Int): Observable<Response<SuccessModel>>
+
+
+    @Headers("Accept: application/json")
+    @POST("admin/clients/create")
+    fun addClient(@Body addClientRequest : AddClientRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @DELETE("admin/categories/delete")
+    fun deleteCategory(@Query("id") categoryId : Int): Observable<Response<SuccessModel>>
 
 
 }

@@ -95,6 +95,7 @@ class FragmentSubProductclassification : Fragment() {
             // not from all listner
             it?.responseDataCode?.removeObservers(activity!!) // remove observer from here only
             it?.notifyItemSelected?.removeObservers(activity!!)
+            it?.errorMessage?.removeObservers(activity!!)
 
         }
 

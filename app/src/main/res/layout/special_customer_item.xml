@@ -23,7 +23,7 @@
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:src="@color/grey_bg"
+                android:src="@drawable/clients_img"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

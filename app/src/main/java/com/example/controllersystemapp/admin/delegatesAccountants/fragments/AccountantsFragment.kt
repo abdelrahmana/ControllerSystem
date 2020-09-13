@@ -122,6 +122,9 @@ class AccountantsFragment : Fragment() , OnRecyclerItemClickListener{
                     successRemove(datamodel)
                 }
 
+
+
+
                 model.responseCodeDataSetter(null) // start details with this data please
             }
 
