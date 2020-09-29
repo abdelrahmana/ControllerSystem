@@ -12,6 +12,7 @@ import com.example.controllersystemapp.admin.storesproducts.models.AddStoreReque
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsListResponse
 import com.example.controllersystemapp.admin.storesproducts.models.StoresListResponse
 import com.example.controllersystemapp.common.cities.CitiesListResponse
+import com.example.controllersystemapp.common.forgetpassword.model.RequestModelNewPass
 import com.example.controllersystemapp.common.login.LoginRequest
 import com.example.controllersystemapp.common.login.LoginResponse
 import io.reactivex.Observable
@@ -118,6 +119,12 @@ interface WebService {
     @Headers("Accept: application/json")
     @DELETE("admin/categories/delete")
     fun deleteCategory(@Query("id") categoryId : Int): Observable<Response<SuccessModel>>
+    @Headers("Accept: application/json")
+    @POST("auth/password/reset")
+   suspend fun setNewPassword(@Body requestNewPass : RequestModelNewPass): Response<SuccessModel>
 
 
+    @Headers("Accept: application/json")
+    @POST("auth/logout")
+    fun loginOut(): Observable<Response<SuccessModel>>
 }

@@ -166,6 +166,11 @@
     <string name="select_store_classify">تصنيف مخزن مطلوب</string>
     <string name="price_required">السعر مطلوب</string>
     <string name="barecode_required">باركود مطلوب</string>
+    <string name="add_new_password">ادخل كلمة السر الجديدة</string>
+    <string name="code">Please enter the verification code</string>
+    <string name="phone_is_required">رقم الهاتف مطلوب</string>
+    <string name="new_password_required">تأكيد كلمة المرور مطلوبة</string>
+    <string name="confirm_pass_invalid">تأ:يد كلمة المرور غير متطابقة</string>
 
 
 </resources>
