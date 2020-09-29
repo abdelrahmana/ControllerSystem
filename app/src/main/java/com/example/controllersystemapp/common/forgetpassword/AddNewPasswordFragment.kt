@@ -96,7 +96,7 @@ class AddNewPasswordFragment : Fragment() {
                           }
 
                       })*/
-        model.responseDataCode.observe(viewLifecycleOwner,Observer<Any>{ datamodel-> // calls
+        model?.responseDataCode?.observe(viewLifecycleOwner,Observer<Any>{ datamodel-> // calls
             if (datamodel !=null){
                 progressDialog?.dismiss()
                 if (datamodel is SuccessModel) // if it is object of this model
