@@ -37,6 +37,7 @@ class AddNewPasswordFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         progressDialog = UtilKotlin.ProgressDialog(context!!)
+        model = UtilKotlin.declarViewModel(this)
         phoneNumber = PrefsUtil.getSharedPrefs(context!!).getString(VerficationFragment.phoneNumberKey, "")?:""
           requestModelNewPass= RequestModelNewPass(phone= phoneNumber)
 
