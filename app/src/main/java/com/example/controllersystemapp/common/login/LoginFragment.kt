@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.home.AccountantHomeActivity
 import com.example.controllersystemapp.admin.AdminHomeActivity
 import com.example.controllersystemapp.common.AuthPresenter
 import com.example.controllersystemapp.common.forgetpassword.ForgetPassword
@@ -198,8 +199,8 @@ class LoginFragment : Fragment() {
                    // PrefsUtil.setInt(context!! , NameUtil.Cart_Num_name, response.body()!!.data.user!!.cart_count!!.toInt())
                     PrefsUtil.setString(context!! , NameUtils.NOTIFICATION_STATUS, response.body()!!.data?.user?.enable_notification)
 
-                    startActivity(Intent(context , AdminHomeActivity::class.java))
-                    activity!!.finish()
+                    whichActivityStart(response?.body()?.data?.user?.role_id?:"1")
+
                 }
                 else
                 {
@@ -214,6 +215,22 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun whichActivityStart(roleID: String?) {
+
+
+        if (roleID.equals("1"))
+        {
+            startActivity(Intent(context , AdminHomeActivity::class.java))
+            activity!!.finish()
+        }
+        else if (roleID.equals("2"))
+        {
+            startActivity(Intent(context , AccountantHomeActivity::class.java))
+            activity!!.finish()
+        }
+
     }
 
 

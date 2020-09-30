@@ -166,6 +166,9 @@
     <string name="select_store_classify">تصنيف مخزن مطلوب</string>
     <string name="price_required">السعر مطلوب</string>
     <string name="barecode_required">باركود مطلوب</string>
+    <string name="notifications_reports">اشعارات و بلاغات</string>
+    <string name="make_special_order">انشاء طلب خاصة</string>
+    <string name="send_sales">ارسال مبيعات</string>
 
 
 </resources>
