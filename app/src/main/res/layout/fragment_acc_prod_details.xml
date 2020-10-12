@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".accountant.products.AccProdDetailsFragment">
+
+
+    <ImageView
+        android:id="@+id/backgroundImg"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:src="@color/colorOrange55"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:id="@+id/closePageIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_close_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/detailsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/closePageIcon">
+
+        <TextView
+            android:visibility="gone"
+            android:textAlignment="viewStart"
+            android:id="@+id/detailsName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:textColor="@color/textColor"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="أمر توصيل رقم 135655"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/prodPrice"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/productCurrancy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="رس"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:textSize="12sp"
+            android:textColor="@color/textColor"
+            app:layout_constraintTop_toTopOf="@+id/detailsName"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:id="@+id/prodPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1000"
+            android:textStyle="bold"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:textSize="15sp"
+            android:textColor="@color/text_black"
+            app:layout_constraintStart_toEndOf="@+id/detailsName"
+            app:layout_constraintEnd_toStartOf="@+id/productCurrancy"
+            app:layout_constraintTop_toTopOf="@+id/productCurrancy"
+            tools:layout_editor_absoluteX="289dp" />
+
+        <TextView
+            android:textAlignment="viewStart"
+            android:id="@+id/prodName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="سامسونغ غالاكسي إس"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/prodQuantity"
+            app:layout_constraintTop_toBottomOf="@+id/detailsName" />
+
+        <TextView
+            android:id="@+id/pieceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/piece"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:textSize="12sp"
+            android:textColor="@color/text_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/prodName"
+            />
+
+        <TextView
+            android:id="@+id/prodQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textColor="@color/text_black"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            app:layout_constraintEnd_toStartOf="@+id/pieceText"
+            app:layout_constraintStart_toEndOf="@+id/prodName"
+            app:layout_constraintTop_toTopOf="@+id/pieceText" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/calssificationDetailsCard"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_100sdp"
+        app:cardElevation="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/detailsContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            >
+
+
+            <TextView
+                android:visibility="gone"
+                android:textAlignment="viewStart"
+                android:layout_marginStart="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/storename"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="مخزن الكترونيات / متجر 1"
+                app:layout_constraintEnd_toStartOf="@+id/date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/classification"
+                android:textStyle="bold"
+                android:fontFamily="@font/ffshamelfamily_sansonebold"
+                android:textColor="@color/black_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/classifyNameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circleColored"
+                    android:layout_width="10dp"
+                    android:layout_height="11dp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:src="@color/orange_color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/date" />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:textColor="@color/black_bold"
+                    android:text="الكترونيات"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/circleColored"
+                    app:layout_constraintTop_toBottomOf="@+id/date" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/classifyStoreLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/classifyQuantityLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/classifyNameLayout"
+                >
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="10dp"
+                    android:layout_height="11dp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:src="@color/orange_color"
+                     />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:textColor="@color/black_bold"
+                    android:text="متجر 1"
+                    android:textSize="12sp"
+                     />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/classifyQuantityLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/classifyStoreLayout"
+                app:layout_constraintTop_toBottomOf="@+id/classifyNameLayout"
+                >
+
+                <TextView
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_bold"
+                    android:text="@string/quantity"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_bold"
+                    android:text="1"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calssificationDetailsCard"
+
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/_60sdp"
+        >
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/detailsProdCard"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="5dp"
+
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_gravity="center_vertical"
+                android:foregroundGravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent">
+
+
+                <TextView
+                    android:visibility="gone"
+                    android:textAlignment="viewStart"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:id="@+id/nameCard"
+                    android:textSize="13sp"
+                    android:textColor="@color/black_bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="سامسونغ غالاكسي إس"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/priceCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="475"
+                    android:textSize="15sp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:textColor="@color/black_bold"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/ffshamelfamily_sansonebold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nameCard" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/currancyCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:textColor="@color/text_grey"
+                    android:text="رس"
+                    app:layout_constraintTop_toBottomOf="@+id/nameCard"
+                    app:layout_constraintStart_toEndOf="@+id/priceCard"
+                    />
+
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_24sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/currancyCard"
+                    android:src="@drawable/image_samsung"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:scaleType="centerCrop"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"/>
+
+                <com.duolingo.open.rtlviewpager.RtlViewPager
+                    android:id="@+id/sliderImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/currancyCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"/>
+
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:layout_margin="@dimen/_10sdp"
+                    app:ci_gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sliderImage"
+                    app:ci_drawable="@drawable/select_circle"
+                    app:ci_drawable_unselected="@drawable/grey_radius"
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

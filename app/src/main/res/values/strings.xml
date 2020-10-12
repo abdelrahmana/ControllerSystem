@@ -169,6 +169,8 @@
     <string name="notifications_reports">اشعارات و بلاغات</string>
     <string name="make_special_order">انشاء طلب خاصة</string>
     <string name="send_sales">ارسال مبيعات</string>
+    <string name="classification">"تصنيف "</string>
+    <string name="quantity">الكمية</string>
 
 
 </resources>
