@@ -73,9 +73,9 @@ class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
                 setCardSelection(accountantProductsCard , accountantProductImg , accountantProductText
                     ,R.drawable.ic_products_store_selected)
 
-//                val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//                intent.putExtra(NameUtils.redirectFragmet, NameUtils.storeProductsFragmet)
-//                startActivity(intent)
+                val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+                intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.ACCOUNTANTS_PRODUCTS)
+                startActivity(intent)
                 //startActivity(Intent(this , AdminStoresProductActivity::class.java))
             }
 
