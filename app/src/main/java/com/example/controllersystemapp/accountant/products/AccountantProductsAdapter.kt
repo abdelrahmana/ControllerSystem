@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import com.example.controllersystemapp.admin.storesproducts.models.Data
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsModel
 import kotlinx.android.synthetic.main.products_item.view.*
 
 class AccountantProductsAdapter(
     var context: Context,
-    var productList: ArrayList<Any>,
+    var productList: ArrayList<Data>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<AccountantProductsAdapter.ViewHolder>(){
 
@@ -48,19 +47,19 @@ class AccountantProductsAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            productsModel: Any,
+            productsModel: Data,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-//            Glide.with(itemView.context).load(productsModel.image?:"")
-////                .placeholder(R.drawable.no_profile)
-////                .error(R.drawable.no_profile)
-//                .into(itemView.productImg)
-//            itemView.productName.text = productsModel.name
-//            itemView.productDesc.text = productsModel.description
-//            itemView.price.text = productsModel.price
-//            itemView.quantity.text = productsModel.total_quantity
-//            itemView.currancy.text = productsModel.currency
+            Glide.with(itemView.context).load(productsModel.image?:"")
+//                .placeholder(R.drawable.no_profile)
+//                .error(R.drawable.no_profile)
+                .into(itemView.productImg)
+            itemView.productName.text = productsModel.name?:""
+            itemView.productDesc.text = productsModel.category?.name?:""
+            itemView.price.text = productsModel.price?:""
+            itemView.quantity.text = productsModel.total_quantity?:""
+            itemView.currancy.text = productsModel.currency?:""
 
 
             //get from api

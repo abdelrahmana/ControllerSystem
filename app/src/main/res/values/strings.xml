@@ -171,6 +171,9 @@
     <string name="send_sales">ارسال مبيعات</string>
     <string name="classification">"تصنيف "</string>
     <string name="quantity">الكمية</string>
+    <string name="description">"الوصف: "</string>
+    <string name="delegateSelect">تحديد مندوب</string>
+    <string name="saveBarcode">تنزيل الباركود</string>
 
 
 </resources>

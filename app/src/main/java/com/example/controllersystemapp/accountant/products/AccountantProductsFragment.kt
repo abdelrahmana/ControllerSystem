@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
@@ -21,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_accountant_products.*
 class AccountantProductsFragment : Fragment(), OnRecyclerItemClickListener {
 
 
-    var productsList = ArrayList<Any>()
+    var productsList = ArrayList<Data>()
     lateinit var accountantProductsAdapter: AccountantProductsAdapter
 
     var webService: WebService? = null
@@ -63,6 +65,78 @@ class AccountantProductsFragment : Fragment(), OnRecyclerItemClickListener {
             }
 
         }
+
+
+        observeData()
+
+    }
+
+    private fun observeData() {
+
+        model.responseDataCode?.observe(activity!!, Observer { datamodel ->
+            Log.d("testApi", "observe")
+
+            if (datamodel != null) {
+                progressDialog?.hide()
+                Log.d("testApi", "responseNotNull")
+
+                if (datamodel is AccountantProductsListResponse) {
+                    Log.d("testApi", "isForyou")
+                    getProductsData(datamodel)
+                }
+
+//                if (datamodel is SuccessModel) {
+//                    Log.d("testApi", "isForyou")
+//                    successRemove(datamodel)
+//                }
+                model.responseCodeDataSetter(null) // start details with this data please
+            }
+
+        })
+
+
+        model.errorMessage.observe(activity!! , Observer { error ->
+
+            if (error != null)
+            {
+                progressDialog?.hide()
+                val errorFinal = UtilKotlin.getErrorBodyResponse(error, context!!)
+                UtilKotlin.showSnackErrorInto(activity!!, errorFinal)
+
+                model.onError(null)
+            }
+
+        })
+
+
+    }
+
+    private fun getProductsData(accountantProductsListResponse: AccountantProductsListResponse) {
+
+        if (accountantProductsListResponse?.data?.isNullOrEmpty() == false)
+        {
+            accProdRecycler.visibility = View.VISIBLE
+            noProductData.visibility = View.GONE
+
+            productsList.clear()
+            productsList.addAll(accountantProductsListResponse?.data)
+            accountantProductsAdapter = AccountantProductsAdapter(context!! , productsList , this)
+            accProdRecycler?.apply {
+
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
+                adapter = accountantProductsAdapter
+            }
+
+        }else{
+
+            //empty
+            accProdRecycler.visibility = View.GONE
+            noProductData.visibility = View.VISIBLE
+
+        }
+
+
     }
 
     override fun onResume() {
@@ -73,24 +147,40 @@ class AccountantProductsFragment : Fragment(), OnRecyclerItemClickListener {
 
     private fun getData() {
 
-        productsList.clear()
-        for (i in 0..5)
-        {
-            productsList.add("")
-        }
-        accountantProductsAdapter = AccountantProductsAdapter(context!! , productsList , this)
-        accProdRecycler?.apply {
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
 
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
-            adapter = accountantProductsAdapter
+            AccountantProductPresenter.productsList(webService!! , activity!! , model)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
         }
 
     }
 
     override fun onItemClick(position: Int) {
 
+        val bundle = Bundle()
+        bundle.putInt(ACC_PROD_ID , productsList[position].id?:0)
         UtilKotlin.changeFragmentBack(activity!! , AccProdDetailsFragment() , ""  ,
-            null,R.id.redirect_acc_fragments)
+            bundle , R.id.redirect_acc_fragments)
+    }
+
+
+    override fun onDestroyView() {
+        model.let {
+            it?.errorMessage?.removeObservers(activity!!)
+            it?.responseDataCode?.removeObservers(activity!!)
+
+        }
+        super.onDestroyView()
+    }
+
+
+    companion object{
+
+        val ACC_PROD_ID = "accountantproductId"
     }
 }
