@@ -42,9 +42,7 @@ class AdminHomeActivity : CommonActivity() , View.OnClickListener{
 
         //setSingleEvent(gridLayout)
 
-        notificationIcon?.setOnClickListener{
-            Log.d("CLick" , "Notification")
-        }
+
         settingIcon?.setOnClickListener{
 
             val intent = Intent(this , RedirectFragmentsActivity::class.java)

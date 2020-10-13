@@ -33,7 +33,7 @@
 
 
                 <TextView
-                    android:id="@+id/delegatesCount"
+                    android:id="@+id/centerCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ffshamelfamily_sansonebold"
@@ -43,19 +43,19 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/delegateText"
+                    android:id="@+id/centerText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:fontFamily="@font/cairo_regular"
-                    android:text="@string/delegate"
+                    android:text="@string/call_center"
                     android:textColor="@color/text_black"
                     android:textSize="12sp" />
             </LinearLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/delegatesRecycler"
+                android:id="@+id/centerRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_14sdp"/>

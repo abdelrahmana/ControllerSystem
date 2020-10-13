@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.admin.delivery.deliverydetails
+package com.example.controllersystemapp.common.delivery.deliverydetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

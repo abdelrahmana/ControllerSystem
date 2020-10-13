@@ -171,6 +171,19 @@
     <string name="phone_is_required">رقم الهاتف مطلوب</string>
     <string name="new_password_required">تأكيد كلمة المرور مطلوبة</string>
     <string name="confirm_pass_invalid">تأ:يد كلمة المرور غير متطابقة</string>
+    <string name="notifications_reports">اشعارات و بلاغات</string>
+    <string name="make_special_order">انشاء طلب خاصة</string>
+    <string name="send_sales">ارسال مبيعات</string>
+    <string name="classification">"تصنيف "</string>
+    <string name="quantity">الكمية</string>
+    <string name="description">"الوصف: "</string>
+    <string name="delegateSelect">تحديد مندوب</string>
+    <string name="saveBarcode">تنزيل الباركود</string>
+    <string name="delegate_call_center">مندوبين وكول سنتر</string>
+    <string name="call_center_layout">كول سنتر</string>
+    <string name="add_delegate">اضف مندوب</string>
+    <string name="add_call_center">اضف كول سنتر</string>
+    <string name="call_center">كول سنتر</string>
 
 
 </resources>

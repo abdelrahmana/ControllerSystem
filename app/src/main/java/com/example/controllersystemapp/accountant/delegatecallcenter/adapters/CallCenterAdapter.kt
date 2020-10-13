@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.admin.delegatesAccountants.adapters
+package com.example.controllersystemapp.accountant.delegatecallcenter.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,16 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterData
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.Data
-import com.example.controllersystemapp.admin.delegatesAccountants.models.DelegatesModel
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import kotlinx.android.synthetic.main.delegate_item.view.*
 
-class DelegatesAdapter(
+class CallCenterAdapter(
     var context: Context,
     var delegateList: ArrayList<CallCenterData>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
-    RecyclerView.Adapter<DelegatesAdapter.ViewHolder>(){
+    RecyclerView.Adapter<CallCenterAdapter.ViewHolder>(){
 
 
 
@@ -41,13 +39,13 @@ class DelegatesAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            delegatesModel: CallCenterData,
+            callCenterModel: CallCenterData,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-            itemView.delegateName.text = delegatesModel.name
-            itemView.delegatePhone.text = delegatesModel.phone
-            Glide.with(itemView.context!!).load(delegatesModel.image?:"").placeholder(R.drawable.image_delivery_item).dontAnimate().into(itemView.delegateImg)
+            itemView.delegateName.text = callCenterModel.name
+            itemView.delegatePhone.text = callCenterModel.phone
+            Glide.with(itemView.context!!).load(callCenterModel.image?:"").placeholder(R.drawable.image_delivery_item).dontAnimate().into(itemView.delegateImg)
 
 
             itemView.setOnClickListener {

@@ -1,6 +1,9 @@
 package com.example.util.ApiConfiguration
 
 
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
+import com.example.controllersystemapp.accountant.products.AccountantProdDetailsResponse
+import com.example.controllersystemapp.accountant.products.AccountantProductsListResponse
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
@@ -32,8 +35,6 @@ interface WebService {
     @Headers("Accept: application/json")
     @GET("admin/products/list")
     fun productsList(@Query("category_id") categoryId : Int?): Observable<Response<ProductsListResponse>>
-
-
 
     @Headers("Accept: application/json")
     @POST("admin/products/create")
@@ -127,4 +128,20 @@ interface WebService {
     @Headers("Accept: application/json")
     @POST("auth/logout")
     fun loginOut(): Observable<Response<SuccessModel>>
+
+
+    //Accountant Data
+
+    @Headers("Accept: application/json")
+    @GET("accountant/products/list")
+    fun accountantProductsList(): Observable<Response<AccountantProductsListResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("admin/products/details")
+    fun accProductDetails(@Query("id") productId : Int?): Observable<Response<AccountantProdDetailsResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("accountant/call-center/list")
+    fun getCallCenterList(): Observable<Response<CallCenterResponse>>
+
 }

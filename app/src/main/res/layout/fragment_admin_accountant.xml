@@ -54,6 +54,7 @@
                         app:srcCompat="@drawable/ic_ab_back_light" />
 
                     <TextView
+                        android:id="@+id/layout_header"
                         android:text="@string/accountant_delegates"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -123,6 +124,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:visibility="gone"
+        tools:visibility="visible"
         android:id="@+id/addAccountantBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"

@@ -19,6 +19,14 @@ object NameUtils {
     var CALLCENTER_ROLE_ID = 3
     var DELEGATE_ROLE_ID = 4
 
+    val redirectAccFragmet = "Switch_Accountant_fragment"
+    val ACCOUNTANTS_PRODUCTS = "accountantProducts"
+    val ACCOUNTANT_DELEAGTES = "accountantDelegates"
+    val noticesReporst = "noticesReports"
+    val MAKE_SPECIAL_ORDER = "makeSpecialOrder"
+    val SEND_SALES = "sendSales"
+
+
 
     val specialCustomersFragmet = "specialCustomers"
 
