@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.sales
+package com.example.controllersystemapp.accountant.sales.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

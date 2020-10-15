@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".accountant.sales.ReceveidSalesFragment">
+    tools:context=".accountant.sales.fragments.ReceveidSalesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginBottom="@dimen/_70sdp"

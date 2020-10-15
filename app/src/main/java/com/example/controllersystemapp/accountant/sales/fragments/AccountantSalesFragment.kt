@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.sales
+package com.example.controllersystemapp.accountant.sales.fragments
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.sales.ViewPagerAccountantSalesAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_accountant_sales.*
@@ -37,7 +38,10 @@ class AccountantSalesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewPagerAccountantSalesAdapter = ViewPagerAccountantSalesAdapter(this@AccountantSalesFragment)
+        viewPagerAccountantSalesAdapter =
+            ViewPagerAccountantSalesAdapter(
+                this@AccountantSalesFragment
+            )
         salesViewPager?.adapter = viewPagerAccountantSalesAdapter
 
         TabLayoutMediator(salesTabLayout, salesViewPager) { tab, position ->

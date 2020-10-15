@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.sales
+package com.example.controllersystemapp.accountant.sales.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,14 +10,15 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.accountant.products.fragments.AccProdDetailsFragment
-import com.example.controllersystemapp.admin.delegatesAccountants.fragments.OrdersDeliveryFragment
+import com.example.controllersystemapp.accountant.sales.ItemAcceptClickListener
+import com.example.controllersystemapp.accountant.sales.adapters.NotReceivedSalesAdapter
 import com.example.util.UtilKotlin
 import kotlinx.android.synthetic.main.fragment_not_received_sales.*
 import kotlinx.android.synthetic.main.no_products.*
 
 
-class NotReceivedSalesFragment : Fragment(), ItemAcceptClickListener {
+class NotReceivedSalesFragment : Fragment(),
+    ItemAcceptClickListener {
 
 
     lateinit var notReceivedSalesAdapter: NotReceivedSalesAdapter
@@ -73,7 +74,12 @@ class NotReceivedSalesFragment : Fragment(), ItemAcceptClickListener {
             notReceivedSalesList.add("")
         }
 
-        notReceivedSalesAdapter = NotReceivedSalesAdapter(context!! , notReceivedSalesList , this)
+        notReceivedSalesAdapter =
+            NotReceivedSalesAdapter(
+                context!!,
+                notReceivedSalesList,
+                this
+            )
         notReceivedSalesRecycler?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)

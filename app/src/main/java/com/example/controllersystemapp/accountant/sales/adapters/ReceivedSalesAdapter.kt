@@ -1,27 +1,28 @@
-package com.example.controllersystemapp.accountant.sales
+package com.example.controllersystemapp.accountant.sales.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
-import kotlinx.android.synthetic.main.fragment_not_received_sales_item.view.*
+import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
+import kotlinx.android.synthetic.main.fragment_received_sales_item.view.*
 
 
-class NotReceivedSalesAdapter(
+class ReceivedSalesAdapter(
     var context: Context,
     var notReceivedSalesList: ArrayList<Any>,
-    var itemAcceptClickListener: ItemAcceptClickListener) :
-    RecyclerView.Adapter<NotReceivedSalesAdapter.ViewHolder>(){
+    var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
+    RecyclerView.Adapter<ReceivedSalesAdapter.ViewHolder>(){
 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.fragment_not_received_sales_item , parent , false)
-        return ViewHolder(view)
+        val view = LayoutInflater.from(context).inflate(R.layout.fragment_received_sales_item , parent , false)
+        return ViewHolder(
+            view
+        )
     }
 
 //    fun removeItemFromList(position: Int) {
@@ -37,7 +38,7 @@ class NotReceivedSalesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bindView(notReceivedSalesList[position], itemAcceptClickListener)
+        holder.bindView(notReceivedSalesList[position], onRecyclerItemClickListener)
 
 
     }
@@ -47,7 +48,7 @@ class NotReceivedSalesAdapter(
     {
         fun bindView(
             productsModel: Any,
-            itemAcceptClickListener: ItemAcceptClickListener
+            onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
 //            Glide.with(itemView.context).load(productsModel.image?:"")
@@ -62,17 +63,13 @@ class NotReceivedSalesAdapter(
 
 
 
-            itemView.setOnClickListener {
+            itemView.sendAdminBtn.setOnClickListener {
 
-                itemAcceptClickListener.onItemListClick(adapterPosition)
-
-            }
-
-            itemView.acceptNotReceivedSalesBtn.setOnClickListener {
-
-                itemAcceptClickListener.onAcceptClick(adapterPosition)
+                onRecyclerItemClickListener.onItemClick(adapterPosition)
 
             }
+
+
 
 
 

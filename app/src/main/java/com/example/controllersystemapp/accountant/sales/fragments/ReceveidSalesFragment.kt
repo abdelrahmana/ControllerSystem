@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.sales
+package com.example.controllersystemapp.accountant.sales.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.sales.adapters.ReceivedSalesAdapter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import kotlinx.android.synthetic.main.fragment_receveid_sales.*
 import kotlinx.android.synthetic.main.no_products.*
@@ -70,7 +71,12 @@ class ReceveidSalesFragment : Fragment()  , OnRecyclerItemClickListener {
             receivedSalesList.add("")
         }
 
-        receivedSalesAdapter = ReceivedSalesAdapter(context!! , receivedSalesList , this)
+        receivedSalesAdapter =
+            ReceivedSalesAdapter(
+                context!!,
+                receivedSalesList,
+                this
+            )
         receivedSalesRecycler?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)

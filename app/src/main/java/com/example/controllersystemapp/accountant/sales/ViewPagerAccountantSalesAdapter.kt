@@ -1,11 +1,9 @@
 package com.example.controllersystemapp.accountant.sales
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.controllersystemapp.admin.storesproducts.fragments.ProductsFragment
-import com.example.controllersystemapp.admin.storesproducts.fragments.StoresFragment
+import com.example.controllersystemapp.accountant.sales.fragments.NotReceivedSalesFragment
+import com.example.controllersystemapp.accountant.sales.fragments.ReceveidSalesFragment
 
 class ViewPagerAccountantSalesAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 

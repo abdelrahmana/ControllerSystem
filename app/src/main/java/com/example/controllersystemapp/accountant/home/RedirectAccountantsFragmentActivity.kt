@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.products.fragments.AccountantProductsFragment
-import com.example.controllersystemapp.accountant.sales.AccountantSalesFragment
+import com.example.controllersystemapp.accountant.sales.fragments.AccountantSalesFragment
 import com.example.controllersystemapp.accountant.settings.AccountantSettingsFragment
 import com.example.util.NameUtils
 import com.example.util.NameUtils.ACCOUNTANTS_PRODUCTS
