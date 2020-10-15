@@ -1,8 +1,10 @@
 package com.example.util.ApiConfiguration
 
 
-import com.example.controllersystemapp.accountant.products.AccountantProdDetailsResponse
-import com.example.controllersystemapp.accountant.products.AccountantProductsListResponse
+import com.example.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
+import com.example.controllersystemapp.accountant.products.models.AccountantProductsListResponse
+import com.example.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
+import com.example.controllersystemapp.accountant.settings.expenses.AccountantExpensesListResponse
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
@@ -17,7 +19,6 @@ import com.example.controllersystemapp.common.cities.CitiesListResponse
 import com.example.controllersystemapp.common.login.LoginRequest
 import com.example.controllersystemapp.common.login.LoginResponse
 import io.reactivex.Observable
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -132,5 +133,29 @@ interface WebService {
     @GET("admin/products/details")
     fun accProductDetails(@Query("id") productId : Int?): Observable<Response<AccountantProdDetailsResponse>>
 
+
+    @Headers("Accept: application/json")
+    @GET("accountant/expenses/list")
+    fun accountantExpensesList(): Observable<Response<AccountantExpensesListResponse>>
+
+
+    @Headers("Accept: application/json")
+    @POST("accountant/expenses/create")
+    fun accountantCreateExpenses(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
+
+
+    @Headers("Accept: application/json")
+    @DELETE("accountant/expenses/delete")
+    fun deleteAccountantExpenses(@Query("id") expensesId : Int): Observable<Response<SuccessModel>>
+
+
+    @Headers("Accept: application/json")
+    @GET("accountant/expenses/details")
+    fun accountantExpensesDetails(@Query("id") expensesId : Int): Observable<Response<AccountantExpensesDetailsResponse>>
+
+
+    @Headers("Accept: application/json")
+    @POST("accountant/expenses/edit")
+    fun accountantEditExpenses(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
 
 }

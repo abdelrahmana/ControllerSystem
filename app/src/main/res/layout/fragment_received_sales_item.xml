@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_140sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="5dp"
+    android:layout_marginBottom="14dp"
+    app:cardElevation="5dp"
+    android:layout_marginStart="@dimen/_16sdp"
+    android:layout_marginEnd="@dimen/_16sdp"
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:id="@+id/imgContainer"
+
+            >
+
+            <ImageView
+                android:id="@+id/receivedSalesImg"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/sales_reports_icon" />
+
+            <TextView
+                android:id="@+id/receivedSalesName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:textAlignment="viewStart"
+                android:text="أمر توصيل رقم 135655"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/cairo_semibold"
+                android:textColor="@color/text_black"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/receivedPrice"
+                app:layout_constraintStart_toEndOf="@+id/receivedSalesImg"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/receivedDelegate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="احمد حازم"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:fontFamily="@font/cairo_regular"
+                android:textSize="12sp"
+                android:textColor="@color/text_black"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/receivedSalesQuantity"
+                app:layout_constraintStart_toEndOf="@+id/receivedSalesImg"
+                app:layout_constraintTop_toBottomOf="@+id/receivedSalesName" />
+
+
+            <TextView
+                android:id="@+id/receivedCurrency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="رس"
+                android:textSize="12sp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:textColor="@color/text_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/receivedPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/receivedSalesName"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:textColor="@color/black_bold"
+                android:fontFamily="@font/ffshamelfamily_sansonebold"
+                app:layout_constraintEnd_toStartOf="@+id/receivedCurrency"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/receivedSalesQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textColor="@color/text_black"
+                android:fontFamily="@font/ffshamelfamily_sansonebold"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/piece_text"
+                android:layout_marginEnd="@dimen/_3sdp"
+                app:layout_constraintEnd_toStartOf="@+id/piece_text"
+                app:layout_constraintTop_toTopOf="@+id/piece_text" />
+
+            <TextView
+                android:id="@+id/piece_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/piece"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/text_black"
+                android:layout_marginEnd="@dimen/_16sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receivedCurrency" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:textAlignment="viewStart"
+            android:id="@+id/receivedDateTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="12 محرم 1450"
+            android:textColor="@color/text_grey"
+            android:textSize="12sp"
+            android:layout_marginStart="@dimen/_16sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
+            />
+
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sendAdminBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_35sdp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:text="@string/send_admin"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/text_green"
+            app:cornerRadius="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/receivedDateTxt"
+            />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/arrowImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_arrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/receivedDateTxt"
+            />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="@string/more"
+            android:textColor="@color/black_bold"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/arrowImg"
+            app:layout_constraintEnd_toStartOf="@+id/arrowImg"
+            app:layout_constraintTop_toTopOf="@+id/arrowImg" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</com.google.android.material.card.MaterialCardView>

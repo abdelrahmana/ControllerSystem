@@ -33,6 +33,7 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
 
     var stringDataVar = MutableLiveData<String>() // lets make this for sharing data overall application
     var InteDataVariable = MutableLiveData<Int>() // lets make this for sharing data overall application
+    var updateOrDelete = MutableLiveData<String>() // lets make this for sharing data overall application
 
     var responseDataCode = MutableLiveData<Any>() // lets make this generic to use it with all apis
     var notifyItemSelected = MutableLiveData<Any>() // lets make this for sharing data overall application
@@ -43,6 +44,10 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
 
     fun setStringVar(stringDataVar: String?) {
         this.stringDataVar.postValue(stringDataVar)
+    }
+
+    fun setUpdateOrDelete(stringDataVar: String?) {
+        this.updateOrDelete.postValue(stringDataVar)
     }
 
     var intIdData = MutableLiveData<Int>()

@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.RedirectFragmentsActivity
 import com.example.util.NameUtils
 import com.example.util.PrefsUtil
 import com.google.android.material.card.MaterialCardView
@@ -37,9 +36,9 @@ class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
 
         settingAccountant?.setOnClickListener{
 
-//            val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//            intent.putExtra(NameUtils.redirectFragmet, NameUtils.settingsFragmet)
-//            startActivity(intent)
+            val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+            intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.ACCOUNTANT_SETTINGS)
+            startActivity(intent)
 
         }
 
@@ -109,10 +108,10 @@ class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
             R.id.sendSalesCard -> {
                 removeCardSelection()
                 setCardSelection(sendSalesCard , sendSalesImg , sendSalesText ,R.drawable.ic_send_sales_unselect)
-                //startActivity(Intent(this , AdminMakeOrdersActivity::class.java))
-//                val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//                intent.putExtra(NameUtils.redirectFragmet, NameUtils.categoriesFragmet)
-//                startActivity(intent)
+
+                val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+                intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.SEND_SALES)
+                startActivity(intent)
             }
 
             R.id.accountantDeliveryCard -> {

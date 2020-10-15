@@ -4,8 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.accountant.products.AccountantProductsFragment
+import com.example.controllersystemapp.accountant.products.fragments.AccountantProductsFragment
+import com.example.controllersystemapp.accountant.sales.AccountantSalesFragment
+import com.example.controllersystemapp.accountant.settings.AccountantSettingsFragment
 import com.example.util.NameUtils
+import com.example.util.NameUtils.ACCOUNTANTS_PRODUCTS
+import com.example.util.NameUtils.ACCOUNTANT_SETTINGS
+import com.example.util.NameUtils.SEND_SALES
 
 class RedirectAccountantsFragmentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +31,16 @@ class RedirectAccountantsFragmentActivity : AppCompatActivity() {
         var tag = ""
 
         when (fragment) {
-            NameUtils.ACCOUNTANTS_PRODUCTS -> {
+            ACCOUNTANTS_PRODUCTS -> {
                 changeFragment(AccountantProductsFragment(), fragment)
+            }
+
+            ACCOUNTANT_SETTINGS -> {
+                changeFragment(AccountantSettingsFragment(), fragment)
+            }
+
+            SEND_SALES  -> {
+                changeFragment(AccountantSalesFragment(), fragment)
             }
 
 

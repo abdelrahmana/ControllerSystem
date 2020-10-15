@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.products
+package com.example.controllersystemapp.accountant.products.fragments
 
 import android.app.Dialog
 import android.os.Bundle
@@ -8,9 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.viewpager.widget.ViewPager
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.accountant.products.AccountantProductsFragment.Companion.ACC_PROD_ID
+import com.example.controllersystemapp.accountant.products.AccountantProductPresenter
+import com.example.controllersystemapp.accountant.products.adapters.SlidingItemImageAdapter
+import com.example.controllersystemapp.accountant.products.fragments.AccountantProductsFragment.Companion.ACC_PROD_ID
+import com.example.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
+import com.example.controllersystemapp.accountant.products.models.DetailsData
+import com.example.controllersystemapp.accountant.products.models.Image
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
@@ -130,7 +134,11 @@ class AccProdDetailsFragment : Fragment() {
             slideImage.clear()
             slideImage.addAll(detailsData?.images)
 
-            slidingItemImageAdapter = SlidingItemImageAdapter(context!! , slideImage)
+            slidingItemImageAdapter =
+                SlidingItemImageAdapter(
+                    context!!,
+                    slideImage
+                )
             sliderImage?.adapter = slidingItemImageAdapter
             indicator.setViewPager(sliderImage)
 
@@ -138,9 +146,19 @@ class AccProdDetailsFragment : Fragment() {
         else{
             //empty
             slideImage.clear()
-            slideImage.add(Image(null , detailsData?.image?:"" , null))
+            slideImage.add(
+                Image(
+                    null,
+                    detailsData?.image ?: "",
+                    null
+                )
+            )
 
-            slidingItemImageAdapter = SlidingItemImageAdapter(context!! , slideImage)
+            slidingItemImageAdapter =
+                SlidingItemImageAdapter(
+                    context!!,
+                    slideImage
+                )
             sliderImage?.adapter = slidingItemImageAdapter
             indicator.setViewPager(sliderImage)
         }
@@ -161,9 +179,11 @@ class AccProdDetailsFragment : Fragment() {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
 
-            AccountantProductPresenter.productsListDetails(webService!! ,
-                arguments?.getInt(ACC_PROD_ID , 0)?:0
-                , activity!! , model)
+            AccountantProductPresenter.productsListDetails(
+                webService!!,
+                arguments?.getInt(ACC_PROD_ID, 0) ?: 0
+                , activity!!, model
+            )
 
         } else {
             progressDialog?.dismiss()

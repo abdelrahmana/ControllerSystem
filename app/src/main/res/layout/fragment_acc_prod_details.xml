@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".accountant.products.AccProdDetailsFragment">
+    tools:context=".accountant.products.fragments.AccProdDetailsFragment">
 
 
     <ImageView
@@ -559,7 +559,8 @@
 
                 <ImageView
                     app:srcCompat="@drawable/ic_img_placeholer_side"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/statusId"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="@dimen/_4sdp"
@@ -568,21 +569,30 @@
                     android:layout_height="@dimen/_30sdp"/>
 
                 <TextView
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toEndOf="@+id/userImage"
-                    app:layout_constraintTop_toTopOf="@+id/userImage"
                     android:id="@+id/userNameText"
-                    android:text="Abdelrahman Salah"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"/>
+                    android:layout_width="0dp"
+                    android:textAlignment="viewStart"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_height="20dp"
+                    android:text="احمد حازم"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/userImage"
+                    app:layout_constraintTop_toTopOf="@+id/userImage" />
 
                 <TextView
+                    android:textAlignment="viewStart"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/userNameText"
                     app:layout_constraintTop_toBottomOf="@+id/userNameText"
                     android:id="@+id/phoneNumberText"
-                    android:text="+201286617935"
+                    android:text="+966 56784 9876"
                     android:textColor="@color/text_black"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 

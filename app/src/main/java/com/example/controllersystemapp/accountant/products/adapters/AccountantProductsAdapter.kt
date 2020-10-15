@@ -1,15 +1,14 @@
-package com.example.controllersystemapp.accountant.products
+package com.example.controllersystemapp.accountant.products.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.products.models.Data
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import com.example.controllersystemapp.admin.storesproducts.models.ProductsModel
 import kotlinx.android.synthetic.main.products_item.view.*
 
 class AccountantProductsAdapter(
@@ -22,7 +21,9 @@ class AccountantProductsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.products_item , parent , false)
-        return ViewHolder(view)
+        return ViewHolder(
+            view
+        )
     }
 
     fun removeItemFromList(position: Int) {

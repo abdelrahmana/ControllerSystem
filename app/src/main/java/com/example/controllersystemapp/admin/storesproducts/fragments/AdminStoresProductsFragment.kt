@@ -135,7 +135,7 @@ class AdminStoresProductsFragment : Fragment() {
                 }
                 val textView =
                     tab.customView!!.findViewById<TextView>(android.R.id.text1)
-                textView.setTextColor(productStoreTabLayout.tabTextColors)
+                textView.setTextColor(productStoreTabLayout?.tabTextColors)
                 textView.typeface = Typeface.DEFAULT_BOLD
             }
 
