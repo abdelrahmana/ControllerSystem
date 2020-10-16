@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.controllersystemapp.R
+import com.example.util.UtilKotlin
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_admin_accountant.*
@@ -47,7 +48,7 @@ class DelegateCallCenterFragment : Fragment() {
             {
                 0 -> {
                     tab.text = getString(R.string.delegates)
-
+                    addAccountantBtn?.text = getString(R.string.add_delegate)
                 }
                 1 -> {
 
@@ -76,6 +77,10 @@ class DelegateCallCenterFragment : Fragment() {
             // if 0 delegates , 1 call center
         //   UtilKotlin.changeFragmentBack(activity!! ,AddAccountantFragment() , "AddAccountant"  , null,R.id.frameLayout_direction)
 
+            if (currentSelectedPosition==0)
+                UtilKotlin.changeFragmentBack(activity!! ,AddDelegateFragment() , "AddDelegate" , null,R.id.frameLayout_direction)
+            else
+                UtilKotlin.changeFragmentBack(activity!! ,AddCallCenterFragment() , "call_center"  , null,R.id.frameLayout_direction)
 
         }
 
@@ -152,7 +157,7 @@ class DelegateCallCenterFragment : Fragment() {
 
     }
 
-    private fun setupTabLayout() {
+  /*  private fun setupTabLayout() {
 
 
 //        titlesTab.clear()
@@ -171,5 +176,5 @@ class DelegateCallCenterFragment : Fragment() {
 //        }
 
 
-    }
+    }*/
 }

@@ -1,7 +1,6 @@
 package com.example.controllersystemapp.admin.settings
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,11 +9,11 @@ import android.view.ViewGroup
 import com.example.controllersystemapp.BuildConfig
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.settings.admin.AdminFragment
+import com.example.controllersystemapp.admin.settings.editpassword.EditPasswordFragment
 import com.example.controllersystemapp.admin.settings.editprofile.EditProfileFragment
 import com.example.controllersystemapp.admin.settings.masrufat.MasrufatFragment
 import com.example.controllersystemapp.admin.settings.payments.PaymentsFragment
 import com.example.controllersystemapp.common.AuthPresenter
-import com.example.controllersystemapp.common.ContainerActivityForFragment
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService

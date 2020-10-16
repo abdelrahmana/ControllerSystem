@@ -6,17 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter.getCallCenter
 import com.example.controllersystemapp.accountant.delegatecallcenter.adapters.CallCenterAdapter
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterData
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
+import com.example.controllersystemapp.bottomsheets.AdminBottomSheet
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils
 import com.example.util.UtilKotlin
+import com.example.util.ViewModelHandleChangeFragmentclass
+import com.google.gson.Gson
 import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.fragment_call_center.*
 import retrofit2.Response
@@ -24,7 +29,8 @@ import retrofit2.Response
 class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
 
     lateinit var callCenterAdapter: CallCenterAdapter
-    var callCenterArray = ArrayList<CallCenterData>()
+    var callCenterArray = ArrayList<CallCenterDelegateData>()
+    lateinit var modelHandleChangeFragmentclass: ViewModelHandleChangeFragmentclass
     var webService : WebService?=null
     var progressDialog : Dialog?=null
     override fun onCreateView(
@@ -33,6 +39,7 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
     ): View? {
         // Inflate the layout for this fragment
         webService = ApiManagerDefault(context!!).apiService // auth
+        modelHandleChangeFragmentclass = UtilKotlin.declarViewModel(activity!!)!!
         progressDialog = UtilKotlin.ProgressDialog(activity!!)
         return inflater.inflate(R.layout.fragment_call_center, container, false)
     }
@@ -43,7 +50,25 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
 
       //  Log.d("back" , "Delegate crested")
 
+        modelHandleChangeFragmentclass.notifyItemSelected?.observe(activity!!, Observer { datamodel ->
 
+            if (datamodel != null) {
+
+                if (datamodel ==1) {
+
+                    val bundle = Bundle()
+                    bundle.putString(NameUtils.CURRENT_CALL_CENTER,Gson().toJson(callCenterArray.get(selectedItemPosition)))
+
+                    UtilKotlin.changeFragmentBack(activity!! ,
+                        EditCallCenterFragment(), "call_center"  , bundle,R.id.frameLayout_direction)
+
+
+                }
+
+                modelHandleChangeFragmentclass.responseCodeDataSetter(null) // start details with this data please
+            }
+
+        })
     }
 
     override fun onResume() {
@@ -83,12 +108,11 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
 
         }
 
-
-
     }
 
     override fun onDestroyView() {
       disposableObserver?.dispose()
+        modelHandleChangeFragmentclass?.notifyItemSelected?.removeObservers(activity!!)
         super.onDestroyView()
     }
 
@@ -130,14 +154,23 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
         return disposableObserver!!
     }
 
+    var selectedItemPosition = 0
     override fun onItemClick(position: Int) {
-
+ selectedItemPosition = position
+        val bundle = Bundle()
+        bundle.putBoolean(callCenter, true)
+        val bottomSheetActions = BottomSheetActions()
+        bottomSheetActions.arguments = bundle
+        bottomSheetActions.show(activity?.supportFragmentManager!!, "bottomSheetActions")
     //    Log.d("clickDelegate" , "${delegatesList[position].Id}")
 
 //        UtilKotlin.replaceFragmentWithBack(context!!, this, DelegateDetailsFragment(),
 //            null, R.id.frameLayout_direction, 120, false, true)
 
    //     UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , ""  , null,R.id.frameLayout_direction)
+    }
+    companion object{
+        val callCenter = "this_is_call_center"
     }
 
 }

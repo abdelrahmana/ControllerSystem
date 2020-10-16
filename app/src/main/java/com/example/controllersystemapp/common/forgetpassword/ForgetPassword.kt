@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.common.verficationfragment.VerficationFragment
+import com.example.util.NameUtils.FORGETPASSWORD
 import com.example.util.UtilKotlin
 import com.example.util.UtilKotlin.checkOViewsAvaliablity
 import kotlinx.android.synthetic.main.fragment_forget_password.*
@@ -29,11 +30,14 @@ class ForgetPassword : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_VALIDATION_CODE_Phone) {
+            val bundle  = Bundle()
+            bundle.putBoolean(FORGETPASSWORD,true
+            )
             UtilKotlin.changeFragmentBack(
                 activity!!,
                 AddNewPasswordFragment(),
                 "verficationFragment",
-                null,
+                bundle,
                 R.id.container
             )
         }

@@ -34,8 +34,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andrognito.flashbar.Flashbar
 import com.andrognito.flashbar.anim.FlashAnim
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.example.controllersystemapp.admin.addproduct.AddProductFragment.Companion.GALLERY
 import com.example.controllersystemapp.common.ContainerActivityForFragment
+import com.example.controllersystemapp.common.login.User
 import com.example.controllersystemapp.common.verficationfragment.ValidationActivity
 import com.example.controllersystemapp.common.verficationfragment.VerficationFragment.Companion.phoneNumberKey
 import com.example.util.ApiConfiguration.ErrorBodyResponse
@@ -44,6 +46,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.loader_layout.*
 import okhttp3.ResponseBody
+import org.json.JSONStringer
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -486,5 +489,13 @@ object UtilKotlin {
         }
     }
 
+    fun getDelegateCallCenter(jsonString : String): CallCenterDelegateData? { // this should return the object
+        val jso = jsonString
+        val gson = Gson()
+        val typeToken = object : TypeToken<CallCenterDelegateData?>() {}.type
+        val obj = gson.fromJson<CallCenterDelegateData>(jso, typeToken) ?: CallCenterDelegateData() //ResponseLogin(Data("", null))
+        return obj
+
+    }
 
 }

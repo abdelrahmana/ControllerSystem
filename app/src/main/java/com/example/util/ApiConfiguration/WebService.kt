@@ -1,6 +1,7 @@
 package com.example.util.ApiConfiguration
 
 
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.AddDelegateCallCenterRequest
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.example.controllersystemapp.accountant.products.AccountantProdDetailsResponse
 import com.example.controllersystemapp.accountant.products.AccountantProductsListResponse
@@ -9,6 +10,7 @@ import com.example.controllersystemapp.admin.delegatesAccountants.models.Account
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AddAccountantRequest
 import com.example.controllersystemapp.admin.settings.admin.AdminListResponse
+import com.example.controllersystemapp.admin.settings.editpassword.EditPasswordRequest
 import com.example.controllersystemapp.admin.specialcustomers.AddClientRequest
 import com.example.controllersystemapp.admin.specialcustomers.ClientsListResponse
 import com.example.controllersystemapp.admin.storesproducts.models.AddStoreRequest
@@ -143,5 +145,21 @@ interface WebService {
     @Headers("Accept: application/json")
     @GET("accountant/call-center/list")
     fun getCallCenterList(): Observable<Response<CallCenterResponse>>
+
+    @Headers("Accept: application/json")
+    @POST("accountant/call-center/create")
+    fun addCallCenter(@Body callCenterRequest: AddDelegateCallCenterRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @POST("accountant/call-center/edit")
+    fun editCallCenter(@Body callCenterRequest: AddDelegateCallCenterRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @POST("accountant/delegates/edit")
+    fun editDelegate(@Body callCenterRequest: AddDelegateCallCenterRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @POST("users/update-password")
+    fun changePassword(@Body callCenterRequest: EditPasswordRequest): Observable<Response<SuccessModel>>
 
 }

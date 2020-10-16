@@ -7,19 +7,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.delegatecallcenter.BottomSheetActions
 import com.example.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterData
+import com.example.controllersystemapp.accountant.delegatecallcenter.EditCallCenterFragment
+import com.example.controllersystemapp.accountant.delegatecallcenter.EditDelegateFragment
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.Data
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.DelegatesAdapter
-import com.example.controllersystemapp.admin.delegatesAccountants.models.DelegatesModel
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils
 import com.example.util.UtilKotlin
+import com.example.util.ViewModelHandleChangeFragmentclass
+import com.google.gson.Gson
 import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.fragment_delegates.*
 import retrofit2.Response
@@ -27,7 +32,7 @@ import retrofit2.Response
 class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 
     lateinit var delegatesAdapter: DelegatesAdapter
-    var delegatesList = ArrayList<CallCenterData>()
+    var delegatesList = ArrayList<CallCenterDelegateData>()
 
     var webService : WebService?=null
     var progressDialog : Dialog?=null
@@ -36,6 +41,8 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        modelHandleChangeFragmentclass = UtilKotlin.declarViewModel(activity!!)!!
+
         return inflater.inflate(R.layout.fragment_delegates, container, false)
     }
 
@@ -48,6 +55,8 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 
 
     }
+    lateinit var modelHandleChangeFragmentclass: ViewModelHandleChangeFragmentclass
+
     private fun getDelegatesList() {
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
@@ -59,10 +68,28 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 
         }
 
+        modelHandleChangeFragmentclass.notifyItemSelected?.observe(activity!!, Observer { datamodel ->
 
+            if (datamodel != null) {
+
+                if (datamodel ==1) {
+
+                    val bundle = Bundle()
+                    bundle.putString(NameUtils.CURRENT_DELEGATE, Gson().toJson(delegatesList.get(selectedItemPosition)))
+                    UtilKotlin.changeFragmentBack(activity!! ,
+                        EditDelegateFragment(), "call_center"  , bundle,R.id.frameLayout_direction)
+
+
+                }
+
+                modelHandleChangeFragmentclass.responseCodeDataSetter(null) // start details with this data please
+            }
+
+        })
 
     }
 
+    var selectedItemPosition = 0
     override fun onDestroyView() {
         disposableObserver?.dispose()
         super.onDestroyView()
@@ -140,6 +167,13 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 //            null, R.id.frameLayout_direction, 120, false, true)
 
         UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , ""  , null,R.id.frameLayout_direction)
+    }
+
+    override fun delegateClickListener(position: Int) {
+        selectedItemPosition = position
+        val bottomSheetActions = BottomSheetActions()
+        bottomSheetActions.show(activity?.supportFragmentManager!!, "bottomSheetActions")
+
     }
 
 }

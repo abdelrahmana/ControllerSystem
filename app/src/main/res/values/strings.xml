@@ -184,6 +184,17 @@
     <string name="add_delegate">اضف مندوب</string>
     <string name="add_call_center">اضف كول سنتر</string>
     <string name="call_center">كول سنتر</string>
+    <string name="call_center_name">اسم الكول سنتر</string>
+    <string name="name_is_required">الأسم مطلوب</string>
+    <string name="added_successfully">تمت الإضافة بنجاح</string>
+    <string name="current_password_required">كلمة المرور الحالية مطلوبة</string>
+    <string name="edit_call_center">تعديل الكول سنتر</string>
+    <string name="delete_call_center">مسح الكول سنتر</string>
+    <string name="block_call">حظر الكول سنتر</string>
+    <string name="view_profile">تعديل الملف الشخصى</string>
+    <string name="delete_delegate">مسح المندوب</string>
+    <string name="block_delegate">حظر المندوب</string>
+    <string name="edit_delegate">تعديل المندوب</string>
 
 
 </resources>

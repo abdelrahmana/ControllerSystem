@@ -25,8 +25,9 @@ object NameUtils {
     val noticesReporst = "noticesReports"
     val MAKE_SPECIAL_ORDER = "makeSpecialOrder"
     val SEND_SALES = "sendSales"
-
-
+    val FORGETPASSWORD = "Forget_password"
+    val CURRENT_CALL_CENTER = "EDIT_CALL"
+    val CURRENT_DELEGATE = "EDIT_DELEGATE"
 
     val specialCustomersFragmet = "specialCustomers"
 

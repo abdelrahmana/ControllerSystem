@@ -83,9 +83,9 @@ class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
                 removeCardSelection()
                 setCardSelection(accountantDelegatesCard , accountantDelegatesImage , accountantDelegatesText ,R.drawable.ic_accountant_selected)
                 //startActivity(Intent(this , AdminAccountantActivity::class.java))
-//                val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//                intent.putExtra(NameUtils.redirectFragmet, NameUtils.delegatesAccountantsFragmet)
-//                startActivity(intent)
+                val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+              intent.putExtra(NameUtils.redirectFragmet, NameUtils.delegatesAccountantsFragmet)
+               startActivity(intent)
             }
 
             R.id.accountantNoticesCard -> {

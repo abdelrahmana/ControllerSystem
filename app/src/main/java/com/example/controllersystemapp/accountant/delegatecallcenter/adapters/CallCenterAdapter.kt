@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterData
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import kotlinx.android.synthetic.main.delegate_item.view.*
 
 class CallCenterAdapter(
     var context: Context,
-    var delegateList: ArrayList<CallCenterData>,
+    var delegateList: ArrayList<CallCenterDelegateData>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<CallCenterAdapter.ViewHolder>(){
 
@@ -39,7 +39,7 @@ class CallCenterAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            callCenterModel: CallCenterData,
+            callCenterModel: CallCenterDelegateData,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 

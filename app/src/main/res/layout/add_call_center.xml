@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <include
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/toolbar_title"
+        layout="@layout/tool_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/headerName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_title"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textSize="@dimen/_14sdp"
+        android:text="@string/call_center_name"
+        android:textColor="@color/black_bold"
+        android:textAlignment="viewStart"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerName"
+        android:id="@+id/containerCallCenterName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        >
+        <!-- android:drawableStart="@drawable/ic_person_icon"-->
+        <EditText
+            android:id="@+id/callCenterEditText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:theme="@style/adding_loginstate"
+            android:drawablePadding="16dp"
+            android:textSize="@dimen/_12sdp"
+            android:hint="@string/mobile_number"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:visibility="gone"
+            android:drawableStart="@drawable/ic_error_input"
+            android:drawablePadding="@dimen/_5sdp"
+            android:id="@+id/callCenterError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:textColor="@color/error_color"
+            app:layout_constraintStart_toStartOf="@+id/callCenterEditText"
+            app:layout_constraintTop_toBottomOf="@+id/callCenterEditText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/headerPhoneNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containerCallCenterName"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textSize="@dimen/_14sdp"
+        android:text="@string/phone_number"
+        android:textColor="@color/black_bold"
+        android:textAlignment="viewStart"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerPhoneNumber"
+        android:id="@+id/containerPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        >
+        <!-- android:drawableStart="@drawable/ic_person_icon"-->
+
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:drawablePadding="16dp"
+            android:hint="@string/mobile_number"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/_14sdp"
+            android:theme="@style/adding_loginstate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:visibility="gone"
+            android:drawableStart="@drawable/ic_error_input"
+            android:drawablePadding="@dimen/_5sdp"
+            android:id="@+id/errorPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:textColor="@color/error_color"
+            app:layout_constraintStart_toStartOf="@+id/editTextPhone"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/headerPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containerPhone"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textSize="@dimen/_14sdp"
+        android:text="@string/password"
+        android:textColor="@color/black_bold"
+        android:textAlignment="viewStart"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerPassword"
+        android:id="@+id/containerPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        >
+        <!-- android:drawableStart="@drawable/ic_person_icon"-->
+
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:drawablePadding="16dp"
+            android:hint="@string/mobile_number"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:padding="8dp"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/_14sdp"
+            android:theme="@style/adding_loginstate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:visibility="gone"
+            android:drawableStart="@drawable/ic_error_input"
+            android:drawablePadding="@dimen/_5sdp"
+            android:id="@+id/errorPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:textColor="@color/error_color"
+            app:layout_constraintStart_toStartOf="@+id/editTextPassword"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add"
+        android:fontFamily="@font/ffshamelfamily_sansonebold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        app:backgroundTint="@color/orange_color"
+        app:cornerRadius="7dp"
+        android:text="@string/add_call_center"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="@dimen/_15sdp"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

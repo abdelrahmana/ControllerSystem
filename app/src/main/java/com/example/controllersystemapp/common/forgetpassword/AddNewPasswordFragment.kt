@@ -14,6 +14,7 @@ import com.example.controllersystemapp.common.forgetpassword.model.RequestModelN
 import com.example.controllersystemapp.common.verficationfragment.VerficationFragment
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils
 import com.example.util.PrefsUtil
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
@@ -67,6 +68,7 @@ class AddNewPasswordFragment : Fragment() {
             activity?.supportFragmentManager?.popBackStack()
 
         }
+        createObserverViewModel()
     }
     var callCortinues :Job?=null
     var progressDialog : Dialog?=null
@@ -103,6 +105,9 @@ class AddNewPasswordFragment : Fragment() {
                 if (datamodel is SuccessModel) // if it is object of this model
                 {
                     UtilKotlin.showSnackMessage(activity!!, datamodel.msg?.get(0) ?:"")
+                  /*  if (arguments?.getBoolean(NameUtils.FORGETPASSWORD,false) != true)
+                        activity!!.supportFragmentManager.popBackStack() // change password
+                    else*/
                     activity!!.supportFragmentManager.popBackStack("LoginFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
                     //getData(datamodel) // move data to here please

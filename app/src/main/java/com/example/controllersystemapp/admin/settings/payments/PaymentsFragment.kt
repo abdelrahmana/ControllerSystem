@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.settings.EditPasswordFragment
 import com.example.util.UtilKotlin
-import kotlinx.android.synthetic.main.fragment_masrufat.*
 import kotlinx.android.synthetic.main.fragment_payments.*
-import kotlinx.android.synthetic.main.fragment_payments.view.*
 import kotlinx.android.synthetic.main.no_fees.view.*
 
 class PaymentsFragment : Fragment() {
