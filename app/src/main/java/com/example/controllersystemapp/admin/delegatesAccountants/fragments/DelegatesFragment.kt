@@ -77,7 +77,7 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
                     val bundle = Bundle()
                     bundle.putString(NameUtils.CURRENT_DELEGATE, Gson().toJson(delegatesList.get(selectedItemPosition)))
                     UtilKotlin.changeFragmentBack(activity!! ,
-                        EditDelegateFragment(), "call_center"  , bundle,R.id.frameLayout_direction)
+                        EditDelegateFragment(), "delegate"  , bundle,R.id.frameLayout_direction)
 
 
                 }
