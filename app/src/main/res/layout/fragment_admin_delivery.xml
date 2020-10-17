@@ -61,7 +61,12 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/search_layout"/>
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/_15sdp"
                 android:id="@+id/deliveryRecycleView"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"

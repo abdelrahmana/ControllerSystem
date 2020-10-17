@@ -34,13 +34,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andrognito.flashbar.Flashbar
 import com.andrognito.flashbar.anim.FlashAnim
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.example.controllersystemapp.admin.addproduct.AddProductFragment.Companion.GALLERY
+import com.example.controllersystemapp.common.ContainerActivityForFragment
+import com.example.controllersystemapp.common.login.User
+import com.example.controllersystemapp.common.verficationfragment.ValidationActivity
+import com.example.controllersystemapp.common.verficationfragment.VerficationFragment.Companion.phoneNumberKey
 import com.example.util.ApiConfiguration.ErrorBodyResponse
 import com.example.util.PrefsUtil.getSharedPrefs
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.loader_layout.*
 import okhttp3.ResponseBody
+import org.json.JSONStringer
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -76,6 +82,16 @@ object UtilKotlin {
         fo.close()
 
         return f!!
+    }
+    fun localSignOut(context: Activity?) {
+        PrefsUtil.removeKey(context!! , PrefsModel.TOKEN)
+        PrefsUtil.setLoginState(context!!, false)
+        PrefsUtil.removeKey(context!! , PrefsModel.userModel)
+        //   context.startActivity(Intent(context, AuthContainer::class.java))
+        //  context!!.finishAffinity()
+        context.startActivity(Intent(context, ContainerActivityForFragment::class.java)) // go to home please
+        // startActivity(Intent(activity,AuthContainer::class.java))
+        context!!.finishAffinity()
     }
 
     fun performImgPicAction(which: Int, fragment: Fragment?, context: Activity) {
@@ -198,7 +214,38 @@ object UtilKotlin {
 
         }
     }
+    fun checkOViewsAvaliablity(view: EditText?, errorMessage: String, activity: Activity, errorMedicalInssurance: TextView?): Boolean { // errors on view which is required
+        if (checkAvalibalityOptions(view?.text.toString())==true) // not empty
+        {
+            errorMedicalInssurance?.text = "" // clean it
+            return true
+        }
+        else
+            errorMedicalInssurance?.text = errorMessage
+        // showSnackErrorInto(activity!!, errorMessage)
+        return false
 
+
+    }
+    fun checkAvalibalityOptions(checkEmptyOrNot: Any) :Boolean? { // when check empty strings or int or whatever you need
+        /* when(checkEmptyOrNot) {
+             Int->{
+                 return (checkEmptyOrNot as Int)>0
+             }
+             String->{
+                 return (checkEmptyOrNot as String).isNotEmpty()
+
+             }
+         }*/
+        if (checkEmptyOrNot is Int) {
+            return (checkEmptyOrNot as Int)>0
+        }
+        else if (checkEmptyOrNot is String)
+            return (checkEmptyOrNot as String).isNotEmpty()
+        else if (checkEmptyOrNot is ArrayList<*>)
+            return (checkEmptyOrNot).size>0
+        return false // no supports value
+    }
     fun changeFragmentWithBack(activity: FragmentActivity?, containerBottomNav: Int, fragment: Fragment, bundle: Bundle?) {
 
         val transaction = activity!!.supportFragmentManager.beginTransaction()
@@ -302,7 +349,13 @@ object UtilKotlin {
 
     }
 
-
+    fun startValidationFragmentForResult(parentFragment: Fragment?, requestValidationCode: Int,context: Activity,phoneNumber : String) {
+        PrefsUtil.getSharedPrefs(context).edit().putString(phoneNumberKey,/*"+"+*/phoneNumber).apply() // set the required phone number
+        if (parentFragment != null)
+            parentFragment.startActivityForResult(Intent(context, ValidationActivity::class.java), requestValidationCode)
+        else
+            context.startActivityForResult(Intent(context,ValidationActivity::class.java),requestValidationCode)
+    }
     fun hideKeyboard(view: View) {
         val input = view.context
             .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -437,5 +490,13 @@ object UtilKotlin {
         }
     }
 
+    fun getDelegateCallCenter(jsonString : String): CallCenterDelegateData? { // this should return the object
+        val jso = jsonString
+        val gson = Gson()
+        val typeToken = object : TypeToken<CallCenterDelegateData?>() {}.type
+        val obj = gson.fromJson<CallCenterDelegateData>(jso, typeToken) ?: CallCenterDelegateData() //ResponseLogin(Data("", null))
+        return obj
+
+    }
 
 }

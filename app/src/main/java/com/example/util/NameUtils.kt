@@ -31,6 +31,9 @@ object NameUtils {
     val ACCOUNTANT_SETTINGS = "accountantSettings"
 
 
+    val FORGETPASSWORD = "Forget_password"
+    val CURRENT_CALL_CENTER = "EDIT_CALL"
+    val CURRENT_DELEGATE = "EDIT_DELEGATE"
 
     val specialCustomersFragmet = "specialCustomers"
 

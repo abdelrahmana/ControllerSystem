@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.settings.expenses.ExpensesFragment
-import com.example.controllersystemapp.admin.settings.EditPasswordFragment
+import com.example.controllersystemapp.admin.settings.editpassword.EditPasswordFragment
 import com.example.controllersystemapp.admin.settings.editprofile.EditProfileFragment
 import com.example.util.UtilKotlin
 import kotlinx.android.synthetic.main.fragment_accountant_settings.*

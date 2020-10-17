@@ -10,6 +10,7 @@ import com.example.controllersystemapp.accountant.products.fragments.AccountantP
 import com.example.controllersystemapp.accountant.sales.fragments.AccountantSalesFragment
 import com.example.controllersystemapp.accountant.settings.AccountantSettingsFragment
 import com.example.controllersystemapp.admin.notification.NotificationFragment
+import com.example.controllersystemapp.accountant.delegatecallcenter.DelegateCallCenterFragment
 import com.example.util.NameUtils
 import com.example.util.NameUtils.ACCOUNTANTS_PRODUCTS
 import com.example.util.NameUtils.ACCOUNTANT_SETTINGS
@@ -41,6 +42,9 @@ class RedirectAccountantsFragmentActivity : AppCompatActivity() {
                 changeFragment(AccountantProductsFragment(), fragment)
             }
 
+            NameUtils.ACCOUNTANT_DELEAGTES -> {
+                changeFragment(DelegateCallCenterFragment(), fragment)
+            }
             ACCOUNTANT_SETTINGS -> {
                 changeFragment(AccountantSettingsFragment(), fragment)
             }

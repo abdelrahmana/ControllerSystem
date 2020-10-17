@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.admin.delivery
+package com.example.controllersystemapp.common.delivery
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.delivery.deliverydetails.DeliveryDetailsFragment
-import com.example.controllersystemapp.admin.reports.ReportsDetailsFragment
+import com.example.controllersystemapp.common.delivery.deliverydetails.DeliveryDetailsFragment
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.photonect.photographerapp.notificationphotographer.DonePackgae.DeliveryItemAdapter

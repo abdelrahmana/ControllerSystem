@@ -1,8 +1,7 @@
-package com.example.controllersystemapp.admin.delegatesAccountants.fragments
+package com.example.controllersystemapp.accountant.delegatecallcenter
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.accountant.delegatecallcenter.BottomSheetActions
-import com.example.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter
-import com.example.controllersystemapp.accountant.delegatecallcenter.EditCallCenterFragment
-import com.example.controllersystemapp.accountant.delegatecallcenter.EditDelegateFragment
+import com.example.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter.getCallCenter
+import com.example.controllersystemapp.accountant.delegatecallcenter.adapters.CallCenterAdapter
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
-import com.example.controllersystemapp.admin.delegatesAccountants.adapters.DelegatesAdapter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
+import com.example.controllersystemapp.bottomsheets.AdminBottomSheet
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
@@ -26,14 +23,14 @@ import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.google.gson.Gson
 import io.reactivex.observers.DisposableObserver
-import kotlinx.android.synthetic.main.fragment_delegates.*
+import kotlinx.android.synthetic.main.fragment_call_center.*
 import retrofit2.Response
 
-class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
+class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
 
-    lateinit var delegatesAdapter: DelegatesAdapter
-    var delegatesList = ArrayList<CallCenterDelegateData>()
-
+    lateinit var callCenterAdapter: CallCenterAdapter
+    var callCenterArray = ArrayList<CallCenterDelegateData>()
+    lateinit var modelHandleChangeFragmentclass: ViewModelHandleChangeFragmentclass
     var webService : WebService?=null
     var progressDialog : Dialog?=null
     override fun onCreateView(
@@ -41,32 +38,17 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        webService = ApiManagerDefault(context!!).apiService // auth
         modelHandleChangeFragmentclass = UtilKotlin.declarViewModel(activity!!)!!
-
-        return inflater.inflate(R.layout.fragment_delegates, container, false)
+        progressDialog = UtilKotlin.ProgressDialog(activity!!)
+        return inflater.inflate(R.layout.fragment_call_center, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        webService = ApiManagerDefault(context!!).apiService // auth
-        progressDialog = UtilKotlin.ProgressDialog(activity!!)
-       // Log.d("back" , "Delegate crested")
 
-
-    }
-    lateinit var modelHandleChangeFragmentclass: ViewModelHandleChangeFragmentclass
-
-    private fun getDelegatesList() {
-
-        if (UtilKotlin.isNetworkAvailable(context!!)) {
-            progressDialog?.show()
-            CallCenterPresnter.getCallCenter(webService!!, callCenterResponse())
-        } else {
-            progressDialog?.dismiss()
-            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
-
-        }
+      //  Log.d("back" , "Delegate crested")
 
         modelHandleChangeFragmentclass.notifyItemSelected?.observe(activity!!, Observer { datamodel ->
 
@@ -75,9 +57,10 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
                 if (datamodel ==1) {
 
                     val bundle = Bundle()
-                    bundle.putString(NameUtils.CURRENT_DELEGATE, Gson().toJson(delegatesList.get(selectedItemPosition)))
+                    bundle.putString(NameUtils.CURRENT_CALL_CENTER,Gson().toJson(callCenterArray.get(selectedItemPosition)))
+
                     UtilKotlin.changeFragmentBack(activity!! ,
-                        EditDelegateFragment(), "call_center"  , bundle,R.id.frameLayout_direction)
+                        EditCallCenterFragment(), "call_center"  , bundle,R.id.frameLayout_direction)
 
 
                 }
@@ -86,12 +69,50 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
             }
 
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+      //  Log.d("back" , "Delegate Resume")
+        getCallCenter()
 
     }
 
-    var selectedItemPosition = 0
+    private fun getCallCenterData() {
+
+      /*  delegatesList.clear()
+        for (i in 0..4)
+        {
+            delegatesList.add(DelegatesModel("احمد حازم" , null , " +966 56784 9876" , i+1))
+        }*/
+
+        centerCount?.text = callCenterArray.size.toString()
+        callCenterAdapter = CallCenterAdapter(context!! , callCenterArray , this)
+        centerRecycler?.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
+            adapter = callCenterAdapter
+        }
+
+
+    }
+
+    private fun getCallCenter() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+            getCallCenter(webService!! , callCenterResponse())
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
+    }
+
     override fun onDestroyView() {
-        disposableObserver?.dispose()
+      disposableObserver?.dispose()
+        modelHandleChangeFragmentclass?.notifyItemSelected?.removeObservers(activity!!)
         super.onDestroyView()
     }
 
@@ -113,9 +134,9 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
             override fun onNext(response: Response<CallCenterResponse>) {
                 if (response!!.isSuccessful) {
                     progressDialog?.dismiss()
-                    delegatesList.clear()
-                    delegatesList.addAll(response.body()?.data?.list?:ArrayList())
-                    getDeleagtesData()
+                    callCenterArray.clear()
+                    callCenterArray.addAll(response.body()?.data?.list?:ArrayList())
+                    getCallCenterData()
 
                 }
                 else
@@ -133,47 +154,23 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
         return disposableObserver!!
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("back" , "Delegate Resume")
-        getDelegatesList()
-    }
-
-    private fun getDeleagtesData() {
-
-    //    delegatesList.clear()
-    /*    for (i in 0..4)
-        {
-            delegatesList.add(DelegatesModel("احمد حازم" , null , " +966 56784 9876" , i+1))
-        }*/
-        delegatesCount?.text = delegatesList.size.toString()
-
-        delegatesAdapter = DelegatesAdapter(context!! , delegatesList , this)
-        delegatesRecycler?.apply {
-
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
-            adapter = delegatesAdapter
-        }
-
-
-    }
-
+    var selectedItemPosition = 0
     override fun onItemClick(position: Int) {
-
-      //  Log.d("clickDelegate" , "${delegatesList[position].Id}")
+ selectedItemPosition = position
+        val bundle = Bundle()
+        bundle.putBoolean(callCenter, true)
+        val bottomSheetActions = BottomSheetActions()
+        bottomSheetActions.arguments = bundle
+        bottomSheetActions.show(activity?.supportFragmentManager!!, "bottomSheetActions")
+    //    Log.d("clickDelegate" , "${delegatesList[position].Id}")
 
 //        UtilKotlin.replaceFragmentWithBack(context!!, this, DelegateDetailsFragment(),
 //            null, R.id.frameLayout_direction, 120, false, true)
 
-        UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , ""  , null,R.id.frameLayout_direction)
+   //     UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , ""  , null,R.id.frameLayout_direction)
     }
-
-    override fun delegateClickListener(position: Int) {
-        selectedItemPosition = position
-        val bottomSheetActions = BottomSheetActions()
-        bottomSheetActions.show(activity?.supportFragmentManager!!, "bottomSheetActions")
-
+    companion object{
+        val callCenter = "this_is_call_center"
     }
 
 }

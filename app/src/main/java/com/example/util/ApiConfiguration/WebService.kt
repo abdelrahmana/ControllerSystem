@@ -5,17 +5,21 @@ import com.example.controllersystemapp.accountant.products.models.AccountantProd
 import com.example.controllersystemapp.accountant.products.models.AccountantProductsListResponse
 import com.example.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
 import com.example.controllersystemapp.accountant.settings.expenses.AccountantExpensesListResponse
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.AddDelegateCallCenterRequest
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AddAccountantRequest
 import com.example.controllersystemapp.admin.settings.admin.AdminListResponse
+import com.example.controllersystemapp.admin.settings.editpassword.EditPasswordRequest
 import com.example.controllersystemapp.admin.specialcustomers.AddClientRequest
 import com.example.controllersystemapp.admin.specialcustomers.ClientsListResponse
 import com.example.controllersystemapp.admin.storesproducts.models.AddStoreRequest
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsListResponse
 import com.example.controllersystemapp.admin.storesproducts.models.StoresListResponse
 import com.example.controllersystemapp.common.cities.CitiesListResponse
+import com.example.controllersystemapp.common.forgetpassword.model.RequestModelNewPass
 import com.example.controllersystemapp.common.login.LoginRequest
 import com.example.controllersystemapp.common.login.LoginResponse
 import io.reactivex.Observable
@@ -119,8 +123,14 @@ interface WebService {
     @Headers("Accept: application/json")
     @DELETE("admin/categories/delete")
     fun deleteCategory(@Query("id") categoryId : Int): Observable<Response<SuccessModel>>
+    @Headers("Accept: application/json")
+    @POST("auth/password/reset")
+   suspend fun setNewPassword(@Body requestNewPass : RequestModelNewPass): Response<SuccessModel>
 
 
+    @Headers("Accept: application/json")
+    @POST("auth/logout")
+    fun loginOut(): Observable<Response<SuccessModel>>
 
 
     //Accountant Data
@@ -133,6 +143,25 @@ interface WebService {
     @GET("admin/products/details")
     fun accProductDetails(@Query("id") productId : Int?): Observable<Response<AccountantProdDetailsResponse>>
 
+    @Headers("Accept: application/json")
+    @GET("accountant/call-center/list")
+    fun getCallCenterList(): Observable<Response<CallCenterResponse>>
+
+    @Headers("Accept: application/json")
+    @POST("accountant/call-center/create")
+    fun addCallCenter(@Body callCenterRequest: AddDelegateCallCenterRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @POST("accountant/call-center/edit")
+    fun editCallCenter(@Body callCenterRequest: AddDelegateCallCenterRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @POST("accountant/delegates/edit")
+    fun editDelegate(@Body callCenterRequest: AddDelegateCallCenterRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @POST("users/update-password")
+    fun changePassword(@Body callCenterRequest: EditPasswordRequest): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
     @GET("accountant/expenses/list")

@@ -76,7 +76,7 @@ class AdminBottomSheet : BottomSheetDialogFragment() {
             Log.d("testApi", "observe")
 
             if (datamodel != null) {
-                progressDialog?.hide()
+                progressDialog?.dismiss()
                 dismiss()
                 Log.d("testApi", "responseNotNull")
 

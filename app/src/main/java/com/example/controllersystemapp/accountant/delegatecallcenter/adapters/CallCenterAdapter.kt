@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.admin.delegatesAccountants.adapters
+package com.example.controllersystemapp.accountant.delegatecallcenter.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,11 +11,11 @@ import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallC
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import kotlinx.android.synthetic.main.delegate_item.view.*
 
-class DelegatesAdapter(
+class CallCenterAdapter(
     var context: Context,
     var delegateList: ArrayList<CallCenterDelegateData>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
-    RecyclerView.Adapter<DelegatesAdapter.ViewHolder>(){
+    RecyclerView.Adapter<CallCenterAdapter.ViewHolder>(){
 
 
 
@@ -39,22 +39,19 @@ class DelegatesAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            delegatesModel: CallCenterDelegateData,
+            callCenterModel: CallCenterDelegateData,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-            itemView.delegateName.text = delegatesModel.name
-            itemView.delegatePhone.text = delegatesModel.phone
-            Glide.with(itemView.context!!).load(delegatesModel.image?:"").placeholder(R.drawable.image_delivery_item).dontAnimate().into(itemView.delegateImg)
+            itemView.delegateName.text = callCenterModel.name
+            itemView.delegatePhone.text = callCenterModel.phone
+            Glide.with(itemView.context!!).load(callCenterModel.image?:"").placeholder(R.drawable.image_delivery_item).dontAnimate().into(itemView.delegateImg)
 
 
             itemView.setOnClickListener {
 
                 onRecyclerItemClickListener.onItemClick(adapterPosition)
 
-            }
-            itemView.optionIcon.setOnClickListener{
-                onRecyclerItemClickListener.delegateClickListener(adapterPosition)
             }
 
 

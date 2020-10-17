@@ -188,7 +188,7 @@ class ApiManagerDefault {
         }*/
       val  NETWORK_TIMEOUT :Long = 30
 
-        val BASE_URL = "https://al-aseyl.com/api/"
+            val BASE_URL = "https://al-aseyl.com/api/"
         val LIVE_BASE_URL = "https://al-aseyl.com/api/"
     }
 
