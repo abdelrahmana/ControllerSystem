@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.products
+package com.example.controllersystemapp.accountant.products.fragments
 
 import android.app.Dialog
 import android.os.Bundle
@@ -11,9 +11,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.products.AccountantProductPresenter
+import com.example.controllersystemapp.accountant.products.models.AccountantProductsListResponse
+import com.example.controllersystemapp.accountant.products.models.Data
+import com.example.controllersystemapp.accountant.products.adapters.AccountantProductsAdapter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.util.ApiConfiguration.ApiManagerDefault
-import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
@@ -115,12 +118,17 @@ class AccountantProductsFragment : Fragment(), OnRecyclerItemClickListener {
 
         if (accountantProductsListResponse?.data?.isNullOrEmpty() == false)
         {
-            accProdRecycler.visibility = View.VISIBLE
-            noProductData.visibility = View.GONE
+            accProdRecycler?.visibility = View.VISIBLE
+            noProductData?.visibility = View.GONE
 
             productsList.clear()
             productsList.addAll(accountantProductsListResponse?.data)
-            accountantProductsAdapter = AccountantProductsAdapter(context!! , productsList , this)
+            accountantProductsAdapter =
+                AccountantProductsAdapter(
+                    context!!,
+                    productsList,
+                    this
+                )
             accProdRecycler?.apply {
 
                 setHasFixedSize(true)
@@ -131,8 +139,8 @@ class AccountantProductsFragment : Fragment(), OnRecyclerItemClickListener {
         }else{
 
             //empty
-            accProdRecycler.visibility = View.GONE
-            noProductData.visibility = View.VISIBLE
+            accProdRecycler?.visibility = View.GONE
+            noProductData?.visibility = View.VISIBLE
 
         }
 
@@ -150,7 +158,11 @@ class AccountantProductsFragment : Fragment(), OnRecyclerItemClickListener {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
 
-            AccountantProductPresenter.productsList(webService!! , activity!! , model)
+            AccountantProductPresenter.productsList(
+                webService!!,
+                activity!!,
+                model
+            )
 
         } else {
             progressDialog?.dismiss()
@@ -163,8 +175,9 @@ class AccountantProductsFragment : Fragment(), OnRecyclerItemClickListener {
     override fun onItemClick(position: Int) {
 
         val bundle = Bundle()
-        bundle.putInt(ACC_PROD_ID , productsList[position].id?:0)
-        UtilKotlin.changeFragmentBack(activity!! , AccProdDetailsFragment() , ""  ,
+        bundle.putInt(ACC_PROD_ID, productsList[position].id?:0)
+        UtilKotlin.changeFragmentBack(activity!! ,
+            AccProdDetailsFragment(), ""  ,
             bundle , R.id.redirect_acc_fragments)
     }
 

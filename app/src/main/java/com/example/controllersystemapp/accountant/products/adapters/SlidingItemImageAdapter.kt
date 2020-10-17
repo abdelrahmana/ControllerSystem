@@ -1,13 +1,13 @@
-package com.example.controllersystemapp.accountant.products
+package com.example.controllersystemapp.accountant.products.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.products.models.Image
 import kotlinx.android.synthetic.main.viewpager_slide_item.view.*
 
 
@@ -18,7 +18,9 @@ class SlidingItemImageAdapter(var context: Context, var IMAGES: ArrayList<Image>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view: View =
             LayoutInflater.from(context).inflate(R.layout.viewpager_slide_item, parent, false)
-        return MyViewHolder(view)
+        return MyViewHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

@@ -17,6 +17,7 @@ import com.example.controllersystemapp.admin.productclassification.FragmentProdu
 import com.example.controllersystemapp.admin.productclassification.lastsubcategory.FragmentLastSubProductclassification
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils
 import com.example.util.NameUtils.productId
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
@@ -140,9 +141,12 @@ class FragmentSubProductclassification : Fragment() {
                     Log.d("subParetnId" , "observeParentId ${arguments?.getInt(FragmentProductclassification.PARENT_ID)}")
 
                     bundle.putInt(FragmentProductclassification.SUB_PARENT_ID, modelSelected.id?:-1)
-                    bundle.putString(FragmentProductclassification.PARENT_NAME, modelSelected.name?:"")
+                    bundle.putString(FragmentProductclassification.SUB_PARENT_NAME, modelSelected.name?:"")
+                    bundle.putString(FragmentProductclassification.PARENT_NAME, arguments?.getString(FragmentProductclassification.PARENT_NAME)?:"")
                     bundle.putInt(FragmentProductclassification.PARENT_ID, arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1)
-                    UtilKotlin.changeFragmentWithBack(activity!! , R.id.frameLayout_direction , FragmentLastSubProductclassification() , bundle)
+                    UtilKotlin.changeFragmentWithBack(activity!! ,
+                        arguments?.getInt(NameUtils.WHICH_ADD_PRD_STORE)?:R.id.frameLayout_direction ,
+                        FragmentLastSubProductclassification() , bundle)
                 }
                 /* else if (modelSelected is ImageModelData) // if it is object of this model
                   {

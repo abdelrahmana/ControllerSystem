@@ -2,6 +2,8 @@ package com.example.controllersystemapp.accountant.products
 
 import android.app.Activity
 import android.util.Log
+import com.example.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
+import com.example.controllersystemapp.accountant.products.models.AccountantProductsListResponse
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass

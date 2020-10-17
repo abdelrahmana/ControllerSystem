@@ -20,10 +20,10 @@
         <ImageView
             android:id="@+id/notificationImg"
             android:padding="@dimen/_10sdp"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_16sdp"
-            app:srcCompat="@drawable/ic_ab_notification"
+            app:srcCompat="@drawable/ic_img_notification"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,33 +34,37 @@
             android:id="@+id/notificationName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="اشعار 1"
+            android:text=" الادمن تم سحب قطعه ايفون من مخزنك "
             android:fontFamily="@font/cairo_semibold"
             android:textColor="@color/textColor"
-            android:textSize="15sp"
+            android:textSize="12sp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textAlignment="viewStart"
             android:textStyle="bold"
-            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_4sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/notificationImg"
             app:layout_constraintTop_toTopOf="@+id/notificationImg" />
 
         <TextView
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textAlignment="viewStart"
             android:id="@+id/notificationDetails"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="تفاصيل"
-            android:textSize="12sp"
-            android:textColor="@color/text_black"
             android:layout_marginEnd="@dimen/_4sdp"
-            app:layout_constraintTop_toBottomOf="@+id/notificationName"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="١٣ وفمبر ٢٠١٩"
+            android:textAlignment="viewStart"
+            android:textColor="@color/login_gray"
+            android:textSize="11sp"
+            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="@+id/notificationImg"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/notificationName" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/notificationName"
+            app:layout_constraintTop_toBottomOf="@+id/notificationName"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@ import com.example.controllersystemapp.admin.categories.models.CategoriesListRes
 import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.PARENT_NAME
+import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.SUB_PARENT_NAME
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils.productId
@@ -53,7 +54,7 @@ class FragmentLastSubProductclassification : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subCategroyHeader?.text = arguments?.getString(PARENT_NAME)?:""
+        subCategroyHeader?.text = arguments?.getString(SUB_PARENT_NAME)?:""
         backButton?.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
 
@@ -202,11 +203,23 @@ class FragmentLastSubProductclassification : Fragment() {
                 activity!!.supportFragmentManager!!.getBackStackEntryAt(index - 3)
             activity!!.supportFragmentManager.popBackStack(previous.id,0)*/
             Log.d("addBtn" , "last ${arguments?.getInt(FragmentProductclassification.PARENT_ID)}")
-            model?.responseCodeDataSetter(arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1)
+            Log.d("addBtn" , "parentName ${arguments?.getString(FragmentProductclassification.PARENT_NAME)}")
+            Log.d("addBtn" , "subName ${arguments?.getString(FragmentProductclassification.SUB_PARENT_NAME)}")
+            Log.d("addBtn" , "lastName ${modelSelected?.name?:""}")
+
+            model?.responseCodeDataSetter(ViewModelHandleChangeFragmentclass.ProductClassification(
+                arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1,
+                arguments?.getString(FragmentProductclassification.PARENT_NAME)?:"",
+                arguments?.getString(FragmentProductclassification.SUB_PARENT_NAME)?:"",
+                modelSelected?.name?:""
+            ))
+
+            //model?.responseCodeDataSetter(arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1)
             activity!!.supportFragmentManager.popBackStack()
             activity!!.supportFragmentManager.popBackStack()
             activity!!.supportFragmentManager.popBackStack()
 
         }
     }
+
 }

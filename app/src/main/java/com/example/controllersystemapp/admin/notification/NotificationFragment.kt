@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
@@ -14,6 +15,7 @@ import com.example.controllersystemapp.admin.delegatesAccountants.models.Account
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import kotlinx.android.synthetic.main.fragment_accountant.*
 import kotlinx.android.synthetic.main.fragment_notification.*
+import kotlinx.android.synthetic.main.no_products.*
 
 
 class NotificationFragment : Fragment() , OnRecyclerItemClickListener {
@@ -34,6 +36,8 @@ class NotificationFragment : Fragment() , OnRecyclerItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        handleNoDataViews()
+
         backImageAdmin?.setOnClickListener {
             if (activity?.supportFragmentManager?.backStackEntryCount == 1)
             {
@@ -45,6 +49,15 @@ class NotificationFragment : Fragment() , OnRecyclerItemClickListener {
         }
     }
 
+    private fun handleNoDataViews() {
+
+        no_data_image?.setImageDrawable(ContextCompat.getDrawable(context!! , R.drawable.ic_img_notification))
+        firstNoDataTxt?.text = getString(R.string.no_notifications)
+        secondNoDataTxt?.visibility = View.GONE
+
+
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -52,6 +65,9 @@ class NotificationFragment : Fragment() , OnRecyclerItemClickListener {
     }
 
     private fun getNotificationData() {
+
+        notificationRecycler?.visibility = View.VISIBLE
+        noDataLayout?.visibility = View.GONE
 
         notificationList.clear()
         for (i in 0..3)

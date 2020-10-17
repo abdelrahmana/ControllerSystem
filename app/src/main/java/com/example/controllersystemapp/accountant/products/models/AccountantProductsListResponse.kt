@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.products
+package com.example.controllersystemapp.accountant.products.models
 
 data class AccountantProductsListResponse(
     val `data`: List<Data>?

@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.RedirectFragmentsActivity
 import com.example.util.NameUtils
 import com.example.util.PrefsUtil
 import com.google.android.material.card.MaterialCardView
@@ -37,17 +36,17 @@ class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
 
         settingAccountant?.setOnClickListener{
 
-//            val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//            intent.putExtra(NameUtils.redirectFragmet, NameUtils.settingsFragmet)
-//            startActivity(intent)
+            val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+            intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.ACCOUNTANT_SETTINGS)
+            startActivity(intent)
 
         }
 
         notificationAccountant?.setOnClickListener{
 
-//            val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//            intent.putExtra(NameUtils.redirectFragmet, NameUtils.notificationsFragmet)
-//            startActivity(intent)
+            val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+            intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.notificationsFragmet)
+            startActivity(intent)
 
         }
     }
@@ -84,7 +83,7 @@ class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
                 setCardSelection(accountantDelegatesCard , accountantDelegatesImage , accountantDelegatesText ,R.drawable.ic_accountant_selected)
                 //startActivity(Intent(this , AdminAccountantActivity::class.java))
                 val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
-              intent.putExtra(NameUtils.redirectFragmet, NameUtils.delegatesAccountantsFragmet)
+              intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.ACCOUNTANT_DELEAGTES)
                startActivity(intent)
             }
 
@@ -92,27 +91,27 @@ class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
                 removeCardSelection()
                 setCardSelection(accountantNoticesCard , accountantNoticesImg , accountantNoticesText ,R.drawable.notices_reports_select)
                 //startActivity(Intent(this , AdminReportsActivity::class.java))
-//                val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//                intent.putExtra(NameUtils.redirectFragmet, NameUtils.reporstFragmet)
-//                startActivity(intent)
+                val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+                intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.NOTICES_AND_REPORTS)
+                startActivity(intent)
             }
 
             R.id.accountantSpecialOrderCard -> {
                 removeCardSelection()
                 setCardSelection(accountantSpecialOrderCard , accountantSpecialOrderImg , accountantSpecialOrderText ,R.drawable.ic_order_selected)
                 //startActivity(Intent(this , AdminDeliveryActivity::class.java))
-//                val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//                intent.putExtra(NameUtils.redirectFragmet, NameUtils.deliveryFragmet)
-//                startActivity(intent)
+                val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+                intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.MAKE_SPECIAL_ORDER)
+                startActivity(intent)
             }
 
             R.id.sendSalesCard -> {
                 removeCardSelection()
                 setCardSelection(sendSalesCard , sendSalesImg , sendSalesText ,R.drawable.ic_send_sales_unselect)
-                //startActivity(Intent(this , AdminMakeOrdersActivity::class.java))
-//                val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//                intent.putExtra(NameUtils.redirectFragmet, NameUtils.categoriesFragmet)
-//                startActivity(intent)
+
+                val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+                intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.SEND_SALES)
+                startActivity(intent)
             }
 
             R.id.accountantDeliveryCard -> {

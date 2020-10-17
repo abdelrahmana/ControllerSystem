@@ -19,12 +19,18 @@ object NameUtils {
     var CALLCENTER_ROLE_ID = 3
     var DELEGATE_ROLE_ID = 4
 
+    var DELETE = "delete"
+    var UPDATE = "update"
+
     val redirectAccFragmet = "Switch_Accountant_fragment"
     val ACCOUNTANTS_PRODUCTS = "accountantProducts"
     val ACCOUNTANT_DELEAGTES = "accountantDelegates"
-    val noticesReporst = "noticesReports"
+    val NOTICES_AND_REPORTS = "noticesAndReports"
     val MAKE_SPECIAL_ORDER = "makeSpecialOrder"
     val SEND_SALES = "sendSales"
+    val ACCOUNTANT_SETTINGS = "accountantSettings"
+
+
     val FORGETPASSWORD = "Forget_password"
     val CURRENT_CALL_CENTER = "EDIT_CALL"
     val CURRENT_DELEGATE = "EDIT_DELEGATE"
@@ -38,6 +44,7 @@ object NameUtils {
 
     val WHICH_ADD_PRD_STORE = "whichAddProdStore"
     val ADD_PRODUCT = "addProduct"
+    val ACCOUNTANT_PROD_CLASSIFY = "accountantProdCalssify"
     val ADD_STORE = "addStore"
 
 
