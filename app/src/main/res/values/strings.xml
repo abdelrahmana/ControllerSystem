@@ -126,7 +126,7 @@
     <string name="creditorr">دائن</string>
     <string name="valuePaidNow">" قيمة المدفوعه الان"</string>
     <string name="cash">كاش</string>
-    <string name="notification">اشعارات</string>
+    <string name="notification">التنبيهات</string>
     <string name="about_account">كل ما تحتاجه لإدارة الحسابات الخاصة بك</string>
     <string name="confirms">التاكيد</string>
     <string name="dont_get_code">أدخل رمز التحقق الذي نرسله لك على رقم الهاتف</string>
@@ -182,6 +182,13 @@
     <string name="received">مستلمة</string>
     <string name="no_sales">لا توجد مبيعات متاحه</string>
     <string name="send_admin">ارسال الي الادمن</string>
+    <string name="no_notifications">لا توجد تنبيهات متاحه</string>
+    <string name="delivery_address">عنوان التوصيل</string>
+    <string name="recipientName">اسم المستلم</string>
+    <string name="barcodeText">لانهاء باركود قم بتصوير \n كشف الحساب</string>
+    <string name="add_noticesReports">قم بالبحث عن اسم المندوب باختيار المندوب الذي سيتم ارسال اليهم البلاغ</string>
+    <string name="addNotificaion">اضف اشعار</string>
+    <string name="writeMessage">اكتب الرساله</string>
 
 
 </resources>

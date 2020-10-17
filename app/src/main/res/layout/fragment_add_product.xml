@@ -254,14 +254,15 @@
         app:cardCornerRadius="@dimen/_10sdp"
         app:cardBackgroundColor="@color/material_card"
         app:strokeColor="@color/material_card"
-        android:layout_height="@dimen/_100sdp">
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_100sdp">
         <EditText
             android:id="@+id/describeProductEditText"
             android:gravity="top|start"
             android:paddingTop="10dp"
             android:padding="@dimen/_16sdp"
             android:background="@null"
-            android:textColor="@color/white"
+            android:textColor="@color/black_bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </com.google.android.material.card.MaterialCardView>
@@ -340,15 +341,32 @@
         app:cardCornerRadius="5dp"
         app:cardBackgroundColor="@color/orange_color"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:drawableStart="@drawable/ic_side_arrow"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:text="@string/product_level"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:minHeight="@dimen/_32sdp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textAlignment="viewStart"
+                android:id="@+id/addProdClassifyTxt"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:drawableStart="@drawable/ic_side_arrow"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/product_level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </com.google.android.material.card.MaterialCardView>
 
 

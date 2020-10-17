@@ -25,7 +25,7 @@ object NameUtils {
     val redirectAccFragmet = "Switch_Accountant_fragment"
     val ACCOUNTANTS_PRODUCTS = "accountantProducts"
     val ACCOUNTANT_DELEAGTES = "accountantDelegates"
-    val noticesReporst = "noticesReports"
+    val NOTICES_AND_REPORTS = "noticesAndReports"
     val MAKE_SPECIAL_ORDER = "makeSpecialOrder"
     val SEND_SALES = "sendSales"
     val ACCOUNTANT_SETTINGS = "accountantSettings"
@@ -41,6 +41,7 @@ object NameUtils {
 
     val WHICH_ADD_PRD_STORE = "whichAddProdStore"
     val ADD_PRODUCT = "addProduct"
+    val ACCOUNTANT_PROD_CLASSIFY = "accountantProdCalssify"
     val ADD_STORE = "addStore"
 
 

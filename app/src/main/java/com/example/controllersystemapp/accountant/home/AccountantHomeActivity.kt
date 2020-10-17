@@ -44,9 +44,9 @@ class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
 
         notificationAccountant?.setOnClickListener{
 
-//            val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//            intent.putExtra(NameUtils.redirectFragmet, NameUtils.notificationsFragmet)
-//            startActivity(intent)
+            val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+            intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.notificationsFragmet)
+            startActivity(intent)
 
         }
     }
@@ -91,18 +91,18 @@ class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
                 removeCardSelection()
                 setCardSelection(accountantNoticesCard , accountantNoticesImg , accountantNoticesText ,R.drawable.notices_reports_select)
                 //startActivity(Intent(this , AdminReportsActivity::class.java))
-//                val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//                intent.putExtra(NameUtils.redirectFragmet, NameUtils.reporstFragmet)
-//                startActivity(intent)
+                val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+                intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.NOTICES_AND_REPORTS)
+                startActivity(intent)
             }
 
             R.id.accountantSpecialOrderCard -> {
                 removeCardSelection()
                 setCardSelection(accountantSpecialOrderCard , accountantSpecialOrderImg , accountantSpecialOrderText ,R.drawable.ic_order_selected)
                 //startActivity(Intent(this , AdminDeliveryActivity::class.java))
-//                val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//                intent.putExtra(NameUtils.redirectFragmet, NameUtils.deliveryFragmet)
-//                startActivity(intent)
+                val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+                intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.MAKE_SPECIAL_ORDER)
+                startActivity(intent)
             }
 
             R.id.sendSalesCard -> {

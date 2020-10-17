@@ -32,11 +32,14 @@ import com.example.util.NameUtils.WHICH_ADD_PRD_STORE
 import com.example.util.UtilKotlin
 import com.example.util.UtilKotlin.performImgPicAction
 import com.example.util.UtilKotlin.permissionForImageAndFile
+import com.example.util.UtilKotlin.permissionScan
 import com.example.util.UtilKotlin.showSnackErrorInto
 import com.example.util.UtilKotlin.submitPermssion
 import com.example.util.ViewModelHandleChangeFragmentclass
+import kotlinx.android.synthetic.main.fragment_accountant_make_order.*
 import kotlinx.android.synthetic.main.fragment_add_accountant.*
 import kotlinx.android.synthetic.main.fragment_add_product.*
+import kotlinx.android.synthetic.main.fragment_add_product.barCodeTxt
 import java.io.IOException
 
 
@@ -57,6 +60,7 @@ class AddProductFragment : Fragment() {
 
     var categoryID = 0
 
+    var barCode : String ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,10 +93,10 @@ class AddProductFragment : Fragment() {
         }
 
         materialProduct?.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putString(WHICH_ADD_PRD_STORE , ADD_PRODUCT)
+         val bundle = Bundle()
+         bundle.putInt(WHICH_ADD_PRD_STORE , R.id.frameLayout_direction)
          UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassification() , "productClassification"  ,
-             null , R.id.frameLayout_direction)
+             bundle , R.id.frameLayout_direction)
         }
 
         materialSave?.setOnClickListener {
@@ -128,9 +132,13 @@ class AddProductFragment : Fragment() {
         openScanCamera?.setOnClickListener {
 
            //IntentIntegrator(activity!!).initiateScan() // `this` is the current Activity
+            if (UtilKotlin.checkPermssionGrantedForImageAndFile(activity!!, permissionScan,this)){
+                // if the result ok go submit else on
+                val intent = Intent(activity , ScanCodeActivity::class.java)
+                startActivityForResult(intent  , ScanCodeActivity.scanCode)
 
-            val intent = Intent(activity , ScanCodeActivity::class.java)
-            startActivity(intent)
+            }
+
 
 
         }
@@ -181,7 +189,7 @@ class AddProductFragment : Fragment() {
             errorMessage += "\n"
         }
 
-        if (BARCODE == "") {
+        if (barCode == null || barCode == "") {
             errorMessage += getString(R.string.barecode_required)
             errorMessage += "\n"
         }
@@ -257,8 +265,9 @@ class AddProductFragment : Fragment() {
         observeAdd()
 
         Log.d("viewCreated", "resume")
-        Log.d("code", "$BARCODE")
-        barCodeTxt?.text = BARCODE?:""
+        //Log.d("code", "$BARCODE")
+        //barCodeTxt?.text = BARCODE?:""
+        barCodeTxt?.text = barCode
 
     }
 
@@ -276,9 +285,16 @@ class AddProductFragment : Fragment() {
                     getAddProductData(datamodel)
                 }
 
-                if (datamodel is Int) {//when choose category return categoryID
+//                if (datamodel is Int) {//when choose category return categoryID
+//                    Log.d("observeData", "dd $datamodel")
+//                    categoryID = datamodel
+//                }
+
+                if (datamodel is ViewModelHandleChangeFragmentclass.ProductClassification) {//when choose category return categoryID
                     Log.d("observeData", "dd $datamodel")
-                    categoryID = datamodel
+                    categoryID = datamodel.id?:-1
+                    Log.d("finalText", "${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.subParentName}")
+                    //addProdClassifyTxt?.text = "${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.subParentName}"
                 }
 
                 if (datamodel is StoreIdQuantity) {//when choose category return categoryID
@@ -299,6 +315,24 @@ class AddProductFragment : Fragment() {
                 }
 
                 model.responseCodeDataSetter(null) // start details with this data please
+            }
+            else{
+                Log.d("testApi", "observeNull")
+
+            }
+
+        })
+
+        model.stringDataVar?.observe(activity!!, Observer { datamodel ->
+            Log.d("testApi", "observe")
+
+            if (datamodel != null) {
+                progressDialog?.hide()
+                Log.d("testApi", "responseNotNull")
+                Log.d("resultData", datamodel) // Prints scan results
+                barCode = datamodel
+
+                model.setStringVar(null) // start details with this data please
             }
             else{
                 Log.d("testApi", "observeNull")
@@ -340,8 +374,9 @@ class AddProductFragment : Fragment() {
 
     private fun makeRequest() {
 
+        Log.d("barcod" , "bar $barCode")
         val addProductRequest = AddProductRequest(productNameEditText?.text?.toString() ,
-            describeProductEditText?.text?.toString() , priceEditText?.text?.toString() , BARCODE ,
+            describeProductEditText?.text?.toString() , priceEditText?.text?.toString() , barCode ,
             categoryID , quantityList , warehouse_id , productImagesList)
 
         AddProductsPresenter.getAddProduct(webService!! , addProductRequest , activity!! , model)
@@ -363,6 +398,17 @@ class AddProductFragment : Fragment() {
         else if (requestCode == permissionForImageAndFile) {
             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 performImgPicAction(whichOpen , this , activity!!)
+
+            } else {
+                showSnackErrorInto(activity, getString(R.string.cant_add_image))
+
+            }
+        }
+        else if (requestCode == permissionScan) {
+            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+
+                val intent = Intent(activity , ScanCodeActivity::class.java)
+                startActivityForResult(intent  , ScanCodeActivity.scanCode)
 
             } else {
                 showSnackErrorInto(activity, getString(R.string.cant_add_image))
@@ -392,9 +438,18 @@ class AddProductFragment : Fragment() {
         } else if (requestCode == CAMERA && resultCode == Activity.RESULT_OK) { // async with dialog show
             bitmapUpdatedImage = data!!.extras!!["data"] as Bitmap?
             addImageToList(bitmapUpdatedImage!!)
-
-
             // userImage.setImageBitmap(bitmapUpdatedImage)
+        }
+        else if (requestCode == ScanCodeActivity.scanCode) {
+            if (resultCode == Activity.RESULT_OK) {
+                val result = data?.getStringExtra(ScanCodeActivity.SCANERESULT)
+                Log.d("resultData", result) // Prints scan results
+                barCode = result
+                barCodeTxt?.text = result
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
         }
 
     }
@@ -416,7 +471,7 @@ class AddProductFragment : Fragment() {
     companion object {
         val GALLERY = 1
         val CAMERA = 0
-        var BARCODE = ""
+        //var BARCODE = ""
 
     }
 

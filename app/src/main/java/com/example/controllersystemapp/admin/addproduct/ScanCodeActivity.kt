@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.addproduct.AddProductFragment.Companion.BARCODE
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.google.zxing.Result
@@ -21,9 +20,12 @@ class ScanCodeActivity : AppCompatActivity() , ZXingScannerView.ResultHandler {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_code)
+        model = UtilKotlin.declarViewModel(this)!!
         mScannerView = ZXingScannerView(this) // Programmatically initialize the scanner view
         setContentView(mScannerView) // Set the scanner view as the content view
     }
+
+
 
     override fun onResume() {
         super.onResume()
@@ -38,12 +40,19 @@ class ScanCodeActivity : AppCompatActivity() , ZXingScannerView.ResultHandler {
 
     override fun handleResult(rawResult: Result?) {
         // Do something with the result here
+        Log.d("testttt" , "handle")
+
         Log.v("FragmentActivity.TAG", rawResult?.text) // Prints scan results
         Log.v("FragmentActivity.TAG", rawResult?.getBarcodeFormat().toString()
         ) // Prints the scan format (qrcode, pdf417 etc.)
 
-        BARCODE = rawResult?.text?:""
+       // BARCODE = rawResult?.text?:""
+       // model.setStringVar(rawResult?.text?:"")
+        val returnIntent = Intent()
+        returnIntent.putExtra(SCANERESULT, rawResult?.text?:"")
+        setResult(Activity.RESULT_OK, returnIntent)
         finish()
+       // finish()
         // If you would like to resume scanning, call this method below:
         //mScannerView!!.resumeCameraPreview(this)
 
@@ -51,6 +60,8 @@ class ScanCodeActivity : AppCompatActivity() , ZXingScannerView.ResultHandler {
     companion object {
         val RES_CODE_B = 1
         val REQUEST_BARCODE = "barCode"
+        val scanCode = 340
+        val SCANERESULT = "scanResult"
 
     }
 

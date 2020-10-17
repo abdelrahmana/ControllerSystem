@@ -269,10 +269,12 @@
                 android:textColor="@color/login_gray"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
-                android:text="@string/barcode"
+                android:textAlignment="viewStart"
+                android:text="@string/barcodeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:visibility="gone"
                 android:textColor="@color/login_gray"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"

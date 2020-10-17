@@ -16,6 +16,7 @@ import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.admin.productclassification.productsubclassification.FragmentSubProductclassification
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils.ACCOUNTANT_PROD_CLASSIFY
 import com.example.util.NameUtils.ADD_PRODUCT
 import com.example.util.NameUtils.ADD_STORE
 import com.example.util.NameUtils.WHICH_ADD_PRD_STORE
@@ -175,12 +176,17 @@ class FragmentProductclassification : Fragment() {
                     //bundle.putInt(EXITENCEIDPACKAGE, availableServiceList.get(position).id?:-1)
                     bundle.putInt(PARENT_ID, modelSelected.id?:-1)
                     bundle.putString(PARENT_NAME, modelSelected.name?:"")
+                    bundle.putInt(WHICH_ADD_PRD_STORE , arguments?.getInt(WHICH_ADD_PRD_STORE)?:R.id.frameLayout_direction)
 
-                    UtilKotlin.changeFragmentWithBack(
-                        activity!!,
-                        R.id.frameLayout_direction,
-                        FragmentSubProductclassification(),
-                        bundle)
+                        UtilKotlin.changeFragmentWithBack(
+                            activity!!,
+                            arguments?.getInt(WHICH_ADD_PRD_STORE)?:R.id.frameLayout_direction,
+                            FragmentSubProductclassification(),
+                            bundle)
+
+
+
+
                 }
                 model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
 
@@ -227,6 +233,7 @@ class FragmentProductclassification : Fragment() {
 
         var PARENT_ID = "parentId"
         var SUB_PARENT_ID = "subParentId"
+        var SUB_PARENT_NAME = "subParentName"
         var PARENT_NAME = "parentName"
 
     }

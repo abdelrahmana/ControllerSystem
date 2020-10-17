@@ -108,4 +108,14 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
 
         this.responseDataCode.postValue(responseBody)
     }
+
+    class ProductClassification(
+        var id : Int? = -1,
+        var parentName :String ? = "",
+        var subParentName :String ? = "",
+        var lastSubParentName :String ? = ""
+
+    ){
+
+    }
 }

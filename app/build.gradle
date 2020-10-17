@@ -132,11 +132,14 @@ dependencies {
 
     implementation 'com.github.alahammad:android-OTP-View:1.0.2'
 
-    implementation 'com.google.zxing:core:3.3.3'
-    implementation 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
+//    implementation 'com.google.zxing:core:3.3.3'
+//    implementation 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
 
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    //implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+
 
     implementation 'me.relex:circleindicator:2.1.4'
 
