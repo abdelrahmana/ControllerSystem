@@ -29,7 +29,9 @@ object NameUtils {
     val MAKE_SPECIAL_ORDER = "makeSpecialOrder"
     val SEND_SALES = "sendSales"
     val ACCOUNTANT_SETTINGS = "accountantSettings"
+    val DELIVERYSETTING = "delivery"
 
+  val WHICHID = "Which_container"
 
     val FORGETPASSWORD = "Forget_password"
     val CURRENT_CALL_CENTER = "EDIT_CALL"

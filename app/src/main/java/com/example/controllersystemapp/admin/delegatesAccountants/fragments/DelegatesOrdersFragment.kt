@@ -12,6 +12,7 @@ import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.DelegateOrdersAdapter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsModel
+import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import kotlinx.android.synthetic.main.fragment_delegates_orders.*
 
@@ -71,7 +72,8 @@ class DelegatesOrdersFragment : Fragment(), OnRecyclerItemClickListener {
 
 //        UtilKotlin.replaceFragmentWithBack(context!!, this, OrdersDeliveryFragment(),
 //            null, R.id.frameLayout_direction, 120, false, true)
-        UtilKotlin.changeFragmentBack(activity!! ,OrdersDeliveryFragment() , "" , null,R.id.frameLayout_direction)
+        UtilKotlin.changeFragmentBack(activity!! ,OrdersDeliveryFragment() , "" , null,arguments?.getInt(
+            NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
 
     }
 }

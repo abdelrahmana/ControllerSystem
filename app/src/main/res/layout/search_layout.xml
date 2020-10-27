@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:cardCornerRadius="10dp"
-        android:background="@color/card_background"
+        app:cardBackgroundColor="@color/search"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,11 +34,12 @@
                 android:layout_marginStart="@dimen/_16sdp"
                 />
 
-            <TextView
+            <EditText
                 android:textAlignment="viewStart"
-                android:text="@string/search"
+                android:hint="@string/search"
                 android:textSize="14sp"
-                android:textColor="@color/search_text"
+                android:background="@null"
+                android:textColor="@color/black"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -1,17 +1,13 @@
 package com.example.controllersystemapp.admin.delegatesAccountants.fragments
 
-import android.R.attr.fragment
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.RedirectFragmentsActivity
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.ViewPagerDelegateDetailsAdapter
 import com.example.util.NameUtils
 import com.google.android.material.tabs.TabLayout
@@ -40,7 +36,8 @@ class DelegateDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewPagerAdaptor = ViewPagerDelegateDetailsAdapter(this@DelegateDetailsFragment)
+        viewPagerAdaptor = ViewPagerDelegateDetailsAdapter(this@DelegateDetailsFragment,
+            arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
         viewPagerDelegatesDetails?.adapter = viewPagerAdaptor
 
         TabLayoutMediator(delegatesDetailsTab, viewPagerDelegatesDetails) { tab, position ->

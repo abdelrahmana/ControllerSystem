@@ -41,6 +41,9 @@ class AddDelegateFragment : Fragment() {
         }
         headerText?.text = getString(R.string.add_delegate)
         add?.text = getString(R.string.add_delegate)
+        add?.setOnClickListener{
+            addDelegate()
+        }
     }
 
 

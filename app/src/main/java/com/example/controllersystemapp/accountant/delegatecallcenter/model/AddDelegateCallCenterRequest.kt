@@ -7,7 +7,7 @@ data class AddDelegateCallCenterRequest(
     var password_confirmation: String? ="",
     var phone: String?="",
     var role_id: Int?=-1,
-    var email : String?="",
-    var status : String?="",
+    var email : String?="test@g.com",
+    var status : Int?=1,
     var id : Int?=0
 )

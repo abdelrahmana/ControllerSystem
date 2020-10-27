@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.sales.adapters.ReceivedSalesAdapter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
+import com.example.util.UtilKotlin
 import kotlinx.android.synthetic.main.fragment_receveid_sales.*
 import kotlinx.android.synthetic.main.no_products.*
 
@@ -90,6 +91,9 @@ class ReceveidSalesFragment : Fragment()  , OnRecyclerItemClickListener {
 
     override fun onItemClick(position: Int) {
         Log.d("click" , "Item")
+        UtilKotlin.changeFragmentBack(activity!! ,
+            NotReceivedSalesDetailsFragment(), ""  ,
+            null , R.id.redirect_acc_fragments)
     }
 
 

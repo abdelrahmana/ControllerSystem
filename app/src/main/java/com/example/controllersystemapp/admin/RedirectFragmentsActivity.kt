@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.categories.fragments.CategoriesFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AdminAccountantFragment
-import com.example.controllersystemapp.common.delivery.AdminDeliveryFragment
+import com.example.controllersystemapp.common.delivery.DeliveryFragment
 import com.example.controllersystemapp.admin.makeorders.AdminMakeOrderFragment
 import com.example.controllersystemapp.admin.notification.NotificationFragment
 import com.example.controllersystemapp.admin.reports.reportcontainerfragment.ReportContainerFragment
@@ -50,7 +50,7 @@ class RedirectFragmentsActivity : CommonActivity() {
             }
 
             deliveryFragmet -> {
-                changeFragment(AdminDeliveryFragment(), fragment)
+                changeFragment(DeliveryFragment(), fragment)
             }
 
             makeOrderFragmet -> {

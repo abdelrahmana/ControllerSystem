@@ -48,6 +48,7 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
       //  Log.d("back" , "Delegate crested")
 
         modelHandleChangeFragmentclass.notifyItemSelected?.observe(activity!!, Observer { datamodel ->
@@ -60,12 +61,12 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
                     bundle.putString(NameUtils.CURRENT_CALL_CENTER,Gson().toJson(callCenterArray.get(selectedItemPosition)))
 
                     UtilKotlin.changeFragmentBack(activity!! ,
-                        EditCallCenterFragment(), "call_center"  , bundle,R.id.frameLayout_direction)
+                        EditCallCenterFragment(), "call_center"  , bundle,R.id.redirect_acc_fragments)
 
 
                 }
 
-                modelHandleChangeFragmentclass.responseCodeDataSetter(null) // start details with this data please
+                modelHandleChangeFragmentclass.setNotifyItemSelected(null) // start details with this data please
             }
 
         })

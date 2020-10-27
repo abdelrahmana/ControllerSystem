@@ -146,6 +146,9 @@ interface WebService {
     @Headers("Accept: application/json")
     @GET("accountant/call-center/list")
     fun getCallCenterList(): Observable<Response<CallCenterResponse>>
+    @Headers("Accept: application/json")
+    @GET("accountant/delegates/list")
+    fun getDelegates(): Observable<Response<CallCenterResponse>>
 
     @Headers("Accept: application/json")
     @POST("accountant/call-center/create")

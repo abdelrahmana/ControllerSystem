@@ -15,6 +15,7 @@ import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
 import com.example.util.PrefsUtil
 import com.example.util.UtilKotlin
+import com.example.util.Validation
 import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.edit_call_center.*
 import kotlinx.android.synthetic.main.tool_title.*
@@ -49,14 +50,20 @@ class EditCallCenterFragment : Fragment() {
 
             if (UtilKotlin.checkOViewsAvaliablity(callCenterEditText,getString(R.string.name_is_required),activity!!,callCenterError)
                 && UtilKotlin.checkOViewsAvaliablity(editTextPhone,getString(R.string.phone_is_required),activity!!,errorPhone)
-            ) {
-                editCallCenter()
-            }
-             callCenterObject = UtilKotlin.getDelegateCallCenter(arguments?.getString(NameUtils.CURRENT_CALL_CENTER)?:"")
-            callCenterEditText?.setText(callCenterObject?.name?:"")
-            editTextPhone.setText(callCenterObject?.phone?:"")
-        }
+                &&UtilKotlin.checkOViewsAvaliablity(editTextEmail,getString(R.string.email_name_reuqired),activity!!,errorEmail)
 
+            ) {
+                if (Validation.validateEmail(editTextEmail))
+                editCallCenter()
+                else
+                    errorEmail.text = getString(R.string.email_invalid)
+            }
+
+        }
+        callCenterObject = UtilKotlin.getDelegateCallCenter(arguments?.getString(NameUtils.CURRENT_CALL_CENTER)?:"")
+        callCenterEditText?.setText(callCenterObject?.name?:"")
+        editTextPhone.setText(callCenterObject?.phone?:"")
+        editTextEmail.setText(callCenterObject?.email?:"")
     }
 
     var editCallCenterDelegate = AddDelegateCallCenterRequest()
@@ -65,7 +72,8 @@ class EditCallCenterFragment : Fragment() {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
             editCallCenterDelegate = AddDelegateCallCenterRequest(name = callCenterEditText.text.toString(),
-                city_id = (PrefsUtil.getUserModel(context!!)?.city_id?:"0").toInt(),phone = editTextPhone.text.toString(),id = callCenterObject?.id?:0)
+                city_id = (PrefsUtil.getUserModel(context!!)?.city_id?:"0").toInt(),phone = editTextPhone.text.toString(),id = callCenterObject?.id?:0,
+                email = editTextEmail.text.toString())
             CallCenterPresnter.editCallCenter(webService!! , callCenterResponse(),editCallCenterDelegate)
         } else {
             progressDialog?.dismiss()

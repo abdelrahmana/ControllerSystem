@@ -9,12 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.controllersystemapp.R
+import com.example.util.CommonActivity
 import com.example.util.NameUtils
 import com.example.util.PrefsUtil
 import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.activity_accountant_home.*
 
-class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
+class AccountantHomeActivity : CommonActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_accountant_home)
@@ -117,10 +118,9 @@ class AccountantHomeActivity : AppCompatActivity(), View.OnClickListener {
             R.id.accountantDeliveryCard -> {
                 removeCardSelection()
                 setCardSelection(accountantDeliveryCard , accountantDeliveryImg , accountantDeliveryText ,R.drawable.ic_delivery_selected)
-                //startActivity(Intent(this , AdminSpecialCustomersActivity::class.java))
-//                val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//                intent.putExtra(NameUtils.redirectFragmet, NameUtils.specialCustomersFragmet)
-//                startActivity(intent)
+                val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+                intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.DELIVERYSETTING)
+                startActivity(intent)
             }
 
 

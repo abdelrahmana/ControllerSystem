@@ -61,7 +61,7 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
-            CallCenterPresnter.getCallCenter(webService!!, callCenterResponse())
+            CallCenterPresnter.getDelegates(webService!!, callCenterResponse())
         } else {
             progressDialog?.dismiss()
             UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
@@ -77,12 +77,13 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
                     val bundle = Bundle()
                     bundle.putString(NameUtils.CURRENT_DELEGATE, Gson().toJson(delegatesList.get(selectedItemPosition)))
                     UtilKotlin.changeFragmentBack(activity!! ,
-                        EditDelegateFragment(), "delegate"  , bundle,R.id.frameLayout_direction)
+                        EditDelegateFragment(),"delegate"  , bundle,
+                        arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
 
 
                 }
 
-                modelHandleChangeFragmentclass.responseCodeDataSetter(null) // start details with this data please
+                modelHandleChangeFragmentclass.setNotifyItemSelected(null) // start details with this data please
             }
 
         })
@@ -92,6 +93,7 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
     var selectedItemPosition = 0
     override fun onDestroyView() {
         disposableObserver?.dispose()
+        modelHandleChangeFragmentclass.notifyItemSelected.removeObservers(activity!!)
         super.onDestroyView()
     }
 
@@ -166,7 +168,9 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 //        UtilKotlin.replaceFragmentWithBack(context!!, this, DelegateDetailsFragment(),
 //            null, R.id.frameLayout_direction, 120, false, true)
 
-        UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , ""  , null,R.id.frameLayout_direction)
+        val bundle = Bundle()
+        bundle.putInt(NameUtils.WHICHID,arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
+        UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , ""  , bundle,arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
     }
 
     override fun delegateClickListener(position: Int) {

@@ -11,15 +11,20 @@ import com.example.controllersystemapp.accountant.sales.fragments.AccountantSale
 import com.example.controllersystemapp.accountant.settings.AccountantSettingsFragment
 import com.example.controllersystemapp.admin.notification.NotificationFragment
 import com.example.controllersystemapp.accountant.delegatecallcenter.DelegateCallCenterFragment
+import com.example.controllersystemapp.common.delivery.DeliveryFragment
+import com.example.util.CommonActivity
 import com.example.util.NameUtils
 import com.example.util.NameUtils.ACCOUNTANTS_PRODUCTS
 import com.example.util.NameUtils.ACCOUNTANT_SETTINGS
+import com.example.util.NameUtils.DELIVERYSETTING
 import com.example.util.NameUtils.MAKE_SPECIAL_ORDER
 import com.example.util.NameUtils.NOTICES_AND_REPORTS
 import com.example.util.NameUtils.SEND_SALES
+import com.example.util.NameUtils.WHICHID
 import com.example.util.NameUtils.notificationsFragmet
+import com.example.util.UtilKotlin
 
-class RedirectAccountantsFragmentActivity : AppCompatActivity() {
+class RedirectAccountantsFragmentActivity : CommonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_redirect_accountants_fragment)
@@ -65,7 +70,13 @@ class RedirectAccountantsFragmentActivity : AppCompatActivity() {
                 changeFragment(NoticesAndReportsFragment(), fragment)
             }
 
+            DELIVERYSETTING-> {
+                val bundle = Bundle()
+                bundle.putInt(WHICHID,R.id.redirect_acc_fragments)
+                UtilKotlin.changeFragmentWithBack(this,R.id.redirect_acc_fragments,DeliveryFragment(),bundle)
+               // changeFragment(DeliveryFragment(), fragment)
 
+            }
         }
 
 

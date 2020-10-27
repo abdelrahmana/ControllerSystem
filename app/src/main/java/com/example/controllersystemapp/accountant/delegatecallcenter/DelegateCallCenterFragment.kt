@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.controllersystemapp.R
+import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -78,9 +79,9 @@ class DelegateCallCenterFragment : Fragment() {
         //   UtilKotlin.changeFragmentBack(activity!! ,AddAccountantFragment() , "AddAccountant"  , null,R.id.frameLayout_direction)
 
             if (currentSelectedPosition==0)
-                UtilKotlin.changeFragmentBack(activity!! ,AddDelegateFragment() , "AddDelegate" , null,R.id.frameLayout_direction)
+                UtilKotlin.changeFragmentBack(activity!! ,AddDelegateFragment() , "AddDelegate" , null,R.id.redirect_acc_fragments)
             else
-                UtilKotlin.changeFragmentBack(activity!! ,AddCallCenterFragment() , "call_center"  , null,R.id.frameLayout_direction)
+                UtilKotlin.changeFragmentBack(activity!! ,AddCallCenterFragment() , "call_center"  , null,R.id.redirect_acc_fragments)
 
         }
 

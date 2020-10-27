@@ -1,13 +1,12 @@
 package com.example.controllersystemapp.admin.delegatesAccountants.adapters
+import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.*
-import com.example.controllersystemapp.admin.storesproducts.fragments.ProductsFragment
-import com.example.controllersystemapp.admin.storesproducts.fragments.StoresFragment
+import com.example.util.NameUtils
 
-class ViewPagerDelegateDetailsAdapter(fragment: Fragment)
+class ViewPagerDelegateDetailsAdapter(fragment: Fragment, var id: Int)
     : FragmentStateAdapter(fragment) {
 
 
@@ -19,11 +18,13 @@ class ViewPagerDelegateDetailsAdapter(fragment: Fragment)
     }
 
     override fun createFragment(position: Int): Fragment {
+        val bundle = Bundle()
+        bundle.putInt(NameUtils.WHICHID,id)
         when(position)
         {
-            0 -> fragment =  DelegatesOrdersFragment()
+            0 -> fragment =  DelegatesOrdersFragment().also { it.arguments = bundle }
 
-            1 -> fragment =  DelegateWalletFragment()
+            1 -> fragment =  DelegateWalletFragment().also { it.arguments = bundle }
         }
         return fragment!!
     }
