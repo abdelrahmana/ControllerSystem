@@ -41,6 +41,8 @@
     <color name="logout_red">#d0021b</color>
     <color name="grey_version">#5a5a5a</color>
     <color name="green_message">#15B70E</color>
+    <color name="darkOrange">#f2905c</color>
+    <color name="orangeBorder">#2cf2905c</color>
 
 
 

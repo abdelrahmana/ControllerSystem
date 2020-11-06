@@ -235,6 +235,8 @@ class ProductsFragment : Fragment()  , OnRecyclerItemClickListener {
 
         //Toast.makeText(context!! , "pos "+productList[position].name , Toast.LENGTH_LONG).show()
         Log.d("click" , "position $position name ${productList[position]}")
+        UtilKotlin.changeFragmentBack(activity!! , ProductDetailsFragment() , "ProductDetailsFragment"  ,
+            null,R.id.frameLayout_direction)
 
     }
 

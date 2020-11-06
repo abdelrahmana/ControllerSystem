@@ -61,7 +61,17 @@
         <item name="android:textColorHint">#A09E9E</item>
     </style>
 
+    <style name="cardDialog" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/card_dialog</item>
+    </style>
 
+    <style name="card_dialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomRight">10dp</item>
+        <item name="cornerSizeBottomLeft">10dp</item>
+    </style>
 
 
 </resources>
