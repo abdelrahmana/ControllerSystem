@@ -167,7 +167,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:drawablePadding="16dp"
-            android:hint="@string/mobile_number"
+            android:hint="@string/password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:padding="8dp"

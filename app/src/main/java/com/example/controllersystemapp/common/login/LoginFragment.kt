@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.home.AccountantHomeActivity
 import com.example.controllersystemapp.admin.AdminHomeActivity
+import com.example.controllersystemapp.callcenter.home.CallCenterHome
 import com.example.controllersystemapp.common.AuthPresenter
 import com.example.controllersystemapp.common.forgetpassword.ForgetPassword
 import com.example.util.ApiConfiguration.ApiManagerDefault
@@ -228,6 +229,11 @@ class LoginFragment : Fragment() {
         else if (roleID.equals("2"))
         {
             startActivity(Intent(context , AccountantHomeActivity::class.java))
+            activity!!.finish()
+        }
+        else if (roleID.equals("3"))
+        {
+            startActivity(Intent(context , CallCenterHome::class.java))
             activity!!.finish()
         }
 

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".accountant.home.AccountantHomeActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:background="@color/colorOrange55"
+        android:src="@drawable/png"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/notificationAccountant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/ic_ab_notification"
+                />
+
+            <ImageView
+                android:padding="@dimen/_5sdp"
+                android:id="@+id/settingAccountant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/ic_ab_settings"
+                />
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+
+
+            <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/callCenterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="يامن رسلان"
+                android:textAlignment="viewStart"
+                android:fontFamily="@font/ffshamelfamily_sansonebold"
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_marginStart="@dimen/_24sdp"
+                />
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@+id/callCenterName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/callCenterRole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/call_center"
+                android:textAlignment="viewStart"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_marginStart="@dimen/_24sdp"
+                />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="235dp" />
+
+
+            <GridLayout
+                android:id="@+id/gridLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guideline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="4"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false"
+                android:orientation="horizontal"
+                android:layout_marginBottom="80dp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                >
+
+                <!-- Row 1 -->
+
+
+                <!-- Column 2 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/accountantDelegatesCard"
+                    android:layout_width="0dp"
+                    android:layout_height="133dp"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginBottom="19dp"
+                    android:layout_rowWeight="1"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginEnd="@dimen/_7sdp"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/accountantDelegatesImage"
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_accountant_icon"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/accountantDelegatesText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:fontFamily="@font/ffshamelfamily_sansonebold"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="@color/textColor"
+                            android:text="@string/delegates"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="10dp"
+                            />
+
+
+
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="133dp"
+                    android:id="@+id/makeOrderCard"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginBottom="19dp"
+                    android:layout_marginStart="@dimen/_7sdp"                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/makeOrderImg"
+                            android:maxHeight="80dp"
+                            android:maxWidth="@dimen/_80sdp"
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_product_store"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/makeOrderText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:fontFamily="@font/ffshamelfamily_sansonebold"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="@color/textColor"
+                            android:text="@string/make_order"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="6dp"
+                            />
+
+
+
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+                <!-- Row 2 -->
+
+
+            </GridLayout>
+
+
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
