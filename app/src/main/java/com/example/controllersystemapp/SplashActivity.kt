@@ -1,11 +1,11 @@
 package com.example.controllersystemapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.controllersystemapp.accountant.home.AccountantHomeActivity
 import com.example.controllersystemapp.admin.AdminHomeActivity
+import com.example.controllersystemapp.callcenter.home.CallCenterHome
 import com.example.controllersystemapp.common.ContainerActivityForFragment
 import com.example.util.CommonActivity
 import com.example.util.PrefsUtil
@@ -33,6 +33,11 @@ class SplashActivity : CommonActivity(){
                 else if (PrefsUtil.getUserModel(this)?.role_id.equals("2"))
                 {
                     startActivity(Intent(this , AccountantHomeActivity::class.java))
+                    finish()
+                }
+                else if (PrefsUtil.getUserModel(this)?.role_id.equals("3"))
+                {
+                    startActivity(Intent(this , CallCenterHome::class.java))
                     finish()
                 }
 

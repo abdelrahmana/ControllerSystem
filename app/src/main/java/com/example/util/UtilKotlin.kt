@@ -218,10 +218,14 @@ object UtilKotlin {
         if (checkAvalibalityOptions(view?.text.toString())==true) // not empty
         {
             errorMedicalInssurance?.text = "" // clean it
+            errorMedicalInssurance?.visibility = View.GONE
+
             return true
         }
-        else
+        else {
             errorMedicalInssurance?.text = errorMessage
+            errorMedicalInssurance?.visibility = View.VISIBLE
+        }
         // showSnackErrorInto(activity!!, errorMessage)
         return false
 

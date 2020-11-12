@@ -60,7 +60,6 @@ class DelegateCallCenterFragment : Fragment() {
         }.attach()
 
         backImgAccountant?.setOnClickListener {
-
             activity?.let {
                 if (it.supportFragmentManager.backStackEntryCount == 1)
                 {

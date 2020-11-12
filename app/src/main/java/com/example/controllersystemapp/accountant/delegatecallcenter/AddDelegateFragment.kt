@@ -7,10 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter.addDelegateApi
 import com.example.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter.getCallCenter
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.AddDelegateCallCenterRequest
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.PrefsUtil
 import com.example.util.UtilKotlin
 import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.add_call_center.*
@@ -42,16 +46,26 @@ class AddDelegateFragment : Fragment() {
         headerText?.text = getString(R.string.add_delegate)
         add?.text = getString(R.string.add_delegate)
         add?.setOnClickListener{
-            addDelegate()
+            if (UtilKotlin.checkOViewsAvaliablity(callCenterEditText,getString(R.string.name_is_required),activity!!,callCenterError)
+                && UtilKotlin.checkOViewsAvaliablity(editTextPhone,getString(R.string.phone_is_required),activity!!,errorPhone)
+                && UtilKotlin.checkOViewsAvaliablity(editTextPassword,getString(R.string.new_password_required),activity!!,errorPassword)
+            ) {
+                addDelegate()
+
+            }
         }
     }
 
 
+    var addDelegateCallCenterFragment = AddDelegateCallCenterRequest()
     private fun addDelegate() {
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
-            getCallCenter(webService!! , callCenterResponse())
+            addDelegateCallCenterFragment = AddDelegateCallCenterRequest(callCenterEditText.text.toString(),
+                (PrefsUtil.getUserModel(context!!)?.city_id?:"0").toInt(),editTextPassword.text.toString()
+                ,editTextPassword.text.toString(),editTextPhone.text.toString(),(PrefsUtil.getUserModel(context!!)?.role_id?:"0").toInt())
+            addDelegateApi(webService!! , callCenterResponse(),addDelegateCallCenterFragment)
         } else {
             progressDialog?.dismiss()
             UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
@@ -67,10 +81,10 @@ class AddDelegateFragment : Fragment() {
         super.onDestroyView()
     }
 
-    var disposableObserver : DisposableObserver<Response<CallCenterResponse>>?=null
-    private fun callCenterResponse(): DisposableObserver<Response<CallCenterResponse>> {
+    var disposableObserver : DisposableObserver<Response<SuccessModel>>?=null
+    private fun callCenterResponse(): DisposableObserver<Response<SuccessModel>> {
 
-        disposableObserver= object : DisposableObserver<Response<CallCenterResponse>>() {
+        disposableObserver= object : DisposableObserver<Response<SuccessModel>>() {
             override fun onComplete() {
                 progressDialog?.dismiss()
                 dispose()
@@ -82,9 +96,11 @@ class AddDelegateFragment : Fragment() {
                 dispose()
             }
 
-            override fun onNext(response: Response<CallCenterResponse>) {
+            override fun onNext(response: Response<SuccessModel>) {
                 if (response!!.isSuccessful) {
                     progressDialog?.dismiss()
+                    UtilKotlin.showSnackMessage(activity,response.body()?.msg?.get(0)?:getString(R.string.added_successfully))
+                    activity?.supportFragmentManager?.popBackStack()
 
                 }
                 else

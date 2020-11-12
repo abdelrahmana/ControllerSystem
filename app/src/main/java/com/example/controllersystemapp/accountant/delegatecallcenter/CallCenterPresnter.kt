@@ -40,6 +40,14 @@ object CallCenterPresnter {
 
     }
 
+    fun addDelegateApi(webService: WebService,callCenterObserver: DisposableObserver<Response<SuccessModel>>,callCenterRequest: AddDelegateCallCenterRequest)
+    {
+        webService.addDelegate(callCenterRequest)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(callCenterObserver)
+    }
+
     fun addCallCenterApi(webService: WebService,callCenterObserver: DisposableObserver<Response<SuccessModel>>,callCenterRequest: AddDelegateCallCenterRequest)
     {
         webService.addCallCenter(callCenterRequest)
@@ -47,6 +55,8 @@ object CallCenterPresnter {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(callCenterObserver)
     }
+
+
 
     fun editCallCenter(webService: WebService,callCenterObserver: DisposableObserver<Response<SuccessModel>>,callCenterRequest: AddDelegateCallCenterRequest)
     {

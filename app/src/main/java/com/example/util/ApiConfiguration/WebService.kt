@@ -155,6 +155,10 @@ interface WebService {
     fun addCallCenter(@Body callCenterRequest: AddDelegateCallCenterRequest): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
+    @POST("accountant/delegates/create")
+    fun addDelegate(@Body callCenterRequest: AddDelegateCallCenterRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
     @POST("accountant/call-center/edit")
     fun editCallCenter(@Body callCenterRequest: AddDelegateCallCenterRequest): Observable<Response<SuccessModel>>
 
