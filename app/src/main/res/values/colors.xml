@@ -43,7 +43,8 @@
     <color name="green_message">#15B70E</color>
     <color name="darkOrange">#f2905c</color>
     <color name="orangeBorder">#2cf2905c</color>
-
+    <color name="md_black_transparent_5seventy">#BE000000</color>
+    <color name="md_black_transparent_seventy">#70000000</color>
 
 
 

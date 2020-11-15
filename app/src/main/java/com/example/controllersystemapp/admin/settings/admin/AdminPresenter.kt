@@ -69,6 +69,59 @@ object AdminPresenter {
     }
 
 
+    fun getAdminDetails(webService: WebService, adminId: Int , activity: Activity, model: ViewModelHandleChangeFragmentclass)
+    {
+
+        Log.d("testApi" , "getData")
+        webService.adminDetails(adminId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : DisposableObserver<Response<AdminDetailsResponse>>() {
+                override fun onComplete() {
+
+                    //hideLoader()
+                    //  model.setShowLoader(false)
+                    dispose()
+
+                }
+
+                override fun onNext(response: Response<AdminDetailsResponse>) {
+
+                    if (response.isSuccessful)
+                    {
+                        Log.d("testApi" , "responseSuccess")
+
+                        //hideLoader()
+                        // model.setShowLoader(false)
+                        model.responseCodeDataSetter(response?.body())
+
+                    }
+                    else{
+                        Log.d("testApi" , "responseError")
+                        //model.setShowLoader(false)
+                        model.onError(response.errorBody())
+                    }
+
+
+
+                }
+
+                override fun onError(e: Throwable) {
+                    //hideLoader()
+                    // model.setShowLoader(false)
+                    dispose()
+                    Log.d("testApi" , "responsefaile")
+                    UtilKotlin.showSnackErrorInto(activity!! , e.message.toString())
+                }
+
+
+            })
+
+
+
+    }
+
+
 
     fun deleteAdminPresenter(webService: WebService, adminId : Int ,activity: Activity, model: ViewModelHandleChangeFragmentclass)
     {

@@ -189,6 +189,8 @@ class AccountantsFragment : Fragment() , OnRecyclerItemClickListener{
         }
         else{
             //empty
+
+
         }
 
 

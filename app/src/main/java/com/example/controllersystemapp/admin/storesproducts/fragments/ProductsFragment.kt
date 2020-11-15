@@ -187,7 +187,6 @@ class ProductsFragment : Fragment()  , OnRecyclerItemClickListener {
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
-
             ProductsPresenter.getProductsList(webService!! , null , activity!! , model)
 
         } else {
@@ -195,9 +194,6 @@ class ProductsFragment : Fragment()  , OnRecyclerItemClickListener {
             UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
 
         }
-
-
-
 
     }
 
@@ -234,9 +230,11 @@ class ProductsFragment : Fragment()  , OnRecyclerItemClickListener {
     override fun onItemClick(position: Int) {
 
         //Toast.makeText(context!! , "pos "+productList[position].name , Toast.LENGTH_LONG).show()
-        Log.d("click" , "position $position name ${productList[position]}")
+        Log.d("click" , "position $position name ${productList[position].id}")
+        val bundle = Bundle()
+        bundle.putInt(PRODUCT_ID , productList[position].id?:0)
         UtilKotlin.changeFragmentBack(activity!! , ProductDetailsFragment() , "ProductDetailsFragment"  ,
-            null,R.id.frameLayout_direction)
+            bundle , R.id.frameLayout_direction)
 
     }
 
@@ -249,5 +247,11 @@ class ProductsFragment : Fragment()  , OnRecyclerItemClickListener {
         super.onDestroyView()
     }
 
+
+
+    companion object{
+
+        val PRODUCT_ID = "productId"
+    }
 
 }

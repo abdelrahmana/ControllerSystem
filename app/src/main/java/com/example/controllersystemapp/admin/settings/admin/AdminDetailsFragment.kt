@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.admin.delegatesAccountants.fragments
+package com.example.controllersystemapp.admin.settings.admin
 
 import android.app.Dialog
 import android.os.Bundle
@@ -12,18 +12,16 @@ import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
-import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
+import com.example.controllersystemapp.admin.settings.admin.AdminFragment.Companion.ADMINID
 import com.example.util.ApiConfiguration.ApiManagerDefault
-import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.delegate_item.view.*
-import kotlinx.android.synthetic.main.fragment_accountant_details.*
+import kotlinx.android.synthetic.main.fragment_admin_details.*
 
+class AdminDetailsFragment : Fragment() {
 
-class AccountantDetailsFragment : Fragment() {
 
     var webService: WebService? = null
     lateinit var model: ViewModelHandleChangeFragmentclass
@@ -31,30 +29,22 @@ class AccountantDetailsFragment : Fragment() {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         webService = ApiManagerDefault(context!!).apiService
         model = UtilKotlin.declarViewModel(activity)!!
         progressDialog = UtilKotlin.ProgressDialog(context!!)
 
-        return inflater.inflate(R.layout.fragment_accountant_details, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_admin_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        confirmAddAccountantBtn?.visibility = View.GONE
-//        spinnerImg?.visibility = View.GONE
-
-        backImgAddAccountant?.setOnClickListener {
+        backImgAdminDetails?.setOnClickListener {
 
             activity?.supportFragmentManager?.popBackStack()
 
@@ -62,6 +52,31 @@ class AccountantDetailsFragment : Fragment() {
 
 
         observeData()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        getAdminDetailsRequest()
+    }
+
+    private fun getAdminDetailsRequest() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            AdminPresenter.getAdminDetails(webService!! ,
+                arguments?.getInt(ADMINID)?:0 , activity!! , model)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
+
+
     }
 
     private fun observeData() {
@@ -73,9 +88,9 @@ class AccountantDetailsFragment : Fragment() {
                 progressDialog?.hide()
                 Log.d("testApi", "responseNotNull")
 
-                if (datamodel is AccountantDetailsResponse) {
+                if (datamodel is AdminDetailsResponse) {
                     Log.d("testApi", "isForyou")
-                    getAccountantData(datamodel)
+                    getAdminData(datamodel)
                 }
 
 //                if (datamodel is SuccessModel) {
@@ -103,55 +118,22 @@ class AccountantDetailsFragment : Fragment() {
         })
 
 
-
     }
 
-    private fun getAccountantData(accountantDetailsResponse: AccountantDetailsResponse) {
+    private fun getAdminData(adminData: AdminDetailsResponse) {
 
-        accountantDetailsName?.text = accountantDetailsResponse?.data?.name?:""
-        accountantPhoneName?.text = accountantDetailsResponse?.data?.phone?:""
-        accountantDetailsLocation?.text = accountantDetailsResponse?.data?.city?.name?:""
-        accountantDetailsEmail?.text = accountantDetailsResponse?.data?.email?:""
-        Glide.with(context!!).load(accountantDetailsResponse?.data?.image?:"")
+
+        adminDetailsName?.text = adminData?.data?.name?:""
+        adminPhoneName?.text = adminData?.data?.phone?:""
+        adminDetailsLocation?.text = adminData?.data?.city?.name?:""
+        adminDetailsEmail?.text = adminData?.data?.email?:""
+        Glide.with(context!!).load(adminData?.data?.image?:"")
             //.placeholder(R.drawable.image_delivery_item)
-            .dontAnimate().into(accountantDetailsImage)
-
-        //nameEdt?.isFocusable = false
-        //nameEdt?.setText(accountantDetailsResponse?.data?.name?:"")
-
-        //accountantPhoneEdt?.isFocusable = false
-        //accountantPhoneEdt?.setText(accountantDetailsResponse?.data?.phone?:"")
-
-//        spinnerImg?.visibility = View.GONE
-//        cityEditText?.isFocusable = false
-//        cityEditText?.setText(accountantDetailsResponse?.data?.city?.name?:"")
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        getDetails()
-
-    }
-
-    private fun getDetails() {
-
-        if (UtilKotlin.isNetworkAvailable(context!!)) {
-            progressDialog?.show()
-
-            AccountantPresenter.getAccountantDetails(webService!! ,
-                arguments?.getInt(NameUtils.ACCOUNTANT_ID)?:0 , activity!! , model)
-
-        } else {
-            progressDialog?.dismiss()
-            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
-
-        }
-
+            .dontAnimate().into(adminDetailsImage)
 
 
     }
+
 
     override fun onDestroyView() {
         model.let {

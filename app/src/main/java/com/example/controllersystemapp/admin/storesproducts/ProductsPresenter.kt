@@ -2,6 +2,7 @@ package com.example.controllersystemapp.admin.storesproducts
 
 import android.app.Activity
 import android.util.Log
+import com.example.controllersystemapp.admin.storesproducts.models.ProductsDetailsResponse
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsListResponse
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
@@ -67,7 +68,57 @@ object ProductsPresenter {
 
     }
 
+    fun getProductDetails(webService: WebService, productID : Int? ,activity: Activity, model: ViewModelHandleChangeFragmentclass)
+    {
 
+        Log.d("testApi" , "getData")
+        webService.productDetails(productID)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : DisposableObserver<Response<ProductsDetailsResponse>>() {
+                override fun onComplete() {
+
+                    //hideLoader()
+                    //  model.setShowLoader(false)
+                    dispose()
+
+                }
+
+                override fun onNext(response: Response<ProductsDetailsResponse>) {
+
+                    if (response.isSuccessful)
+                    {
+                        Log.d("testApi" , "responseSuccess")
+
+                        //hideLoader()
+                        // model.setShowLoader(false)
+                        model.responseCodeDataSetter(response?.body())
+
+                    }
+                    else{
+                        Log.d("testApi" , "responseError")
+                        //model.setShowLoader(false)
+                        model.onError(response.errorBody())
+                    }
+
+
+
+                }
+
+                override fun onError(e: Throwable) {
+                    //hideLoader()
+                    // model.setShowLoader(false)
+                    dispose()
+                    Log.d("testApi" , "responsefaile")
+                    UtilKotlin.showSnackErrorInto(activity!! , e.message.toString())
+                }
+
+
+            })
+
+
+
+    }
 
 
     fun deleteProductPresenter(webService: WebService, productId : Int , warehouseId : Int? ,activity: Activity, model: ViewModelHandleChangeFragmentclass)

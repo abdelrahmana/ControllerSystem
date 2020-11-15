@@ -14,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
 import com.example.controllersystemapp.admin.delegatesAccountants.adapters.AccountantAdapter
+import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AccountantDetailsFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DoneDialogFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.UtilKotlin.changeFragment
 import com.example.util.ViewModelHandleChangeFragmentclass
@@ -230,6 +232,28 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
     override fun onItemClick(position: Int) {
 
         Log.d("click" , "customers")
+        val bundle = Bundle()
+        bundle.putInt(CLIENT_ID, customerList[position].id?:0)
+
+        UtilKotlin.changeFragmentBack(activity!! ,
+            ClientsDetailsFragment() , "ClientsDetailsFragment"  , bundle,R.id.frameLayout_direction)
+
+
+    }
+
+    override fun onDestroyView() {
+        model.let {
+            it?.errorMessage?.removeObservers(activity!!)
+            it?.responseDataCode?.removeObservers(activity!!)
+
+        }
+        super.onDestroyView()
+    }
+
+
+    companion object{
+
+        val CLIENT_ID = "clientId"
 
     }
 }

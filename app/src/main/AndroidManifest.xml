@@ -21,11 +21,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".accountant.home.RedirectAccountantsFragmentActivity"></activity>
+        <activity android:name=".ViewImagesGalleryActivity"></activity>
+        <activity android:name=".accountant.home.RedirectAccountantsFragmentActivity" />
         <activity android:name=".accountant.home.AccountantHomeActivity" />
         <activity android:name=".admin.addproduct.ScanCodeActivity" />
-        <activity android:name=".callcenter.home.CallCenterHome"/>
-        <activity android:name=".callcenter.home.RedirectCallCenter"/>
+        <activity android:name=".callcenter.home.CallCenterHome" />
+        <activity android:name=".callcenter.home.RedirectCallCenter" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

@@ -15,6 +15,7 @@ import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.storesproducts.StoresPresenter
+import com.example.controllersystemapp.admin.storesproducts.adapters.StoreDetailsFragment
 import com.example.controllersystemapp.admin.storesproducts.adapters.StoresAdapter
 import com.example.controllersystemapp.admin.storesproducts.models.StoresData
 import com.example.controllersystemapp.admin.storesproducts.models.StoresListResponse
@@ -235,6 +236,10 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
     override fun onItemClick(position: Int) {
         Log.d("click" , "position $position name ${storeList[position].name}")
 
+        val bundle = Bundle()
+        bundle.putInt(STOREID, storeList[position].id?:0)
+        UtilKotlin.changeFragmentBack(activity!! , StoreDetailsFragment() , "StoreDetailsFragment"  ,
+            bundle , R.id.frameLayout_direction)
     }
 
 
@@ -248,5 +253,10 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
     }
 
 
+    companion object{
+
+        val STOREID = "store_id"
+
+    }
 
 }

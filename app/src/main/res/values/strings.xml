@@ -211,6 +211,14 @@
     <string name="addNotificaion">اضف اشعار</string>
     <string name="writeMessage">اكتب الرساله</string>
     <string name="productDetails">تفاصيل المنتجات</string>
+    <string name="quantityD">الكمية:</string>
+    <string name="storeNameD">اسم المخزن:</string>
+    <string name="storeDetails">تفاصيل المخزن</string>
+    <string name="belongD">ذمة:</string>
+    <string name="categoryName">اسم التصنيف:</string>
+    <string name="accounatntDetails">تفاصيل المحاسب</string>
+    <string name="clientsDteails">تفاصيل العميل</string>
+    <string name="adminDetails">تفاصيل الادمن</string>
 
 
 </resources>

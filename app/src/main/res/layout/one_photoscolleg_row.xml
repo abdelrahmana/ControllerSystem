@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/md_black_transparent_seventy"
+    app:cardCornerRadius="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.jsibbold.zoomage.ZoomageView
+        android:id="@+id/photo_imageView_all_photos_zoom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:zoomage_animateOnReset="true"
+        app:zoomage_autoCenter="true"
+        app:zoomage_autoResetMode="ALWAYS"
+        app:zoomage_maxScale="8"
+        app:zoomage_minScale="0.6"
+        app:zoomage_restrictBounds="true"
+        app:zoomage_translatable="false"
+        app:zoomage_zoomable="true" />
+
+
+
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:visibility="gone"
+        android:id="@+id/pic_loader"
+        app:indicatorName="@string/loader"
+        app:indicatorColor="@color/colorPrimary"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/photo_imageView_all_photos_zoom"
+        app:layout_constraintEnd_toEndOf="@+id/photo_imageView_all_photos_zoom"
+        app:layout_constraintStart_toStartOf="@+id/photo_imageView_all_photos_zoom"
+        app:layout_constraintTop_toTopOf="@+id/photo_imageView_all_photos_zoom" />
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

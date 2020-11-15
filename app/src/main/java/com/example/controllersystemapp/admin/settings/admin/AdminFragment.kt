@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
+import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AccountantDetailsFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.specialcustomers.SpecialCustomerAdapter
@@ -144,6 +145,7 @@ class AdminFragment : Fragment(), OnRecyclerItemClickListener {
             }
         } else {
             //empty
+
         }
 
 
@@ -178,6 +180,18 @@ class AdminFragment : Fragment(), OnRecyclerItemClickListener {
 
     override fun onItemClick(position: Int) {
 
+        val bundle = Bundle()
+        bundle.putInt(ADMINID, adminList[position].id?:0)
+
+        UtilKotlin.changeFragmentBack(activity!! ,
+            AdminDetailsFragment() , "AdminDetailsFragment"  , bundle,R.id.frameLayout_direction)
+
+
+
+    }
+
+    override fun adminOptionsClickListener(position: Int) {
+
         Log.d("click", "admin")
         val bundle = Bundle()
         bundle.putInt(ADMIN_ID, adminList.get(position).id ?: 0)
@@ -195,5 +209,11 @@ class AdminFragment : Fragment(), OnRecyclerItemClickListener {
 
         }
         super.onDestroyView()
+    }
+
+    companion object{
+
+        val ADMINID = "ADMIN_Id"
+
     }
 }

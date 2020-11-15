@@ -11,13 +11,13 @@ import com.example.controllersystemapp.admin.categories.models.CategoriesListRes
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AddAccountantRequest
+import com.example.controllersystemapp.admin.settings.admin.AdminDetailsResponse
 import com.example.controllersystemapp.admin.settings.admin.AdminListResponse
 import com.example.controllersystemapp.admin.settings.editpassword.EditPasswordRequest
 import com.example.controllersystemapp.admin.specialcustomers.AddClientRequest
+import com.example.controllersystemapp.admin.specialcustomers.ClientDetailsResponse
 import com.example.controllersystemapp.admin.specialcustomers.ClientsListResponse
-import com.example.controllersystemapp.admin.storesproducts.models.AddStoreRequest
-import com.example.controllersystemapp.admin.storesproducts.models.ProductsListResponse
-import com.example.controllersystemapp.admin.storesproducts.models.StoresListResponse
+import com.example.controllersystemapp.admin.storesproducts.models.*
 import com.example.controllersystemapp.common.cities.CitiesListResponse
 import com.example.controllersystemapp.common.forgetpassword.model.RequestModelNewPass
 import com.example.controllersystemapp.common.login.LoginRequest
@@ -40,6 +40,10 @@ interface WebService {
     fun productsList(@Query("category_id") categoryId : Int?): Observable<Response<ProductsListResponse>>
 
     @Headers("Accept: application/json")
+    @GET("admin/products/details")
+    fun productDetails(@Query("id") productId : Int?): Observable<Response<ProductsDetailsResponse>>
+
+    @Headers("Accept: application/json")
     @POST("admin/products/create")
     fun addProduct(@Body requestBody : RequestBody): Observable<Response<SuccessModel>>
 
@@ -52,6 +56,12 @@ interface WebService {
     @Headers("Accept: application/json")
     @GET("admin/ware-house/list")
     fun storesList(@Query("category_id") categoryId : Int?): Observable<Response<StoresListResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("admin/ware-house/details")
+    fun storeDetails(@Query("id") storeId : Int?): Observable<Response<StoreDetailsResponse>>
+
+
 
     @Headers("Accept: application/json")
     @DELETE("admin/products/delete")
@@ -96,6 +106,10 @@ interface WebService {
     @GET("admin/admin/list")
     fun adminsList(): Observable<Response<AdminListResponse>>
 
+    @Headers("Accept: application/json")
+    @GET("admin/admin/details")
+    fun adminDetails(@Query("id") adminId : Int?): Observable<Response<AdminDetailsResponse>>
+
 
     @Headers("Accept: application/json")
     @DELETE("admin/admin/delete")
@@ -110,6 +124,12 @@ interface WebService {
     @Headers("Accept: application/json")
     @GET("admin/clients/list")
     fun clientsList(): Observable<Response<ClientsListResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("admin/clients/details")
+    fun clientDetails(@Query("id") clientId : Int?): Observable<Response<ClientDetailsResponse>>
+
+
 
     @Headers("Accept: application/json")
     @DELETE("admin/clients/delete")

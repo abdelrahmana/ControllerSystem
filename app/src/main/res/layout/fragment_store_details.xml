@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".admin.delegatesAccountants.fragments.AccountantDetailsFragment">
+    tools:context=".admin.storesproducts.adapters.StoreDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleContainer"
@@ -17,7 +17,7 @@
         android:background="@color/colorOrange55"
         >
         <ImageView
-            android:id="@+id/backImgAddAccountant"
+            android:id="@+id/backProdDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_24sdp"
@@ -27,8 +27,7 @@
             app:srcCompat="@drawable/ic_ab_back_light" />
 
         <TextView
-            android:id="@+id/titleTxt"
-            android:text="@string/accounatntDetails"
+            android:text="@string/storeDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -38,7 +37,7 @@
             android:layout_marginStart="@dimen/_24sdp"
             android:layout_marginTop="@dimen/_16sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/backImgAddAccountant"
+            app:layout_constraintTop_toBottomOf="@+id/backProdDetails"
 
             />
 
@@ -56,24 +55,41 @@
         android:layout_height="0dp"
         >
 
-
-
-
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.makeramen.roundedimageview.RoundedImageView
-                app:riv_corner_radius="5dp"
+            <com.smarteist.autoimageslider.SliderView
+                android:visibility="gone"
+                android:id="@+id/detailsSlider"
                 android:layout_width="@dimen/_250sdp"
                 android:layout_height="@dimen/_240sdp"
-                android:id="@+id/accountantDetailsImage"
-                android:scaleType="centerCrop"
-                app:riv_mutate_background="true"
                 android:layout_gravity="center"
-                app:riv_border_width="1dp"
-                app:riv_border_color="@color/orangeBorder"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderCircularHandlerEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="2dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorRtlMode="auto"
+                app:sliderScrollTimeInSec="3"
+                app:sliderStartAutoCycle="true"
+                android:layout_marginTop="@dimen/_30sdp"
+
+                />
+
+
+            <ImageView
+                app:srcCompat="@drawable/ic_stores_img"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_190sdp"
+                android:id="@+id/image_slider"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_30sdp"
                 />
             <View
@@ -87,7 +103,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
-
             <com.google.android.material.card.MaterialCardView
                 app:cardElevation="5dp"
                 android:layout_width="match_parent"
@@ -100,14 +115,16 @@
                 android:layout_marginBottom="@dimen/_100sdp"
                 >
 
+
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:minHeight="@dimen/_150sdp"
-                    android:orientation="vertical">
+                    >
 
                     <TextView
-                        android:id="@+id/accountantDetailsName"
+                        android:id="@+id/DetailsStoreNameTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="viewStart"
@@ -115,49 +132,69 @@
                         android:text=""
                         android:textStyle="bold"
                         android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/black_bold"
+                        />
+                    <TextView
+                        android:id="@+id/DetailsStoreLocationTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:text=""
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:drawableStart="@drawable/ic_shape"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/black_bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/DetailsAccTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:text="@string/belongD"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/black_bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/DetailsAccNameTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text=""
                         android:drawableStart="@drawable/ic_username_gray"
                         android:drawablePadding="@dimen/_10sdp"
-                        android:textColor="@color/black_bold"
-                        />
-
-
-                    <TextView
-                        android:id="@+id/accountantPhoneName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="viewStart"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:text=""
                         android:textSize="@dimen/_10ssp"
-                        android:drawableStart="@drawable/ic_phone_call"
-                        android:drawablePadding="@dimen/_10sdp"
                         android:textColor="@color/black_bold"
                         />
 
                     <TextView
-                        android:id="@+id/accountantDetailsLocation"
+                        android:id="@+id/categoryNameTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="viewStart"
                         android:layout_margin="@dimen/_10sdp"
-                        android:text=""
+                        android:text="@string/categoryName"
+                        android:textStyle="bold"
                         android:textSize="@dimen/_10ssp"
-                        android:drawableStart="@drawable/ic_shape"
-                        android:drawablePadding="@dimen/_10sdp"
                         android:textColor="@color/black_bold"
                         />
 
-
                     <TextView
-                        android:id="@+id/accountantDetailsEmail"
+                        android:id="@+id/DetailStoreCategory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="viewStart"
-                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:text=""
+                        android:layout_marginBottom="@dimen/_20sdp"
                         android:textSize="@dimen/_10ssp"
-                        android:drawableStart="@drawable/ic_baseline_mail_outline_24"
-                        android:drawablePadding="@dimen/_10sdp"
                         android:textColor="@color/black_bold"
                         />
 
@@ -168,14 +205,15 @@
 
 
 
+
+
+
             </com.google.android.material.card.MaterialCardView>
 
 
 
+
         </LinearLayout>
-
-
-
 
 
 
