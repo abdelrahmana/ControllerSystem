@@ -62,52 +62,52 @@ class ProductsFragment : Fragment()  , OnRecyclerItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(productsRecycler)
+//        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+//        itemTouchHelper.attachToRecyclerView(productsRecycler)
 
         observeData()
 
 
     }
 
-    var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
-        0,
-        ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-    ) {
-        override fun onMove(
-            recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-            return false
-        }
+//    var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
+//        0,
+//        ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+//    ) {
+//        override fun onMove(
+//            recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+//            return false
+//        }
+//
+//        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int
+//        ) {
+//            //Remove swiped item from list and notify the RecyclerView
+//            val position = viewHolder.adapterPosition
+//
+//            position?.let {
+//                removePosition = it
+//                removeProductItem(it)
+//
+//            }
+//        }
+//    }
 
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int
-        ) {
-            //Remove swiped item from list and notify the RecyclerView
-            val position = viewHolder.adapterPosition
-
-            position?.let {
-                removePosition = it
-                removeProductItem(it)
-
-            }
-        }
-    }
-
-    private fun removeProductItem(position: Int) {
-
-        if (UtilKotlin.isNetworkAvailable(context!!)) {
-            progressDialog?.show()
-
-            ProductsPresenter.deleteProductPresenter(webService!! ,
-                productList[position].id?:-1 , null , activity!! , model)
-
-        } else {
-            progressDialog?.dismiss()
-            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
-
-        }
-
-
-    }
+//    private fun removeProductItem(position: Int) {
+//
+//        if (UtilKotlin.isNetworkAvailable(context!!)) {
+//            progressDialog?.show()
+//
+//            ProductsPresenter.deleteProductPresenter(webService!! ,
+//                productList[position].id?:-1 , null , activity!! , model)
+//
+//        } else {
+//            progressDialog?.dismiss()
+//            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+//
+//        }
+//
+//
+//    }
 
     private fun observeData() {
 
@@ -123,10 +123,10 @@ class ProductsFragment : Fragment()  , OnRecyclerItemClickListener {
                     getProductsData(datamodel)
                 }
 
-                if (datamodel is SuccessModel) {
-                    Log.d("testApi", "isForyou")
-                    successRemove(datamodel)
-                }
+//                if (datamodel is SuccessModel) {
+//                    Log.d("testApi", "isForyou")
+//                    successRemove(datamodel)
+//                }
                 model.responseCodeDataSetter(null) // start details with this data please
             }
 
@@ -149,27 +149,27 @@ class ProductsFragment : Fragment()  , OnRecyclerItemClickListener {
 
     }
 
-    private fun successRemove(successModel: SuccessModel) {
-
-
-        if (successModel?.msg?.isNullOrEmpty() == false)
-        {
-            activity?.let {
-                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
-            }
-
-//            productsAdapter.let {
-//                it?.removeItemFromList(removePosition)
+//    private fun successRemove(successModel: SuccessModel) {
+//
+//
+//        if (successModel?.msg?.isNullOrEmpty() == false)
+//        {
+//            activity?.let {
+//                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
 //            }
-//            productsAdapter?.notifyDataSetChanged()
-
-            getProductsRequest()
-
-        }
-
-
-
-    }
+//
+////            productsAdapter.let {
+////                it?.removeItemFromList(removePosition)
+////            }
+////            productsAdapter?.notifyDataSetChanged()
+//
+//            getProductsRequest()
+//
+//        }
+//
+//
+//
+//    }
 
     override fun onResume() {
         super.onResume()

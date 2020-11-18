@@ -3,10 +3,10 @@ package com.example.controllersystemapp.admin.storeclassification
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
@@ -187,25 +187,37 @@ class StoreClassificationFragment : Fragment() , OnStoreSelcteClickListener {
    }
 
     var modelSelected : Any?=null
+    var selectedStoreData : ArrayList<StoresData> = ArrayList()
+
     private fun setClickListener() {
         addProductButton?.setOnClickListener{
-            // modelselected is the model of tasnef ma5sn
-            Log.d("save" , "quantity ${quantityList?.size}")
-            Log.d("save" , "store ${storesIdList?.size}")
-            for (i in 0 until  quantityList.size) {
-                Log.d("quantityData" , "${quantityList[i]}")
+
+            if (storedAdapter?.getSelected()?.size?:0 > 0) {
+                selectedStoreData = storedAdapter?.getSelected()!!
             }
 
-            for (i in 0 until  storesIdList.size) {
-                Log.d("storeData" , "${storesIdList[i]}")
-            }
+//            quantityList.clear()
+//            if (storedAdapter?.getSelected()?.size?:0 > 0) {
+//                for (i in 0 until storedAdapter?.getSelected()?.size!!) {
+//                    quantityList.add(storedAdapter?.getSelected()?.get(i)?.quantity?:1)
+//                }
+//                Log.d("finalResult" , "size ${storesIdList?.size}")
+//                Log.d("quantityFinalResult" , "size ${quantityList?.size}")
+//
+//                // showToast(stringBuilder.toString().trim { it <= ' ' })
+//            } else {
+//                Log.d("finalResult" , "NoSelection")
+//            }
+//
+//            for (i in quantityList.indices) {
+//                Log.d("quantityFinalResult" , " Data $i ${quantityList[i]}")
+//            }
+           // val storeIdQuantity = StoreIdQuantity(quantityList , storesIdList)
+            //model.responseCodeDataSetter(storeIdQuantity)
 
-            Log.d("save" , "quantityAfter ${quantityList?.size}")
-            Log.d("save" , "storeAfter ${storesIdList?.size}")
+            val storesListResponse = StoresListResponse(selectedStoreData)
+            model.responseCodeDataSetter(storesListResponse)
 
-            val storeIdQuantity = StoreIdQuantity(quantityList , storesIdList)
-
-            model.responseCodeDataSetter(storeIdQuantity)
             activity?.supportFragmentManager?.popBackStack()
 
 
@@ -218,27 +230,19 @@ class StoreClassificationFragment : Fragment() , OnStoreSelcteClickListener {
         storesIdsList: ArrayList<Int>
     ) {
         addProductButton?.visibility = View.VISIBLE
-        quantityList.clear()
         storesIdList.clear()
-        for (i in quantitiesList.indices) {
 
-            quantityList?.add(quantitiesList[i])
-            Log.d("clickData" , "quantity ${quantitiesList?.get(i)}")
-
-
-        }
-
-            for (i in storesIdsList.indices) {
-                storesIdList?.add(storesIdsList[i])
-                Log.d("clickData" , "stores ${storesIdsList?.get(i)}")
-
+        if (storedAdapter?.getSelected()?.size?:0 > 0) {
+            for (i in 0 until storedAdapter?.getSelected()?.size!!) {
+                storesIdList.add(storedAdapter?.getSelected()?.get(i)?.id?:0)
+               // quantityList.add(storedAdapter?.getSelected()?.get(i)?.quantity?:0)
             }
 
-            Log.d("click" , "adapter ${quantitiesList?.size}")
-            Log.d("click" , "adapter ${storesIdsList?.size}")
+        } else {
+            addProductButton?.visibility = View.GONE
+            Log.d("finalResult" , "NoSelection")
+        }
 
-        Log.d("click" , "fragm ${quantityList?.size}")
-        Log.d("click" , "fragm ${storesIdList?.size}")
     }
 
     override fun onIncreaseItemClick(position: Int, s: String) {

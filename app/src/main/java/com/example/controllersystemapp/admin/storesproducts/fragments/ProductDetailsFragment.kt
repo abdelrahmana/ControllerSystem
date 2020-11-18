@@ -15,6 +15,7 @@ import com.example.controllersystemapp.admin.storesproducts.fragments.ProductsFr
 import com.example.controllersystemapp.admin.storesproducts.models.Image
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsDetailsResponse
 import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
@@ -30,6 +31,7 @@ class ProductDetailsFragment : Fragment() {
     var productDetailsImages : ArrayList<Image> = ArrayList()
     lateinit var productListSliderAdapter : ProductListSliderAdapter
 
+    var productId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,8 @@ class ProductDetailsFragment : Fragment() {
         model = UtilKotlin.declarViewModel(activity)!!
         progressDialog = UtilKotlin.ProgressDialog(context!!)
 
+        productId = arguments?.getInt(PRODUCT_ID)?:0
+
         return inflater.inflate(R.layout.fragment_product_details, container, false)
     }
 
@@ -57,9 +61,32 @@ class ProductDetailsFragment : Fragment() {
 
         }
 
+        deleteProductBtn?.setOnClickListener {
+
+            removeProduct()
+
+        }
+
         observeData()
 
         getProductDetailsData()
+
+
+    }
+
+    private fun removeProduct() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            ProductsPresenter.deleteProductPresenter(webService!! ,
+                productId , null , activity!! , model)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
 
 
     }
@@ -78,10 +105,10 @@ class ProductDetailsFragment : Fragment() {
                     setProductsDetailsData(datamodel)
                 }
 
-//                if (datamodel is SuccessModel) {
-//                    Log.d("testApi", "isForyou")
-//                    successRemove(datamodel)
-//                }
+                if (datamodel is SuccessModel) {
+                    Log.d("testApi", "isForyou")
+                    successRemove(datamodel)
+                }
                 model.responseCodeDataSetter(null) // start details with this data please
             }
 
@@ -171,7 +198,7 @@ class ProductDetailsFragment : Fragment() {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
             ProductsPresenter.getProductDetails(webService!! ,
-                arguments?.getInt(PRODUCT_ID)?:0 ,
+                productId ,
                 activity!! , model)
 
         } else {
@@ -182,6 +209,30 @@ class ProductDetailsFragment : Fragment() {
 
     }
 
+
+    private fun successRemove(successModel: SuccessModel) {
+
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            activity?.let {
+                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
+            }
+
+//            productsAdapter.let {
+//                it?.removeItemFromList(removePosition)
+//            }
+//            productsAdapter?.notifyDataSetChanged()
+
+            //getProductsRequest()
+            model.responseCodeDataSetter(null) // start details with this data please
+            activity?.supportFragmentManager?.popBackStack()
+
+        }
+
+
+
+    }
 
     override fun onDestroyView() {
         model.let {

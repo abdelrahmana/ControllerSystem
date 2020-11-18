@@ -29,6 +29,7 @@ class AccountantDetailsFragment : Fragment() {
     lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
 
+    var accountantId = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +46,8 @@ class AccountantDetailsFragment : Fragment() {
         model = UtilKotlin.declarViewModel(activity)!!
         progressDialog = UtilKotlin.ProgressDialog(context!!)
 
+        accountantId = arguments?.getInt(NameUtils.ACCOUNTANT_ID)?:0
+
         return inflater.inflate(R.layout.fragment_accountant_details, container, false)
     }
 
@@ -60,8 +63,30 @@ class AccountantDetailsFragment : Fragment() {
 
         }
 
+        deleteAccountantBtn?.setOnClickListener {
+
+            removeAccountant()
+
+        }
 
         observeData()
+    }
+
+    private fun removeAccountant() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            AccountantPresenter.deleteAccountantPresenter(webService!! ,
+                accountantId , null , activity!! , model)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
+
     }
 
     private fun observeData() {
@@ -78,10 +103,10 @@ class AccountantDetailsFragment : Fragment() {
                     getAccountantData(datamodel)
                 }
 
-//                if (datamodel is SuccessModel) {
-//                    Log.d("testApi", "isForyou")
-//                    successRemove(datamodel)
-//                }
+                if (datamodel is SuccessModel) {
+                    Log.d("testApi", "isForyou")
+                    successRemove(datamodel)
+                }
 
                 model.responseCodeDataSetter(null) // start details with this data please
             }
@@ -141,7 +166,7 @@ class AccountantDetailsFragment : Fragment() {
             progressDialog?.show()
 
             AccountantPresenter.getAccountantDetails(webService!! ,
-                arguments?.getInt(NameUtils.ACCOUNTANT_ID)?:0 , activity!! , model)
+                accountantId , activity!! , model)
 
         } else {
             progressDialog?.dismiss()
@@ -150,6 +175,27 @@ class AccountantDetailsFragment : Fragment() {
         }
 
 
+
+    }
+
+    private fun successRemove(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            activity?.let {
+                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
+            }
+
+//            productsAdapter.let {
+//                it?.removeItemFromList(removePosition)
+//            }
+//            productsAdapter?.notifyDataSetChanged()
+
+            //requestData()
+            model.responseCodeDataSetter(null) // start details with this data please
+            activity?.supportFragmentManager?.popBackStack()
+
+        }
 
     }
 

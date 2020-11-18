@@ -27,6 +27,7 @@ class ClientsDetailsFragment : Fragment() {
     lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
 
+    var clientId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,7 @@ class ClientsDetailsFragment : Fragment() {
         webService = ApiManagerDefault(context!!).apiService
         model = UtilKotlin.declarViewModel(activity)!!
         progressDialog = UtilKotlin.ProgressDialog(context!!)
-
+        clientId = arguments?.getInt(AdminSpecicalCustomersragment.CLIENT_ID)?:0
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_clients_details, container, false)
@@ -49,7 +50,30 @@ class ClientsDetailsFragment : Fragment() {
             activity?.supportFragmentManager?.popBackStack()
         }
 
+        deleteClientsBtn?.setOnClickListener {
+
+            removeClient()
+
+        }
+
         observeData()
+
+    }
+
+    private fun removeClient() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            ClientsPresenter.deleteClientPresenter(webService!! ,
+                clientId , null , activity!! , model)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
 
     }
 
@@ -65,7 +89,7 @@ class ClientsDetailsFragment : Fragment() {
             progressDialog?.show()
 
             ClientsPresenter.getClientDetails(webService!! ,
-                arguments?.getInt(AdminSpecicalCustomersragment.CLIENT_ID)?:0 , activity!! , model)
+                clientId , activity!! , model)
 
         } else {
             progressDialog?.dismiss()
@@ -92,10 +116,10 @@ class ClientsDetailsFragment : Fragment() {
                     getClientsDetsilsData(datamodel)
                 }
 
-//                if (datamodel is SuccessModel) {
-//                    Log.d("testApi", "isForyou")
-//                    successRemove(datamodel)
-//                }
+                if (datamodel is SuccessModel) {
+                    Log.d("testApi", "isForyou")
+                    successRemove(datamodel)
+                }
 
                 model.responseCodeDataSetter(null) // start details with this data please
             }
@@ -142,6 +166,31 @@ class ClientsDetailsFragment : Fragment() {
 //        Glide.with(context!!).load(clientDetailsResponse?.data?.image?:"")
 //            //.placeholder(R.drawable.image_delivery_item)
 //            .dontAnimate().into(clientDetailsImage)
+
+
+
+    }
+
+    private fun successRemove(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            activity?.let {
+                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
+            }
+
+//            productsAdapter.let {
+//                it?.removeItemFromList(removePosition)
+//            }
+//            productsAdapter?.notifyDataSetChanged()
+
+           // getCustomersData()
+            model.responseCodeDataSetter(null) // start details with this data please
+            activity?.supportFragmentManager?.popBackStack()
+
+        }
+
+
 
 
 

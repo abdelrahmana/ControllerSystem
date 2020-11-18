@@ -13,6 +13,7 @@ import com.example.controllersystemapp.admin.storesproducts.StoresPresenter
 import com.example.controllersystemapp.admin.storesproducts.fragments.StoresFragment
 import com.example.controllersystemapp.admin.storesproducts.models.StoreDetailsResponse
 import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
@@ -25,6 +26,7 @@ class StoreDetailsFragment : Fragment() {
     lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
 
+    var storeId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +42,7 @@ class StoreDetailsFragment : Fragment() {
         model = UtilKotlin.declarViewModel(activity)!!
         progressDialog = UtilKotlin.ProgressDialog(context!!)
 
+        storeId = arguments?.getInt(StoresFragment.STOREID)?:0
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_store_details, container, false)
@@ -52,9 +55,33 @@ class StoreDetailsFragment : Fragment() {
             activity?.supportFragmentManager?.popBackStack()
         }
 
+
+        deleteStoreBtn?.setOnClickListener {
+
+            removeStoreItem()
+
+        }
+
         observeData()
 
         getStoreDetailsData()
+    }
+
+    private fun removeStoreItem() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            StoresPresenter.deleteStorePresenter(webService!! ,
+                storeId ,  activity!! , model)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
+
     }
 
     private fun getStoreDetailsData() {
@@ -62,7 +89,7 @@ class StoreDetailsFragment : Fragment() {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
             StoresPresenter.getStoreDetails(webService!! ,
-                arguments?.getInt(StoresFragment.STOREID)?:0 ,
+                storeId ,
                 activity!! , model)
 
         } else {
@@ -117,10 +144,10 @@ class StoreDetailsFragment : Fragment() {
                     setStoreDetailsData(datamodel)
                 }
 
-//                if (datamodel is SuccessModel) {
-//                    Log.d("testApi", "isForyou")
-//                    successRemove(datamodel)
-//                }
+                if (datamodel is SuccessModel) {
+                    Log.d("testApi", "isForyou")
+                    successRemove(datamodel)
+                }
                 model.responseCodeDataSetter(null) // start details with this data please
             }
 
@@ -140,6 +167,30 @@ class StoreDetailsFragment : Fragment() {
 
         })
     }
+
+    private fun successRemove(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            activity?.let {
+                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
+            }
+
+//            productsAdapter.let {
+//                it?.removeItemFromList(removePosition)
+//            }
+//            productsAdapter?.notifyDataSetChanged()
+
+            //requestStoreData()
+            model.responseCodeDataSetter(null) // start details with this data please
+            activity?.supportFragmentManager?.popBackStack()
+
+        }
+
+
+
+    }
+
 
 
     override fun onDestroyView() {

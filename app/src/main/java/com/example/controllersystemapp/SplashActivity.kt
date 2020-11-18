@@ -7,6 +7,7 @@ import com.example.controllersystemapp.accountant.home.AccountantHomeActivity
 import com.example.controllersystemapp.admin.AdminHomeActivity
 import com.example.controllersystemapp.callcenter.home.CallCenterHome
 import com.example.controllersystemapp.common.ContainerActivityForFragment
+import com.example.controllersystemapp.delegates.activities.DelegatesHomeActivity
 import com.example.util.CommonActivity
 import com.example.util.PrefsUtil
 
@@ -38,6 +39,11 @@ class SplashActivity : CommonActivity(){
                 else if (PrefsUtil.getUserModel(this)?.role_id.equals("3"))
                 {
                     startActivity(Intent(this , CallCenterHome::class.java))
+                    finish()
+                }
+                else if (PrefsUtil.getUserModel(this)?.role_id.equals("4"))
+                {
+                    startActivity(Intent(this , DelegatesHomeActivity::class.java))
                     finish()
                 }
 

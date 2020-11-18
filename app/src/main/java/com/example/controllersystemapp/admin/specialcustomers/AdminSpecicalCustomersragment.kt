@@ -54,8 +54,8 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
         super.onViewCreated(view, savedInstanceState)
 
 
-        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(specialCustomersRecycler)
+//        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+//        itemTouchHelper.attachToRecyclerView(specialCustomersRecycler)
 
 
         backImage?.setOnClickListener {
@@ -79,43 +79,43 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
 
     var removePosition = 0
 
-    var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
-        0,
-        ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-    ) {
-        override fun onMove(
-            recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-            return false
-        }
+//    var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
+//        0,
+//        ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+//    ) {
+//        override fun onMove(
+//            recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+//            return false
+//        }
+//
+//        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int
+//        ) {
+//            //Remove swiped item from list and notify the RecyclerView
+//            val position = viewHolder.adapterPosition
+//
+//            position?.let {
+//                removePosition = it
+//                removeClientItem(it)
+//
+//            }
+//        }
+//    }
 
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int
-        ) {
-            //Remove swiped item from list and notify the RecyclerView
-            val position = viewHolder.adapterPosition
-
-            position?.let {
-                removePosition = it
-                removeClientItem(it)
-
-            }
-        }
-    }
-
-    private fun removeClientItem(position: Int) {
-
-        if (UtilKotlin.isNetworkAvailable(context!!)) {
-            progressDialog?.show()
-
-            ClientsPresenter.deleteClientPresenter(webService!! ,
-                customerList[position].id?:-1 , null , activity!! , model)
-
-        } else {
-            progressDialog?.dismiss()
-            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
-
-        }
-
-    }
+//    private fun removeClientItem(position: Int) {
+//
+//        if (UtilKotlin.isNetworkAvailable(context!!)) {
+//            progressDialog?.show()
+//
+//            ClientsPresenter.deleteClientPresenter(webService!! ,
+//                customerList[position].id?:-1 , null , activity!! , model)
+//
+//        } else {
+//            progressDialog?.dismiss()
+//            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+//
+//        }
+//
+//    }
 
     private fun observeData() {
 
@@ -131,13 +131,10 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
                     getClientsData(datamodel)
                 }
 
-                if (datamodel is SuccessModel) {
-                    Log.d("testApi", "isForyou")
-                    successRemove(datamodel)
-                }
-
-
-
+//                if (datamodel is SuccessModel) {
+//                    Log.d("testApi", "isForyou")
+//                    successRemove(datamodel)
+//                }
 
                 model.responseCodeDataSetter(null) // start details with this data please
             }
@@ -162,28 +159,28 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
 
     }
 
-    private fun successRemove(successModel: SuccessModel) {
-
-        if (successModel?.msg?.isNullOrEmpty() == false)
-        {
-            activity?.let {
-                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
-            }
-
-//            productsAdapter.let {
-//                it?.removeItemFromList(removePosition)
+//    private fun successRemove(successModel: SuccessModel) {
+//
+//        if (successModel?.msg?.isNullOrEmpty() == false)
+//        {
+//            activity?.let {
+//                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
 //            }
-//            productsAdapter?.notifyDataSetChanged()
-
-            getCustomersData()
-
-        }
-
-
-
-
-
-    }
+//
+////            productsAdapter.let {
+////                it?.removeItemFromList(removePosition)
+////            }
+////            productsAdapter?.notifyDataSetChanged()
+//
+//            getCustomersData()
+//
+//        }
+//
+//
+//
+//
+//
+//    }
 
     private fun getClientsData(clientsListResponse: ClientsListResponse) {
 

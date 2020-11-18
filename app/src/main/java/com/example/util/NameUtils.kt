@@ -31,6 +31,14 @@ object NameUtils {
     val ACCOUNTANT_SETTINGS = "accountantSettings"
     val DELIVERYSETTING = "delivery"
 
+    val redirectDelegFragmet = "Switch_Delegate_fragment"
+    val SEPCIAL_WALLET = "specialWallet"
+    val DELEGATE_ORDERS = "deleagteOrders"
+    val DELEGATE_MAKE_ORDER = "delegateMakeOrder"
+    val DELEGATE_NoTIFY_REPORTS = "delegateNotifyReports"
+    val DELEGATE_SETTINGS = "deleagteSettings"
+    val DELEGATE_NOTIFICATIONS = "deleagteNotifications"
+
   val WHICHID = "Which_container"
 
     val FORGETPASSWORD = "Forget_password"

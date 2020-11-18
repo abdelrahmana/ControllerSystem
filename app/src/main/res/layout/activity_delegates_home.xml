@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".admin.AdminHomeActivity">
-
+    tools:context=".delegates.activities.DelegatesHomeActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -87,10 +87,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/name"
+                android:id="@+id/deleagteName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="يامن رسلان"
+                android:text=""
                 android:textAlignment="viewStart"
                 android:fontFamily="@font/ffshamelfamily_sansonebold"
                 android:textStyle="bold"
@@ -102,13 +102,13 @@
                 />
 
             <TextView
-                app:layout_constraintTop_toBottomOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/deleagteName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/status"
+                android:id="@+id/delegateStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ادمن"
+                android:text="@string/delegate"
                 android:textAlignment="viewStart"
                 android:textColor="@color/textColor"
                 android:textSize="12sp"
@@ -147,7 +147,7 @@
 
                 <!-- Column 1 -->
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/productsStoreCard"
+                    android:id="@+id/specialWalletCard"
                     android:layout_width="0dp"
                     android:layout_height="133dp"
                     android:layout_columnWeight="1"
@@ -160,25 +160,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:gravity="center"
+                        android:gravity="center_vertical|center"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         >
 
                         <ImageView
-                            android:id="@+id/productStoreImg"
-                            android:maxHeight="80dp"
-                            android:maxWidth="@dimen/_80sdp"
-                            android:layout_marginTop="19dp"
+                            android:id="@+id/specialWalletImg"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_product_store"
+                            app:srcCompat="@drawable/ic_delivery"
 
                             />
 
                         <TextView
-                            android:id="@+id/productStoreImgText"
+                            android:id="@+id/specialWalletText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
@@ -187,8 +184,7 @@
                             android:textStyle="bold"
                             android:textSize="14sp"
                             android:textColor="@color/textColor"
-                            android:text="@string/products_stores"
-                            android:layout_marginTop="16dp"
+                            android:text="@string/sepcialWallet"
                             android:layout_marginBottom="10dp"
                             />
 
@@ -201,7 +197,7 @@
 
                 <!-- Column 2 -->
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/accountantDelegatCard"
+                    android:id="@+id/delegateOrdersCard"
                     android:layout_width="0dp"
                     android:layout_height="133dp"
                     android:layout_columnWeight="1"
@@ -215,23 +211,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:gravity="center"
+                        android:gravity="center_vertical|center"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         >
 
                         <ImageView
-                            android:id="@+id/accountantDelegatImage"
-                            android:layout_marginTop="10dp"
+                            android:id="@+id/delegateOrdersImage"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_accountant_icon"
+                            app:srcCompat="@drawable/ic_ordersicon"
 
                             />
 
                         <TextView
-                            android:id="@+id/accountantDelegatText"
+                            android:id="@+id/delegateOrdersText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
@@ -240,9 +235,7 @@
                             android:textStyle="bold"
                             android:textSize="14sp"
                             android:textColor="@color/textColor"
-                            android:text="@string/accountant_delegates"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginBottom="10dp"
+                            android:text="@string/orders"
                             />
 
 
@@ -256,7 +249,7 @@
 
                 <!-- Column 1 -->
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/reportsCard"
+                    android:id="@+id/notificationReportsCard"
                     android:layout_width="0dp"
                     android:layout_height="133dp"
                     android:layout_columnWeight="1"
@@ -269,16 +262,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:gravity="center"
+                        android:gravity="center_vertical|center"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         >
 
                         <ImageView
-                            android:id="@+id/reportsImg"
+                            android:id="@+id/notificationReportsImg"
                             android:maxHeight="80dp"
                             android:maxWidth="@dimen/_80sdp"
-                            android:layout_marginTop="24dp"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -287,7 +279,7 @@
                             />
 
                         <TextView
-                            android:id="@+id/reportsText"
+                            android:id="@+id/notificationReportsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
@@ -296,9 +288,8 @@
                             android:textStyle="bold"
                             android:textSize="14sp"
                             android:textColor="@color/textColor"
-                            android:text="@string/reports"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="6dp"
+                            android:text="@string/notifications_reports"
+
                             />
 
 
@@ -311,7 +302,7 @@
                 <!-- Column 2 -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
-                    android:id="@+id/deliveryCard"
+                    android:id="@+id/makeOrderDelegateCard"
                     android:layout_height="133dp"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
@@ -324,23 +315,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:gravity="center"
+                        android:gravity="center_vertical|center"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         >
 
                         <ImageView
-                            android:id="@+id/deliveryImg"
-                            android:layout_marginTop="12dp"
+                            android:id="@+id/makeOrderDelegateImg"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_delivery"
+                            app:srcCompat="@drawable/ic_order_icon"
 
                             />
 
                         <TextView
-                            android:id="@+id/deliveryText"
+                            android:id="@+id/makeOrderDelegateText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
@@ -349,8 +339,7 @@
                             android:textStyle="bold"
                             android:textSize="14sp"
                             android:textColor="@color/textColor"
-                            android:text="@string/delivery"
-                            android:layout_marginBottom="7dp"
+                            android:text="@string/make_special_order"
                             />
 
 
@@ -365,6 +354,7 @@
 
                 <!-- Column 1 -->
                 <com.google.android.material.card.MaterialCardView
+                    android:visibility="gone"
                     android:layout_width="0dp"
                     android:layout_height="133dp"
                     android:id="@+id/makeOrderCard"
@@ -379,20 +369,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:gravity="center"
+                        android:gravity="center_vertical|center"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         >
 
                         <ImageView
                             android:id="@+id/makeOrderImg"
-                            android:maxHeight="80dp"
-                            android:maxWidth="@dimen/_80sdp"
-                            android:layout_marginTop="15dp"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_order_icon"
+                            app:srcCompat="@drawable/ic_send_sales_unselect"
 
                             />
 
@@ -406,9 +393,7 @@
                             android:textStyle="bold"
                             android:textSize="14sp"
                             android:textColor="@color/textColor"
-                            android:text="@string/make_order"
-                            android:layout_marginTop="7dp"
-                            android:layout_marginBottom="6dp"
+                            android:text="@string/send_sales"
                             />
 
 
@@ -420,8 +405,9 @@
 
                 <!-- Column 2 -->
                 <com.google.android.material.card.MaterialCardView
+                    android:visibility="gone"
                     android:layout_width="0dp"
-                    android:id="@+id/customersCard"
+                    android:id="@+id/delegateDeliveryCard"
                     android:layout_height="133dp"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
@@ -435,18 +421,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:gravity="center"
+                        android:gravity="center_vertical|center"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         >
 
                         <ImageView
                             android:id="@+id/customerImg"
-                            android:layout_marginTop="15dp"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_customers_icon"
+                            app:srcCompat="@drawable/ic_delivery"
 
                             />
 
@@ -459,10 +444,8 @@
                             android:fontFamily="@font/ffshamelfamily_sansonebold"
                             android:textStyle="bold"
                             android:textSize="14sp"
-                            android:layout_marginTop="6dp"
                             android:textColor="@color/textColor"
-                            android:text="@string/special_customers"
-                            android:layout_marginBottom="7dp"
+                            android:text="@string/delivery"
                             />
 
 
@@ -471,72 +454,6 @@
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
-
-
-                <!-- Row 4 -->
-
-                <!-- Column 1 -->
-
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="133dp"
-                    android:id="@+id/categoriesCard"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    app:cardCornerRadius="5dp"
-                    android:layout_marginTop="19dp"
-                    android:layout_marginBottom="19dp"
-                    android:layout_marginEnd="@dimen/_7sdp"                    >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        >
-
-                        <ImageView
-                            android:id="@+id/categoriesImg"
-                            android:maxHeight="80dp"
-                            android:maxWidth="@dimen/_80sdp"
-                            android:layout_marginTop="15dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_category"
-
-                            />
-
-                        <TextView
-                            android:id="@+id/categoryText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:gravity="center"
-                            android:fontFamily="@font/ffshamelfamily_sansonebold"
-                            android:textStyle="bold"
-                            android:textSize="14sp"
-                            android:textColor="@color/textColor"
-                            android:text="@string/categories"
-                            android:layout_marginTop="7dp"
-                            android:layout_marginBottom="6dp"
-                            />
-
-
-
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-
-
-
-
-
 
 
             </GridLayout>
@@ -555,5 +472,7 @@
 
 
     </ScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

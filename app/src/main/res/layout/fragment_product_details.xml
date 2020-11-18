@@ -115,9 +115,8 @@
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/_150sdp"
                 style="@style/cardDialog"
-                android:layout_marginBottom="@dimen/_100sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
                 >
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -254,7 +253,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="viewStart"
-                        android:text="electronic"
+                        android:text=""
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
@@ -269,14 +268,29 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-
-
             </com.google.android.material.card.MaterialCardView>
 
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteProductBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginBottom="@dimen/_100sdp"
+                app:backgroundTint="@color/logout_red"
+                app:cornerRadius="7dp"
+                android:text="@string/delete"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"/>
 
 
         </LinearLayout>

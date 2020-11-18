@@ -22,6 +22,8 @@ import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Compani
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.RES_CODE_B
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
 import com.example.controllersystemapp.admin.storeclassification.StoreClassificationFragment
+import com.example.controllersystemapp.admin.storesproducts.models.StoresData
+import com.example.controllersystemapp.admin.storesproducts.models.StoresListResponse
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
@@ -46,7 +48,7 @@ import java.io.IOException
 class AddProductFragment : Fragment() {
 
 
-    var whichOpen : Int = 0
+    var whichOpen: Int = 0
 
     lateinit var imagesListAdaptor: ImagesListAdaptor
     var productImagesList: ArrayList<String>? = ArrayList()
@@ -56,11 +58,11 @@ class AddProductFragment : Fragment() {
 
     var webService: WebService? = null
     lateinit var model: ViewModelHandleChangeFragmentclass
-    lateinit var progressDialog : Dialog
+    lateinit var progressDialog: Dialog
 
     var categoryID = 0
 
-    var barCode : String ? = null
+    var barCode: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,23 +95,32 @@ class AddProductFragment : Fragment() {
         }
 
         materialProduct?.setOnClickListener {
-         val bundle = Bundle()
-         bundle.putInt(WHICH_ADD_PRD_STORE , R.id.frameLayout_direction)
-         UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassification() , "productClassification"  ,
-             bundle , R.id.frameLayout_direction)
+            val bundle = Bundle()
+            bundle.putInt(WHICH_ADD_PRD_STORE, R.id.frameLayout_direction)
+            UtilKotlin.changeFragmentBack(
+                activity!!, FragmentProductclassification(), "productClassification",
+                bundle, R.id.frameLayout_direction
+            )
         }
 
         materialSave?.setOnClickListener {
-            UtilKotlin.changeFragmentBack(activity!! , StoreClassificationFragment() , "storeClassification"  ,
-                null , R.id.frameLayout_direction)
+            UtilKotlin.changeFragmentBack(
+                activity!!, StoreClassificationFragment(), "storeClassification",
+                null, R.id.frameLayout_direction
+            )
         }
 
-        openCamLayout?.setOnClickListener{
+        openCamLayout?.setOnClickListener {
             whichOpen = 0
 
-            if (UtilKotlin.checkPermssionGrantedForImageAndFile(activity!!, permissionForImageAndFile,this)){
+            if (UtilKotlin.checkPermssionGrantedForImageAndFile(
+                    activity!!,
+                    permissionForImageAndFile,
+                    this
+                )
+            ) {
                 // if the result ok go submit else on
-                performImgPicAction(0 , this , activity!!)
+                performImgPicAction(0, this, activity!!)
 
 
             }
@@ -117,12 +128,17 @@ class AddProductFragment : Fragment() {
         }
 
 
-        openGalleryLayout?.setOnClickListener{
+        openGalleryLayout?.setOnClickListener {
             whichOpen = 1
 
-            if (UtilKotlin.checkPermssionGrantedForImageAndFile(activity!!, permissionForImageAndFile,this)){
+            if (UtilKotlin.checkPermssionGrantedForImageAndFile(
+                    activity!!,
+                    permissionForImageAndFile,
+                    this
+                )
+            ) {
                 // if the result ok go submit else on
-                performImgPicAction(1 , this , activity!!)
+                performImgPicAction(1, this, activity!!)
 
 
             }
@@ -131,14 +147,13 @@ class AddProductFragment : Fragment() {
 
         openScanCamera?.setOnClickListener {
 
-           //IntentIntegrator(activity!!).initiateScan() // `this` is the current Activity
-            if (UtilKotlin.checkPermssionGrantedForImageAndFile(activity!!, permissionScan,this)){
+            //IntentIntegrator(activity!!).initiateScan() // `this` is the current Activity
+            if (UtilKotlin.checkPermssionGrantedForImageAndFile(activity!!, permissionScan, this)) {
                 // if the result ok go submit else on
-                val intent = Intent(activity , ScanCodeActivity::class.java)
-                startActivityForResult(intent  , ScanCodeActivity.scanCode)
+                val intent = Intent(activity, ScanCodeActivity::class.java)
+                startActivityForResult(intent, ScanCodeActivity.scanCode)
 
             }
-
 
 
         }
@@ -150,7 +165,6 @@ class AddProductFragment : Fragment() {
             checkValidation()
 
         }
-
 
 
     }
@@ -204,9 +218,6 @@ class AddProductFragment : Fragment() {
         }
 
 
-
-
-
     }
 
     private fun requestAddProduct() {
@@ -242,20 +253,20 @@ class AddProductFragment : Fragment() {
         })
 
 
-
-
     }
 
     private fun setAdaptorItem() {
 
-        imagesListAdaptor = ImagesListAdaptor(UtilKotlin.declarViewModel(activity!!)!!,
-            productImagesList?:ArrayList())
+        imagesListAdaptor = ImagesListAdaptor(
+            UtilKotlin.declarViewModel(activity!!)!!,
+            productImagesList ?: ArrayList()
+        )
 
-        val linearLayoutManager: LinearLayoutManager? = LinearLayoutManager(context, RecyclerView.HORIZONTAL,false)
+        val linearLayoutManager: LinearLayoutManager? =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         imagesListRecycler.layoutManager = linearLayoutManager
         imagesListRecycler.setHasFixedSize(true)
         imagesListRecycler.adapter = imagesListAdaptor
-
 
 
     }
@@ -292,31 +303,59 @@ class AddProductFragment : Fragment() {
 
                 if (datamodel is ViewModelHandleChangeFragmentclass.ProductClassification) {//when choose category return categoryID
                     Log.d("observeData", "dd $datamodel")
-                    categoryID = datamodel.id?:-1
-                    Log.d("finalText", "${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.subParentName}")
-                    //addProdClassifyTxt?.text = "${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.subParentName}"
+                    categoryID = datamodel.id ?: -1
+                    Log.d(
+                        "finalText",
+                        "${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}"
+                    )
+                    addProdClassifyTxt?.text = "${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}"
                 }
 
-                if (datamodel is StoreIdQuantity) {//when choose category return categoryID
-                    Log.d("observeData", "quantityId ${datamodel.quantityId.size}")
-                    Log.d("observeData", "storeId ${datamodel.storeId.size}")
+                //StoreIdQuantity
+                if (datamodel is StoresListResponse) {//when choose category return categoryID
+//                    Log.d("observeData", "quantityId ${datamodel.quantityId.size}")
+//                    Log.d("observeData", "storeId ${datamodel.storeId.size}")
                     quantityList?.clear()
                     warehouse_id?.clear()
+                    var storeName = ""
 
-                    for (i in 0 until datamodel.quantityId.size)
-                    {
-                        quantityList?.add(datamodel.quantityId[i])
-                    }
 
-                    for (i in 0 until datamodel.storeId.size)
-                    {
-                        warehouse_id?.add(datamodel.storeId[i])
+//                    for (i in 0 until datamodel.quantityId.size)
+//                    {
+//                        quantityList?.add(datamodel.quantityId[i])
+//                    }
+//
+//                    for (i in 0 until datamodel.storeId.size)
+//                    {
+//
+//                        warehouse_id?.add(datamodel.storeId[i])
+//                    }
+                    if (datamodel.data?.size ?: 0 > 0) {
+                        for (i in 0 until datamodel.data?.size!!) {
+                            quantityList?.add(datamodel.data[i].quantity ?: 1)
+                            warehouse_id?.add(datamodel.data[i].id ?: 0)
+                            storeName += datamodel?.data?.get(i).name ?: ""
+                            if (i != datamodel?.data?.size - 1)
+                                storeName += " - "
+
+                        }
                     }
+                    Log.d("quantityFinalResult", " size${quantityList?.size}")
+                    Log.d("warehouseFinalResult", " size ${warehouse_id?.size}")
+
+                    for (i in quantityList?.indices!!) {
+                        Log.d("quantityFinalResult", " Data $i ${quantityList?.get(i)}")
+                    }
+                    for (i in warehouse_id?.indices!!) {
+                        Log.d("warehouseFinalResult", " Data $i ${warehouse_id?.get(i)}")
+                    }
+                    storeClassificationTxt?.text = storeName
+
+
                 }
 
                 model.responseCodeDataSetter(null) // start details with this data please
-            }
-            else{
+            } else {
                 Log.d("testApi", "observeNull")
 
             }
@@ -333,18 +372,16 @@ class AddProductFragment : Fragment() {
                 barCode = datamodel
 
                 model.setStringVar(null) // start details with this data please
-            }
-            else{
+            } else {
                 Log.d("testApi", "observeNull")
 
             }
 
         })
 
-        model.errorMessage.observe(activity!! , Observer { error ->
+        model.errorMessage.observe(activity!!, Observer { error ->
 
-            if (error != null)
-            {
+            if (error != null) {
                 progressDialog?.hide()
                 val errorFinal = UtilKotlin.getErrorBodyResponse(error, context!!)
                 Log.d("error", "error $errorFinal")
@@ -360,9 +397,8 @@ class AddProductFragment : Fragment() {
 
     private fun getAddProductData(successModel: SuccessModel) {
 
-        if (successModel?.msg?.isNullOrEmpty() == false)
-        {
-            UtilKotlin.showSnackMessage(activity , successModel?.msg[0])
+        if (successModel?.msg?.isNullOrEmpty() == false) {
+            UtilKotlin.showSnackMessage(activity, successModel?.msg[0])
             Handler().postDelayed(Runnable {
                 activity?.let {
                     it.supportFragmentManager.popBackStack()
@@ -374,41 +410,45 @@ class AddProductFragment : Fragment() {
 
     private fun makeRequest() {
 
-        Log.d("barcod" , "bar $barCode")
-        val addProductRequest = AddProductRequest(productNameEditText?.text?.toString() ,
-            describeProductEditText?.text?.toString() , priceEditText?.text?.toString() , barCode ,
-            categoryID , quantityList , warehouse_id , productImagesList)
+        Log.d("barcod", "bar $barCode")
+        val addProductRequest = AddProductRequest(
+            productNameEditText?.text?.toString(),
+            describeProductEditText?.text?.toString(), priceEditText?.text?.toString(), barCode,
+            categoryID, quantityList, warehouse_id, productImagesList
+        )
 
-        AddProductsPresenter.getAddProduct(webService!! , addProductRequest , activity!! , model)
+        AddProductsPresenter.getAddProduct(webService!!, addProductRequest, activity!!, model)
 
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         if (requestCode == submitPermssion) {
             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 //  uploadNewImageFirst()
-               // performImgPicAction(whichOpen , this , activity!!)
+                // performImgPicAction(whichOpen , this , activity!!)
                 //performImgPicAction(whichOpen , this , activity!!)
 
             } else {
                 showSnackErrorInto(activity, getString(R.string.cant_add_image))
 
             }
-        }
-        else if (requestCode == permissionForImageAndFile) {
+        } else if (requestCode == permissionForImageAndFile) {
             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                performImgPicAction(whichOpen , this , activity!!)
+                performImgPicAction(whichOpen, this, activity!!)
 
             } else {
                 showSnackErrorInto(activity, getString(R.string.cant_add_image))
 
             }
-        }
-        else if (requestCode == permissionScan) {
+        } else if (requestCode == permissionScan) {
             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 
-                val intent = Intent(activity , ScanCodeActivity::class.java)
-                startActivityForResult(intent  , ScanCodeActivity.scanCode)
+                val intent = Intent(activity, ScanCodeActivity::class.java)
+                startActivityForResult(intent, ScanCodeActivity.scanCode)
 
             } else {
                 showSnackErrorInto(activity, getString(R.string.cant_add_image))
@@ -418,7 +458,7 @@ class AddProductFragment : Fragment() {
     }
 
 
-    var bitmapUpdatedImage : Bitmap? = null
+    var bitmapUpdatedImage: Bitmap? = null
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         super.onActivityResult(requestCode, resultCode, data)
@@ -426,7 +466,9 @@ class AddProductFragment : Fragment() {
             if (data != null) {
                 val contentURI = data.data
                 try {
-                    bitmapUpdatedImage = BitmapFactory.decodeStream(activity!!.contentResolver.openInputStream(contentURI!!))
+                    bitmapUpdatedImage = BitmapFactory.decodeStream(
+                        activity!!.contentResolver.openInputStream(contentURI!!)
+                    )
                     addImageToList(bitmapUpdatedImage!!)
                     //  val file =getCreatedFileFromBitmap("image",bitmapUpdatedImage!!,"jpg",context!!)
                     //   imageModel.image?.add(file.absolutePath)
@@ -439,8 +481,7 @@ class AddProductFragment : Fragment() {
             bitmapUpdatedImage = data!!.extras!!["data"] as Bitmap?
             addImageToList(bitmapUpdatedImage!!)
             // userImage.setImageBitmap(bitmapUpdatedImage)
-        }
-        else if (requestCode == ScanCodeActivity.scanCode) {
+        } else if (requestCode == ScanCodeActivity.scanCode) {
             if (resultCode == Activity.RESULT_OK) {
                 val result = data?.getStringExtra(ScanCodeActivity.SCANERESULT)
                 Log.d("resultData", result) // Prints scan results
@@ -453,15 +494,17 @@ class AddProductFragment : Fragment() {
         }
 
     }
-//E/Parcel: Class not found when unmarshalling: com.google.android.apps.photos.allphotos.data.AllPhotosCollection
+
+    //E/Parcel: Class not found when unmarshalling: com.google.android.apps.photos.allphotos.data.AllPhotosCollection
 //    java.lang.ClassNotFoundException: com.google.android.apps.photos.allphotos.data.AllPhotosCollection
     private fun addImageToList(bitmapUpdatedImage: Bitmap) {
-       // productImagesList?.clear()
+        // productImagesList?.clear()
 
-        val file = UtilKotlin.getCreatedFileFromBitmap("image",bitmapUpdatedImage!!,"jpg",context!!)
+        val file =
+            UtilKotlin.getCreatedFileFromBitmap("image", bitmapUpdatedImage!!, "jpg", context!!)
         productImagesList?.add(file.absolutePath)
-        Log.d("Size" , "${productImagesList?.size}")
-        Log.d("Size" , "${productImagesList?.get(0)}")
+        Log.d("Size", "${productImagesList?.size}")
+        Log.d("Size", "${productImagesList?.get(0)}")
         // lets notify adaptor now
         //model?.setNotifyItemSelected(imageModel) // update other lists
         model?.setNotifyItemSelected("select") // update other lists

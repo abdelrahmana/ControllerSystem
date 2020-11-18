@@ -1,5 +1,7 @@
 package com.photonect.photographerapp.notificationphotographer.DonePackgae
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import com.example.controllersystemapp.admin.storesproducts.models.StoresData
 import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.stored_item_adaptor.view.*
 
+
 class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentclass,
                                   val arrayListOfTutorials:ArrayList<StoresData>
     //this method is returning the view for each item in the list
@@ -19,6 +22,8 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
 
     var quantityList = ArrayList<Int>()
     var storesIdList = ArrayList<Int>()
+    var clickFlag = false
+    var clickRowFlag = false
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,7 +44,15 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
         return arrayListOfTutorials.size
     }
 
-
+    fun getSelected(): ArrayList<StoresData>? {
+        val selected: ArrayList<StoresData> = ArrayList()
+        for (i in 0 until arrayListOfTutorials.size) {
+            if (arrayListOfTutorials.get(i).isChecked!!) {
+                selected.add(arrayListOfTutorials[i])
+            }
+        }
+        return selected
+    }
 
     //the class is hodling the list view
     inner  class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -53,6 +66,22 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
         ) {
 
             itemView.store_name.text = itemData?.name?:""
+
+//            if (itemData.isChecked == true)
+//                {
+//                    showHideViews(itemView,View.VISIBLE)
+//                    clickFlag = true
+//                    // quantityList.add((itemView.increasementText?.text.toString()).toInt())
+//                    quantityList.add((itemView.productNameEditText?.text.toString()).toInt())
+//                    storesIdList.add(arrayListOfTutorials[position].id?:-1)
+//                }
+//                else{
+//                    showHideViews(itemView,View.GONE)
+//                    clickFlag = false
+//                    quantityList.remove((itemView.productNameEditText?.text.toString()).toInt())
+//                    storesIdList.remove(arrayListOfTutorials[position].id?:-1)
+//                }
+
             /*   itemView.costText.text = itemData.modelCost
                 if (itemData.modelStatus==myOrdersModel.doneOrder) {
                     itemView.statusOfOrder.setTextColor(ContextCompat.getColor(itemView.context,R.color.green))
@@ -78,19 +107,46 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
 //                showHideViews(itemView,View.GONE)
 //            }
 
-            itemView?.decreaseImage.setOnClickListener{
-                if (Integer.parseInt(itemView?.increasementText?.text.toString())>1)
-                    itemView?.increasementText?.text = (Integer.parseInt(itemView?.increasementText?.text.toString())-1).toString()
+            itemView?.productNameEditText?.setText((itemData.quantity?:1).toString())
+            itemView?.productNameEditText?.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable) {
 
-               // listener?.onDecreaseItemClick(adapterPosition, itemView?.increasementText?.text.toString()?:"")
+                    if (s.length != 0) {
 
-            }
-            itemView?.plusImage.setOnClickListener{
-                    itemView?.increasementText?.text = (Integer.parseInt(itemView?.increasementText?.text.toString())+1).toString()
-               // listener?.onIncreaseItemClick(adapterPosition, itemView?.increasementText?.text.toString()?:"")
+                       // modelData.setNotifyItemSelected()
+                        itemData.quantity = (itemView?.productNameEditText?.text?.toString())?.toInt()
+
+                    }
+
+                }
+                override fun beforeTextChanged(
+                    s: CharSequence, start: Int,
+                    count: Int, after: Int
+                ) {
+                }
+
+                override fun onTextChanged(
+                    s: CharSequence, start: Int,
+                    before: Int, count: Int
+                ) {
+                    //if (s.length != 0) field2.setText("")
+                }
+            })
 
 
-            }
+//            itemView?.decreaseImage.setOnClickListener{
+//                if (Integer.parseInt(itemView?.increasementText?.text.toString())>1)
+//                    itemView?.increasementText?.text = (Integer.parseInt(itemView?.increasementText?.text.toString())-1).toString()
+//
+//               // listener?.onDecreaseItemClick(adapterPosition, itemView?.increasementText?.text.toString()?:"")
+//
+//            }
+//            itemView?.plusImage.setOnClickListener{
+//                    itemView?.increasementText?.text = (Integer.parseInt(itemView?.increasementText?.text.toString())+1).toString()
+//               // listener?.onIncreaseItemClick(adapterPosition, itemView?.increasementText?.text.toString()?:"")
+//
+//
+//            }
             itemView.itemContainer.setOnClickListener{
 
                   onItemClicked(modelData,adapterPosition) // go to details please
@@ -109,12 +165,55 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
 
         private fun onItemClicked(model: ViewModelHandleChangeFragmentclass,position: Int) {
             Log.d("pos" , "$position")
-            // adapterPositionChecked = adapterPosition
-            showHideViews(itemView,View.VISIBLE)
+//            adapterPositionChecked = adapterPosition
+//            notifyDataSetChanged() // reload this please
+
+
+            arrayListOfTutorials[position].isChecked = !arrayListOfTutorials[position].isChecked
+
+            if (arrayListOfTutorials[position].isChecked)
+            {
+                showHideViews(itemView,View.VISIBLE)
+//                clickFlag = true
+//                // quantityList.add((itemView.increasementText?.text.toString()).toInt())
+                //quantityList.add((itemView.productNameEditText?.text.toString()).toInt())
+//                storesIdList.add(arrayListOfTutorials[position].id?:-1)
+            }
+            else{
+                showHideViews(itemView,View.GONE)
+//                clickFlag = false
+                //quantityList.remove((itemView.productNameEditText?.text.toString()).toInt())
+//                storesIdList.remove(arrayListOfTutorials[position].id?:-1)
+            }
+                ?:false
+
+//                if (!clickFlag)
+//                {
+//                    showHideViews(itemView,View.VISIBLE)
+//                    clickFlag = true
+//                    // quantityList.add((itemView.increasementText?.text.toString()).toInt())
+//                    quantityList.add((itemView.productNameEditText?.text.toString()).toInt())
+//                    storesIdList.add(arrayListOfTutorials[position].id?:-1)
+//                }
+//                else{
+//                    showHideViews(itemView,View.GONE)
+//                    clickFlag = false
+//                    quantityList.remove((itemView.productNameEditText?.text.toString()).toInt())
+//                    storesIdList.remove(arrayListOfTutorials[position].id?:-1)
+//                }
+//
+
+
+
+
+
+            // showHideViews(itemView,View.VISIBLE)test
+
 //            quantityList.clear()
 //            storesIdList.clear()
-            quantityList.add((itemView.increasementText?.text.toString()).toInt())
-            storesIdList.add(arrayListOfTutorials.get(position).id?:-1)
+
+//            quantityList.add((itemView.increasementText?.text.toString()).toInt())//test
+//            storesIdList.add(arrayListOfTutorials[position].id?:-1)//test
 
             listener.onClickItemClick(position, quantityList , storesIdList )
 //            for (i in quantityList.indices) {
@@ -129,8 +228,8 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
 //
 //            }
 
-            Log.d("Arraysss" , "${quantityList.size}")
-            Log.d("Arraysss" , "${storesIdList.size}")
+            Log.d("Arraysss" , "quantityAdapter ${quantityList.size}")
+            Log.d("Arraysss" , "storeAdaapter ${storesIdList.size}")
 
             // send this item please
             // model.setNotifyItemSelected(arrayListOfTutorials.get(position)?:"") // update sign up fragment please

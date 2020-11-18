@@ -21,7 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewImagesGalleryActivity"></activity>
+        <activity android:name=".delegates.activities.RedirecteDelegateActivity"></activity>
+        <activity android:name=".delegates.activities.DelegatesHomeActivity" />
+        <activity android:name=".ViewImagesGalleryActivity" />
         <activity android:name=".accountant.home.RedirectAccountantsFragmentActivity" />
         <activity android:name=".accountant.home.AccountantHomeActivity" />
         <activity android:name=".admin.addproduct.ScanCodeActivity" />

@@ -16,6 +16,7 @@ import com.example.controllersystemapp.admin.AdminHomeActivity
 import com.example.controllersystemapp.callcenter.home.CallCenterHome
 import com.example.controllersystemapp.common.AuthPresenter
 import com.example.controllersystemapp.common.forgetpassword.ForgetPassword
+import com.example.controllersystemapp.delegates.activities.DelegatesHomeActivity
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
@@ -234,6 +235,11 @@ class LoginFragment : Fragment() {
         else if (roleID.equals("3"))
         {
             startActivity(Intent(context , CallCenterHome::class.java))
+            activity!!.finish()
+        }
+        else if (roleID.equals("4"))
+        {
+            startActivity(Intent(context , DelegatesHomeActivity::class.java))
             activity!!.finish()
         }
 

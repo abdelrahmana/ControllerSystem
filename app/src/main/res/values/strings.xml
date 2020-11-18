@@ -219,6 +219,9 @@
     <string name="accounatntDetails">تفاصيل المحاسب</string>
     <string name="clientsDteails">تفاصيل العميل</string>
     <string name="adminDetails">تفاصيل الادمن</string>
+    <string name="sepcialWallet">المحفظة الخاصة</string>
+    <string name="current">الحالية</string>
+    <string name="addNew">اضافات جديدة</string>
 
 
 </resources>
