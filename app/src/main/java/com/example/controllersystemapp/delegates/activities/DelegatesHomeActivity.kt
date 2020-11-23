@@ -68,7 +68,7 @@ class DelegatesHomeActivity : CommonActivity() , View.OnClickListener{
             R.id.specialWalletCard -> {
 
                 removeCardSelection()
-                setCardSelection(specialWalletCard , specialWalletImg , specialWalletText ,R.drawable.ic_delivery_selected)
+                setCardSelection(specialWalletCard , specialWalletImg , specialWalletText ,R.drawable.ic_wallet_img)
                 val intent = Intent(this , RedirecteDelegateActivity::class.java)
                 intent.putExtra(NameUtils.redirectDelegFragmet, NameUtils.SEPCIAL_WALLET)
                 startActivity(intent)
@@ -114,7 +114,7 @@ class DelegatesHomeActivity : CommonActivity() , View.OnClickListener{
 
 
         specialWalletCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
-        specialWalletImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_delivery))
+        specialWalletImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_wallet_img))
         specialWalletText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
 

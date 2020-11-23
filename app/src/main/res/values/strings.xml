@@ -222,6 +222,8 @@
     <string name="sepcialWallet">المحفظة الخاصة</string>
     <string name="current">الحالية</string>
     <string name="addNew">اضافات جديدة</string>
+    <string name="no_wallet">لا توجد منتجات متاحة في المحفظة</string>
+    <string name="delivery_done">اتمام التوصيل</string>
 
 
 </resources>

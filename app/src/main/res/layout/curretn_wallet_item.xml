@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_130sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="5dp"
+    android:layout_marginBottom="14dp"
+    app:cardElevation="5dp"
+    android:layout_marginStart="@dimen/_16sdp"
+    android:layout_marginEnd="@dimen/_16sdp"
+    android:layout_marginTop="@dimen/_2sdp"
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:id="@+id/imgContainer"
+
+            >
+
+            <ImageView
+                android:id="@+id/currentWalletImg"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/ic_wallet_img" />
+
+            <TextView
+                android:id="@+id/currentWalletName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:textAlignment="viewStart"
+                android:text="أمر تجهيز رقم 135655"
+                android:fontFamily="@font/cairo_semibold"
+                android:textColor="@color/text_black"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/quantityLayout"
+                app:layout_constraintStart_toEndOf="@+id/currentWalletImg"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/currentWalletDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:text="سامسونغ غالاكسي إس"
+                android:fontFamily="@font/cairo_regular"
+                android:textSize="12sp"
+                android:textColor="@color/text_black"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:textAlignment="viewStart"
+                app:layout_constraintEnd_toStartOf="@+id/priceContainer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/currentWalletImg"
+                app:layout_constraintTop_toBottomOf="@+id/currentWalletName" />
+
+
+            <LinearLayout
+                android:id="@+id/quantityLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/currentWalletName"
+                >
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:textColor="@color/black_bold"
+                    android:fontFamily="@font/ffshamelfamily_sansonebold"
+                 />
+
+                <TextView
+                    android:id="@+id/currancy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="رس"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:textColor="@color/text_grey"
+                   />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/priceContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/currentWalletDesc"
+                app:layout_constraintTop_toBottomOf="@+id/quantityLayout"
+                >
+
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:textColor="@color/text_black"
+                    android:fontFamily="@font/ffshamelfamily_sansonebold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                   />
+
+                <TextView
+                    android:id="@+id/piece_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/piece"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_black"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    />
+
+            </LinearLayout>
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/walletCategoryTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="الكترونيات"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/_10sdp"
+
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/slash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            app:layout_constraintStart_toEndOf="@+id/walletCategoryTxt"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
+            android:text="/"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/black"
+
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/walletStoreTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            app:layout_constraintStart_toEndOf="@+id/slash"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
+            android:text="مخزن1"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/black"
+
+            />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/statusCurrentWallet"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:minWidth="@dimen/_80sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/walletCategoryTxt"
+            app:layout_constraintVertical_bias="0.428"
+            app:strokeColor="@color/greyText"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:minWidth="@dimen/_80sdp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/statusCurrentWalletTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="تم التوصيل"
+                    android:textAlignment="center"
+                    android:textColor="@color/greyText"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:id="@+id/arrowImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_arrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
+            />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="@string/more"
+            android:textColor="@color/black_bold"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/arrowImg"
+            app:layout_constraintEnd_toStartOf="@+id/arrowImg"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/statusCurrentWallet"
+            app:layout_constraintTop_toTopOf="@+id/arrowImg" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</com.google.android.material.card.MaterialCardView>

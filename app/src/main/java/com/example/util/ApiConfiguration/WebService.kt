@@ -22,6 +22,9 @@ import com.example.controllersystemapp.common.cities.CitiesListResponse
 import com.example.controllersystemapp.common.forgetpassword.model.RequestModelNewPass
 import com.example.controllersystemapp.common.login.LoginRequest
 import com.example.controllersystemapp.common.login.LoginResponse
+import com.example.controllersystemapp.delegates.wallet.models.DelegateOrderItemDetailsResponse
+import com.example.controllersystemapp.delegates.wallet.models.DelegateOrderItemsListResponse
+import com.example.controllersystemapp.delegates.wallet.models.DelegateOrdersListResponse
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -213,5 +216,21 @@ interface WebService {
     @Headers("Accept: application/json")
     @POST("accountant/expenses/edit")
     fun accountantEditExpenses(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
+
+
+    //Delegates Api
+
+    @Headers("Accept: application/json")
+    @GET("delegate/orders/list")
+    fun delegateOrdersList(@Query("status") status : Int): Observable<Response<DelegateOrdersListResponse>>
+
+
+    @Headers("Accept: application/json")
+    @GET("delegate/orders/items")
+    fun delegateOrderItemsList(@Query("order_id") order_id : Int): Observable<Response<DelegateOrderItemsListResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("delegate/orders/item-details")
+    fun delegateOrderItemDetails(@Query("item_id") item_id : Int): Observable<Response<DelegateOrderItemDetailsResponse>>
 
 }

@@ -12,61 +12,78 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.accountant.products.fragments.AccProdDetailsFragment
-import com.example.controllersystemapp.accountant.products.fragments.AccountantProductsFragment
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.delegates.wallet.DelegateOrdersPresenter
 import com.example.controllersystemapp.delegates.wallet.adapter.CurrentWalletAdapter
-import com.example.controllersystemapp.delegates.wallet.models.Data
+import com.example.controllersystemapp.delegates.wallet.adapter.OrderItemsAdapter
+import com.example.controllersystemapp.delegates.wallet.models.DelegateOrderItemsListResponse
 import com.example.controllersystemapp.delegates.wallet.models.DelegateOrdersListResponse
+import com.example.controllersystemapp.delegates.wallet.models.ItemsData
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.fragment_current_special_wallet.*
+import kotlinx.android.synthetic.main.fragment_orders_items.*
+import kotlinx.android.synthetic.main.fragment_orders_items.noCurrentWalletData
 import kotlinx.android.synthetic.main.no_products.view.*
 
+class OrdersItemsFragment : Fragment() , OnRecyclerItemClickListener {
 
-class CurrentSpecialWalletFragment : Fragment() , OnRecyclerItemClickListener {
 
     var webService: WebService? = null
     lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
 
-    var currentWaletList = ArrayList<Data>()
-    lateinit var currentWalletAdapter: CurrentWalletAdapter
+    var orderItemsList = ArrayList<ItemsData>()
+    lateinit var orderItemsAdapter: OrderItemsAdapter
+
+    var orderId = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         webService = ApiManagerDefault(context!!).apiService
         model = UtilKotlin.declarViewModel(activity)!!
         progressDialog = UtilKotlin.ProgressDialog(context!!)
-
+        orderId = arguments?.getInt(CurrentSpecialWalletFragment.WALLET_ORDER_ID , 0)?:0
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_current_special_wallet, container, false)
+        return inflater.inflate(R.layout.fragment_orders_items, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
+        backImg?.setOnClickListener {
+
+            activity?.supportFragmentManager?.popBackStack()
+        }
+
         handleNoData()
         observeData()
 
+        requestData()
 
     }
 
-    private fun handleNoData() {
-        noCurrentWalletData?.firstNoDataTxt?.text = getString(R.string.no_wallet)
-        noCurrentWalletData?.no_data_image?.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_wallet_img))
-        noCurrentWalletData?.secondNoDataTxt?.visibility = View.GONE
+    private fun requestData() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+            DelegateOrdersPresenter.getOrderItemsList(webService!! , orderId , activity!! , model)
+
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
     }
 
     private fun observeData() {
-
         model.responseDataCode?.observe(activity!!, Observer { datamodel ->
             Log.d("testApi", "observe")
 
@@ -74,7 +91,7 @@ class CurrentSpecialWalletFragment : Fragment() , OnRecyclerItemClickListener {
                 progressDialog?.hide()
                 Log.d("testApi", "responseNotNull")
 
-                if (datamodel is DelegateOrdersListResponse) {
+                if (datamodel is DelegateOrderItemsListResponse) {
                     Log.d("testApi", "isForyou")
                     getData(datamodel)
                 }
@@ -98,86 +115,50 @@ class CurrentSpecialWalletFragment : Fragment() , OnRecyclerItemClickListener {
 
         })
 
-
-
-
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun getData(delegateOrderItemsListResponse: DelegateOrderItemsListResponse) {
 
-        requestCurrentWallet()
-
-    }
-
-    private fun requestCurrentWallet() {
-
-
-        if (UtilKotlin.isNetworkAvailable(context!!)) {
-            progressDialog?.show()
-            DelegateOrdersPresenter.getOrdersList(webService!! , 1 , activity!! , model)
-
-
-        } else {
-            progressDialog?.dismiss()
-            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
-
-        }
-
-
-    }
-
-    private fun getData(delegateOrdersListResponse : DelegateOrdersListResponse) {
-
-        if (delegateOrdersListResponse.data?.isNullOrEmpty() == false)
+        if (delegateOrderItemsListResponse?.data?.isNullOrEmpty() == false)
         {
-            currentWalletRecycler?.visibility = View.VISIBLE
+            orderItemsRecycler?.visibility = View.VISIBLE
             noCurrentWalletData?.visibility = View.GONE
-            currentWaletList.clear()
-            currentWaletList.addAll(delegateOrdersListResponse.data)
-            currentWalletAdapter = CurrentWalletAdapter(context!! , currentWaletList , this)
-            currentWalletRecycler?.apply {
-
+            orderItemsList.clear()
+            orderItemsList.addAll(delegateOrderItemsListResponse?.data)
+            orderItemsAdapter = OrderItemsAdapter(context!! , orderItemsList , this)
+            orderItemsRecycler?.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
-                adapter = currentWalletAdapter
+                adapter = orderItemsAdapter
 
             }
+
+
         }
         else{
             //empty
-            currentWalletRecycler?.visibility = View.VISIBLE
+            orderItemsRecycler?.visibility = View.VISIBLE
             noCurrentWalletData?.visibility = View.GONE
-            currentWaletList.clear()
-            currentWaletList.add(Data("" , "" , 0 , "رس" , 0 ,
-                null , "", 1 , "أمر تجهيز رقم 135655" , 0 , "" ,
-                "" , 0 , "تم التوصيل" , "200" , ""))
-            currentWalletAdapter = CurrentWalletAdapter(context!! , currentWaletList , this)
-            currentWalletRecycler?.apply {
-
+            orderItemsList.clear()
+            orderItemsList.add(ItemsData("" , null , 1 , "رس" ,
+                "ايفون سفن بلاس اصل" , 1 ,
+            "" , "ايفون" , "500" , "20" , null ))
+            orderItemsAdapter = OrderItemsAdapter(context!! , orderItemsList , this)
+            orderItemsRecycler?.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
-                adapter = currentWalletAdapter
+                adapter = orderItemsAdapter
 
             }
-
-//            currentWalletRecycler?.visibility = View.GONE
-//            noCurrentWalletData?.visibility = View.VISIBLE
         }
 
 
     }
 
-    override fun onItemClick(position: Int) {
-
-        Log.d("click" , "position $position name ${currentWaletList[position]}")
-        val bundle = Bundle()
-        bundle.putInt(WALLET_ORDER_ID, currentWaletList[position].id?:0)
-        UtilKotlin.changeFragmentBack(activity!! ,
-            OrdersItemsFragment(), ""  ,
-            bundle , R.id.frameLayoutDirdelegate)
-
-
+    private fun handleNoData() {
+        noCurrentWalletData?.firstNoDataTxt?.text = getString(R.string.no_wallet)
+        noCurrentWalletData?.no_data_image?.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_wallet_img))
+        noCurrentWalletData?.secondNoDataTxt?.visibility = View.GONE
     }
 
     override fun onDestroyView() {
@@ -191,7 +172,16 @@ class CurrentSpecialWalletFragment : Fragment() , OnRecyclerItemClickListener {
 
     companion object{
 
-        val WALLET_ORDER_ID = "walletOrderId"
+        val ITEM_ID = "itemId"
+
+    }
+
+    override fun onItemClick(position: Int) {
+        val bundle = Bundle()
+        bundle.putInt(ITEM_ID, orderItemsList[position].id?:0)
+        UtilKotlin.changeFragmentBack(activity!! ,
+            OrderItemDetailsFragment(), ""  ,
+            bundle , R.id.frameLayoutDirdelegate)
 
     }
 

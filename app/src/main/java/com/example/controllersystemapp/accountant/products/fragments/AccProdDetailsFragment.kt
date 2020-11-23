@@ -196,4 +196,12 @@ class AccProdDetailsFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        model.let {
+            it?.errorMessage?.removeObservers(activity!!)
+            it?.responseDataCode?.removeObservers(activity!!)
+
+        }
+        super.onDestroyView()
+    }
 }

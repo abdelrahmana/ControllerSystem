@@ -166,11 +166,13 @@
                         >
 
                         <ImageView
+                            android:minHeight="@dimen/_50sdp"
+                            android:minWidth="@dimen/_50sdp"
                             android:id="@+id/specialWalletImg"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_delivery"
+                            app:srcCompat="@drawable/ic_wallet_img"
 
                             />
 
@@ -185,7 +187,6 @@
                             android:textSize="14sp"
                             android:textColor="@color/textColor"
                             android:text="@string/sepcialWallet"
-                            android:layout_marginBottom="10dp"
                             />
 
 

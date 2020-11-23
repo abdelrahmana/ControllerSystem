@@ -36,6 +36,7 @@
     <color name="green_background">#1569c193</color>
     <color name="search_text">#9b9b9b</color>
     <color name="card_background">#3acdd3e0</color>
+    <color name="greyText">#cdd3e0</color>
     <color name="pink_color">#ea5f72</color>
     <color name="switch_green">#00ad2a</color>
     <color name="logout_red">#d0021b</color>
