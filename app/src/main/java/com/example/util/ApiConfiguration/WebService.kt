@@ -18,6 +18,11 @@ import com.example.controllersystemapp.admin.specialcustomers.ClientsListRespons
 import com.example.controllersystemapp.admin.storesproducts.models.AddStoreRequest
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsListResponse
 import com.example.controllersystemapp.admin.storesproducts.models.StoresListResponse
+import com.example.controllersystemapp.callcenter.delegate.model.DelegateResponse
+import com.example.controllersystemapp.callcenter.delegate.model.ItemDetailsResponse
+import com.example.controllersystemapp.callcenter.delegate.model.ItemListResponse
+import com.example.controllersystemapp.callcenter.delegate.model.OrderResponse
+import com.example.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.ProductResponse
 import com.example.controllersystemapp.common.cities.CitiesListResponse
 import com.example.controllersystemapp.common.forgetpassword.model.RequestModelNewPass
 import com.example.controllersystemapp.common.login.LoginRequest
@@ -194,4 +199,25 @@ interface WebService {
     @POST("accountant/expenses/edit")
     fun accountantEditExpenses(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
 
+
+    @GET("call-center/delegates/list")
+    fun getDelegateListInCallCenter(@QueryMap mapPage : HashMap<String,Any>): Observable<Response<DelegateResponse>>
+
+    @GET("call-center/delegates/details")
+    fun getOrderList(@QueryMap map : HashMap<String,Any>): Observable<Response<OrderResponse>>
+
+    @GET("call-center/orders/items")
+    fun getItemList(@QueryMap map : HashMap<String,Any>): Observable<Response<ItemListResponse>>
+
+    @GET("call-center/orders/item-details")
+    fun getItemDetailsData(@QueryMap map : HashMap<String,Any>): Observable<Response<ItemDetailsResponse>>
+
+
+    @Headers("Accept: application/json")
+    @GET("call-center/categories/list")
+    fun categoriesListCallCenter(@Query("parent_id") parentId : Int?): Observable<Response<CategoriesListResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("call-center/products/list")
+    fun getCategoryId(@Query("category_id") categoryId : Int?): Observable<Response<ProductResponse>>
 }

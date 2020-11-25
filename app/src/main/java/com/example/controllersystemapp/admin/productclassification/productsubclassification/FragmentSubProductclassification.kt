@@ -14,6 +14,7 @@ import com.example.controllersystemapp.admin.categories.CategoriesPresenter
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
+import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.ISCALLCENTER
 import com.example.controllersystemapp.admin.productclassification.lastsubcategory.FragmentLastSubProductclassification
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
@@ -135,6 +136,16 @@ class FragmentSubProductclassification : Fragment() {
                     // initSlider(modelSelected.pictures)
                     // }
                 //    model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
+                    if (arguments?.getBoolean(ISCALLCENTER,false)==true)
+                    {
+                        model?.responseCodeDataSetter(ViewModelHandleChangeFragmentclass.ProductClassification(
+                            modelSelected.id?:-1, // sub parent model
+                            arguments?.getString(FragmentProductclassification.PARENT_NAME)?:"",
+                            modelSelected.name?:"",
+                            ""
+                        ))
+
+                    }
                     val bundle = Bundle()
                     //     bundle.putInt(EXITENCEIDPACKAGE,availableServiceList.get(position).id?:-1)
                     Log.d("subParetnId" , "observeParent ${modelSelected.id}")

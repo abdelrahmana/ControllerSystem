@@ -63,7 +63,9 @@ class RedirectAccountantsFragmentActivity : CommonActivity() {
             }
 
             MAKE_SPECIAL_ORDER -> {
-                changeFragment(AccountantMakeOrderFragment(), fragment)
+
+                changeFragment(AccountantMakeOrderFragment().also { it.arguments = Bundle().also {
+                    it.putInt(NameUtils.WHICHID,R.id.redirect_acc_fragments)} }, fragment)
             }
 
             NOTICES_AND_REPORTS -> {

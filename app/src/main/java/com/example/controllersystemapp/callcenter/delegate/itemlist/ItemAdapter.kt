@@ -5,15 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.callcenter.delegate.model.DataBean
+import com.example.controllersystemapp.callcenter.delegate.model.DelegateOrder
 import com.example.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.sales_item_adapter.view.*
+import kotlinx.android.synthetic.main.order_item_adapter.view.*
 
-class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
-                       val arrayListOfTutorials:ArrayList<Any>//this method is returning the view for each item in the list
-) : RecyclerView.Adapter<SalesItemAdapter.ViewHolder>()  {
+class ItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
+                  val arrayListOfTutorials:ArrayList<DataBean>//this method is returning the view for each item in the list
+) : RecyclerView.Adapter<ItemAdapter.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.sales_item_adapter, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.order_item_adapter, parent, false)
         return ViewHolder(v)
     }
 
@@ -36,11 +38,16 @@ class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
 
 
         fun bindItems(
-            itemData: Any,
+            itemData: DataBean,
             /*model: ViewModelData,*/
-            arrayListOffersValues: ArrayList<Any>
+            arrayListOffersValues: ArrayList<DataBean>
         ) {
 
+            itemView.orderName.text = itemData.name?:""
+            //itemView.arrive.text = itemData.status_word?:""
+            itemView.rsomText.text = itemData.price?:""
+            itemView.textKeyRsom.text = itemData.currency?:""
+            itemView.piecesTextView.text = itemData.total_quantity?:""
             /*   itemView.costText.text = itemData.modelCost
                 if (itemData.modelStatus==myOrdersModel.doneOrder) {
                     itemView.statusOfOrder.setTextColor(ContextCompat.getColor(itemView.context,R.color.green))

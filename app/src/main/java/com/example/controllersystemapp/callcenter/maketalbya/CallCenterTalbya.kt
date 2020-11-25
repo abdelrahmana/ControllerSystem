@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.makeorder
+package com.example.controllersystemapp.callcenter.maketalbya
 
 import android.app.Activity
 import android.app.Dialog
@@ -16,6 +16,7 @@ import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.SCANERESULT
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.scanCode
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
+import com.example.controllersystemapp.admin.productclassification.FragmentProductclassificationCenter
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
@@ -23,7 +24,7 @@ import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.fragment_accountant_make_order.*
 
-class AccountantMakeOrderFragment : Fragment() {
+class CallCenterTalbya : Fragment() {
 
     var webService: WebService? = null
     lateinit var model: ViewModelHandleChangeFragmentclass
@@ -69,8 +70,9 @@ class AccountantMakeOrderFragment : Fragment() {
             val bundle = Bundle()
             bundle.putInt(NameUtils.WHICH_ADD_PRD_STORE, /*R.id.redirect_acc_fragments*/
                 arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
-
-            UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassification() , "productClassification"  ,
+            bundle.putBoolean(FragmentProductclassification.ISCALLCENTER, /*R.id.redirect_acc_fragments*/
+                true)
+            UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassificationCenter() , "productClassification"  ,
                 bundle ,arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction /*R.id.redirect_acc_fragments*/)
 
         }
@@ -106,10 +108,7 @@ class AccountantMakeOrderFragment : Fragment() {
 
             if (datamodel != null) {
                 progressDialog?.hide()
-                Log.d("testApi", "responseNotNull")
-
                 if (datamodel is ViewModelHandleChangeFragmentclass.ProductClassification) {//when choose category return categoryID
-                    Log.d("observeData", "dd $datamodel")
                     categoryID = datamodel.id?:-1
                     Log.d("finalText", " ${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}")
                     productClassificationTxt.text = " ${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}"

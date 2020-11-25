@@ -27,58 +27,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:id="@+id/deliveryNumberText"
+            android:id="@+id/orderName"
             android:text="توصيل رقم"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/rsomText"
             android:textAlignment="viewStart"
             android:layout_marginStart="@dimen/_5sdp"
             app:layout_constraintStart_toEndOf="@+id/salesImage"
-            app:layout_constraintTop_toTopOf="@+id/salesImage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:textColor="@color/black"
-            android:id="@+id/nameTextView"
-            android:text="ahmed Hazem"
-            app:layout_constraintEnd_toStartOf="@+id/piecesTextView"
-            android:textAlignment="viewStart"
-            android:layout_marginStart="@dimen/_5sdp"
-            app:layout_constraintStart_toEndOf="@+id/salesImage"
-            app:layout_constraintTop_toBottomOf="@+id/deliveryNumberText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/rsomText"
-            android:text="2000"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/textKeyRsom"
-            android:textAlignment="viewStart"
-            android:layout_marginEnd="@dimen/_7sdp"
             app:layout_constraintTop_toTopOf="@+id/salesImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:id="@+id/rsomText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/salesImage"
+            app:layout_constraintTop_toBottomOf="@+id/orderName" />
+
         <TextView
             android:id="@+id/textKeyRsom"
             android:text="رسوم"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/rsomText"
+            app:layout_constraintStart_toEndOf="@+id/rsomText"
             android:textAlignment="viewStart"
             android:layout_marginEnd="@dimen/_7sdp"
-            app:layout_constraintTop_toTopOf="@+id/salesImage"
+            app:layout_constraintTop_toTopOf="@+id/rsomText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/piecesTextView"
-            android:text="2"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textAlignment="viewStart"
             android:layout_marginEnd="@dimen/_7sdp"
             app:layout_constraintEnd_toStartOf="@+id/picecesKeyRsom"
-            app:layout_constraintTop_toBottomOf="@+id/deliveryNumberText"
+            app:layout_constraintTop_toTopOf="@+id/orderName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
@@ -91,12 +79,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:id="@+id/date"
-            android:text="10 محرم 1450"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:id="@+id/arrive"
+            android:layout_marginTop="@dimen/_5sdp"
             android:textAlignment="viewStart"
             app:layout_constraintStart_toStartOf="@+id/salesImage"
-            app:layout_constraintTop_toBottomOf="@+id/piecesTextView"
+            app:layout_constraintTop_toBottomOf="@+id/rsomText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -107,10 +94,10 @@
             android:drawableEnd="@drawable/ic_more"
             android:drawablePadding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_7sdp"
             android:textAlignment="viewStart"
-            app:layout_constraintTop_toBottomOf="@+id/piecesTextView"
+            app:layout_constraintTop_toTopOf="@+id/arrive"
+            app:layout_constraintBottom_toBottomOf="@+id/arrive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

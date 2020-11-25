@@ -1,12 +1,12 @@
-package com.example.controllersystemapp.admin.productclassification.lastsubcategory
+package com.example.controllersystemapp.admin.productclassification.productsubclassification
 
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
@@ -14,25 +14,28 @@ import com.example.controllersystemapp.admin.categories.CategoriesPresenter
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
-import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.PARENT_NAME
-import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.SUB_PARENT_NAME
+import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.ISCALLCENTER
+import com.example.controllersystemapp.admin.productclassification.lastsubcategory.FragmentLastSubProductclassification
+import com.example.controllersystemapp.admin.productclassification.lastsubcategory.FragmentLastSubProductclassificationCenter
+import com.example.controllersystemapp.callcenter.maketalbya.CategoriesPresenterCallCenter
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils
 import com.example.util.NameUtils.productId
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
+import com.photonect.photographerapp.notificationphotographer.DonePackgae.ProductClassificationAdaptor
 import kotlinx.android.synthetic.main.fragment_product_classification.*
 
-class FragmentLastSubProductclassification : Fragment() {
+class FragmentSubProductclassificationCenter : Fragment() {
 
 
     lateinit var model : ViewModelHandleChangeFragmentclass
     var webService: WebService? = null
     lateinit var progressDialog: Dialog
 
-    var subProductAdaptor : LastSubProductClassificationAdaptor?=null
-    var lastSubCategoryList = ArrayList<Data>()
-
+    var subProductAdaptor : SubProductClassificationAdaptorCenter?=null
+    var subCategoryList = ArrayList<Data>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,29 +57,29 @@ class FragmentLastSubProductclassification : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subCategroyHeader?.text = arguments?.getString(SUB_PARENT_NAME)?:""
+        subCategroyHeader?.text = arguments?.getString(FragmentProductclassification.PARENT_NAME)?:""
         backButton?.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
 
         }
            //setRecycleViewData() // set recycleView
-        setViewModelListener() // last item clicked now we need to go to the add product fragment and no back please
-       // activity!!.supportFragmentManager.popBackStack()
+        setViewModelListener() // when select item
     }
-
 
     override fun onResume() {
         super.onResume()
 
-        getLastSubData()
+        getSubData()
     }
 
-    private fun getLastSubData() {
+    private fun getSubData() {
+
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
-            CategoriesPresenter.getCategoriesList(webService!!
-                , arguments?.getInt(FragmentProductclassification.SUB_PARENT_ID)?:-1
+
+            CategoriesPresenterCallCenter.getCategoriesList(webService!!
+                , arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1
                 , activity!!, model)
 
         } else {
@@ -96,6 +99,7 @@ class FragmentLastSubProductclassification : Fragment() {
             // not from all listner
             it?.responseDataCode?.removeObservers(activity!!) // remove observer from here only
             it?.notifyItemSelected?.removeObservers(activity!!)
+            it?.errorMessage?.removeObservers(activity!!)
 
         }
 
@@ -104,15 +108,15 @@ class FragmentLastSubProductclassification : Fragment() {
 
         if (categoriesListResponse.data?.isNullOrEmpty() == false) {
 
-            lastSubCategoryList.clear()
-            lastSubCategoryList.addAll(categoriesListResponse?.data)
-            subProductAdaptor = LastSubProductClassificationAdaptor(model, lastSubCategoryList)
+            subCategoryList.clear()
+            subCategoryList.addAll(categoriesListResponse?.data)
+            subProductAdaptor = SubProductClassificationAdaptorCenter(model, subCategoryList)
             UtilKotlin.setRecycleView(productList,subProductAdaptor!!,
                 RecyclerView.VERTICAL,context!!, null, true)
-
         } else {
             //empty
         }
+
 
 
 
@@ -121,7 +125,7 @@ class FragmentLastSubProductclassification : Fragment() {
 //        arrayList.add("العاب")
 //        arrayList.add("منزل")
 //        arrayList.add("اجهزة منزلية")
-//        subProductAdaptor = LastSubProductClassificationAdaptor(model,arrayList)
+//        subProductAdaptor = SubProductClassificationAdaptor(model,arrayList)
 //        UtilKotlin.setRecycleView(productList,subProductAdaptor!!,
 //            RecyclerView.VERTICAL,context!!, null, true)
     }
@@ -129,16 +133,33 @@ class FragmentLastSubProductclassification : Fragment() {
     fun setViewModelListener() {
         model?.notifyItemSelected?.observe(activity!!, Observer<Any> { modelSelected ->
             if (modelSelected != null) { // if null here so it's new service with no any data
-                if (modelSelected is Data) { // dont set this to null because this will go to the first page
+                if (modelSelected is Data) {
                     // if (modelSelected.isItCurrent) {
                     // initSlider(modelSelected.pictures)
                     // }
-            /*        model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
+                //    model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
+                  /*  if (arguments?.getBoolean(ISCALLCENTER,false)==true)
+                    {
+                        model?.responseCodeDataSetter(ViewModelHandleChangeFragmentclass.ProductClassification(
+                            modelSelected.id?:-1, // sub parent model
+                            arguments?.getString(FragmentProductclassification.PARENT_NAME)?:"",
+                            modelSelected.name?:"",
+                            ""
+                        ))
+
+                    }*/
                     val bundle = Bundle()
                     //     bundle.putInt(EXITENCEIDPACKAGE,availableServiceList.get(position).id?:-1)
-                    UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , FragmentLastSubProductclassification() , bundle)*/
+                    Log.d("subParetnId" , "observeParent ${modelSelected.id}")
+                    Log.d("subParetnId" , "observeParentId ${arguments?.getInt(FragmentProductclassification.PARENT_ID)}")
 
-                    setAddButton(modelSelected)
+                    bundle.putInt(FragmentProductclassification.SUB_PARENT_ID, modelSelected.id?:-1)
+                    bundle.putString(FragmentProductclassification.SUB_PARENT_NAME, modelSelected.name?:"")
+                    bundle.putString(FragmentProductclassification.PARENT_NAME, arguments?.getString(FragmentProductclassification.PARENT_NAME)?:"")
+                    bundle.putInt(FragmentProductclassification.PARENT_ID, arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1)
+                    UtilKotlin.changeFragmentWithBack(activity!! ,
+                        arguments?.getInt(NameUtils.WHICH_ADD_PRD_STORE)?:R.id.frameLayout_direction ,
+                        FragmentLastSubProductclassificationCenter() , bundle)
                 }
                 /* else if (modelSelected is ImageModelData) // if it is object of this model
                   {
@@ -152,7 +173,6 @@ class FragmentLastSubProductclassification : Fragment() {
                       //getData(datamodel) // move data to here please
                   }
   */
-
                 model?.setNotifyItemSelected(null)
             }
         })
@@ -189,37 +209,5 @@ class FragmentLastSubProductclassification : Fragment() {
 
 
 
-
-
     }
-
-    private fun setAddButton(modelSelected: Data) {
-        addProductButton?.visibility = View.VISIBLE
-        addProductButton?.setOnClickListener{
-          /* val index = activity!!.supportFragmentManager.backStackEntryCount - 1
-            val lastEntry: FragmentManager.BackStackEntry =
-                activity!!.supportFragmentManager!!.getBackStackEntryAt(index)
-            val previous: FragmentManager.BackStackEntry =
-                activity!!.supportFragmentManager!!.getBackStackEntryAt(index - 3)
-            activity!!.supportFragmentManager.popBackStack(previous.id,0)*/
-            Log.d("addBtn" , "last ${arguments?.getInt(FragmentProductclassification.PARENT_ID)}")
-            Log.d("addBtn" , "parentName ${arguments?.getString(FragmentProductclassification.PARENT_NAME)}")
-            Log.d("addBtn" , "subName ${arguments?.getString(FragmentProductclassification.SUB_PARENT_NAME)}")
-            Log.d("addBtn" , "lastName ${modelSelected?.name?:""}")
-
-            model?.responseCodeDataSetter(ViewModelHandleChangeFragmentclass.ProductClassification(
-                /*arguments?.getInt(FragmentProductclassification.PARENT_ID)*/modelSelected?.id?:-1,
-                arguments?.getString(FragmentProductclassification.PARENT_NAME)?:"",
-                arguments?.getString(FragmentProductclassification.SUB_PARENT_NAME)?:"",
-                modelSelected?.name?:""
-            ))
-
-            //model?.responseCodeDataSetter(arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1)
-            activity!!.supportFragmentManager.popBackStack()
-            activity!!.supportFragmentManager.popBackStack()
-            activity!!.supportFragmentManager.popBackStack()
-
-        }
-    }
-
 }

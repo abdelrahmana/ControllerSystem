@@ -16,6 +16,8 @@ import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.PARENT_NAME
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.SUB_PARENT_NAME
+import com.example.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.Datas
+import com.example.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.ProductResponse
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils.productId
@@ -23,15 +25,15 @@ import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.fragment_product_classification.*
 
-class FragmentLastSubProductclassification : Fragment() {
+class FragmentLastSubProductclassificationCenter : Fragment() {
 
 
     lateinit var model : ViewModelHandleChangeFragmentclass
     var webService: WebService? = null
     lateinit var progressDialog: Dialog
 
-    var subProductAdaptor : LastSubProductClassificationAdaptor?=null
-    var lastSubCategoryList = ArrayList<Data>()
+    var subProductAdaptor : LastSubProductAdaptorCenter?=null
+    var lastSubCategoryList = ArrayList<Datas>()
 
 
 
@@ -100,13 +102,13 @@ class FragmentLastSubProductclassification : Fragment() {
         }
 
     }
-    private fun setRecycleViewData(categoriesListResponse: CategoriesListResponse) {
+    private fun setRecycleViewData(categoriesListResponse: ProductResponse) {
 
         if (categoriesListResponse.data?.isNullOrEmpty() == false) {
 
             lastSubCategoryList.clear()
-            lastSubCategoryList.addAll(categoriesListResponse?.data)
-            subProductAdaptor = LastSubProductClassificationAdaptor(model, lastSubCategoryList)
+            lastSubCategoryList.addAll(categoriesListResponse?.data?:ArrayList())
+            subProductAdaptor = LastSubProductAdaptorCenter(model, lastSubCategoryList)
             UtilKotlin.setRecycleView(productList,subProductAdaptor!!,
                 RecyclerView.VERTICAL,context!!, null, true)
 
@@ -129,7 +131,7 @@ class FragmentLastSubProductclassification : Fragment() {
     fun setViewModelListener() {
         model?.notifyItemSelected?.observe(activity!!, Observer<Any> { modelSelected ->
             if (modelSelected != null) { // if null here so it's new service with no any data
-                if (modelSelected is Data) { // dont set this to null because this will go to the first page
+                if (modelSelected is Datas) { // dont set this to null because this will go to the first page
                     // if (modelSelected.isItCurrent) {
                     // initSlider(modelSelected.pictures)
                     // }
@@ -164,7 +166,7 @@ class FragmentLastSubProductclassification : Fragment() {
                 progressDialog?.hide()
                 Log.d("testApi", "responseNotNull")
 
-                if (datamodel is CategoriesListResponse) {
+                if (datamodel is ProductResponse) {
                     Log.d("testApi", "isForyou")
                     setRecycleViewData(datamodel)
 
@@ -193,7 +195,7 @@ class FragmentLastSubProductclassification : Fragment() {
 
     }
 
-    private fun setAddButton(modelSelected: Data) {
+    private fun setAddButton(modelSelected: Datas) {
         addProductButton?.visibility = View.VISIBLE
         addProductButton?.setOnClickListener{
           /* val index = activity!!.supportFragmentManager.backStackEntryCount - 1

@@ -29,10 +29,11 @@ class CallCenterHome : CommonActivity(), View.OnClickListener {
         //setSingleEvent(gridLayout)
 
 
+
         settingAccountant?.setOnClickListener{
 
             val intent = Intent(this , RedirectCallCenter::class.java)
-            intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.ACCOUNTANT_SETTINGS)
+            intent.putExtra(NameUtils.redirectFragmet, NameUtils.settingsFragmet)
             startActivity(intent)
 
         }

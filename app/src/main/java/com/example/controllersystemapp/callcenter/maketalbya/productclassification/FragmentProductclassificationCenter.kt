@@ -14,6 +14,8 @@ import com.example.controllersystemapp.admin.categories.CategoriesPresenter
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.admin.productclassification.productsubclassification.FragmentSubProductclassification
+import com.example.controllersystemapp.admin.productclassification.productsubclassification.FragmentSubProductclassificationCenter
+import com.example.controllersystemapp.callcenter.maketalbya.CategoriesPresenterCallCenter
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils.ACCOUNTANT_PROD_CLASSIFY
@@ -23,9 +25,10 @@ import com.example.util.NameUtils.WHICH_ADD_PRD_STORE
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.photonect.photographerapp.notificationphotographer.DonePackgae.ProductClassificationAdaptor
+import com.photonect.photographerapp.notificationphotographer.DonePackgae.ProductClassificationAdaptorCenter
 import kotlinx.android.synthetic.main.fragment_product_classification.*
 
-class FragmentProductclassification : Fragment() {
+class FragmentProductclassificationCenter : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +40,7 @@ class FragmentProductclassification : Fragment() {
     var webService: WebService? = null
     lateinit var progressDialog: Dialog
 
-    var productAdaptor: ProductClassificationAdaptor? = null
+    var productAdaptor: ProductClassificationAdaptorCenter? = null
     var categoriesParentList = ArrayList<Data>()
 
 
@@ -113,7 +116,7 @@ class FragmentProductclassification : Fragment() {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
 
-            CategoriesPresenter.getCategoriesList(webService!!, null, activity!!, model)
+            CategoriesPresenterCallCenter.getCategoriesList(webService!!, null, activity!!, model)
 
         } else {
             progressDialog?.dismiss()
@@ -131,7 +134,7 @@ class FragmentProductclassification : Fragment() {
 
             categoriesParentList.clear()
             categoriesParentList.addAll(categoriesListResponse?.data)
-            productAdaptor = ProductClassificationAdaptor(model, categoriesParentList)
+            productAdaptor = ProductClassificationAdaptorCenter(model, categoriesParentList)
             UtilKotlin.setRecycleView(
                 productList, productAdaptor!!,
                 RecyclerView.VERTICAL, context!!, null, true
@@ -181,7 +184,7 @@ class FragmentProductclassification : Fragment() {
                         UtilKotlin.changeFragmentWithBack(
                             activity!!,
                             arguments?.getInt(WHICH_ADD_PRD_STORE)?:R.id.frameLayout_direction,
-                            FragmentSubProductclassification(),
+                            FragmentSubProductclassificationCenter(),
                             bundle)
 
 

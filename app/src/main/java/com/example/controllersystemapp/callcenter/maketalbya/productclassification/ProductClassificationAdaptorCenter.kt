@@ -1,19 +1,26 @@
 package com.photonect.photographerapp.notificationphotographer.DonePackgae
 
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.categories.models.Data
+import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
+import com.example.controllersystemapp.admin.productclassification.productsubclassification.FragmentSubProductclassification
+import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.sales_item_adapter.view.*
+import kotlinx.android.synthetic.main.product_item_adaptor.view.*
 
-class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
-                       val arrayListOfTutorials:ArrayList<Any>//this method is returning the view for each item in the list
-) : RecyclerView.Adapter<SalesItemAdapter.ViewHolder>()  {
+class ProductClassificationAdaptorCenter(val modelData: ViewModelHandleChangeFragmentclass,
+                                   val arrayListOfTutorials:ArrayList<Data>//this method is returning the view for each item in the list
+) : RecyclerView.Adapter<ProductClassificationAdaptorCenter.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.sales_item_adapter, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.product_item_adaptor, parent, false)
         return ViewHolder(v)
     }
 
@@ -21,6 +28,7 @@ class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(arrayListOfTutorials[position],/*modelData*/arrayListOfTutorials)
         //  setAnimation(holder.itemView, position)
+
 
     }
 
@@ -36,10 +44,13 @@ class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
 
 
         fun bindItems(
-            itemData: Any,
+            itemData: Data,
             /*model: ViewModelData,*/
-            arrayListOffersValues: ArrayList<Any>
+            arrayListOffersValues: ArrayList<Data>
         ) {
+
+
+           itemView.category_name.text = itemData.name?:""
 
             /*   itemView.costText.text = itemData.modelCost
                 if (itemData.modelStatus==myOrdersModel.doneOrder) {
@@ -58,7 +69,7 @@ class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
                   itemView.divider.visibility = View.GONE
               }*/
 
-            itemView.cardContainer.setOnClickListener{
+            itemView.itemContainer.setOnClickListener{
 
                   onItemClicked(modelData,adapterPosition) // go to details please
               }
@@ -69,7 +80,20 @@ class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
 
          private fun onItemClicked(model: ViewModelHandleChangeFragmentclass,position: Int) {
               // send this item please
-              model.setNotifyItemSelected(arrayListOfTutorials.get(position)?:"") // update sign up fragment please
+             Log.d("paretnId" , "clickAdapter")
+
+//             val bundle = Bundle()
+//             //bundle.putInt(EXITENCEIDPACKAGE, availableServiceList.get(position).id?:-1)
+//             bundle.putInt(FragmentProductclassification.PARENT_ID, arrayListOfTutorials[position].id?:-1)
+//             bundle.putString(FragmentProductclassification.PARENT_NAME, arrayListOfTutorials[position].name?:"")
+//
+//             UtilKotlin.changeFragmentWithBack(
+//                 (itemView.context as FragmentActivity?)!!,
+//                 R.id.frameLayout_direction,
+//                 FragmentSubProductclassification(),
+//                 bundle
+//             )
+             model.setNotifyItemSelected(arrayListOfTutorials.get(position)?:"") // update sign up fragment please
 
 
           }
