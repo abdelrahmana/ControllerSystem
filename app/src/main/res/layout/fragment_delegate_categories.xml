@@ -68,7 +68,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:layout_margin="@dimen/_16sdp"
+                    android:padding="@dimen/_10sdp"
                     android:id="@+id/search_arrow_image"
                     app:srcCompat="@drawable/ic_btn_search_bar"
                     app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
                     android:imeOptions="actionSearch"
                     android:layout_margin="@dimen/_16sdp"
                     android:hint="@string/search"
-                    android:id="@+id/search_edit_text"
+                    android:id="@+id/searchCategory"
                     android:textColor="@color/black"
                     android:background="@null"
                     android:textAlignment="viewStart"

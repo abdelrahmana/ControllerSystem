@@ -3,10 +3,13 @@ package com.example.controllersystemapp.delegates.makeorder.fragments
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
@@ -40,6 +43,7 @@ class DelegatSubCategoriesFragment : Fragment() {
 
     var nameSearch : String? = null
     var parentId : Int ? = null
+    lateinit var rootView : View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,13 +54,14 @@ class DelegatSubCategoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        rootView = inflater.inflate(R.layout.fragment_delegate_categories, container, false)
         // Inflate the layout for this fragment
         model =UtilKotlin.declarViewModel(activity!!)!!
         webService = ApiManagerDefault(context!!).apiService
         progressDialog = UtilKotlin.ProgressDialog(context!!)
         parentId = arguments?.getInt(DelegateCategoriesFragment.CATEGORY_PARENT_ID)?:0
 
-        return inflater.inflate(R.layout.fragment_delegate_categories, container, false)
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,9 +71,44 @@ class DelegatSubCategoriesFragment : Fragment() {
             activity?.supportFragmentManager?.popBackStack()
 
         }
+        handleSearchEidtTextCLick()
+
+        search_arrow_image?.setOnClickListener {
+            moveToSearch()
+        }
            //setRecycleViewData() // set recycleView
         setViewModelListener() // when select item
     }
+
+    private fun handleSearchEidtTextCLick() {
+
+        searchCategory?.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    // makeSearch(search_edit_text!!.text.toString())
+                    UtilKotlin.hideKeyboardEditText(searchCategory , rootView)
+                    moveToSearch()
+
+                    return true
+                }
+                return false
+            }
+        })
+
+    }
+
+    private fun moveToSearch() {
+
+        if (!searchCategory?.text?.toString().isNullOrBlank())
+        {
+            nameSearch = searchCategory?.text?.toString()?.trim()
+            getSubData()
+
+        }
+
+
+    }
+
 
     override fun onResume() {
         super.onResume()

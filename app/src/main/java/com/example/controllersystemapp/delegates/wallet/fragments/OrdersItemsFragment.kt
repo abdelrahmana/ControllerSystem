@@ -137,19 +137,22 @@ class OrdersItemsFragment : Fragment() , OnRecyclerItemClickListener {
         }
         else{
             //empty
-            orderItemsRecycler?.visibility = View.VISIBLE
-            noCurrentWalletData?.visibility = View.GONE
-            orderItemsList.clear()
-            orderItemsList.add(ItemsData("" , null , 1 , "رس" ,
-                "ايفون سفن بلاس اصل" , 1 ,
-            "" , "ايفون" , "500" , "20" , null ))
-            orderItemsAdapter = OrderItemsAdapter(context!! , orderItemsList , this)
-            orderItemsRecycler?.apply {
-                setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
-                adapter = orderItemsAdapter
+            orderItemsRecycler?.visibility = View.GONE
+            noCurrentWalletData?.visibility = View.VISIBLE
 
-            }
+//            orderItemsRecycler?.visibility = View.VISIBLE
+//            noCurrentWalletData?.visibility = View.GONE
+//            orderItemsList.clear()
+//            orderItemsList.add(ItemsData("" , null , 1 , "رس" ,
+//                "ايفون سفن بلاس اصل" , 1 ,
+//            "" , "ايفون" , "500" , "20" , null ))
+//            orderItemsAdapter = OrderItemsAdapter(context!! , orderItemsList , this)
+//            orderItemsRecycler?.apply {
+//                setHasFixedSize(true)
+//                layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
+//                adapter = orderItemsAdapter
+//
+//            }
         }
 
 

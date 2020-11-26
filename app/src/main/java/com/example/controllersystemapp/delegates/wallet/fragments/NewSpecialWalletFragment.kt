@@ -168,23 +168,26 @@ class NewSpecialWalletFragment : Fragment() , OnRecyclerItemClickListener {
         }
         else{
             //empty
-            newWalletRecycler?.visibility = View.VISIBLE
-            noNewWalletData?.visibility = View.GONE
-            newWalletList.clear()
-            newWalletList.add(Data("" , "" , 0 , "رس" , 0 ,
-                null , "", 1 , "أمر تجهيز رقم 135655" , 0 , "" ,
-                "" , 0 , "تم التوصيل" , "200" , ""))
-            newWalletAdapter = NewWalletAdapter(context!! , newWalletList , this)
-            newWalletRecycler?.apply {
 
-                setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
-                adapter = newWalletAdapter
+            newWalletRecycler?.visibility = View.GONE
+            noNewWalletData?.visibility = View.VISIBLE
 
-            }
+//            newWalletRecycler?.visibility = View.VISIBLE
+//            noNewWalletData?.visibility = View.GONE
+//            newWalletList.clear()
+//            newWalletList.add(Data("" , "" , 0 , "رس" , 0 ,
+//                null , "", 1 , "أمر تجهيز رقم 135655" , 0 , "" ,
+//                "" , 0 , "تم التوصيل" , "200" , ""))
+//            newWalletAdapter = NewWalletAdapter(context!! , newWalletList , this)
+//            newWalletRecycler?.apply {
+//
+//                setHasFixedSize(true)
+//                layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
+//                adapter = newWalletAdapter
+//
+//            }
 
-//            currentWalletRecycler?.visibility = View.GONE
-//            noCurrentWalletData?.visibility = View.VISIBLE
+
         }
 
 

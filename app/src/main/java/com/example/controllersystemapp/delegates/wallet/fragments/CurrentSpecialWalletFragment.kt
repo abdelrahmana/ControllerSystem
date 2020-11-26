@@ -146,23 +146,25 @@ class CurrentSpecialWalletFragment : Fragment() , OnRecyclerItemClickListener {
         }
         else{
             //empty
-            currentWalletRecycler?.visibility = View.VISIBLE
-            noCurrentWalletData?.visibility = View.GONE
-            currentWaletList.clear()
-            currentWaletList.add(Data("" , "" , 0 , "رس" , 0 ,
-                null , "", 1 , "أمر تجهيز رقم 135655" , 0 , "" ,
-                "" , 0 , "تم التوصيل" , "200" , ""))
-            currentWalletAdapter = CurrentWalletAdapter(context!! , currentWaletList , this)
-            currentWalletRecycler?.apply {
+            currentWalletRecycler?.visibility = View.GONE
+            noCurrentWalletData?.visibility = View.VISIBLE
 
-                setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
-                adapter = currentWalletAdapter
+//            currentWalletRecycler?.visibility = View.VISIBLE
+//            noCurrentWalletData?.visibility = View.GONE
+//            currentWaletList.clear()
+//            currentWaletList.add(Data("" , "" , 0 , "رس" , 0 ,
+//                null , "", 1 , "أمر تجهيز رقم 135655" , 0 , "" ,
+//                "" , 0 , "تم التوصيل" , "200" , ""))
+//            currentWalletAdapter = CurrentWalletAdapter(context!! , currentWaletList , this)
+//            currentWalletRecycler?.apply {
+//
+//                setHasFixedSize(true)
+//                layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
+//                adapter = currentWalletAdapter
+//
+//            }
 
-            }
 
-//            currentWalletRecycler?.visibility = View.GONE
-//            noCurrentWalletData?.visibility = View.VISIBLE
         }
 
 

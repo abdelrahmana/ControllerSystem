@@ -33,18 +33,16 @@ class DelegatesHomeActivity : CommonActivity() , View.OnClickListener{
 
         settingIcon?.setOnClickListener{
 
-//            val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//            intent.putExtra(NameUtils.redirectFragmet, NameUtils.settingsFragmet)
-//            startActivity(intent)
-
+            val intent = Intent(this , RedirecteDelegateActivity::class.java)
+            intent.putExtra(NameUtils.redirectDelegFragmet, NameUtils.DELEGATE_SETTINGS)
+            startActivity(intent)
         }
 
         notificationIcon?.setOnClickListener{
 
-//            val intent = Intent(this , RedirectFragmentsActivity::class.java)
-//            intent.putExtra(NameUtils.redirectFragmet, NameUtils.notificationsFragmet)
-//            startActivity(intent)
-
+            val intent = Intent(this , RedirecteDelegateActivity::class.java)
+            intent.putExtra(NameUtils.redirectDelegFragmet, NameUtils.DELEGATE_NOTIFICATIONS)
+            startActivity(intent)
         }
 
     }

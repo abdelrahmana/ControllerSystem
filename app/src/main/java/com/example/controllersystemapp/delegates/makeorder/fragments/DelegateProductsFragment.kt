@@ -3,10 +3,13 @@ package com.example.controllersystemapp.delegates.makeorder.fragments
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
@@ -32,6 +35,7 @@ class DelegateProductsFragment : Fragment() {
     var productList = ArrayList<Data>()
     lateinit var delegateProductsListAdapter: DelegateProductsListAdapter
 
+    lateinit var rootView : View
 
     var nameSearch: String? = null
     var categoryId: Int? = null
@@ -40,13 +44,14 @@ class DelegateProductsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        rootView = inflater.inflate(R.layout.fragment_delegate_products, container, false)
         model = UtilKotlin.declarViewModel(activity!!)!!
         webService = ApiManagerDefault(context!!).apiService
         progressDialog = UtilKotlin.ProgressDialog(context!!)
         categoryId = arguments?.getInt(DelegateCategoriesFragment.CATEGORY_LAST_PARENT_ID) ?: 0
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_delegate_products, container, false)
+        return rootView
     }
 
 
@@ -59,8 +64,44 @@ class DelegateProductsFragment : Fragment() {
         productCategoryName?.text =
             arguments?.getString(DelegateCategoriesFragment.CATEGORY_LAST_PARENT_NAME) ?: ""
 
+        handleSearchEidtTextCLick()
+        searchProdImage?.setOnClickListener {
+            moveToSearch()
+        }
+
+
+
         setViewModelListener()
     }
+
+    private fun handleSearchEidtTextCLick() {
+
+        searchProduct?.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    // makeSearch(search_edit_text!!.text.toString())
+                    UtilKotlin.hideKeyboardEditText(searchProduct , rootView)
+                    moveToSearch()
+
+                    return true
+                }
+                return false
+            }
+        })
+
+    }
+
+    private fun moveToSearch() {
+
+        if (!searchProduct?.text?.toString().isNullOrBlank())
+        {
+            nameSearch = searchProduct?.text?.toString()?.trim()
+            getProductsData()
+        }
+
+
+    }
+
 
     fun setViewModelListener() {
         model?.notifyItemSelected?.observe(activity!!, Observer<Any> { modelSelected ->
@@ -134,14 +175,14 @@ class DelegateProductsFragment : Fragment() {
         } else {
             //empty
             Log.d("productDelegate", "empty")
-            productList.clear()
-            productList.add(Data("" , null , 1 , "" ,
-                "" , 55 , "" , "iphone6s" , "" , "81" , null))
-            delegateProductsListAdapter = DelegateProductsListAdapter(model, productList)
-            UtilKotlin.setRecycleView(
-                delegateProductsRecycler, delegateProductsListAdapter!!,
-                RecyclerView.VERTICAL, context!!, null, true
-            )
+//            productList.clear()
+//            productList.add(Data("" , null , 1 , "" ,
+//                "" , 55 , "" , "iphone6s" , "" , "81" , null))
+//            delegateProductsListAdapter = DelegateProductsListAdapter(model, productList)
+//            UtilKotlin.setRecycleView(
+//                delegateProductsRecycler, delegateProductsListAdapter!!,
+//                RecyclerView.VERTICAL, context!!, null, true
+//            )
         }
 
 

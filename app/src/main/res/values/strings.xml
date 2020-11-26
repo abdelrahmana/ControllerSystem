@@ -226,6 +226,8 @@
     <string name="delivery_done">اتمام التوصيل</string>
     <string name="address_required">العنوان مطلوب</string>
     <string name="shipping_fee_required">رسوم الشحن مطلوب</string>
+    <string name="no_notifications_reports">"لا توجداشعارات و بلاغات "</string>
+    <string name="under_procedure">تحت الإجراء</string>
 
 
 </resources>
