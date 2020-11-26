@@ -10,9 +10,10 @@ import com.example.controllersystemapp.delegates.notificationreports.fragments.D
 import com.example.controllersystemapp.delegates.orders.fragments.DelegateOrdersFragment
 import com.example.controllersystemapp.delegates.settings.DelegateSettingsFragment
 import com.example.controllersystemapp.delegates.wallet.fragments.SpecialWalletFragment
+import com.example.util.CommonActivity
 import com.example.util.NameUtils
 
-class RedirecteDelegateActivity : AppCompatActivity() {
+class RedirecteDelegateActivity : CommonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_redirecte_delegate)

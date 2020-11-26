@@ -22,6 +22,8 @@ import com.example.controllersystemapp.common.cities.CitiesListResponse
 import com.example.controllersystemapp.common.forgetpassword.model.RequestModelNewPass
 import com.example.controllersystemapp.common.login.LoginRequest
 import com.example.controllersystemapp.common.login.LoginResponse
+import com.example.controllersystemapp.delegates.makeorder.model.DelegateMakeOrderRequest
+import com.example.controllersystemapp.delegates.makeorder.model.DelegateProductsListResponse
 import com.example.controllersystemapp.delegates.wallet.models.DelegateOrderItemDetailsResponse
 import com.example.controllersystemapp.delegates.wallet.models.DelegateOrderItemsListResponse
 import com.example.controllersystemapp.delegates.wallet.models.DelegateOrdersListResponse
@@ -233,4 +235,22 @@ interface WebService {
     @GET("delegate/orders/item-details")
     fun delegateOrderItemDetails(@Query("item_id") item_id : Int): Observable<Response<DelegateOrderItemDetailsResponse>>
 
+    @Headers("Accept: application/json")
+    @POST("delegate/orders/update-status")
+    fun delegateUpdateOrderStatus(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @POST("delegate/orders/create")
+    fun delegateCreateOrder(@Body delegateMakeOrderRequest: DelegateMakeOrderRequest): Observable<Response<SuccessModel>>
+
+
+    @Headers("Accept: application/json")
+    @GET("delegate/categories/list")
+    fun delegateCategoriesList(@Query("parent_id") parentId : Int? , @Query("name") name : String?):
+            Observable<Response<CategoriesListResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("delegate/products/list")
+    fun delegateProductsList(@Query("category_id") categoryId : Int? , @Query("name") name : String?):
+            Observable<Response<DelegateProductsListResponse>>
 }

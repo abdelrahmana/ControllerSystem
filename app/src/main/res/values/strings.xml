@@ -224,6 +224,8 @@
     <string name="addNew">اضافات جديدة</string>
     <string name="no_wallet">لا توجد منتجات متاحة في المحفظة</string>
     <string name="delivery_done">اتمام التوصيل</string>
+    <string name="address_required">العنوان مطلوب</string>
+    <string name="shipping_fee_required">رسوم الشحن مطلوب</string>
 
 
 </resources>

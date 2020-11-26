@@ -10,18 +10,18 @@ import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.delegates.wallet.models.Data
-import kotlinx.android.synthetic.main.curretn_wallet_item.view.*
+import kotlinx.android.synthetic.main.new_wallet_item.view.*
 
 
-class CurrentWalletAdapter(
+class NewWalletAdapter(
     var context: Context,
     var currentWalletList: ArrayList<Data>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
-    RecyclerView.Adapter<CurrentWalletAdapter.ViewHolder>(){
+    RecyclerView.Adapter<NewWalletAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.curretn_wallet_item , parent , false)
+        val view = LayoutInflater.from(context).inflate(R.layout.new_wallet_item , parent , false)
         return ViewHolder(view)
     }
 
@@ -51,17 +51,16 @@ class CurrentWalletAdapter(
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-            itemView.currentWalletName.text = " أمر تجهيز رقم ${orderWallet?.order_number}"
-            itemView.currentWalletDesc.text = orderWallet?.details?.get(0)?.product?.name?:""
-            itemView.price.text = orderWallet?.total_price?:""
-            itemView.currancy.text = orderWallet?.currency?:""
-            itemView.quantity.text = (orderWallet?.details?.get(0)?.quantity?:0).toString()?:""
-            itemView.walletCategoryTxt?.text = orderWallet?.details?.get(0)?.product?.category?.name?:""
+            itemView.newWalletName.text = " أمر تجهيز رقم ${orderWallet?.order_number}"
+            itemView.newWalletDesc.text = orderWallet?.details?.get(0)?.product?.name?:""
+            itemView.newOrderPrice.text = orderWallet?.total_price?:""
+            itemView.newOrderCurrency.text = orderWallet?.currency?:""
+            itemView.newOrderQuantity.text = (orderWallet?.details?.get(0)?.quantity?:0).toString()?:""
+            itemView.newwalletCategoryTxt?.text = orderWallet?.details?.get(0)?.product?.category?.name?:""
             // itemView.walletStoreTxt?.text = orderWallet?.currency?:""
-            itemView.slash?.visibility = View.GONE
-            itemView.walletStoreTxt?.visibility = View.GONE
+            itemView.newSlash?.visibility = View.GONE
+            itemView.newwalletStoreTxt?.visibility = View.GONE
            // itemView.walletCategoryTxt?.visibility = View.GONE
-            itemView.statusCurrentWalletTxt?.text = orderWallet?.status_word?:""
 
 
 //            Glide.with(itemView.context).load(productsModel.image?:"")
@@ -73,6 +72,11 @@ class CurrentWalletAdapter(
 
                 onRecyclerItemClickListener.onItemClick(adapterPosition)
 
+            }
+
+            itemView?.acceptOrderBtn?.setOnClickListener {
+
+                onRecyclerItemClickListener.acceptOrderClickListener(adapterPosition)
             }
 
 

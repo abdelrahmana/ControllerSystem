@@ -11,4 +11,8 @@ interface OnRecyclerItemClickListener {
 
     }
 
+    fun acceptOrderClickListener(position: Int) {
+
+    }
+
 }

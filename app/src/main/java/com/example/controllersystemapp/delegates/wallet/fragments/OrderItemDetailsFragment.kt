@@ -2,6 +2,7 @@ package com.example.controllersystemapp.delegates.wallet.fragments
 
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.example.controllersystemapp.accountant.products.models.AccountantProd
 import com.example.controllersystemapp.delegates.wallet.DelegateOrdersPresenter
 import com.example.controllersystemapp.delegates.wallet.models.DelegateOrderItemDetailsResponse
 import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
@@ -29,6 +31,7 @@ class OrderItemDetailsFragment : Fragment() {
     lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
 
+    var orderId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,11 +57,33 @@ class OrderItemDetailsFragment : Fragment() {
         confirmDeliveryBtn?.setOnClickListener {
 
             Log.d("btnClick", "yess")
-
+            confirmOrder()
 
         }
 
-      //  observeData()
+        observeData()
+
+
+
+    }
+
+    private fun confirmOrder() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            // status = 3 mean confirm delivery
+            DelegateOrdersPresenter.delegateUpdateOrder(
+                webService!!,
+                orderId , 3
+                , activity!!, model
+            )
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
 
 
 
@@ -67,7 +92,7 @@ class OrderItemDetailsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-       // getData()
+        getData()
 
     }
 
@@ -104,10 +129,10 @@ class OrderItemDetailsFragment : Fragment() {
                     getDetailsData(datamodel)
                 }
 
-//                if (datamodel is SuccessModel) {
-//                    Log.d("testApi", "isForyou")
-//                    successRemove(datamodel)
-//                }
+                if (datamodel is SuccessModel) {
+                    Log.d("testApi", "isForyou")
+                    confirmDeliveryData(datamodel)
+                }
                 model.responseCodeDataSetter(null) // start details with this data please
             }
 
@@ -131,9 +156,32 @@ class OrderItemDetailsFragment : Fragment() {
 
     }
 
+    private fun confirmDeliveryData(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            model.responseCodeDataSetter(null) // start details with this data please
+
+
+            UtilKotlin.showSnackMessage(activity, successModel?.msg[0])
+            activity?.supportFragmentManager?.popBackStack()
+            activity?.supportFragmentManager?.popBackStack()
+
+//            Handler().postDelayed(Runnable {
+//                activity?.let {
+//                    it.supportFragmentManager.popBackStack()
+//                }
+//            }, 1000)
+        }
+
+
+    }
+
     private fun getDetailsData(itemDetails: DelegateOrderItemDetailsResponse) {
 
         itemDetails?.data?.let {itemDetailsData ->
+
+            orderId = itemDetailsData?.order_id?:0
 
             itemName?.text = itemDetailsData?.product?.name?:""
             itemQuantity?.text = (itemDetailsData?.quantity?:0).toString()
