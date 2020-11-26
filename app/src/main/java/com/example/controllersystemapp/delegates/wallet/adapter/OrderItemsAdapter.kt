@@ -60,7 +60,10 @@ class OrderItemsAdapter(
             if (orderWallet?.category == null || orderWallet?.ware_houses.isNullOrEmpty())
                 itemView.slash?.visibility = View.GONE
             itemView.walletCategoryTxt?.text = orderWallet?.category?.name?:""
-            itemView.walletStoreTxt?.text = orderWallet?.ware_houses?.get(0)?.name?:""
+            if (orderWallet?.ware_houses.isNullOrEmpty() == false)
+            {
+                itemView.walletStoreTxt?.text = orderWallet?.ware_houses?.get(0)?.name?:""
+            }
             itemView.statusCurrentWallet?.visibility = View.GONE
 
 //            Glide.with(itemView.context).load(productsModel.image?:"")

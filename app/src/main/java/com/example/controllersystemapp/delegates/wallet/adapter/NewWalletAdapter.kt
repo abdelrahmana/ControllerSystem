@@ -52,12 +52,15 @@ class NewWalletAdapter(
         ) {
 
             itemView.newWalletName.text = " أمر تجهيز رقم ${orderWallet?.order_number}"
-            itemView.newWalletDesc.text = orderWallet?.details?.get(0)?.product?.name?:""
             itemView.newOrderPrice.text = orderWallet?.total_price?:""
             itemView.newOrderCurrency.text = orderWallet?.currency?:""
-            itemView.newOrderQuantity.text = (orderWallet?.details?.get(0)?.quantity?:0).toString()?:""
-            itemView.newwalletCategoryTxt?.text = orderWallet?.details?.get(0)?.product?.category?.name?:""
             // itemView.walletStoreTxt?.text = orderWallet?.currency?:""
+            if (orderWallet?.details?.isNullOrEmpty() == false)
+            {
+                itemView.newWalletDesc.text = orderWallet?.details?.get(0)?.product?.name?:""
+                itemView.newOrderQuantity.text = (orderWallet?.details?.get(0)?.quantity?:0).toString()?:""
+                itemView.newwalletCategoryTxt?.text = orderWallet?.details?.get(0)?.product?.category?.name?:""
+            }
             itemView.newSlash?.visibility = View.GONE
             itemView.newwalletStoreTxt?.visibility = View.GONE
            // itemView.walletCategoryTxt?.visibility = View.GONE
