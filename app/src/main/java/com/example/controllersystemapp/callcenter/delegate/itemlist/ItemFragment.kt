@@ -26,7 +26,7 @@ import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.photonect.photographerapp.notificationphotographer.DonePackgae.ItemAdapter
 import io.reactivex.observers.DisposableObserver
-import kotlinx.android.synthetic.main.fragment_delegates.*
+import kotlinx.android.synthetic.main.orders_layout.*
 import retrofit2.Response
 
 class ItemFragment : Fragment(), OnRecyclerItemClickListener {
@@ -50,6 +50,7 @@ class ItemFragment : Fragment(), OnRecyclerItemClickListener {
         webService = ApiManagerDefault(context!!).apiService // auth
         progressDialog = UtilKotlin.ProgressDialog(activity!!)
        // Log.d("back" , "Delegate crested")
+        nameOfDelegates?.text = arguments?.getString(NameUtils.orderName,"")?:""
 
 
     }
@@ -71,10 +72,10 @@ class ItemFragment : Fragment(), OnRecyclerItemClickListener {
 
             if (datamodel != null) {
 
-                if (datamodel is  Int) {
+                if (datamodel is  DataBean) {
                       // should call list of it
                     val bundle = Bundle()
-                    bundle.putInt(NameUtils.itemId,itemList.get(datamodel).id?:0)
+                    bundle.putInt(NameUtils.itemId,datamodel.id?:0)
                     // should call item detalis
                     UtilKotlin.changeFragmentBack(activity!! ,
                         ItemDetailsFragment(),"itemDetails"  , bundle,
@@ -147,10 +148,9 @@ class ItemFragment : Fragment(), OnRecyclerItemClickListener {
         {
             delegatesList.add(DelegatesModel("احمد حازم" , null , " +966 56784 9876" , i+1))
         }*/
-        delegatesCount?.text = itemList.size.toString()
 
         itemAdapter = ItemAdapter(modelHandleChangeFragmentclass!! , itemList)
-        delegatesRecycler?.apply {
+        delegatesRecycle?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
             adapter = itemAdapter

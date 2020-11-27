@@ -16,6 +16,7 @@ import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.PARENT_NAME
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.SUB_PARENT_NAME
+import com.example.controllersystemapp.callcenter.maketalbya.CategoriesPresenterCallCenter
 import com.example.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.Datas
 import com.example.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.ProductResponse
 import com.example.util.ApiConfiguration.ApiManagerDefault
@@ -77,8 +78,8 @@ class FragmentLastSubProductclassificationCenter : Fragment() {
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
-            CategoriesPresenter.getCategoriesList(webService!!
-                , arguments?.getInt(FragmentProductclassification.SUB_PARENT_ID)?:-1
+            CategoriesPresenterCallCenter.getProductsList(webService!!
+                , arguments?.getInt(FragmentProductclassification.LAST_SUB)?:-1
                 , activity!!, model)
 
         } else {

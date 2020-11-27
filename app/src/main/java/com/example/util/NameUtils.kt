@@ -4,6 +4,7 @@ object NameUtils {
 
     val delegateId: String? = "delegate_id_call"
     val orderId: String? = "order_id"
+    val orderName: String? = "order_name"
     val itemId: String? = "item_id"
     val LANGUAGE = "language"
     val redirectFragmet = "Switch_fragment"

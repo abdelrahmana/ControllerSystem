@@ -11,18 +11,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.bumptech.glide.util.Util
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.SCANERESULT
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.scanCode
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassificationCenter
+import com.example.controllersystemapp.callcenter.maketalbya.model.OrderCreateRequest
 import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
+import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.fragment_accountant_make_order.*
+import okhttp3.MultipartBody
+import retrofit2.Response
 
 class CallCenterTalbya : Fragment() {
 
@@ -33,7 +39,7 @@ class CallCenterTalbya : Fragment() {
     var categoryID = 0
     var barCode : String ? = null
 
-
+var orderCreateRequest = OrderCreateRequest()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -89,7 +95,9 @@ class CallCenterTalbya : Fragment() {
             }
         }
 
-
+        makeOrderBtn?.setOnClickListener{
+            postCallCenterTalbya()
+        }
         observeData()
     }
 
@@ -100,6 +108,109 @@ class CallCenterTalbya : Fragment() {
 
     }
 
+    private fun postCallCenterTalbya() {
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            if (UtilKotlin.checkAvalibalityOptions(recipientNameEdt?.text.toString()) == true
+                && UtilKotlin.checkAvalibalityOptions(mobileNumberEdt?.text.toString()) == true
+                && UtilKotlin.checkAvalibalityOptions(addressEdt?.text.toString()) == true
+                && UtilKotlin.checkAvalibalityOptions(emailAddressEdt?.text.toString()) == true
+                && UtilKotlin.checkAvalibalityOptions(makeOrderPriceEdt?.text.toString()) == true
+                && UtilKotlin.checkAvalibalityOptions(categoryID) == true
+                && UtilKotlin.checkAvalibalityOptions(orderShoppingFeeEdt?.text.toString()) == true
+            ) {
+                clearProductList()
+               setOrderRequest()
+
+                progressDialog?.show()
+                CategoriesPresenterCallCenter.setTalabyaPost(
+                    webService!!,
+                    ItemListObserver(),
+                    orderCreateRequest!!
+                )
+            } else {
+                UtilKotlin.showSnackErrorInto(activity, getString(R.string.insert_all_data))
+
+            }
+        }else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+            }
+
+    private fun setOrderRequest() {
+        orderCreateRequest.products?.add(categoryID?:0)
+        orderCreateRequest.quantity?.add(1)
+        orderCreateRequest.address = addressEdt?.text.toString()
+        orderCreateRequest.shipment_cost = orderShoppingFeeEdt?.text.toString()
+        orderCreateRequest.delegate_id = 0
+        orderCreateRequest.name = recipientNameEdt?.text.toString()
+        orderCreateRequest.phone = mobileNumberEdt?.text.toString()
+        orderCreateRequest.email = emailAddressEdt?.text.toString()
+
+        val builder = MultipartBody.Builder()
+        builder.setType(MultipartBody.FORM)
+            .addFormDataPart("name", recipientNameEdt?.text.toString())
+            .addFormDataPart("shipment_cost", orderShoppingFeeEdt?.text.toString())
+            .addFormDataPart("address", addressEdt?.text.toString())
+            .addFormDataPart("price", makeOrderPriceEdt?.text.toString())
+            .addFormDataPart("phone", mobileNumberEdt?.text.toString())
+            .addFormDataPart("email", emailAddressEdt?.text.toString())
+            .addFormDataPart("delegate_id",0.toString())
+            .addFormDataPart("quantity[$0]",
+                "1")
+            .addFormDataPart("products[$0]",
+                categoryID.toString())
+
+    }
+
+    private fun clearProductList() {
+        orderCreateRequest.products?.clear()
+        orderCreateRequest?.quantity?.clear()
+    }
+
+
+    override fun onDestroyView() {
+        disposableObserver?.dispose()
+        model.responseDataCode.removeObservers(activity!!)
+        super.onDestroyView()
+    }
+
+    var disposableObserver : DisposableObserver<Response<SuccessModel>>?=null
+    private fun ItemListObserver(): DisposableObserver<Response<SuccessModel>> {
+
+        disposableObserver= object : DisposableObserver<Response<SuccessModel>>() {
+            override fun onComplete() {
+                progressDialog?.dismiss()
+                dispose()
+            }
+
+            override fun onError(e: Throwable) {
+                UtilKotlin.showSnackErrorInto(activity!!, e.message.toString())
+                progressDialog?.dismiss()
+                dispose()
+            }
+
+            override fun onNext(response: Response<SuccessModel>) {
+                if (response!!.isSuccessful) {
+                    progressDialog?.dismiss()
+                    UtilKotlin.showSnackMessage(activity!!, response.body()?.msg?.get(0)?:"")
+                    activity?.onBackPressed()
+                }
+                else
+                {
+                    progressDialog?.dismiss()
+                    if (response.errorBody() != null) {
+                        // val error = PrefsUtil.handleResponseError(response.errorBody(), context!!)
+                        val error = UtilKotlin.getErrorBodyResponse(response.errorBody(), context!!)
+                        UtilKotlin.showSnackErrorInto(activity!!, error)
+                    }
+
+                }
+            }
+        }
+        return disposableObserver!!
+    }
     private fun observeData() {
 
 
@@ -180,14 +291,4 @@ class CallCenterTalbya : Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        model.let {
-           // it?.errorMessage?.removeObservers(activity!!)
-            it?.responseDataCode?.removeObservers(activity!!)
-           // it?.notifyItemSelected?.removeObservers(activity!!)
-
-
-        }
-        super.onDestroyView()
-    }
 }

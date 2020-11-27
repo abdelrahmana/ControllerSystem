@@ -22,14 +22,14 @@ import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.fragment_product_classification.*
 
-class FragmentSubProductclassificationCenter : Fragment() {
+class SubSubProductListFragment : Fragment() {
 
 
     lateinit var model : ViewModelHandleChangeFragmentclass
     var webService: WebService? = null
     lateinit var progressDialog: Dialog
 
-    var subProductAdaptor : SubProductClassificationAdaptorCenter?=null
+    var subProductAdaptor : SubSubProductListAdapters?=null
     var subCategoryList = ArrayList<Data>()
 
 
@@ -74,7 +74,7 @@ class FragmentSubProductclassificationCenter : Fragment() {
             progressDialog?.show()
 
             CategoriesPresenterCallCenter.getCategoriesList(webService!!
-                , arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1
+                , arguments?.getInt(FragmentProductclassification.SUB_PARENT_ID)?:-1
                 , activity!!, model)
 
         } else {
@@ -95,7 +95,6 @@ class FragmentSubProductclassificationCenter : Fragment() {
             it?.responseDataCode?.removeObservers(activity!!) // remove observer from here only
             it?.notifyItemSelected?.removeObservers(activity!!)
             it?.errorMessage?.removeObservers(activity!!)
-
         }
 
     }
@@ -105,7 +104,7 @@ class FragmentSubProductclassificationCenter : Fragment() {
 
             subCategoryList.clear()
             subCategoryList.addAll(categoriesListResponse?.data)
-            subProductAdaptor = SubProductClassificationAdaptorCenter(model, subCategoryList)
+            subProductAdaptor = SubSubProductListAdapters(model, subCategoryList)
             UtilKotlin.setRecycleView(productList,subProductAdaptor!!,
                 RecyclerView.VERTICAL,context!!, null, true)
         } else {
@@ -148,13 +147,13 @@ class FragmentSubProductclassificationCenter : Fragment() {
                     Log.d("subParetnId" , "observeParent ${modelSelected.id}")
                     Log.d("subParetnId" , "observeParentId ${arguments?.getInt(FragmentProductclassification.PARENT_ID)}")
 
-                    bundle.putInt(FragmentProductclassification.SUB_PARENT_ID, modelSelected.id?:-1)
+                    bundle.putInt(FragmentProductclassification.LAST_SUB, modelSelected.id?:-1)
                     bundle.putString(FragmentProductclassification.SUB_PARENT_NAME, modelSelected.name?:"")
                     bundle.putString(FragmentProductclassification.PARENT_NAME, arguments?.getString(FragmentProductclassification.PARENT_NAME)?:"")
                     bundle.putInt(FragmentProductclassification.PARENT_ID, arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1)
                     UtilKotlin.changeFragmentWithBack(activity!! ,
-                        arguments?.getInt(NameUtils.WHICH_ADD_PRD_STORE)?:R.id.frameLayout_direction ,
-                        SubSubProductListFragment() , bundle)
+                        R.id.frameLayout_direction ,
+                        FragmentLastSubProductclassificationCenter() , bundle)
                 }
                 /* else if (modelSelected is ImageModelData) // if it is object of this model
                   {

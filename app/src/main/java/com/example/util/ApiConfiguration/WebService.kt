@@ -22,6 +22,7 @@ import com.example.controllersystemapp.callcenter.delegate.model.DelegateRespons
 import com.example.controllersystemapp.callcenter.delegate.model.ItemDetailsResponse
 import com.example.controllersystemapp.callcenter.delegate.model.ItemListResponse
 import com.example.controllersystemapp.callcenter.delegate.model.OrderResponse
+import com.example.controllersystemapp.callcenter.maketalbya.model.OrderCreateRequest
 import com.example.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.ProductResponse
 import com.example.controllersystemapp.common.cities.CitiesListResponse
 import com.example.controllersystemapp.common.forgetpassword.model.RequestModelNewPass
@@ -220,4 +221,9 @@ interface WebService {
     @Headers("Accept: application/json")
     @GET("call-center/products/list")
     fun getCategoryId(@Query("category_id") categoryId : Int?): Observable<Response<ProductResponse>>
+
+
+    @Headers("Accept: application/json")
+    @POST("call-center/orders/create")
+    fun postOrder(@Body orderCreateRequest: OrderCreateRequest): Observable<Response<SuccessModel>>
 }

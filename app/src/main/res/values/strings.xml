@@ -211,6 +211,7 @@
     <string name="addNotificaion">اضف اشعار</string>
     <string name="writeMessage">اكتب الرساله</string>
     <string name="choose_delegate">تحديد مندوب</string>
+    <string name="insert_all_data">تأكد من إدخال جميع البيانات</string>
 
 
 </resources>
