@@ -57,25 +57,6 @@ class DelegateNotificationReportsAdapter(
 
             // itemView.store_name.text = itemData?.name?:""
 
-//            if (adapterPositionChecked == adapterPosition) {
-//                showHideViews(itemView, View.VISIBLE)
-//                itemView.openCloseImage.setImageDrawable(
-//                    ContextCompat.getDrawable(
-//                        itemView.context,
-//                        R.drawable.ic_btn_close_info
-//                    )
-//                )
-//            } else {
-//                showHideViews(itemView, View.GONE)
-//                itemView.openCloseImage.setImageDrawable(
-//                    ContextCompat.getDrawable(
-//                        itemView.context,
-//                        R.drawable.ic_btn_open_info
-//                    )
-//                )
-//
-//            }
-//
 
             itemView.setOnClickListener {
                 onItemClicked(modelData, adapterPosition) // go to details please
@@ -100,9 +81,7 @@ class DelegateNotificationReportsAdapter(
         private fun onItemClicked(model: ViewModelHandleChangeFragmentclass, position: Int) {
             Log.d("pos", "$position")
             delegateNotificationlist[position].isChecked = !delegateNotificationlist[position].isChecked
-//            adapterPositionChecked = adapterPosition
-//            // model.setNotifyItemSelected(delegateNotificationlist.get(position)?:"") // update sign up fragment please
-//            notifyDataSetChanged() // reload this please
+
             if (delegateNotificationlist[position].isChecked)
             {
                 itemView.openCloseImage.setImageDrawable(
@@ -128,6 +107,5 @@ class DelegateNotificationReportsAdapter(
 
     }
 
-    var adapterPositionChecked = -1 // this is the checked item to use
 
 }

@@ -213,7 +213,7 @@
 
                 />
             <TextView
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/ffshamelfamily_sansonebold"
                 android:textColor="@color/textColor"
@@ -236,7 +236,7 @@
                 android:layout_width="0dp"
                 android:layout_height="26dp"
                 android:text="احمد بن صالح الشامي"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/ffshamelfamily_sansonebold"
                 android:textColor="@color/textColor"
@@ -251,8 +251,8 @@
                 android:id="@+id/notificationPhoneTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text=" +966 00000 0000"
-                android:textSize="14sp"
+                android:text="+966 00000 0000"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/ffshamelfamily_sansonebold"
                 android:textColor="@color/textColor"
@@ -273,7 +273,7 @@
                 android:text="trose@buzzbean.info"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black_bold"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
