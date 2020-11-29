@@ -210,6 +210,7 @@
     <string name="add_noticesReports">قم بالبحث عن اسم المندوب باختيار المندوب الذي سيتم ارسال اليهم البلاغ</string>
     <string name="addNotificaion">اضف اشعار</string>
     <string name="writeMessage">اكتب الرساله</string>
+    <string name="choose_delegate">تحديد مندوب</string>
     <string name="productDetails">تفاصيل المنتجات</string>
     <string name="quantityD">الكمية:</string>
     <string name="storeNameD">اسم المخزن:</string>

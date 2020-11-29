@@ -17,7 +17,6 @@
         android:background="@color/colorOrange55"
         >
 
-
         <ImageView
             android:id="@+id/backOrderImg"
             android:layout_marginStart="@dimen/_16sdp"
@@ -348,6 +347,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:visibility="gone"
             android:textAlignment="viewStart"
             android:layout_marginTop="@dimen/_15sdp"
             android:textColor="@color/login_gray"
@@ -356,6 +356,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/barCodeTxt"
             android:textColor="@color/login_gray"
             android:layout_marginStart="32dp"
@@ -366,6 +367,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/scanOrderCard"
+            android:visibility="gone"
             android:layout_marginBottom="@dimen/_40sdp"
             android:minWidth="@dimen/_100sdp"
             android:minHeight="@dimen/_90sdp"
@@ -408,7 +410,17 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-
+        <CheckBox
+            app:layout_constraintTop_toBottomOf="@+id/containerTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            style="@style/Widget.App.CheckBox"
+            android:text="@string/choose_delegate"
+            android:textStyle="bold"
+            android:textColor="@color/add_product_gray"
+            android:id="@+id/chooseDelegate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

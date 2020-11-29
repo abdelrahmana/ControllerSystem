@@ -2,6 +2,9 @@ package  com.example.util
 
 object NameUtils {
 
+    val delegateId: String? = "delegate_id_call"
+    val orderId: String? = "order_id"
+    val itemId: String? = "item_id"
     val LANGUAGE = "language"
     val redirectFragmet = "Switch_fragment"
     val storeProductsFragmet = "storeAndProducts"

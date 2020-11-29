@@ -184,10 +184,10 @@ class OrderItemDetailsFragment : Fragment() {
             orderId = itemDetailsData?.order_id?:0
 
             itemName?.text = itemDetailsData?.product?.name?:""
-            itemQuantity?.text = (itemDetailsData?.quantity?:0).toString()
+            itemQuantity?.text = itemDetailsData?.quantity?:""
             itemCategoryName?.text = itemDetailsData?.product?.category?.name?:""
            // itemStoreName?.text = itemDetailsData?.
-            //itemStoreQuantity?.text =
+            itemStoreQuantity?.text = itemDetailsData?.product?.total_quantity?:""
             Glide.with(context!!).load(itemDetailsData?.product?.image?:"")
 //                .placeholder(R.drawable.no_profile)
 //                .error(R.drawable.no_profile)
@@ -198,12 +198,16 @@ class OrderItemDetailsFragment : Fragment() {
             itemMapName?.text = itemDetailsData?.order?.name?:""
             itemMapPhone?.text = itemDetailsData?.order?.phone?:""
             itemMapEmail?.text = itemDetailsData?.order?.email?:""
-           // feePrice?.text = itemDetailsData?.order?.email?:""
+            feePrice?.text = itemDetailsData?.order?.total_price?:"0.0"
             feeCurrency?.text = itemDetailsData?.order?.currency?:""
-            shippingText?.text = itemDetailsData?.order?.shipment_cost?:""
+            shippingPrice?.text = itemDetailsData?.order?.shipment_cost?:"0.0"
             shippingCurrancy?.text = itemDetailsData?.order?.currency?:""
-            totalPriceText?.text = itemDetailsData?.order?.total_price?:""
+            val price = itemDetailsData?.order?.total_price?:"0"
+            val shippingPrice = itemDetailsData?.order?.shipment_cost?:"0"
+            val totalPrice = price.toDouble() + shippingPrice.toDouble()
+            totalPricePrice?.text = (totalPrice).toString()
             totalPriceCurrancy?.text = itemDetailsData?.order?.currency?:""
+
 
 
         }

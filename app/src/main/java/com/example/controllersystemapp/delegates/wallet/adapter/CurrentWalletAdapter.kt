@@ -51,7 +51,7 @@ class CurrentWalletAdapter(
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-            itemView.currentWalletName.text = " أمر تجهيز رقم ${orderWallet?.order_number}"
+            itemView.currentWalletName.text = "أمر تجهيز رقم${orderWallet?.order_number}"
             itemView.price.text = orderWallet?.total_price ?: ""
             itemView.currancy.text = orderWallet?.currency ?: ""
             if (orderWallet?.details?.isNullOrEmpty() == false)

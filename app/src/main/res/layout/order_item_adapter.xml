@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/_15sdp"
+    android:id="@+id/cardContainer"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="3dp"
+    android:minHeight="@dimen/_80sdp"
+    app:cardBackgroundColor="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/itemContainer"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/salesImage"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/sales_reports_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/orderName"
+            android:text="توصيل رقم"
+            android:textColor="@color/black"
+            android:textAlignment="viewStart"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintStart_toEndOf="@+id/salesImage"
+            app:layout_constraintTop_toTopOf="@+id/salesImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:id="@+id/rsomText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/salesImage"
+            app:layout_constraintTop_toBottomOf="@+id/orderName" />
+
+        <TextView
+            android:id="@+id/textKeyRsom"
+            android:text="رسوم"
+            app:layout_constraintBottom_toBottomOf="@+id/rsomText"
+            app:layout_constraintStart_toEndOf="@+id/rsomText"
+            android:textAlignment="viewStart"
+            android:layout_marginEnd="@dimen/_7sdp"
+            app:layout_constraintTop_toTopOf="@+id/rsomText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/piecesTextView"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textAlignment="viewStart"
+            android:layout_marginEnd="@dimen/_7sdp"
+            app:layout_constraintEnd_toStartOf="@+id/picecesKeyRsom"
+            app:layout_constraintTop_toTopOf="@+id/orderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/picecesKeyRsom"
+            android:text="قطعة"
+            android:textAlignment="viewStart"
+            android:layout_marginEnd="@dimen/_7sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/piecesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/arrive"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textAlignment="viewStart"
+            app:layout_constraintStart_toStartOf="@+id/salesImage"
+            app:layout_constraintTop_toBottomOf="@+id/rsomText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/moreText"
+            android:text="@string/more"
+            android:paddingBottom="@dimen/_7sdp"
+            android:drawableEnd="@drawable/ic_more"
+            android:drawablePadding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:textAlignment="viewStart"
+            app:layout_constraintTop_toTopOf="@+id/arrive"
+            app:layout_constraintBottom_toBottomOf="@+id/arrive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

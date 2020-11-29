@@ -12,7 +12,7 @@ data class ItemDetailsData(
     val price: String?,
     val product: ItemDetailsProduct?,
     val product_id: Int?,
-    val quantity: Int?,
+    val quantity: String?,
     val updated_at: String?
 )
 

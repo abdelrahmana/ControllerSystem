@@ -235,6 +235,7 @@ class FragmentProductclassification : Fragment() {
         var SUB_PARENT_ID = "subParentId"
         var SUB_PARENT_NAME = "subParentName"
         var PARENT_NAME = "parentName"
+        var ISCALLCENTER= "Call_center"
 
     }
 }

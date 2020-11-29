@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.delegate_item.view.*
 class DelegatesAdapter(
     var context: Context,
     var delegateList: ArrayList<CallCenterDelegateData>,
-    var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
+    var onRecyclerItemClickListener: OnRecyclerItemClickListener,var showOptions : Int = View.VISIBLE ) :
     RecyclerView.Adapter<DelegatesAdapter.ViewHolder>(){
 
 
@@ -34,9 +34,24 @@ class DelegatesAdapter(
 
 
     }
+    fun updateData(newList: List<CallCenterDelegateData>?) {
+        val start = itemCount
+        if (newList != null) {
+            if (!newList.isEmpty()) { // if this is the first time
+                if (delegateList.size > 0) // has old data
+                {
+                    this.delegateList.addAll(newList)
+                    notifyItemRangeInserted(start, delegateList.size - 1)
+                } else {
+                    this.delegateList.addAll(newList)
+                    notifyDataSetChanged()
+                }
 
+            }
+        }
+    }
 
-    class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
+   inner class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
             delegatesModel: CallCenterDelegateData,
@@ -53,6 +68,7 @@ class DelegatesAdapter(
                 onRecyclerItemClickListener.onItemClick(adapterPosition)
 
             }
+            itemView.optionIcon.visibility = showOptions
             itemView.optionIcon.setOnClickListener{
                 onRecyclerItemClickListener.delegateClickListener(adapterPosition)
             }

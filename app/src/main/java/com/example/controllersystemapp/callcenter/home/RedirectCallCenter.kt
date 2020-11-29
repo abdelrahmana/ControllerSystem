@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.makeorder.AccountantMakeOrderFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DelegatesFragment
+import com.example.controllersystemapp.callcenter.delegate.DelegatesFragmentCenter
+import com.example.controllersystemapp.callcenter.maketalbya.CallCenterTalbya
 import com.example.controllersystemapp.callcenter.setting.SettingCallCenter
 import com.example.util.CommonActivity
 import com.example.util.NameUtils
@@ -30,11 +32,11 @@ class RedirectCallCenter : CommonActivity() {
 
         when (fragment) {
             NameUtils.ACCOUNTANT_DELEAGTES -> {
-                changeFragment(DelegatesFragment(), fragment)
+                changeFragment(DelegatesFragmentCenter(), fragment)
             }
 
             NameUtils.MAKE_SPECIAL_ORDER -> {
-                changeFragment(AccountantMakeOrderFragment(), fragment)
+                changeFragment(CallCenterTalbya(), fragment)
             }
 
             settingsFragmet-> {

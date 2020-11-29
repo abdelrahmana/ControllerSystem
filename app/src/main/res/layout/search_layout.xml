@@ -34,6 +34,7 @@
                 />
 
             <EditText
+                android:id="@+id/searchEditText"
                 android:textAlignment="viewStart"
                 android:hint="@string/search"
                 android:textSize="14sp"

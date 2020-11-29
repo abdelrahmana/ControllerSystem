@@ -2,25 +2,33 @@ package com.example.controllersystemapp.delegates.notificationreports.fragments
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.interfaces.OnRecyclerIClickAcceptRejectListener
+import com.example.controllersystemapp.delegates.notificationreports.models.DelegateNotificationresponse
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
+import com.photonect.photographerapp.notificationphotographer.DonePackgae.DelegateNotificationReportsAdapter
 import kotlinx.android.synthetic.main.fragment_delegate_notify_reports.*
 import kotlinx.android.synthetic.main.no_products.view.*
 
-class DelegateNotifyReportsFragment : Fragment() {
+class DelegateNotifyReportsFragment : Fragment() , OnRecyclerIClickAcceptRejectListener {
 
     var webService: WebService? = null
     lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
 
+    var notificationList = ArrayList<DelegateNotificationresponse>()
+    lateinit var delegaetNotificationReportsAdapter: DelegateNotificationReportsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,11 +65,42 @@ class DelegateNotifyReportsFragment : Fragment() {
         noNotificationReportsData?.firstNoDataTxt?.text = getString(R.string.no_notifications_reports)
         noNotificationReportsData?.secondNoDataTxt?.visibility = View.GONE
 
-        notificationReportsRecycler?.visibility = View.GONE
-        noNotificationReportsData?.visibility = View.VISIBLE
     }
 
+    override fun onResume() {
+        super.onResume()
 
+        requestData()
+
+    }
+
+    private fun requestData() {
+
+        notificationReportsRecycler?.visibility = View.VISIBLE
+        noNotificationReportsData?.visibility = View.GONE
+        notificationList.clear()
+        notificationList.add(DelegateNotificationresponse(null , false))
+        notificationList.add(DelegateNotificationresponse(null , false))
+        notificationList.add(DelegateNotificationresponse(null , false))
+
+        delegaetNotificationReportsAdapter = DelegateNotificationReportsAdapter(model ,notificationList , this )
+        notificationReportsRecycler?.apply {
+
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
+            adapter = delegaetNotificationReportsAdapter
+
+        }
+
+    }
+
+    override fun onItemAcceptClick(position: Int) {
+        Log.d("clickButton" , "Accept")
+    }
+
+    override fun onItemRejectClick(position: Int) {
+        Log.d("clickButton" , "reject")
+    }
 
 
 }

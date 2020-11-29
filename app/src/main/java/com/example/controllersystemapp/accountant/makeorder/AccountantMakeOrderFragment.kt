@@ -67,10 +67,11 @@ class AccountantMakeOrderFragment : Fragment() {
         productClassificationCard?.setOnClickListener {
 
             val bundle = Bundle()
-            bundle.putInt(NameUtils.WHICH_ADD_PRD_STORE, R.id.redirect_acc_fragments)
+            bundle.putInt(NameUtils.WHICH_ADD_PRD_STORE, /*R.id.redirect_acc_fragments*/
+                arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
 
             UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassification() , "productClassification"  ,
-                bundle , R.id.redirect_acc_fragments)
+                bundle ,arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction /*R.id.redirect_acc_fragments*/)
 
         }
 

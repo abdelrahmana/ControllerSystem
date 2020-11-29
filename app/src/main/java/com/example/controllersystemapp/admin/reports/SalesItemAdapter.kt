@@ -22,7 +22,6 @@ class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
         holder.bindItems(arrayListOfTutorials[position],/*modelData*/arrayListOfTutorials)
         //  setAnimation(holder.itemView, position)
 
-
     }
 
     //this method is giving the size of the list

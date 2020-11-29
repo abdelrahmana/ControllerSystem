@@ -8,7 +8,8 @@
     tools:context=".admin.delegatesAccountants.fragments.DelegatesFragment">
 
 
-    <androidx.core.widget.NestedScrollView
+    <com.example.util.NestedScrollPaginationView
+        android:id="@+id/scrollingNestedScrollMostSelling"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,8 +18,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:background="@color/colorOrange55"
+                android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/backDelegate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_24sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_ab_back_light" />
+
+                <TextView
+                    android:id="@+id/delegate_name"
+                    android:text="@string/delegates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:textColor="@color/textColor"
+                    android:fontFamily="@font/ffshamelfamily_sansonebold"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/backDelegate"
+
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <include
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/search_layout"/>
@@ -63,7 +97,7 @@
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </com.example.util.NestedScrollPaginationView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

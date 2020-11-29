@@ -320,7 +320,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/image_samsung"
+                    android:src="@color/grey_bg"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:scaleType="centerCrop"
                     android:layout_width="@dimen/_100sdp"
@@ -530,17 +530,18 @@
                         android:id="@+id/itemMapEmail"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:textSize="14sp"
-                        android:textColor="@color/black_bold"
+                        android:text=""
                         android:textAlignment="viewStart"
-                        android:layout_marginTop="@dimen/_7sdp"
-                        app:layout_constraintStart_toStartOf="@+id/itemAddress"
+                        android:textColor="@color/black_bold"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/itemAddress"
                         app:layout_constraintTop_toBottomOf="@+id/itemMapPhone"
-                        />
+                        app:layout_constraintVertical_bias="0.28" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
