@@ -2,6 +2,7 @@ package com.example.util
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -69,6 +70,9 @@ object UtilKotlin {
     val permissionForImageAndFile = 200
     val submitPermssion = 190 // when user submit check this permssion before creating file and go to update profile
     val permissionScan = 330
+
+
+
 
     fun getCreatedFileFromBitmap(fileName: String, bitmapUpdatedImage: Bitmap, typeOfFile : String?, context:Context) : File {
         val bytes =  ByteArrayOutputStream()

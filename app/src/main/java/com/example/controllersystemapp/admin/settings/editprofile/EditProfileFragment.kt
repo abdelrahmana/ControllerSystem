@@ -3,6 +3,7 @@ package com.example.controllersystemapp.admin.settings.editprofile
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -13,6 +14,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
+import com.example.util.UtilKotlin
+import com.example.util.UtilKotlin.showSnackErrorInto
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import java.io.IOException
 
@@ -42,28 +45,50 @@ class EditProfileFragment : Fragment() {
         }
 
         profileImg?.setOnClickListener {
+            if (UtilKotlin.checkPermssionGrantedForImageAndFile(
+                    activity!!,
+                    UtilKotlin.permissionForImageAndFile,
+                    this
+                )
+            ) {
+              setDialogChooser()
 
-            val pictureDialog =
-                AlertDialog.Builder(context)
-            //pictureDialog.setTitle("Select Action");
-            //pictureDialog.setTitle("Select Action");
-            val pictureDialogItems = arrayOf(
-                getString(R.string.choose_from_mobile_pic),
-                getString(R.string.take_photo)
-            )
-            pictureDialog.setItems(
-                pictureDialogItems
-            ) { dialog, which ->
-                when (which) {
-                    0 -> choosePhotoFromGallary()
-                    1 -> takePhotoFromCamera()
-                }
             }
-            pictureDialog.show()
-
         }
 
 
+    }
+
+    private fun setDialogChooser() {
+        val pictureDialog =
+            AlertDialog.Builder(context)
+        //pictureDialog.setTitle("Select Action");
+        //pictureDialog.setTitle("Select Action");
+        val pictureDialogItems = arrayOf(
+            getString(R.string.choose_from_mobile_pic),
+            getString(R.string.take_photo)
+        )
+        pictureDialog.setItems(
+            pictureDialogItems
+        ) { dialog, which ->
+            when (which) {
+                0 -> choosePhotoFromGallary()
+                1 -> takePhotoFromCamera()
+            }
+        }
+        pictureDialog.show()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (requestCode == UtilKotlin.permissionForImageAndFile) {
+            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                setDialogChooser()
+
+            } else {
+                showSnackErrorInto(activity, getString(R.string.cant_add_image))
+
+            }
+        }
     }
 
     private val GALLERY = 1
@@ -71,17 +96,15 @@ class EditProfileFragment : Fragment() {
     var bitmap: Bitmap? = null
 
     fun choosePhotoFromGallary() {
-        val galleryIntent = Intent(
-            Intent.ACTION_PICK,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        )
-        startActivityForResult(galleryIntent, GALLERY)
-    }
 
+        UtilKotlin.performImgPicAction(GALLERY,this,activity!!)
+      //  startActivityForResult(galleryIntent, GALLERY)
+    }
     private fun takePhotoFromCamera() {
-        val intent =
-            Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, CAMERA)
+
+        UtilKotlin.performImgPicAction(CAMERA,this,activity!!)
+
+        //  startActivityForResult(intent, CAMERA)
     }
 
 

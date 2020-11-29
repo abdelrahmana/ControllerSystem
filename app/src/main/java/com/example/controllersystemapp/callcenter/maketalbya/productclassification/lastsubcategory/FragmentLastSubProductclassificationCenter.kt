@@ -161,7 +161,7 @@ class FragmentLastSubProductclassificationCenter : Fragment() {
         })
 
         model.responseDataCode?.observe(activity!!, Observer { datamodel ->
-            Log.d("testApi", "observe")
+            //Log.d("testApi", "observe")
 
             if (datamodel != null) {
                 progressDialog?.hide()
@@ -221,6 +221,8 @@ class FragmentLastSubProductclassificationCenter : Fragment() {
             activity!!.supportFragmentManager.popBackStack()
             activity!!.supportFragmentManager.popBackStack()
             activity!!.supportFragmentManager.popBackStack()
+            activity!!.supportFragmentManager.popBackStack()
+
 
         }
     }

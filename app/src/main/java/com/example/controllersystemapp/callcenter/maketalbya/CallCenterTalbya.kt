@@ -5,13 +5,15 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.bumptech.glide.util.Util
+import com.example.controllersystemapp.ModelStringID
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.SCANERESULT
@@ -19,6 +21,7 @@ import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Compani
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
 import com.example.controllersystemapp.admin.productclassification.FragmentProductclassificationCenter
 import com.example.controllersystemapp.callcenter.maketalbya.model.OrderCreateRequest
+import com.example.controllersystemapp.callcenter.responsibledelegate.ResponsibleDelegateFragment
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
@@ -29,6 +32,7 @@ import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.fragment_accountant_make_order.*
 import okhttp3.MultipartBody
 import retrofit2.Response
+
 
 class CallCenterTalbya : Fragment() {
 
@@ -56,6 +60,7 @@ var orderCreateRequest = OrderCreateRequest()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeData()
 
         backOrderImg?.setOnClickListener {
 
@@ -69,7 +74,30 @@ var orderCreateRequest = OrderCreateRequest()
                 }
             }
 
+
+            }
+        chooseDelegate?.setOnClickListener{
+            if (chooseDelegate?.isChecked==true) {
+                if (delegateId == 0)
+                    UtilKotlin.changeFragmentBack(
+                        activity!!, ResponsibleDelegateFragment(), "Delegate_fragment",
+                        null, R.id.frameLayout_direction
+                    )
+            }
+            else
+                delegateId = 0
         }
+     /*   chooseDelegate?.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked)
+                if (delegateId==0)
+                UtilKotlin.changeFragmentBack(activity!! , ResponsibleDelegateFragment() , "Delegate_fragment"  ,
+                    null ,R.id.frameLayout_direction)
+
+            else {
+                delegateId = 0 // remove delegate
+
+            }
+        }*/
 
         productClassificationCard?.setOnClickListener {
 
@@ -84,8 +112,6 @@ var orderCreateRequest = OrderCreateRequest()
         }
 
         scanOrderCard?.setOnClickListener {
-
-
             if (UtilKotlin.checkPermssionGrantedForImageAndFile(activity!!,
                     UtilKotlin.permissionScan,this)){
                 // if the result ok go submit else on
@@ -98,7 +124,6 @@ var orderCreateRequest = OrderCreateRequest()
         makeOrderBtn?.setOnClickListener{
             postCallCenterTalbya()
         }
-        observeData()
     }
 
     override fun onResume() {
@@ -138,6 +163,7 @@ var orderCreateRequest = OrderCreateRequest()
         }
             }
 
+    var delegateId = 0
     private fun setOrderRequest() {
         orderCreateRequest.products?.add(categoryID?:0)
         orderCreateRequest.quantity?.add(1)
@@ -156,7 +182,7 @@ var orderCreateRequest = OrderCreateRequest()
             .addFormDataPart("price", makeOrderPriceEdt?.text.toString())
             .addFormDataPart("phone", mobileNumberEdt?.text.toString())
             .addFormDataPart("email", emailAddressEdt?.text.toString())
-            .addFormDataPart("delegate_id",0.toString())
+            .addFormDataPart("delegate_id",delegateId.toString())
             .addFormDataPart("quantity[$0]",
                 "1")
             .addFormDataPart("products[$0]",
@@ -173,6 +199,7 @@ var orderCreateRequest = OrderCreateRequest()
     override fun onDestroyView() {
         disposableObserver?.dispose()
         model.responseDataCode.removeObservers(activity!!)
+        model.stringNameData.removeObservers(activity!!)
         super.onDestroyView()
     }
 
@@ -194,8 +221,11 @@ var orderCreateRequest = OrderCreateRequest()
             override fun onNext(response: Response<SuccessModel>) {
                 if (response!!.isSuccessful) {
                     progressDialog?.dismiss()
+
                     UtilKotlin.showSnackMessage(activity!!, response.body()?.msg?.get(0)?:"")
-                    activity?.onBackPressed()
+                    Handler().postDelayed({
+                        activity?.onBackPressed()
+                    },750)
                 }
                 else
                 {
@@ -233,24 +263,19 @@ var orderCreateRequest = OrderCreateRequest()
 
         })
 
-//        model.stringDataVar?.observe(viewLifecycleOwner, Observer { datamodel ->
-//            Log.d("testApi", "observe")
-//
-//            if (datamodel != null) {
-//                progressDialog?.hide()
-//                Log.d("testApi", "responseNotNull")
-//                Log.d("resultDataObserve", datamodel) // Prints scan results
-//                barCode = datamodel
-//                barCodeTxt?.text = barCode
-//
-//                model.setStringVar(null) // start details with this data please
-//            }
-//            else{
-//                Log.d("testApi", "observeNull")
-//
-//            }
-//
-//        })
+        model.stringNameData?.observe(activity!!, Observer { datamodel ->
+            if (datamodel != null) {
+                if (datamodel is ModelStringID) {
+                    delegateId = datamodel.id?:0
+                   // chooseDelegate?.isChecked = true
+                }
+
+
+                model.setStringData(null) // start details with this data please
+            }
+
+
+        })
 
 
 

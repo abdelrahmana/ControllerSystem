@@ -89,7 +89,7 @@ object CategoriesPresenterCallCenter {
 
                     if (response.isSuccessful)
                     {
-                        Log.d("testApi" , "responseSuccess")
+                      //  Log.d("testApi" , "responseSuccess")
 
                         //hideLoader()
                         // model.setShowLoader(false)
