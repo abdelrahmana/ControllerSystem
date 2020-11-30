@@ -7,16 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantData
-import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantModel
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import kotlinx.android.synthetic.main.admin_delegate_item.view.*
 
-class AccountantAdapter(
+class AdminDelegatesAdapter(
     var context: Context,
-    var accountantsList: ArrayList<AccountantData>,
+    var delegateList: ArrayList<Any>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
-    RecyclerView.Adapter<AccountantAdapter.ViewHolder>(){
+    RecyclerView.Adapter<AdminDelegatesAdapter.ViewHolder>(){
 
 
 
@@ -26,27 +23,26 @@ class AccountantAdapter(
     }
 
     override fun getItemCount(): Int {
-        return accountantsList.size
+        return delegateList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bindView(accountantsList[position], onRecyclerItemClickListener)
+        holder.bindView(delegateList[position], onRecyclerItemClickListener)
 
 
     }
 
-
-    class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
+   inner class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            accountantModel: AccountantData,
+            delegatesModel: Any,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-            itemView.adminDelegateName?.text = accountantModel.name
-            itemView.adminDelegatePhone?.text = accountantModel.phone
-            Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.adminDelegateImg)
+//            itemView.delegateName.text = delegatesModel.name
+//            itemView.delegatePhone.text = delegatesModel.phone
+//            Glide.with(itemView.context!!).load(delegatesModel.image?:"").placeholder(R.drawable.image_delivery_item).dontAnimate().into(itemView.delegateImg)
 
 
             itemView.setOnClickListener {
@@ -54,6 +50,7 @@ class AccountantAdapter(
                 onRecyclerItemClickListener.onItemClick(adapterPosition)
 
             }
+
 
 
 

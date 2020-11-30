@@ -2,10 +2,10 @@ package com.example.controllersystemapp.callcenter.delegate.itemdetails
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.products.adapters.SlidingItemImageAdapter
 import com.example.controllersystemapp.accountant.products.models.Image
@@ -17,12 +17,14 @@ import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.fragment_item_details.*
 import retrofit2.Response
 
 
-class ItemDetailsFragment : Fragment() {
+class ItemDetailsFragment : Fragment(), OnMapReadyCallback {
 
     lateinit var slidingItemImageAdapter: SlidingItemImageAdapter
     var slideImage = ArrayList<Image>()
@@ -51,7 +53,8 @@ class ItemDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+//        orderMap.onCreate(savedInstanceState);
+        //orderMap.getMapAsync(this)
         closePageIcon?.setOnClickListener {
 
             activity?.supportFragmentManager?.popBackStack()
@@ -101,10 +104,6 @@ class ItemDetailsFragment : Fragment() {
     }*/
 
     private fun getItemDetails(data: DataBeans) {
-
-
-
-
             prodName?.text = data.product?.name?:""
             prodQuantity?.text = data.product?.total_quantity?:""
             prodCategoryName?.text = data.product?.category?.name?:""
@@ -161,6 +160,7 @@ class ItemDetailsFragment : Fragment() {
     }
 
     override fun onResume() {
+       // orderMap.onResume()
         super.onResume()
 
         getData()
@@ -223,5 +223,25 @@ class ItemDetailsFragment : Fragment() {
 
     }
 
+    override fun onMapReady(p0: GoogleMap?) {
+0
+    }
 
+
+
+
+    override fun onPause() {
+        super.onPause()
+       // orderMap.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    //    orderMap.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+      //  orderMap.onLowMemory()
+    }
 }

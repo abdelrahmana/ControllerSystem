@@ -10,21 +10,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.categories.CategoriesPresenter
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.categories.models.Data
-import com.example.controllersystemapp.admin.productclassification.productsubclassification.FragmentSubProductclassification
 import com.example.controllersystemapp.admin.productclassification.productsubclassification.FragmentSubProductclassificationCenter
+import com.example.controllersystemapp.admin.productclassification.productsubclassification.SubSubProductListFragment
 import com.example.controllersystemapp.callcenter.maketalbya.CategoriesPresenterCallCenter
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
-import com.example.util.NameUtils.ACCOUNTANT_PROD_CLASSIFY
-import com.example.util.NameUtils.ADD_PRODUCT
-import com.example.util.NameUtils.ADD_STORE
 import com.example.util.NameUtils.WHICH_ADD_PRD_STORE
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
-import com.photonect.photographerapp.notificationphotographer.DonePackgae.ProductClassificationAdaptor
 import com.photonect.photographerapp.notificationphotographer.DonePackgae.ProductClassificationAdaptorCenter
 import kotlinx.android.synthetic.main.fragment_product_classification.*
 

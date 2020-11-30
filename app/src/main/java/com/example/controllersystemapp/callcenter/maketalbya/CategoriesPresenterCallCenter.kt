@@ -4,6 +4,8 @@ import android.app.Activity
 import android.util.Log
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsListResponse
+import com.example.controllersystemapp.callcenter.delegate.model.ItemDetailsResponse
+import com.example.controllersystemapp.callcenter.maketalbya.model.OrderCreateRequest
 import com.example.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.ProductResponse
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
@@ -71,7 +73,6 @@ object CategoriesPresenterCallCenter {
 
     fun getProductsList(webService: WebService, parentID : Int?, activity: Activity, model: ViewModelHandleChangeFragmentclass)
     {
-
         webService.getCategoryId(parentID)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -88,7 +89,7 @@ object CategoriesPresenterCallCenter {
 
                     if (response.isSuccessful)
                     {
-                        Log.d("testApi" , "responseSuccess")
+                      //  Log.d("testApi" , "responseSuccess")
 
                         //hideLoader()
                         // model.setShowLoader(false)
@@ -115,6 +116,19 @@ object CategoriesPresenterCallCenter {
 
 
             })
+
+    }
+
+    fun setTalabyaPost(
+        webService: WebService,
+        itemObserver: DisposableObserver<Response<SuccessModel>>,
+        orderCreateRequest: OrderCreateRequest
+    )
+    {
+        webService.postOrder(orderCreateRequest)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(itemObserver)
 
 
 

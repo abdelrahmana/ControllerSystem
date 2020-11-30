@@ -185,6 +185,8 @@ class DelegatesFragmentCenter : Fragment(), OnRecyclerItemClickListener, NestedS
         val bundle = Bundle()
         // send delegate id to order list 
       bundle.putInt(NameUtils.delegateId,delegatesList.get(position).id?:0)
+        bundle.putString(NameUtils.orderName,delegatesList.get(position).name?:"")
+
         // go to fragment of orders
         UtilKotlin.changeFragmentBack(activity!! ,OrdersFragment() , ""  , bundle,arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
     }

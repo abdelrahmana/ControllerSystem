@@ -21,7 +21,7 @@ import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.photonect.photographerapp.notificationphotographer.DonePackgae.OrderItemAdapter
 import io.reactivex.observers.DisposableObserver
-import kotlinx.android.synthetic.main.fragment_delegates.*
+import kotlinx.android.synthetic.main.orders_layout.*
 import retrofit2.Response
 
 class OrdersFragment : Fragment(), OnRecyclerItemClickListener {
@@ -45,7 +45,7 @@ class OrdersFragment : Fragment(), OnRecyclerItemClickListener {
         webService = ApiManagerDefault(context!!).apiService // auth
         progressDialog = UtilKotlin.ProgressDialog(activity!!)
        // Log.d("back" , "Delegate crested")
-
+        nameOfDelegates?.text = arguments?.getString(NameUtils.orderName,"")?:""
 
     }
     lateinit var modelHandleChangeFragmentclass: ViewModelHandleChangeFragmentclass
@@ -67,10 +67,11 @@ class OrdersFragment : Fragment(), OnRecyclerItemClickListener {
 
             if (datamodel != null) {
 
-                if (datamodel is  Int) {
+                if (datamodel is  DelegateOrder) {
 
                     val bundle = Bundle()
-                    bundle.putInt(NameUtils.orderId,ordersList.get(datamodel).id?:0)
+                    bundle.putInt(NameUtils.orderId,datamodel.id?:0)
+                    bundle.putString(NameUtils.orderName,datamodel.name?:"")
                     UtilKotlin.changeFragmentBack(activity!! ,
                         ItemFragment(),"order"  , bundle,
                         arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
@@ -136,7 +137,7 @@ class OrdersFragment : Fragment(), OnRecyclerItemClickListener {
 
     private fun getOrderAdapter() {
         orderAdapter = OrderItemAdapter(modelHandleChangeFragmentclass!! , ordersList)
-        delegatesRecycler?.apply {
+        delegatesRecycle?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
             adapter = orderAdapter

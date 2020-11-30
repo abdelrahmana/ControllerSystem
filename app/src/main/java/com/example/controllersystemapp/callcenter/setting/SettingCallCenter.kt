@@ -49,12 +49,12 @@ class SettingCallCenter : Fragment() {
         notificationCard.visibility = View.GONE
         editProfileCard?.setOnClickListener {
             UtilKotlin.changeFragmentBack(activity!! ,
-                EditProfileFragment(), "" , null,R.id.redirect_acc_fragments)
+                EditProfileFragment(), "" , null,R.id.frameLayout_direction)
         }
 
         editPasswordCard?.setOnClickListener {
             UtilKotlin.changeFragmentBack(activity!! ,
-                EditPasswordFragment(), "" , null,R.id.redirect_acc_fragments)
+                EditPasswordFragment(), "" , null,R.id.frameLayout_direction)
         }
 
         logOutCard?.setOnClickListener {

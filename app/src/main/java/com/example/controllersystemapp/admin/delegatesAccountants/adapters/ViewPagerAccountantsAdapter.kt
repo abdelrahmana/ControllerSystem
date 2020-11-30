@@ -9,6 +9,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AccountantsFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AdminAccountantFragment
+import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AdminDelegatesFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DelegatesFragment
 
 class ViewPagerAccountantsAdapter(fragment: Fragment)
@@ -24,8 +25,8 @@ class ViewPagerAccountantsAdapter(fragment: Fragment)
     override fun createFragment(position: Int): Fragment {
         when (position) {
                 0 ->
-                    fragment =
-                        DelegatesFragment()
+                    fragment = AdminDelegatesFragment()
+                        //DelegatesFragment()
                 1 ->
                     fragment =
                         AccountantsFragment()

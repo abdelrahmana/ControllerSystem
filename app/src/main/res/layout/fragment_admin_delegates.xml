@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/_70sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".admin.delegatesAccountants.fragments.AccountantsFragment">
+    tools:context=".admin.delegatesAccountants.fragments.AdminDelegatesFragment">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
         <LinearLayout
@@ -33,7 +32,7 @@
 
 
                 <TextView
-                    android:id="@+id/accountantCount"
+                    android:id="@+id/adminDelegateCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ffshamelfamily_sansonebold"
@@ -43,19 +42,19 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/accountantText"
+                    android:id="@+id/adminDelegateText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:fontFamily="@font/cairo_regular"
-                    android:text="@string/accounatnt"
+                    android:text="@string/delegate"
                     android:textColor="@color/text_black"
                     android:textSize="12sp" />
             </LinearLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/accountantRecycler"
+                android:id="@+id/adminDelegateRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_14sdp"

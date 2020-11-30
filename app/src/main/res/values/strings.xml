@@ -229,6 +229,8 @@
     <string name="shipping_fee_required">رسوم الشحن مطلوب</string>
     <string name="no_notifications_reports">"لا توجداشعارات و بلاغات "</string>
     <string name="under_procedure">تحت الإجراء</string>
+    <string name="insert_all_data">تأكد من إدخال جميع البيانات</string>
+    <string name="delegate_choose">تحديد مندوب</string>
 
 
 </resources>
