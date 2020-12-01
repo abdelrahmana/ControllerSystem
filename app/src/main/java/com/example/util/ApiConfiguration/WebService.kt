@@ -66,6 +66,13 @@ interface WebService {
     @GET("admin/categories/list")
     fun categoriesList(@Query("parent_id") parentId : Int?): Observable<Response<CategoriesListResponse>>
 
+    @Headers("Accept: application/json")
+    @POST("admin/categories/create")
+    fun addCategory(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @POST("admin/categories/edit")
+    fun editCategory(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
     @GET("admin/ware-house/list")
@@ -157,6 +164,7 @@ interface WebService {
     @Headers("Accept: application/json")
     @DELETE("admin/categories/delete")
     fun deleteCategory(@Query("id") categoryId : Int): Observable<Response<SuccessModel>>
+
     @Headers("Accept: application/json")
     @POST("auth/password/reset")
    suspend fun setNewPassword(@Body requestNewPass : RequestModelNewPass): Response<SuccessModel>

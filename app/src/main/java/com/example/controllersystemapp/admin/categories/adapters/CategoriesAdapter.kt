@@ -1,6 +1,7 @@
 package com.example.controllersystemapp.admin.categories.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,17 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import kotlinx.android.synthetic.main.categories_item.view.*
+import com.example.util.ViewModelHandleChangeFragmentclass
+import kotlinx.android.synthetic.main.admin_category_item.view.*
 
-class CategoriesAdapter(
-    var cateogriesList: ArrayList<Data>,
-    var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
+class CategoriesAdapter(val modelData: ViewModelHandleChangeFragmentclass,
+                        var cateogriesList: ArrayList<Data>,
+                        var onRecyclerItemClickListener: OnRecyclerItemClickListener
+                        ) :
     RecyclerView.Adapter<CategoriesAdapter.ViewHolder>(){
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.categories_item , parent , false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.admin_category_item , parent , false)
         return ViewHolder(view)
     }
 
@@ -28,27 +30,31 @@ class CategoriesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bindView(cateogriesList[position], onRecyclerItemClickListener)
+        holder.bindView(cateogriesList[position])
 
 
     }
 
 
-    class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
+    inner class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            categoryModel: Data,
-            onRecyclerItemClickListener: OnRecyclerItemClickListener
-        ) {
+            categoryModel: Data) {
 
-            itemView.categoryName.text = categoryModel.name?:""
-            itemView.categoryCount.text = categoryModel.products_count?:""
+            itemView.category_name?.text = categoryModel.name?:""
+           // itemView.categoryCount.text = categoryModel.products_count?:""
 
 
             itemView.setOnClickListener {
+                Log.d("Click" , "observeData")
 
-                onRecyclerItemClickListener.onItemClick(adapterPosition)
+                //onRecyclerItemClickListener.onItemClick(adapterPosition)
+                modelData.setNotifyItemSelected(cateogriesList[adapterPosition]) // update sign up fragment please
 
+            }
+
+            itemView.editImage?.setOnClickListener {
+                onRecyclerItemClickListener?.onItemClick(adapterPosition)
             }
 
 

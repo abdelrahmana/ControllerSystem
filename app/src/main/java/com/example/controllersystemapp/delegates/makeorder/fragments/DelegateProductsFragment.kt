@@ -229,10 +229,10 @@ class DelegateProductsFragment : Fragment() {
             model?.responseCodeDataSetter(modelSelected)
 
             //model?.responseCodeDataSetter(arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1)
-            activity!!.supportFragmentManager.popBackStack()
-            activity!!.supportFragmentManager.popBackStack()
-            activity!!.supportFragmentManager.popBackStack()
-            activity!!.supportFragmentManager.popBackStack()
+            activity?.supportFragmentManager?.popBackStack()
+            activity?.supportFragmentManager?.popBackStack()
+            activity?.supportFragmentManager?.popBackStack()
+            activity?.supportFragmentManager?.popBackStack()
 
         }
     }

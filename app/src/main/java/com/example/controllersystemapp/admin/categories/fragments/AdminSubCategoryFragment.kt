@@ -8,24 +8,18 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.EditText
-import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.accountant.settings.expenses.AddAccountantExpensesFragment
-import com.example.controllersystemapp.accountant.settings.expenses.ExpensesFragment
 import com.example.controllersystemapp.admin.categories.CategoriesPresenter
-import com.example.controllersystemapp.admin.categories.adapters.CategoriesAdapter
+import com.example.controllersystemapp.admin.categories.adapters.AdminSubCategoriesAdaptor
+import com.example.controllersystemapp.admin.categories.fragments.CategoriesFragment.Companion.ADMINCATEG_SUB_PARENT_ID
+import com.example.controllersystemapp.admin.categories.fragments.CategoriesFragment.Companion.ADMINCATEG_SUB_PARENT_NAME
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.categories.models.Data
-import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.bottomsheets.EditDeleteBottomSheet
-import com.example.controllersystemapp.delegates.makeorder.fragments.DelegatSubCategoriesFragment
-import com.example.controllersystemapp.delegates.makeorder.fragments.DelegateCategoriesFragment
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
@@ -33,18 +27,19 @@ import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.google.android.material.button.MaterialButton
-import kotlinx.android.synthetic.main.fragment_categories.*
+import kotlinx.android.synthetic.main.fragment_admin_sub_category.*
 
-class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
+class AdminSubCategoryFragment : Fragment() , OnRecyclerItemClickListener {
 
-    lateinit var model: ViewModelHandleChangeFragmentclass
+    lateinit var model : ViewModelHandleChangeFragmentclass
     var webService: WebService? = null
     lateinit var progressDialog: Dialog
 
+    lateinit var  adminSubCategoriesAdaptor : AdminSubCategoriesAdaptor
+    var subCategoryList = ArrayList<Data>()
 
-    lateinit var categoriesAdapter: CategoriesAdapter
-    var categoryList = ArrayList<Data>()
-    lateinit var rootView: View
+    var nameSearch : String? = null
+    var parentId : Int ? = null
     var listPosition: Int ? = null
 
     override fun onCreateView(
@@ -55,46 +50,49 @@ class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
         model = UtilKotlin.declarViewModel(activity!!)!!
         webService = ApiManagerDefault(context!!).apiService
         progressDialog = UtilKotlin.ProgressDialog(context!!)
+        parentId = arguments?.getInt(CategoriesFragment.ADMINCATEG_PARENT_ID)?:0
 
-        rootView = inflater.inflate(R.layout.fragment_categories, container, false)
-        return rootView
+        return inflater.inflate(R.layout.fragment_admin_sub_category, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-//        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-//        itemTouchHelper.attachToRecyclerView(categoriesRecycler)
-
-
         back?.setOnClickListener {
-
-            if (activity?.supportFragmentManager?.backStackEntryCount == 1)
-            {
-                activity?.finish()
-            }
-            else{
-                activity?.supportFragmentManager?.popBackStack()
-            }
+            activity?.supportFragmentManager?.popBackStack()
         }
+        subCategoryNameText?.text = arguments?.getString(CategoriesFragment.ADMINCATEG_PARENT_NAME)?:""
 
-        addCategoryBtn?.setOnClickListener {
+        addSubCategoryBtn?.setOnClickListener {
             showAddDialog(null , null)
         }
-
         setRecyclerData()
 
-        observeData()
+        setViewModelListener() // when select item
+
     }
 
     private fun setRecyclerData() {
+        adminSubCategoriesAdaptor = AdminSubCategoriesAdaptor(model, subCategoryList , this)
+        UtilKotlin.setRecycleView(adminSubCategoriesRecycler, adminSubCategoriesAdaptor,
+            RecyclerView.VERTICAL,context!!, null, true)
+    }
 
-        categoriesAdapter = CategoriesAdapter(model, categoryList , this )
-        categoriesRecycler?.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
-            adapter = categoriesAdapter
+    override fun onResume() {
+        super.onResume()
+
+        getSubData()
+    }
+
+    private fun getSubData(){
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+            CategoriesPresenter.getCategoriesList(webService!!, parentId, activity!!, model)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
         }
     }
 
@@ -125,7 +123,6 @@ class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
             categoryName.setText(editCategoryName)
         }
 
-
         addDialogButton?.setOnClickListener(View.OnClickListener {
             Log.d("categoryName" , "name ${categoryName?.text}")
 
@@ -155,7 +152,7 @@ class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
 
-            CategoriesPresenter.updateCategory(webService!! , name , id , null , activity!! , model)
+            CategoriesPresenter.updateCategory(webService!! , name , id , parentId , activity!! , model)
 
         } else {
             progressDialog?.dismiss()
@@ -170,7 +167,7 @@ class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
             progressDialog?.show()
 
             CategoriesPresenter.addCategory(webService!! ,
-                name?:"" , null , activity!! , model)
+                name?:"" , parentId , activity!! , model)
 
         } else {
             progressDialog?.dismiss()
@@ -181,91 +178,38 @@ class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
 
     }
 
-    var removePosition = 0
-
-//    var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
-//        0,
-//        ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-//    ) {
-//        override fun onMove(
-//            recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-//            return false
-//        }
-//
-//        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int
-//        ) {
-//            //Remove swiped item from list and notify the RecyclerView
-//            val position = viewHolder.adapterPosition
-//
-//            position?.let {
-//                removePosition = it
-//                removeCategoryItem(it)
-//
-//            }
-//        }
-//    }
-
-    private fun removeCategoryItem(categoryId: Int) {
-
-        if (UtilKotlin.isNetworkAvailable(context!!)) {
-            progressDialog?.show()
-
-            CategoriesPresenter.deleteCategoryPresenter(webService!! ,
-                categoryId?:-1 , null , activity!! , model)
-
-        } else {
-            progressDialog?.dismiss()
-            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
-
-        }
-
-
-
-    }
-
-
-    private fun observeData() {
-
+    fun setViewModelListener() {
         model?.notifyItemSelected?.observe(activity!!, Observer<Any> { modelSelected ->
             if (modelSelected != null) { // if null here so it's new service with no any data
-                Log.d("Click" , "observeData")
-
                 if (modelSelected is Data) {
+
                     val bundle = Bundle()
-                    bundle.putInt(ADMINCATEG_PARENT_ID, modelSelected.id?:-1)
-                    bundle.putString(ADMINCATEG_PARENT_NAME, modelSelected.name?:"")
+                    bundle.putInt(ADMINCATEG_SUB_PARENT_ID, modelSelected.id?:-1)
+                    bundle.putString(ADMINCATEG_SUB_PARENT_NAME, modelSelected.name?:"")
 
-                    UtilKotlin.changeFragmentWithBack(
-                        activity!!,
+                    UtilKotlin.changeFragmentWithBack(activity!! ,
                         R.id.frameLayout_direction,
-                        AdminSubCategoryFragment(),
-                        bundle)
+                        AdminLastCategoryFragment() , bundle)
                 }
-                model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
-
+                model?.setNotifyItemSelected(null)
             }
-
-            Log.d("paretnId" , "j22j")
         })
-
-
 
         model.responseDataCode?.observe(activity!!, Observer { datamodel ->
             Log.d("testApi", "observe")
-
+            Log.d("testttttD" , "datatObserve")
             if (datamodel != null) {
                 progressDialog?.hide()
                 Log.d("testApi", "responseNotNull")
 
                 if (datamodel is CategoriesListResponse) {
-                    Log.d("testApi", "isForyou")
+                    Log.d("testttttD" , "datatCTEGOAry")
                     setRecycleViewData(datamodel)
 
                 }
-
                 if (datamodel is SuccessModel) {
                     Log.d("testApi", "isForyou")
-                    successAdd(datamodel)
+                    successData(datamodel)
                 }
 
                 model.responseCodeDataSetter(null) // start details with this data please
@@ -300,7 +244,6 @@ class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
         })
 
 
-
     }
 
     private fun setUpdateOrDelete(optionSelect: String) {
@@ -310,81 +253,27 @@ class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
             NameUtils.DELETE -> {
                 Log.d("testEdit" , "delete $listPosition")
                 listPosition?.let {
-                    removeCategoryItem(categoryList[it].id?:-1)
+                    removeCategoryItem(subCategoryList[it].id?:-1)
                 }
             }
 
             NameUtils.UPDATE -> {
-               // Log.d("testEdit" , "update $listPosition")
                 listPosition?.let {
-                    showAddDialog(categoryList[it].name?:"" ,categoryList[it].id?:-1 )
+                    showAddDialog(subCategoryList[it].name?:"" ,subCategoryList[it].id?:-1 )
                 }
 
-
             }
         }
 
-
     }
 
-
-    private fun successAdd(successModel: SuccessModel) {
-
-        if (successModel?.msg?.isNullOrEmpty() == false)
-        {
-            activity?.let {
-                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
-            }
-
-//            productsAdapter.let {
-//                it?.removeItemFromList(removePosition)
-//            }
-//            productsAdapter?.notifyDataSetChanged()
-
-            getCateogriesData()
-        }
-
-
-    }
-
-    private fun setRecycleViewData(categoriesListResponse: CategoriesListResponse) {
-
-        if (categoriesListResponse?.data?.isNullOrEmpty() == false)
-        {
-            categoryList.clear()
-            categoryList.addAll(categoriesListResponse?.data)
-            categoriesAdapter?.notifyDataSetChanged()
-//            categoriesAdapter = CategoriesAdapter(model, categoryList , this )
-//            categoriesRecycler?.apply {
-//                setHasFixedSize(true)
-//                layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
-//                adapter = categoriesAdapter
-//            }
-
-        }
-        else{
-            //emoty
-            categoryList.clear()
-            categoriesAdapter?.notifyDataSetChanged()
-
-        }
-
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("back" , "Delegate Resume")
-
-        getCateogriesData()
-    }
-
-    private fun getCateogriesData() {
+    private fun removeCategoryItem(categoryId: Int) {
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
 
-            CategoriesPresenter.getCategoriesList(webService!!, null, activity!!, model)
+            CategoriesPresenter.deleteCategoryPresenter(webService!! ,
+                categoryId?:-1 , null , activity!! , model)
 
         } else {
             progressDialog?.dismiss()
@@ -393,14 +282,38 @@ class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
         }
 
     }
-    companion object{
 
-        var ADMINCATEG_PARENT_ID = "adminCatgParentId"
-        var ADMINCATEG_SUB_PARENT_ID = "adminCatgSubParentId"
-        var ADMINCATEG_SUB_PARENT_NAME = "adminCatgSubParentName"
-        var ADMINCATEG_PARENT_NAME = "adminCatgParentName"
-        var ADMINCATEG_LAST_PARENT_ID = "adminCatgLastParentId"
-     //   var ADMINCATEG_LAST_PARENT_NAME = "adminCatgLastParentName"
+    private fun successData(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            activity?.let {
+                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
+            }
+
+            getSubData()
+        }
+
+
+    }
+
+    private fun setRecycleViewData(categoriesListResponse: CategoriesListResponse) {
+
+        if (categoriesListResponse.data?.isNullOrEmpty() == false) {
+            Log.d("testttttD" , "datatNotEmpty")
+            subCategoryList.clear()
+            subCategoryList.addAll(categoriesListResponse?.data)
+            adminSubCategoriesAdaptor?.notifyDataSetChanged()
+            // adminSubCategoriesAdaptor = AdminSubCategoriesAdaptor(model, subCategoryList , this)
+//            UtilKotlin.setRecycleView(adminSubCategoriesRecycler, adminSubCategoriesAdaptor,
+//                RecyclerView.VERTICAL,context!!, null, true)
+        } else {
+            //empty
+            Log.d("testttttD" , "datatEmpty")
+            subCategoryList.clear()
+            adminSubCategoriesAdaptor?.notifyDataSetChanged()
+
+        }
 
     }
 
@@ -414,7 +327,7 @@ class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Log.d("click" , "category")
+
         listPosition = position
         val addPhotoBottomDialogFragment: EditDeleteBottomSheet =
             EditDeleteBottomSheet.newInstance()
@@ -425,6 +338,7 @@ class CategoriesFragment : Fragment() , OnRecyclerItemClickListener {
             activity?.supportFragmentManager!!,
             EditDeleteBottomSheet.TAG
         )
+
     }
 
 }

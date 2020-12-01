@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".admin.categories.fragments.CategoriesFragment">
+    tools:context=".admin.categories.fragments.AdminSubCategoryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topContainer"
@@ -32,7 +32,7 @@
 
         <TextView
             android:textAlignment="viewStart"
-            android:id="@+id/textView3"
+            android:id="@+id/subCategoryNameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/categories"
@@ -50,12 +50,9 @@
             app:layout_constraintTop_toBottomOf="@+id/back"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingBottom="@dimen/_70sdp"
         app:layout_constraintTop_toBottomOf="@+id/topContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,11 +69,10 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categoriesRecycler"
+                android:id="@+id/adminSubCategoriesRecycler"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/_70sdp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +90,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:visibility="visible"
-        android:id="@+id/addCategoryBtn"
+        android:id="@+id/addSubCategoryBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         app:backgroundTint="@color/orange_color"
@@ -112,6 +108,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
