@@ -41,6 +41,7 @@ class CallCenterTalbya : Fragment() {
     lateinit var progressDialog : Dialog
 
     var categoryID = 0
+    var quantity : String = "0"
     var barCode : String ? = null
 
 var orderCreateRequest = OrderCreateRequest()
@@ -166,7 +167,7 @@ var orderCreateRequest = OrderCreateRequest()
     var delegateId = 0
     private fun setOrderRequest() {
         orderCreateRequest.products?.add(categoryID?:0)
-        orderCreateRequest.quantity?.add(1)
+        orderCreateRequest.quantity?.add(quantity.toInt())
         orderCreateRequest.address = addressEdt?.text.toString()
         orderCreateRequest.shipment_cost = orderShoppingFeeEdt?.text.toString()
         orderCreateRequest.delegate_id = 0
@@ -251,7 +252,8 @@ var orderCreateRequest = OrderCreateRequest()
                 progressDialog?.hide()
                 if (datamodel is ViewModelHandleChangeFragmentclass.ProductClassification) {//when choose category return categoryID
                     categoryID = datamodel.id?:-1
-                    Log.d("finalText", " ${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}")
+                    quantity = datamodel.quantity?:"0"
+                   // Log.d("finalText", " ${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}")
                     productClassificationTxt.text = " ${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}"
                 }
                 model.responseCodeDataSetter(null) // start details with this data please

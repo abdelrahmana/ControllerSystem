@@ -80,13 +80,11 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
 
             itemView?.decreaseImage.setOnClickListener{
                 if (Integer.parseInt(itemView?.increasementText?.text.toString())>1)
-                    itemView?.increasementText?.text = (Integer.parseInt(itemView?.increasementText?.text.toString())-1).toString()
-
+                    itemView?.increasementText?.setText((Integer.parseInt(itemView?.increasementText?.text.toString())-1).toString())
                // listener?.onDecreaseItemClick(adapterPosition, itemView?.increasementText?.text.toString()?:"")
-
             }
             itemView?.plusImage.setOnClickListener{
-                    itemView?.increasementText?.text = (Integer.parseInt(itemView?.increasementText?.text.toString())+1).toString()
+                    itemView?.increasementText?.setText( (Integer.parseInt(itemView?.increasementText?.text.toString())+1).toString())
                // listener?.onIncreaseItemClick(adapterPosition, itemView?.increasementText?.text.toString()?:"")
 
 

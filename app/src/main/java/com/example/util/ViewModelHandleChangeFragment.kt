@@ -113,7 +113,8 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
         var id : Int? = -1,
         var parentName :String ? = "",
         var subParentName :String ? = "",
-        var lastSubParentName :String ? = ""
+        var lastSubParentName :String ? = "",
+        var quantity : String?=""
 
     ){
 

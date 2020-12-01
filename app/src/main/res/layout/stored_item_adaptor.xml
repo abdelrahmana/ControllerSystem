@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -54,6 +55,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        tools:visibility="visible"
         android:visibility="gone">
 
 
@@ -84,10 +86,12 @@
             app:strokeColor="@color/light_gray"
             app:strokeWidth="1dp">
 
-            <TextView
+            <EditText
                 android:id="@+id/increasementText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="number"
                 android:layout_gravity="center"
                 android:text="1"
                 android:textAlignment="center"
