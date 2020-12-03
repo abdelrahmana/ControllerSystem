@@ -177,9 +177,9 @@ interface WebService {
 
     //Accountant Data
 
-    @Headers("Accept: application/json")
-    @GET("accountant/products/list")
-    fun accountantProductsList(): Observable<Response<AccountantProductsListResponse>>
+//    @Headers("Accept: application/json")
+//    @GET("accountant/products/list")
+//    fun accountantProductsList(): Observable<Response<AccountantProductsListResponse>>
 
     @Headers("Accept: application/json")
     @GET("admin/products/details")
@@ -235,6 +235,17 @@ interface WebService {
     @Headers("Accept: application/json")
     @POST("accountant/expenses/edit")
     fun accountantEditExpenses(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
+
+
+    @Headers("Accept: application/json")
+    @GET("accountant/categories/list")
+    fun accountantCategoriesList(@Query("parent_id") parentId : Int? , @Query("name") name : String?):
+            Observable<Response<CategoriesListResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("accountant/products/list")
+    fun accountantProductsList(@Query("category_id") categoryId : Int? , @Query("name") name : String?):
+            Observable<Response<AccountantProductsListResponse>>
 
 
     //Delegates Api

@@ -160,6 +160,7 @@ class AccountantProductsFragment : Fragment(), OnRecyclerItemClickListener {
 
             AccountantProductPresenter.productsList(
                 webService!!,
+                null , null ,
                 activity!!,
                 model
             )

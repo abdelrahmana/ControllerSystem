@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.makeorder
+package com.example.controllersystemapp.accountant.makeorder.fragments
 
 import android.app.Activity
 import android.app.Dialog
@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.products.models.Data
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.SCANERESULT
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.scanCode
@@ -32,6 +33,8 @@ class AccountantMakeOrderFragment : Fragment() {
     var categoryID = 0
     var barCode : String ? = null
 
+    var productsList = ArrayList<Int>()
+    var quantityList = ArrayList<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,12 +69,17 @@ class AccountantMakeOrderFragment : Fragment() {
 
         productClassificationCard?.setOnClickListener {
 
-            val bundle = Bundle()
-            bundle.putInt(NameUtils.WHICH_ADD_PRD_STORE, /*R.id.redirect_acc_fragments*/
-                arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
+            UtilKotlin.changeFragmentBack(
+                activity!!, AccountantCategoriesFragment(), "AccountantCategoriesFragment",
+                null , R.id.redirect_acc_fragments
+            )
 
-            UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassification() , "productClassification"  ,
-                bundle ,arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction /*R.id.redirect_acc_fragments*/)
+//            val bundle = Bundle()
+//            bundle.putInt(NameUtils.WHICH_ADD_PRD_STORE, /*R.id.redirect_acc_fragments*/
+//                arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
+//
+//            UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassification() , "productClassification"  ,
+//                bundle ,arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction /*R.id.redirect_acc_fragments*/)
 
         }
 
@@ -107,12 +115,16 @@ class AccountantMakeOrderFragment : Fragment() {
             if (datamodel != null) {
                 progressDialog?.hide()
                 Log.d("testApi", "responseNotNull")
+//                if (datamodel is ViewModelHandleChangeFragmentclass.ProductClassification) {//when choose category return categoryID
+//                    Log.d("observeData", "dd $datamodel")
+//                    categoryID = datamodel.id?:-1
+//                    Log.d("finalText", " ${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}")
+//                    productClassificationTxt.text = " ${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}"
+//                }
 
-                if (datamodel is ViewModelHandleChangeFragmentclass.ProductClassification) {//when choose category return categoryID
-                    Log.d("observeData", "dd $datamodel")
-                    categoryID = datamodel.id?:-1
-                    Log.d("finalText", " ${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}")
-                    productClassificationTxt.text = " ${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}"
+                if (datamodel is Data)
+                {
+                    getSelectedProducts(datamodel)
                 }
                 model.responseCodeDataSetter(null) // start details with this data please
             }
@@ -145,7 +157,17 @@ class AccountantMakeOrderFragment : Fragment() {
 
 
     }
+    private fun getSelectedProducts(datamodel: Data) {
 
+        productsList.clear()
+        quantityList.clear()
+        productsList?.add(0 , datamodel?.id?:0)
+        quantityList.add(0 , datamodel?.selectedQuantity?:1)
+        productClassificationTxt?.text = datamodel?.name?:""
+        Log.d("finalSelectedProd" , "id ${datamodel?.id?:0}")
+        Log.d("finalSelectedProd" , "quantity ${datamodel?.selectedQuantity?:1}")
+
+    }
 
     override fun onActivityResult(
         requestCode: Int,

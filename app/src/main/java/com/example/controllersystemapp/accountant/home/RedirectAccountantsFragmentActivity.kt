@@ -1,10 +1,9 @@
 package com.example.controllersystemapp.accountant.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.accountant.makeorder.AccountantMakeOrderFragment
+import com.example.controllersystemapp.accountant.makeorder.fragments.AccountantMakeOrderFragment
 import com.example.controllersystemapp.accountant.noticesandreports.NoticesAndReportsFragment
 import com.example.controllersystemapp.accountant.products.fragments.AccountantProductsFragment
 import com.example.controllersystemapp.accountant.sales.fragments.AccountantSalesFragment
@@ -64,7 +63,9 @@ class RedirectAccountantsFragmentActivity : CommonActivity() {
 
             MAKE_SPECIAL_ORDER -> {
 
-                changeFragment(AccountantMakeOrderFragment().also { it.arguments = Bundle().also {
+                changeFragment(
+                    AccountantMakeOrderFragment()
+                        .also { it.arguments = Bundle().also {
                     it.putInt(NameUtils.WHICHID,R.id.redirect_acc_fragments)} }, fragment)
             }
 

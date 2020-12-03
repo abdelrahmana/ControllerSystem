@@ -26,7 +26,7 @@ import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.google.gson.Gson
 import io.reactivex.observers.DisposableObserver
-import kotlinx.android.synthetic.main.fragment_delegates.*
+import kotlinx.android.synthetic.main.fragment_acc_delegates.*
 import retrofit2.Response
 
 class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
@@ -43,7 +43,7 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
         // Inflate the layout for this fragment
         modelHandleChangeFragmentclass = UtilKotlin.declarViewModel(activity!!)!!
 
-        return inflater.inflate(R.layout.fragment_delegates, container, false)
+        return inflater.inflate(R.layout.fragment_acc_delegates, container, false)
     }
 
 
@@ -148,10 +148,10 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
         {
             delegatesList.add(DelegatesModel("احمد حازم" , null , " +966 56784 9876" , i+1))
         }*/
-        delegatesCount?.text = delegatesList.size.toString()
+        accDelegateText?.text = delegatesList.size.toString()
 
         delegatesAdapter = DelegatesAdapter(context!! , delegatesList , this)
-        delegatesRecycler?.apply {
+        accDelegateRecycler?.apply {
 
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)

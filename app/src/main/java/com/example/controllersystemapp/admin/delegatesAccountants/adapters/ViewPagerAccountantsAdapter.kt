@@ -8,9 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AccountantsFragment
-import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AdminAccountantFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AdminDelegatesFragment
-import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DelegatesFragment
 
 class ViewPagerAccountantsAdapter(fragment: Fragment)
     : FragmentStateAdapter(fragment)  {
