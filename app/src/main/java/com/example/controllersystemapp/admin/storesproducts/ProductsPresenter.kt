@@ -173,7 +173,14 @@ object ProductsPresenter {
 
     }
 
+    fun deleteImage(webService: WebService, itemListObserver: DisposableObserver<Response<SuccessModel>>, imageId: Int) {
 
+        var arrays = arrayOf(imageId)
+        webService.deleteImage(arrays)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(itemListObserver)
+    }
 
 
 }

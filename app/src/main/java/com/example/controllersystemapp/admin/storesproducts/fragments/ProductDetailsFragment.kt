@@ -17,8 +17,10 @@ import com.example.controllersystemapp.admin.storesproducts.models.ProductsDetai
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_product_details.*
 
 
@@ -70,7 +72,13 @@ class ProductDetailsFragment : Fragment() {
         observeData()
 
         getProductDetailsData()
-
+        editProductButton?.setOnClickListener{
+            val bundle = Bundle()
+            var productDetails = Gson().toJson(productsDetailsResponse)
+            bundle.putString(NameUtils.PRODUCT_DETAILS,productDetails)
+            UtilKotlin.changeFragmentBack(activity!! , EditProductFragment() , "editProudcts"  ,
+                bundle , R.id.frameLayout_direction)
+        }
 
     }
 
@@ -91,8 +99,8 @@ class ProductDetailsFragment : Fragment() {
 
     }
 
+    var productsDetailsResponse : ProductsDetailsResponse?=null
     private fun observeData() {
-
         model.responseDataCode?.observe(activity!!, Observer { datamodel ->
             Log.d("testApi", "observe")
 
@@ -103,6 +111,8 @@ class ProductDetailsFragment : Fragment() {
                 if (datamodel is ProductsDetailsResponse) {
                     Log.d("testApi", "isForyou")
                     setProductsDetailsData(datamodel)
+                    productsDetailsResponse= datamodel
+                    editProductButton?.isEnabled = true // open it please
                 }
 
                 if (datamodel is SuccessModel) {

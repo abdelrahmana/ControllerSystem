@@ -5,10 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.Datas
 import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.product_item_adaptor.view.*
+import kotlinx.android.synthetic.main.product_item_adaptor.view.checked
+import kotlinx.android.synthetic.main.product_item_adaptor.view.containerNumber
+import kotlinx.android.synthetic.main.product_item_adaptor.view.decreaseImage
+import kotlinx.android.synthetic.main.product_item_adaptor.view.increasementText
+import kotlinx.android.synthetic.main.product_item_adaptor.view.itemContainer
+import kotlinx.android.synthetic.main.product_item_adaptor.view.plusImage
+import kotlinx.android.synthetic.main.stored_item_adaptor.view.*
 
 class LastSubProductAdaptorCenter(val modelData: ViewModelHandleChangeFragmentclass,
                                           val arrayListOfTutorials:ArrayList<Datas>//this method is returning the view for each item in the list
@@ -60,23 +66,51 @@ class LastSubProductAdaptorCenter(val modelData: ViewModelHandleChangeFragmentcl
             /*  if (adapterPosition ==arrayListOffersValues.size-1) {
                   itemView.divider.visibility = View.GONE
               }*/
+            itemView?.decreaseImage.setOnClickListener{
+                if (Integer.parseInt(itemView?.increasementText?.text.toString())>1)
+                    itemView?.increasementText?.setText((Integer.parseInt(itemView?.increasementText?.text.toString())-1).toString())
+                // listener?.onDecreaseItemClick(adapterPosition, itemView?.increasementText?.text.toString()?:"")
+            }
+            itemView?.plusImage.setOnClickListener{
+                itemView?.increasementText?.setText( (Integer.parseInt(itemView?.increasementText?.text.toString())+1).toString())
+                // listener?.onIncreaseItemClick(adapterPosition, itemView?.increasementText?.text.toString()?:"")
+
+
+            }
+            if (adapterPositions== adapterPosition) {
+                itemView.checked?.visibility = View.VISIBLE
+                itemView.containerNumber?.visibility = View.VISIBLE
+
+            }
+            else {
+                itemView.checked?.visibility = View.GONE
+                itemView.containerNumber?.visibility = View.GONE
+            }
 
             itemView.itemContainer.setOnClickListener{
-                itemView.checked.visibility = View.VISIBLE
-                  onItemClicked(modelData,adapterPosition) // go to details please
-              }
+                 adapterPositions = adapterPosition
+                  onItemClicked(modelData,adapterPosition,(itemView.increasementText?.text.toString())?:"1") // go to details please
+                notifyDataSetChanged()
+
+            }
 
 
         }
 
 
-         private fun onItemClicked(model: ViewModelHandleChangeFragmentclass,position: Int) {
+         private fun onItemClicked(
+             model: ViewModelHandleChangeFragmentclass,
+             position: Int,
+             quantity: String
+         ) {
               // send this item please
+             arrayListOfTutorials.get(position).totalSelectedProduct = quantity
               model.setNotifyItemSelected(arrayListOfTutorials.get(position)?:"") // update sign up fragment please
 
 
           }
 
     }
+    var adapterPositions = -1
 
 }

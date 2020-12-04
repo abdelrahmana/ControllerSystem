@@ -127,7 +127,6 @@ class ItemDetailsFragment : Fragment(), OnMapReadyCallback {
 
         if (detailsData?.isNullOrEmpty() == false)
         {
-
             slideImage.clear()
             slideImage.add(images)
 

@@ -2,6 +2,7 @@ package  com.example.util
 
 object NameUtils {
 
+    val PRODUCT_DETAILS: String? = "product_admin_details"
     val delegateId: String? = "delegate_id_call"
     val orderId: String? = "order_id"
     val orderName: String? = "order_name"

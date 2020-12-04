@@ -20,7 +20,6 @@ class ProductsAdapter(
     RecyclerView.Adapter<ProductsAdapter.ViewHolder>(){
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.products_item , parent , false)
         return ViewHolder(view)
@@ -40,10 +39,7 @@ class ProductsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.bindView(productList[position], onRecyclerItemClickListener)
-
-
     }
-
 
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {

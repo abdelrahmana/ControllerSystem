@@ -272,25 +272,45 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/deleteProductBtn"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/editProductButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
                 android:layout_marginTop="@dimen/_24sdp"
-                android:layout_marginBottom="@dimen/_100sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="@string/edit"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/orange_color"
+                app:cornerRadius="7dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteProductBtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:gravity="center"
+                android:text="@string/delete"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 app:backgroundTint="@color/logout_red"
                 app:cornerRadius="7dp"
-                android:text="@string/delete"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:textSize="15sp"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </LinearLayout>

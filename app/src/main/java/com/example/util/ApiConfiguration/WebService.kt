@@ -62,6 +62,9 @@ interface WebService {
     @POST("admin/products/create")
     fun addProduct(@Body requestBody : RequestBody): Observable<Response<SuccessModel>>
 
+    @Headers("Accept: application/json")
+    @POST("admin/products/edit")
+    fun editProduct(@Body requestBody : RequestBody): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
     @GET("admin/categories/list")
@@ -313,4 +316,12 @@ interface WebService {
     @Headers("Accept: application/json")
     @POST("call-center/orders/create")
     fun postOrder(@Body orderCreateRequest: OrderCreateRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @DELETE("admin/products/delete-images")
+    fun deleteImage(@Query("id[]") array :Array<Int>): Observable<Response<SuccessModel>>
+    @Headers("Accept: application/json")
+    // @Multipart
+    @POST("users/update-profile")
+    fun editProfileWebService(@Body requestBody : RequestBody): Observable<Response<LoginResponse>>
 }

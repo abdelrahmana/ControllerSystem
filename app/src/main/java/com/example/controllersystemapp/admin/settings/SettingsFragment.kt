@@ -126,9 +126,9 @@ var authService : WebService?=null
 
                             //PrefUtils.setUserToken(context!!, response.body()!!.data.access_token)
                             // PrefUtils.setUserModel(context!!, response.body())
-                            PrefsUtil.removeKey(context!! , PrefsModel.TOKEN)
-                            PrefsUtil.setLoginState(context!!, false)
-                            PrefsUtil.removeKey(context!! , PrefsModel.userModel)
+                        //    PrefsUtil.removeKey(context!! , PrefsModel.TOKEN)
+                         //   PrefsUtil.setLoginState(context!!, false)
+                          //  PrefsUtil.removeKey(context!! , PrefsModel.userModel)
 
                             //PrefUtils.setUserToken(context!!, response.body()!!.data.access_token)
                             // PrefUtils.setUserModel(context!!, response.body())
@@ -157,7 +157,6 @@ var authService : WebService?=null
 
 
         }
-
 
     }
 }

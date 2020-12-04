@@ -162,7 +162,7 @@ class StoreClassificationFragment : Fragment() , OnStoreSelcteClickListener {
             Log.d("testApi", "observe")
 
             if (datamodel != null) {
-                progressDialog?.hide()
+                progressDialog?.dismiss()
                 Log.d("testApi", "responseNotNull")
 
                 if (datamodel is StoresListResponse) {
@@ -179,7 +179,7 @@ class StoreClassificationFragment : Fragment() , OnStoreSelcteClickListener {
         model.errorMessage.observe(activity!!, Observer { error ->
 
             if (error != null) {
-                progressDialog?.hide()
+                progressDialog?.dismiss()
                 val errorFinal = UtilKotlin.getErrorBodyResponse(error, context!!)
                 UtilKotlin.showSnackErrorInto(activity!!, errorFinal)
 

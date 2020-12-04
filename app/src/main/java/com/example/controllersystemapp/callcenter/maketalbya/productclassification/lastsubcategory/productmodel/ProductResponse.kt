@@ -15,7 +15,8 @@ data class Datas(
     var name: String?,
     var price: String?,
     var total_quantity: String?,
-    var ware_houses: List<WareHouse>?
+    var ware_houses: List<WareHouse>?,
+    var totalSelectedProduct : String?="0"
 )
 
 data class Category(

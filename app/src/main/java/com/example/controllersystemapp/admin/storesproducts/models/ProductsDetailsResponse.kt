@@ -1,7 +1,7 @@
 package com.example.controllersystemapp.admin.storesproducts.models
 
 data class ProductsDetailsResponse(
-    val `data`: DataProdDetails?
+    val `data`: DataProdDetails?=null
 )
 
 data class DataProdDetails(
@@ -12,11 +12,11 @@ data class DataProdDetails(
     val description: String?="",
     val id: Int?=0,
     val image: String?="",
-    val images: List<Image>?,
+    val images: ArrayList<Image>?,
     val name: String?="",
     val price: String?="",
     val total_quantity: String?="",
-    val ware_houses: List<WareHouse>?
+    val ware_houses: ArrayList<WareHouse>?
 )
 
 data class Category(
@@ -27,7 +27,8 @@ data class Category(
 data class Image(
     val id: Int?=0,
     val image: String?="",
-    val product_id: String?=""
+    val product_id: String?="",
+    var position : Int = 0
 )
 
 //data class WareHouse(
