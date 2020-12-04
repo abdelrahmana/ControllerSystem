@@ -23,7 +23,7 @@ class DelegatesHomeActivity : CommonActivity() , View.OnClickListener{
         setUserData()
 
         specialWalletCard?.setOnClickListener(this)
-        delegateOrdersCard?.setOnClickListener(this)
+        //delegateOrdersCard?.setOnClickListener(this)
         notificationReportsCard?.setOnClickListener(this)
         makeOrderDelegateCard?.setOnClickListener(this)
 
@@ -72,13 +72,13 @@ class DelegatesHomeActivity : CommonActivity() , View.OnClickListener{
                 startActivity(intent)
             }
 
-            R.id.delegateOrdersCard -> {
-                removeCardSelection()
-                setCardSelection(delegateOrdersCard , delegateOrdersImage , delegateOrdersText ,R.drawable.ic_ordersicon)
-                val intent = Intent(this , RedirecteDelegateActivity::class.java)
-                intent.putExtra(NameUtils.redirectDelegFragmet, NameUtils.DELEGATE_ORDERS)
-                startActivity(intent)
-            }
+//            R.id.delegateOrdersCard -> {
+//                removeCardSelection()
+//                setCardSelection(delegateOrdersCard , delegateOrdersImage , delegateOrdersText ,R.drawable.ic_ordersicon)
+//                val intent = Intent(this , RedirecteDelegateActivity::class.java)
+//                intent.putExtra(NameUtils.redirectDelegFragmet, NameUtils.DELEGATE_ORDERS)
+//                startActivity(intent)
+//            }
 
             R.id.notificationReportsCard -> {
                 removeCardSelection()
@@ -116,9 +116,9 @@ class DelegatesHomeActivity : CommonActivity() , View.OnClickListener{
         specialWalletText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
 
-        delegateOrdersCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
-        delegateOrdersImage?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_ordersicon))
-        delegateOrdersText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
+//        delegateOrdersCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
+//        delegateOrdersImage?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_ordersicon))
+//        delegateOrdersText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
 
         notificationReportsCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))

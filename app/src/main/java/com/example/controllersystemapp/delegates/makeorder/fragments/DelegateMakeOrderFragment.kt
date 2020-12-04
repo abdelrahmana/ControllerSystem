@@ -181,7 +181,7 @@ class DelegateMakeOrderFragment : Fragment() {
     private fun checkValidData(): Boolean {
 
         var errorMessage = ""
-        if (nameEdt.text.isNullOrBlank()) {
+        if (nameEdt?.text.isNullOrBlank()) {
             errorMessage += getString(R.string.name_is_required)
             errorMessage += "\n"
         }

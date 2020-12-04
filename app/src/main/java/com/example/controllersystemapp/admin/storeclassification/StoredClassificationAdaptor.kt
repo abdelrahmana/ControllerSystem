@@ -67,34 +67,6 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
 
             itemView.store_name.text = itemData?.name?:""
 
-//            if (itemData.isChecked == true)
-//                {
-//                    showHideViews(itemView,View.VISIBLE)
-//                    clickFlag = true
-//                    // quantityList.add((itemView.increasementText?.text.toString()).toInt())
-//                    quantityList.add((itemView.productNameEditText?.text.toString()).toInt())
-//                    storesIdList.add(arrayListOfTutorials[position].id?:-1)
-//                }
-//                else{
-//                    showHideViews(itemView,View.GONE)
-//                    clickFlag = false
-//                    quantityList.remove((itemView.productNameEditText?.text.toString()).toInt())
-//                    storesIdList.remove(arrayListOfTutorials[position].id?:-1)
-//                }
-
-            /*   itemView.costText.text = itemData.modelCost
-                if (itemData.modelStatus==myOrdersModel.doneOrder) {
-                    itemView.statusOfOrder.setTextColor(ContextCompat.getColor(itemView.context,R.color.green))
-                } else if(itemData.modelStatus==myOrdersModel.canceled) {
-
-                    itemView.statusOfOrder.setTextColor(ContextCompat.getColor(itemView.context,R.color.red))
-
-                }*/
-            //   Glide.with(itemView.imageItem.context).load(itemData.image).into(itemView.imageItem)
-            ///  itemView.nameTextView.text = itemData.name?:""
-            // itemView.simpleRatingBar.rating = 4f
-            // itemView.tutorialImage = itemData.t?:""
-
             /*  if (adapterPosition ==arrayListOffersValues.size-1) {
                   itemView.divider.visibility = View.GONE
               }*/
@@ -174,59 +146,16 @@ class StoredClassificationAdaptor(val modelData: ViewModelHandleChangeFragmentcl
             if (arrayListOfTutorials[position].isChecked)
             {
                 showHideViews(itemView,View.VISIBLE)
-//                clickFlag = true
-//                // quantityList.add((itemView.increasementText?.text.toString()).toInt())
-                //quantityList.add((itemView.productNameEditText?.text.toString()).toInt())
-//                storesIdList.add(arrayListOfTutorials[position].id?:-1)
+
             }
             else{
                 showHideViews(itemView,View.GONE)
-//                clickFlag = false
-                //quantityList.remove((itemView.productNameEditText?.text.toString()).toInt())
-//                storesIdList.remove(arrayListOfTutorials[position].id?:-1)
+
             }
-                ?:false
 
-//                if (!clickFlag)
-//                {
-//                    showHideViews(itemView,View.VISIBLE)
-//                    clickFlag = true
-//                    // quantityList.add((itemView.increasementText?.text.toString()).toInt())
-//                    quantityList.add((itemView.productNameEditText?.text.toString()).toInt())
-//                    storesIdList.add(arrayListOfTutorials[position].id?:-1)
-//                }
-//                else{
-//                    showHideViews(itemView,View.GONE)
-//                    clickFlag = false
-//                    quantityList.remove((itemView.productNameEditText?.text.toString()).toInt())
-//                    storesIdList.remove(arrayListOfTutorials[position].id?:-1)
-//                }
-//
-
-
-
-
-
-            // showHideViews(itemView,View.VISIBLE)test
-
-//            quantityList.clear()
-//            storesIdList.clear()
-
-//            quantityList.add((itemView.increasementText?.text.toString()).toInt())//test
-//            storesIdList.add(arrayListOfTutorials[position].id?:-1)//test
 
             listener.onClickItemClick(position, quantityList , storesIdList )
-//            for (i in quantityList.indices) {
-//
-//                arrayListOfTutorials[position].quantityList?.add(quantityList[i])
-//
-//            }
-//
-//            for (i in storesIdList.indices) {
-//
-//                arrayListOfTutorials[position].storesIdList?.add(storesIdList[i])
-//
-//            }
+
 
             Log.d("Arraysss" , "quantityAdapter ${quantityList.size}")
             Log.d("Arraysss" , "storeAdaapter ${storesIdList.size}")

@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.interfaces.OnStoreSelcteClickListener
 import com.example.controllersystemapp.delegates.makeorder.model.Data
 import com.example.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.stored_item_adaptor.view.*
+import kotlinx.android.synthetic.main.acc_product_select_item.view.*
 
 
 class DelegateProductsListAdapter(val modelData: ViewModelHandleChangeFragmentclass,
@@ -27,7 +28,7 @@ class DelegateProductsListAdapter(val modelData: ViewModelHandleChangeFragmentcl
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.stored_item_adaptor, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.acc_product_select_item, parent, false)
         return ViewHolder(v)
     }
 
@@ -63,6 +64,13 @@ class DelegateProductsListAdapter(val modelData: ViewModelHandleChangeFragmentcl
             /*model: ViewModelData,*/
             arrayListOffersValues: ArrayList<Data>) {
 
+            Glide.with(itemView.context).load(itemData.image ?: "")
+//                .placeholder(R.drawable.no_profile)
+//                .error(R.drawable.no_profile)
+                .into(itemView.productImage)
+            itemView.store_name.text = itemData?.name ?: ""
+            itemView.totalQuantityTxt.text =
+                "${itemData?.total_quantity ?: ""} ${itemView?.context?.getString(R.string.piece)}"
             itemView.store_name.text = itemData?.name?:""
 
             if (adapterPositionChecked == adapterPosition)
@@ -73,47 +81,6 @@ class DelegateProductsListAdapter(val modelData: ViewModelHandleChangeFragmentcl
                 showHideViews(itemView,View.GONE)
             }
 
-
-//            if (itemData.isChecked == true)
-//                {
-//                    showHideViews(itemView,View.VISIBLE)
-//                    clickFlag = true
-//                    // quantityList.add((itemView.increasementText?.text.toString()).toInt())
-//                    quantityList.add((itemView.productNameEditText?.text.toString()).toInt())
-//                    storesIdList.add(arrayListOfTutorials[position].id?:-1)
-//                }
-//                else{
-//                    showHideViews(itemView,View.GONE)
-//                    clickFlag = false
-//                    quantityList.remove((itemView.productNameEditText?.text.toString()).toInt())
-//                    storesIdList.remove(arrayListOfTutorials[position].id?:-1)
-//                }
-
-            /*   itemView.costText.text = itemData.modelCost
-                if (itemData.modelStatus==myOrdersModel.doneOrder) {
-                    itemView.statusOfOrder.setTextColor(ContextCompat.getColor(itemView.context,R.color.green))
-                } else if(itemData.modelStatus==myOrdersModel.canceled) {
-
-                    itemView.statusOfOrder.setTextColor(ContextCompat.getColor(itemView.context,R.color.red))
-
-                }*/
-            //   Glide.with(itemView.imageItem.context).load(itemData.image).into(itemView.imageItem)
-            ///  itemView.nameTextView.text = itemData.name?:""
-            // itemView.simpleRatingBar.rating = 4f
-            // itemView.tutorialImage = itemData.t?:""
-
-            /*  if (adapterPosition ==arrayListOffersValues.size-1) {
-                  itemView.divider.visibility = View.GONE
-              }*/
-
-//            if (adapterPositionChecked == adapterPosition) {
-//                showHideViews(itemView,View.VISIBLE)
-//
-//            }
-//            else {
-//                showHideViews(itemView,View.GONE)
-//            }
-
             itemView?.productNameEditText?.setText((itemData.selectedQuantity?:1).toString())
             itemView?.productNameEditText?.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable) {
@@ -122,7 +89,9 @@ class DelegateProductsListAdapter(val modelData: ViewModelHandleChangeFragmentcl
 
                        // modelData.setNotifyItemSelected()
                         itemData.selectedQuantity = (itemView?.productNameEditText?.text?.toString())?.toInt()
-
+                        modelData.setNotifyItemSelected(
+                            delegateProductsslist.get(adapterPosition) ?: ""
+                        )
                     }
 
                 }
@@ -175,74 +144,6 @@ class DelegateProductsListAdapter(val modelData: ViewModelHandleChangeFragmentcl
             adapterPositionChecked = adapterPosition
             model.setNotifyItemSelected(delegateProductsslist.get(position)?:"") // update sign up fragment please
             notifyDataSetChanged() // reload this please
-
-
-//            delegateProductsslist[position].isChecked = !delegateProductsslist[position].isChecked
-//
-//            if (delegateProductsslist[position].isChecked)
-//            {
-//                showHideViews(itemView,View.VISIBLE)
-////                clickFlag = true
-////                // quantityList.add((itemView.increasementText?.text.toString()).toInt())
-//                //quantityList.add((itemView.productNameEditText?.text.toString()).toInt())
-////                storesIdList.add(arrayListOfTutorials[position].id?:-1)
-//            }
-//            else{
-//                showHideViews(itemView,View.GONE)
-////                clickFlag = false
-//                //quantityList.remove((itemView.productNameEditText?.text.toString()).toInt())
-////                storesIdList.remove(arrayListOfTutorials[position].id?:-1)
-//            }
-                ?:false
-
-//                if (!clickFlag)
-//                {
-//                    showHideViews(itemView,View.VISIBLE)
-//                    clickFlag = true
-//                    // quantityList.add((itemView.increasementText?.text.toString()).toInt())
-//                    quantityList.add((itemView.productNameEditText?.text.toString()).toInt())
-//                    storesIdList.add(arrayListOfTutorials[position].id?:-1)
-//                }
-//                else{
-//                    showHideViews(itemView,View.GONE)
-//                    clickFlag = false
-//                    quantityList.remove((itemView.productNameEditText?.text.toString()).toInt())
-//                    storesIdList.remove(arrayListOfTutorials[position].id?:-1)
-//                }
-//
-
-
-
-
-
-            // showHideViews(itemView,View.VISIBLE)test
-
-//            quantityList.clear()
-//            storesIdList.clear()
-
-//            quantityList.add((itemView.increasementText?.text.toString()).toInt())//test
-//            storesIdList.add(arrayListOfTutorials[position].id?:-1)//test
-
-           // listener.onClickItemClick(position, quantityList , storesIdList )
-//            for (i in quantityList.indices) {
-//
-//                arrayListOfTutorials[position].quantityList?.add(quantityList[i])
-//
-//            }
-//
-//            for (i in storesIdList.indices) {
-//
-//                arrayListOfTutorials[position].storesIdList?.add(storesIdList[i])
-//
-//            }
-
-//            Log.d("Arraysss" , "quantityAdapter ${quantityList.size}")
-//            Log.d("Arraysss" , "storeAdaapter ${storesIdList.size}")
-
-            // send this item please
-            // model.setNotifyItemSelected(arrayListOfTutorials.get(position)?:"") // update sign up fragment please
-             //notifyDataSetChanged()
-
 
           }
 

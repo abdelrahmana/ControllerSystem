@@ -11,6 +11,7 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     // this basically used to notify changefragment with new
     var notifyChangeFragment = MutableLiveData<Int>()
     var errorMessage = MutableLiveData<ResponseBody>()
+    var stringErrorMessage = MutableLiveData<String>()
 
     // handle the back of fragments within activty
     var handleClickBack = MutableLiveData<Boolean>()
@@ -68,6 +69,9 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     fun onError(onError: ResponseBody?) {
         errorMessage.postValue(onError)
     }
+    fun onStringError(error: String?) {
+        stringErrorMessage.postValue(error)
+    }
     fun setNotifyItemSelected(responseBody : Any?) { // lets post this to our listener places
 
         this.notifyItemSelected.value =responseBody
@@ -110,6 +114,7 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     }
 
     class ProductClassification(
+        var parentId : Int? = -1,
         var id : Int? = -1,
         var parentName :String ? = "",
         var subParentName :String ? = "",

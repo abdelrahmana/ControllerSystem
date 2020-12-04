@@ -134,7 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
-                android:rowCount="4"
+                android:rowCount="2"
                 android:alignmentMode="alignMargins"
                 android:columnOrderPreserved="false"
                 android:orientation="horizontal"
@@ -245,6 +245,7 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
+                <!--
                 <com.google.android.material.card.MaterialCardView
                     android:visibility="gone"
                     android:id="@+id/delegateOrdersCard"
@@ -294,7 +295,7 @@
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
-
+-->
                 <!-- Row 2 -->
 
                 <!-- Column 1 -->
@@ -350,6 +351,11 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <!-- Column 2 -->
+
+
+
+
+
 
 
                 <!-- Row 3 -->

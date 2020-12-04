@@ -7,6 +7,7 @@ import com.example.controllersystemapp.accountant.settings.expenses.AccountantEx
 import com.example.controllersystemapp.accountant.settings.expenses.AccountantExpensesListResponse
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.AddDelegateCallCenterRequest
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
+import com.example.controllersystemapp.accountant.makeorder.models.AccountantMakeOrderRequest
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
@@ -246,6 +247,11 @@ interface WebService {
     @GET("accountant/products/list")
     fun accountantProductsList(@Query("category_id") categoryId : Int? , @Query("name") name : String?):
             Observable<Response<AccountantProductsListResponse>>
+
+
+    @Headers("Accept: application/json")
+    @POST("accountant/orders/create")
+    fun accountantCreateOrder(@Body accountantMakeOrderRequest: AccountantMakeOrderRequest): Observable<Response<SuccessModel>>
 
 
     //Delegates Api

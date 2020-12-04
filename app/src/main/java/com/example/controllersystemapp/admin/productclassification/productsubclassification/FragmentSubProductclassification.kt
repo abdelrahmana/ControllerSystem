@@ -139,6 +139,7 @@ class FragmentSubProductclassification : Fragment() {
                     if (arguments?.getBoolean(ISCALLCENTER,false)==true)
                     {
                         model?.responseCodeDataSetter(ViewModelHandleChangeFragmentclass.ProductClassification(
+                            arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1,
                             modelSelected.id?:-1, // sub parent model
                             arguments?.getString(FragmentProductclassification.PARENT_NAME)?:"",
                             modelSelected.name?:"",

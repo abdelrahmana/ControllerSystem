@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.categories.models.Data
 import com.example.controllersystemapp.admin.interfaces.OnCategoriesSelectedelcteClickListener
+import com.example.controllersystemapp.admin.storesproducts.models.StoresData
 import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.product_item_adaptor.view.*
 import kotlinx.android.synthetic.main.product_item_adaptor.view.checked
@@ -22,6 +23,7 @@ class ProductCategoriesSelectAdaptor(val modelData: ViewModelHandleChangeFragmen
     var categoriesList = ArrayList<Int>()
     var categoriesListNames = ArrayList<String>()
 
+    val selected: ArrayList<Data> = ArrayList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -58,22 +60,6 @@ class ProductCategoriesSelectAdaptor(val modelData: ViewModelHandleChangeFragmen
 
            itemView.category_name.text = itemData.name?:""
 
-            /*   itemView.costText.text = itemData.modelCost
-                if (itemData.modelStatus==myOrdersModel.doneOrder) {
-                    itemView.statusOfOrder.setTextColor(ContextCompat.getColor(itemView.context,R.color.green))
-                } else if(itemData.modelStatus==myOrdersModel.canceled) {
-
-                    itemView.statusOfOrder.setTextColor(ContextCompat.getColor(itemView.context,R.color.red))
-
-                }*/
-            //   Glide.with(itemView.imageItem.context).load(itemData.image).into(itemView.imageItem)
-            ///  itemView.nameTextView.text = itemData.name?:""
-            // itemView.simpleRatingBar.rating = 4f
-            // itemView.tutorialImage = itemData.t?:""
-
-            /*  if (adapterPosition ==arrayListOffersValues.size-1) {
-                  itemView.divider.visibility = View.GONE
-              }*/
 
             itemView.itemContainer.setOnClickListener{
 
@@ -97,11 +83,23 @@ class ProductCategoriesSelectAdaptor(val modelData: ViewModelHandleChangeFragmen
          ) {
               // send this item please
               //model.setNotifyItemSelected(arrayListOfTutorials.get(position)) // update sign up fragment please
-             showHideViews(itemView,View.VISIBLE)
-             categoriesList.add(arrayListOfTutorials[position].id?:-1)
-             categoriesListNames.add(arrayListOfTutorials[position].name?:"")
+             arrayListOfTutorials[position].isChecked = !arrayListOfTutorials[position].isChecked
+             if (arrayListOfTutorials[position].isChecked)
+             {
+                 showHideViews(itemView,View.VISIBLE)
+                 selected.add(arrayListOfTutorials[position])
+             }
+             else{
+                 showHideViews(itemView,View.GONE)
+                 selected.remove(arrayListOfTutorials[position])
+             }
 
-             listner.onClickItemClick(position , categoriesList , categoriesListNames)
+
+//             showHideViews(itemView,View.VISIBLE)
+//             categoriesList.add(arrayListOfTutorials[position].id?:-1)
+//             categoriesListNames.add(arrayListOfTutorials[position].name?:"")
+//
+             listner.onItemClickData(position , selected)
 
           }
 

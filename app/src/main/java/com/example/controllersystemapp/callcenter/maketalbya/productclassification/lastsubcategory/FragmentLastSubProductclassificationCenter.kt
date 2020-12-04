@@ -211,7 +211,8 @@ class FragmentLastSubProductclassificationCenter : Fragment() {
             Log.d("addBtn" , "lastName ${modelSelected?.name?:""}")
 
             model?.responseCodeDataSetter(ViewModelHandleChangeFragmentclass.ProductClassification(
-                /*arguments?.getInt(FragmentProductclassification.PARENT_ID)*/modelSelected?.id?:-1,
+                arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1,
+                modelSelected?.id?:-1,
                 arguments?.getString(FragmentProductclassification.PARENT_NAME)?:"",
                 arguments?.getString(FragmentProductclassification.SUB_PARENT_NAME)?:"",
                 modelSelected?.name?:""

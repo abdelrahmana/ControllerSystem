@@ -35,6 +35,7 @@ class ProductCategoriesSelectFragment : Fragment()  , OnCategoriesSelectedelcteC
 
     var categoriesFinalList = ArrayList<Int>()
     var categoriesNamesFinalList = ArrayList<String>()
+    val selectedDataList: ArrayList<Data> = ArrayList()
 
 
     override fun onCreateView(
@@ -54,6 +55,9 @@ class ProductCategoriesSelectFragment : Fragment()  , OnCategoriesSelectedelcteC
         super.onViewCreated(view, savedInstanceState)
 
         addCategoriesButton?.setOnClickListener {
+
+            Log.d("getData" , "id ${categoriesFinalList.size}")
+            Log.d("getData" , "name ${categoriesNamesFinalList.size}")
 
             model.responseCodeDataSetter(NamesIdModel(categoriesFinalList , categoriesNamesFinalList))
             activity?.supportFragmentManager?.popBackStack()
@@ -146,25 +150,45 @@ class ProductCategoriesSelectFragment : Fragment()  , OnCategoriesSelectedelcteC
 
     }
 
-    override fun onClickItemClick(
-        position: Int,
-        categoriesList: ArrayList<Int>,
-        categoriesListNames: ArrayList<String>
-    ) {
+//    override fun onClickItemClick(
+//        position: Int,
+//        categoriesList: ArrayList<Int>,
+//        categoriesListNames: ArrayList<String>
+//    ) {
+//
+//        categoriesFinalList.clear()
+//        for (i in categoriesList.indices) {
+//
+//            categoriesFinalList?.add(categoriesList[i])
+//            Log.d("clickData" , "quantity ${categoriesList?.get(i)}")
+//        }
+//
+//        categoriesNamesFinalList.clear()
+//        for (i in categoriesListNames.indices) {
+//            categoriesNamesFinalList?.add(categoriesListNames[i])
+//        }
+//
+//
+//
+//    }
 
+    override fun onItemClickData(position: Int, categoriesList: ArrayList<Data>) {
+
+        addCategoriesButton?.visibility = View.VISIBLE
         categoriesFinalList.clear()
-        for (i in categoriesList.indices) {
-
-            categoriesFinalList?.add(categoriesList[i])
-            Log.d("clickData" , "quantity ${categoriesList?.get(i)}")
-        }
-
         categoriesNamesFinalList.clear()
-        for (i in categoriesListNames.indices) {
-            categoriesNamesFinalList?.add(categoriesListNames[i])
+
+        if (categoriesList?.size?:0 > 0) {
+            for (i in 0 until categoriesList?.size!!) {
+                categoriesFinalList.add(categoriesList?.get(i)?.id?:0)
+                categoriesNamesFinalList.add(categoriesList?.get(i)?.name?:"")
+                // quantityList.add(storedAdapter?.getSelected()?.get(i)?.quantity?:0)
+            }
+
+        } else {
+            addCategoriesButton?.visibility = View.GONE
+            Log.d("finalResult" , "NoSelection")
         }
-
-
 
     }
 

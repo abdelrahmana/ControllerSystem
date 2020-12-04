@@ -205,6 +205,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
                 android:id="@+id/productCategoryContainer"
                 android:layout_marginStart="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_24sdp"
@@ -239,6 +240,57 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_marginTop="@dimen/_23sdp"
+                android:textSize="@dimen/_12sdp"
+                android:text="@string/product_level"
+                android:textColor="@color/black"
+                android:textAlignment="viewStart"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/storeCategoryClassifyCard"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:minHeight="@dimen/_32sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@color/orange_color"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:minHeight="@dimen/_32sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:textAlignment="viewStart"
+                        android:id="@+id/storeCategoryClassifyText"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:drawableStart="@drawable/ic_side_arrow"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="@string/product_level"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout

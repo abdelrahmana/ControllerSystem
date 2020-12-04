@@ -16,9 +16,10 @@ import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListe
 import com.example.controllersystemapp.delegates.wallet.DelegateOrdersPresenter
 import com.example.controllersystemapp.delegates.wallet.adapter.CurrentWalletAdapter
 import com.example.controllersystemapp.delegates.wallet.adapter.OrderItemsAdapter
+import com.example.controllersystemapp.delegates.wallet.models.DataDelegateOrderItems
 import com.example.controllersystemapp.delegates.wallet.models.DelegateOrderItemsListResponse
 import com.example.controllersystemapp.delegates.wallet.models.DelegateOrdersListResponse
-import com.example.controllersystemapp.delegates.wallet.models.ItemsData
+//import com.example.controllersystemapp.delegates.wallet.models.ItemsData
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
@@ -35,7 +36,9 @@ class OrdersItemsFragment : Fragment() , OnRecyclerItemClickListener {
     lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
 
-    var orderItemsList = ArrayList<ItemsData>()
+ //   var orderItemsList = ArrayList<ItemsData>()
+    var orderItemsList = ArrayList<DataDelegateOrderItems>()
+
     lateinit var orderItemsAdapter: OrderItemsAdapter
 
     var orderId = 0

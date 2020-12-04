@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.addproduct.AddProductFragment
 import com.example.controllersystemapp.admin.addproduct.StoreIdQuantity
 import com.example.controllersystemapp.admin.interfaces.OnStoreSelcteClickListener
 import com.example.controllersystemapp.admin.storesproducts.StoresPresenter
@@ -76,7 +77,9 @@ class StoreClassificationFragment : Fragment() , OnStoreSelcteClickListener {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
 
-            StoresPresenter.getStoresList(webService!!, null, activity!!, model)
+            StoresPresenter.getStoresList(webService!!,
+                arguments?.getInt(AddProductFragment.PARENT_CATEGORY_ID_STORE)?:-1
+                , activity!!, model)
 
         } else {
             progressDialog?.dismiss()
@@ -116,6 +119,9 @@ class StoreClassificationFragment : Fragment() , OnStoreSelcteClickListener {
 
     override fun onDestroyView() {
       model?.notifyItemSelected?.removeObservers(activity!!)
+        model?.responseDataCode?.removeObservers(activity!!)
+        model?.errorMessage?.removeObservers(activity!!)
+
         super.onDestroyView()
 
     }

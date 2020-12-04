@@ -61,8 +61,12 @@ class AddProductFragment : Fragment() {
     lateinit var progressDialog: Dialog
 
     var categoryID = 0
+    var parentCategoryID = 0
 
     var barCode: String? = null
+    var productCategoryName: String? = null
+    var storeName = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,10 +108,20 @@ class AddProductFragment : Fragment() {
         }
 
         materialSave?.setOnClickListener {
-            UtilKotlin.changeFragmentBack(
-                activity!!, StoreClassificationFragment(), "storeClassification",
-                null, R.id.frameLayout_direction
-            )
+
+            if (categoryID == 0) {
+                showSnackErrorInto(activity!!, getString(R.string.selectCategoryFirst))
+            }
+            else{
+                val bundle = Bundle()
+                bundle.putInt(PARENT_CATEGORY_ID_STORE , parentCategoryID?:-1)
+                UtilKotlin.changeFragmentBack(
+                    activity!!, StoreClassificationFragment(), "storeClassification",
+                    bundle , R.id.frameLayout_direction
+                )
+            }
+
+
         }
 
         openCamLayout?.setOnClickListener {
@@ -166,6 +180,7 @@ class AddProductFragment : Fragment() {
 
         }
 
+        observeAdd()
 
     }
 
@@ -173,10 +188,10 @@ class AddProductFragment : Fragment() {
 
         var errorMessage = ""
 
-        if (productImagesList?.isNullOrEmpty() == true) {
-            errorMessage += getString(R.string.select_product_image)
-            errorMessage += "\n"
-        }
+//        if (productImagesList?.isNullOrEmpty() == true) {
+//            errorMessage += getString(R.string.select_product_image)
+//            errorMessage += "\n"
+//        }
 
         if (productNameEditText.text.isNullOrBlank()) {
             errorMessage += getString(R.string.product_name_required)
@@ -273,12 +288,13 @@ class AddProductFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        observeAdd()
 
         Log.d("viewCreated", "resume")
         //Log.d("code", "$BARCODE")
         //barCodeTxt?.text = BARCODE?:""
         barCodeTxt?.text = barCode
+        addProdClassifyTxt?.text = productCategoryName
+        storeClassificationTxt?.text = storeName
 
     }
 
@@ -304,11 +320,9 @@ class AddProductFragment : Fragment() {
                 if (datamodel is ViewModelHandleChangeFragmentclass.ProductClassification) {//when choose category return categoryID
                     Log.d("observeData", "dd $datamodel")
                     categoryID = datamodel.id ?: -1
-                    Log.d(
-                        "finalText",
-                        "${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}"
-                    )
-                    addProdClassifyTxt?.text = "${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}"
+                    parentCategoryID = datamodel.parentId ?: -1
+                    productCategoryName = "${datamodel.parentName} - ${datamodel.subParentName} - ${datamodel.lastSubParentName}"
+                    addProdClassifyTxt?.text = productCategoryName
                 }
 
                 //StoreIdQuantity
@@ -317,7 +331,6 @@ class AddProductFragment : Fragment() {
 //                    Log.d("observeData", "storeId ${datamodel.storeId.size}")
                     quantityList?.clear()
                     warehouse_id?.clear()
-                    var storeName = ""
 
 
 //                    for (i in 0 until datamodel.quantityId.size)
@@ -330,6 +343,7 @@ class AddProductFragment : Fragment() {
 //
 //                        warehouse_id?.add(datamodel.storeId[i])
 //                    }
+                    storeName = ""
                     if (datamodel.data?.size ?: 0 > 0) {
                         for (i in 0 until datamodel.data?.size!!) {
                             quantityList?.add(datamodel.data[i].quantity ?: 1)
@@ -340,15 +354,15 @@ class AddProductFragment : Fragment() {
 
                         }
                     }
-                    Log.d("quantityFinalResult", " size${quantityList?.size}")
-                    Log.d("warehouseFinalResult", " size ${warehouse_id?.size}")
-
-                    for (i in quantityList?.indices!!) {
-                        Log.d("quantityFinalResult", " Data $i ${quantityList?.get(i)}")
-                    }
-                    for (i in warehouse_id?.indices!!) {
-                        Log.d("warehouseFinalResult", " Data $i ${warehouse_id?.get(i)}")
-                    }
+//                    Log.d("quantityFinalResult", " size${quantityList?.size}")
+//                    Log.d("warehouseFinalResult", " size ${warehouse_id?.size}")
+//
+//                    for (i in quantityList?.indices!!) {
+//                        Log.d("quantityFinalResult", " Data $i ${quantityList?.get(i)}")
+//                    }
+//                    for (i in warehouse_id?.indices!!) {
+//                        Log.d("warehouseFinalResult", " Data $i ${warehouse_id?.get(i)}")
+//                    }
                     storeClassificationTxt?.text = storeName
 
 
@@ -386,7 +400,6 @@ class AddProductFragment : Fragment() {
                 val errorFinal = UtilKotlin.getErrorBodyResponse(error, context!!)
                 Log.d("error", "error $errorFinal")
                 showSnackErrorInto(activity!!, errorFinal)
-
                 model.onError(null)
             }
 
@@ -416,9 +429,7 @@ class AddProductFragment : Fragment() {
             describeProductEditText?.text?.toString(), priceEditText?.text?.toString(), barCode,
             categoryID, quantityList, warehouse_id, productImagesList
         )
-
         AddProductsPresenter.getAddProduct(webService!!, addProductRequest, activity!!, model)
-
     }
 
     override fun onRequestPermissionsResult(
@@ -514,6 +525,7 @@ class AddProductFragment : Fragment() {
     companion object {
         val GALLERY = 1
         val CAMERA = 0
+        val PARENT_CATEGORY_ID_STORE = "parentCategoryIdStore"
         //var BARCODE = ""
 
     }

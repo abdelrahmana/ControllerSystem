@@ -226,13 +226,19 @@ class DelegateProductsFragment : Fragment() {
                   activity!!.supportFragmentManager!!.getBackStackEntryAt(index - 3)
               activity!!.supportFragmentManager.popBackStack(previous.id,0)*/
 
-            model?.responseCodeDataSetter(modelSelected)
+            if (modelSelected.selectedQuantity ?: 0 > (modelSelected.total_quantity?.toInt()) ?: 0)
+                UtilKotlin.showSnackErrorInto(activity!!, getString(R.string.max_quantity))
+            else
+            {
+                model?.responseCodeDataSetter(modelSelected)
 
-            //model?.responseCodeDataSetter(arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1)
-            activity?.supportFragmentManager?.popBackStack()
-            activity?.supportFragmentManager?.popBackStack()
-            activity?.supportFragmentManager?.popBackStack()
-            activity?.supportFragmentManager?.popBackStack()
+                //model?.responseCodeDataSetter(arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1)
+                activity?.supportFragmentManager?.popBackStack()
+                activity?.supportFragmentManager?.popBackStack()
+                activity?.supportFragmentManager?.popBackStack()
+                activity?.supportFragmentManager?.popBackStack()
+            }
+
 
         }
     }
@@ -247,6 +253,7 @@ class DelegateProductsFragment : Fragment() {
             // not from all listner
             it?.responseDataCode?.removeObservers(activity!!) // remove observer from here only
             it?.notifyItemSelected?.removeObservers(activity!!)
+            it?.errorMessage?.removeObservers(activity!!)
 
         }
 

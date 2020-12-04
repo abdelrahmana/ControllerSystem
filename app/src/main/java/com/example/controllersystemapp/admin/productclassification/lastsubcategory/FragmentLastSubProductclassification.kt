@@ -96,6 +96,7 @@ class FragmentLastSubProductclassification : Fragment() {
             // not from all listner
             it?.responseDataCode?.removeObservers(activity!!) // remove observer from here only
             it?.notifyItemSelected?.removeObservers(activity!!)
+            it?.errorMessage?.removeObservers(activity!!)
 
         }
 
@@ -202,13 +203,14 @@ class FragmentLastSubProductclassification : Fragment() {
             val previous: FragmentManager.BackStackEntry =
                 activity!!.supportFragmentManager!!.getBackStackEntryAt(index - 3)
             activity!!.supportFragmentManager.popBackStack(previous.id,0)*/
-            Log.d("addBtn" , "last ${arguments?.getInt(FragmentProductclassification.PARENT_ID)}")
-            Log.d("addBtn" , "parentName ${arguments?.getString(FragmentProductclassification.PARENT_NAME)}")
-            Log.d("addBtn" , "subName ${arguments?.getString(FragmentProductclassification.SUB_PARENT_NAME)}")
-            Log.d("addBtn" , "lastName ${modelSelected?.name?:""}")
+//            Log.d("addBtn" , "last ${arguments?.getInt(FragmentProductclassification.PARENT_ID)}")
+//            Log.d("addBtn" , "parentName ${arguments?.getString(FragmentProductclassification.PARENT_NAME)}")
+//            Log.d("addBtn" , "subName ${arguments?.getString(FragmentProductclassification.SUB_PARENT_NAME)}")
+//            Log.d("addBtn" , "lastName ${modelSelected?.name?:""}")
 
             model?.responseCodeDataSetter(ViewModelHandleChangeFragmentclass.ProductClassification(
-                /*arguments?.getInt(FragmentProductclassification.PARENT_ID)*/modelSelected?.id?:-1,
+                arguments?.getInt(FragmentProductclassification.PARENT_ID)?:-1,
+                modelSelected?.id?:-1,
                 arguments?.getString(FragmentProductclassification.PARENT_NAME)?:"",
                 arguments?.getString(FragmentProductclassification.SUB_PARENT_NAME)?:"",
                 modelSelected?.name?:""

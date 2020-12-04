@@ -5,24 +5,32 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
+import com.example.controllersystemapp.accountant.makeorder.AccountantMakeOrderPresenter
+import com.example.controllersystemapp.accountant.makeorder.models.AccountantMakeOrderRequest
 import com.example.controllersystemapp.accountant.products.models.Data
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.SCANERESULT
 import com.example.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.scanCode
-import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
+import com.example.controllersystemapp.delegates.makeorder.DelegateMakeOrderPresenter
 import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
-import com.example.util.NameUtils
+import com.example.util.PrefsUtil
 import com.example.util.UtilKotlin
+import com.example.util.Validation
 import com.example.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.fragment_accountant_make_order.*
+
 
 class AccountantMakeOrderFragment : Fragment() {
 
@@ -32,9 +40,13 @@ class AccountantMakeOrderFragment : Fragment() {
 
     var categoryID = 0
     var barCode : String ? = null
+    var productName : String ? = null
+    var delegateName : String ? = null
 
     var productsList = ArrayList<Int>()
     var quantityList = ArrayList<Int>()
+
+    var delegateId : Int ? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,14 +107,129 @@ class AccountantMakeOrderFragment : Fragment() {
             }
         }
 
+        chooseDelegate.setOnClickListener(View.OnClickListener { view ->
+            if ((view as CompoundButton).isChecked) {
+                UtilKotlin.changeFragmentBack(
+                    activity!!, AccDelegatesFragment(), "AccDelegatesFragment",
+                    null , R.id.redirect_acc_fragments
+                )
+            } else {
+                Log.d("cjeckData" , "false")
+                delegateId = null
+                delegateSelectedName?.text = ""
+                delegateSelectedName?.visibility = View.GONE
+            }
+        })
+
+        makeOrderBtn?.setOnClickListener {
+
+            if (checkValidData()) {
+
+                if (delegateId == null)
+                {
+                    delegateId = PrefsUtil.getUserModel(context!!)?.id ?: 0
+                }
+                val accountantMakeOrderRequest = AccountantMakeOrderRequest(
+                    recipientNameEdt?.text?.toString(),
+                    emailAddressEdt?.text?.toString(), mobileNumberEdt?.text?.toString(),
+                    addressEdt?.text?.toString(), orderShoppingFeeEdt?.text?.toString(),
+                    delegateId, productsList, quantityList
+                )
+                requestMakeOrder(accountantMakeOrderRequest)
+            }
+
+
+        }
 
         observeData()
     }
 
+    private fun requestMakeOrder(accountantMakeOrderRequest: AccountantMakeOrderRequest) {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+            AccountantMakeOrderPresenter.accountantCreateOrder(
+                webService!!, accountantMakeOrderRequest
+                , activity!!, model
+            )
+
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
+
+    }
+
+    private fun checkValidData(): Boolean {
+
+        var errorMessage = ""
+        if (recipientNameEdt?.text.isNullOrBlank()) {
+            errorMessage += getString(R.string.name_is_required)
+            errorMessage += "\n"
+        }
+
+        if (mobileNumberEdt?.text.isNullOrBlank()) {
+            // phoneValid = false
+            errorMessage += getString(R.string.phone_required)
+            errorMessage += "\n"
+        } else if (!Validation.validGlobalPhoneNumber(mobileNumberEdt?.text.toString())) {
+            //phoneValid = false
+            errorMessage += getString(R.string.phone_not_valid)
+            errorMessage += "\n"
+        } else {
+            // phoneValid = true
+        }
+
+
+        if (addressEdt.text.isNullOrBlank()) {
+            errorMessage += getString(R.string.address_required)
+            errorMessage += "\n"
+        }
+
+
+        if (emailAddressEdt?.text.isNullOrBlank()) {
+            errorMessage += getString(R.string.email_name_reuqired)
+            errorMessage += "\n"
+        } else if (!Validation.validateEmail(emailAddressEdt)) {
+            errorMessage += getString(R.string.email_invalid)
+            errorMessage += "\n"
+        }
+
+        if (orderShoppingFeeEdt?.text.isNullOrBlank()) {
+            errorMessage += getString(R.string.shipping_fee_required)
+            errorMessage += "\n"
+        }
+
+        if (productsList.isNullOrEmpty())
+        {
+            errorMessage += getString(R.string.product_classified_required)
+            errorMessage += "\n"
+        }
+
+
+        return if (!errorMessage.isNullOrBlank()) {
+            UtilKotlin.showSnackErrorInto(activity!!, errorMessage)
+            false
+
+        } else {
+            true
+        }
+
+
+    }
+
     override fun onResume() {
         super.onResume()
-        barCodeTxt?.text = barCode
 
+        chooseDelegate?.isChecked = delegateId != null
+
+        barCodeTxt?.text = barCode
+        delegateSelectedName?.visibility = View.VISIBLE
+        delegateSelectedName?.text = delegateName
+        productClassificationTxt?.text = productName
 
     }
 
@@ -110,11 +237,11 @@ class AccountantMakeOrderFragment : Fragment() {
 
 
         model.responseDataCode?.observe(activity!!, Observer { datamodel ->
-            Log.d("testApi", "observe")
+            Log.d("testObserve", "inside")
 
             if (datamodel != null) {
                 progressDialog?.hide()
-                Log.d("testApi", "responseNotNull")
+                Log.d("testObserve", "notNull")
 //                if (datamodel is ViewModelHandleChangeFragmentclass.ProductClassification) {//when choose category return categoryID
 //                    Log.d("observeData", "dd $datamodel")
 //                    categoryID = datamodel.id?:-1
@@ -124,16 +251,60 @@ class AccountantMakeOrderFragment : Fragment() {
 
                 if (datamodel is Data)
                 {
+                    Log.d("testObserve", "data")
+
                     getSelectedProducts(datamodel)
+                }
+                if (datamodel is CallCenterDelegateData)
+                {
+                    Log.d("testObserve", "delegate")
+                    delegateId = datamodel?.id?:0
+                    delegateName = datamodel?.name?:""
+                    delegateSelectedName?.visibility = View.VISIBLE
+                    delegateSelectedName?.text = delegateName
+                }
+                if (datamodel is SuccessModel) {
+                    getSuccessData(datamodel)
                 }
                 model.responseCodeDataSetter(null) // start details with this data please
             }
             else{
-                Log.d("testApi", "observeNull")
+                Log.d("testObserve", "nulll")
 
             }
 
         })
+
+
+        model.errorMessage.observe(activity!!, Observer { error ->
+
+            if (error != null) {
+                progressDialog?.hide()
+                val errorFinal = UtilKotlin.getErrorBodyResponse(error, context!!)
+                UtilKotlin.showSnackErrorInto(activity!!, errorFinal)
+
+                model.onError(null)
+            }
+
+        })
+
+//        model?.notifyItemSelected?.observe(activity!!, Observer<Any> { modelSelected ->
+//            if (modelSelected != null) { // if null here so it's new service with no any data
+//                Log.d("paretnId" , "observeParent")
+//
+//                if (modelSelected is CallCenterDelegateData) {
+//
+//                    delegateId = modelSelected?.id?:0
+//                    delegateSelectedName?.visibility = View.VISIBLE
+//                    delegateSelectedName?.text = modelSelected?.name?:""
+//
+//                }
+//                model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
+//
+//            }
+//
+//            Log.d("paretnId" , "j22j")
+//        })
 
 //        model.stringDataVar?.observe(viewLifecycleOwner, Observer { datamodel ->
 //            Log.d("testApi", "observe")
@@ -157,13 +328,30 @@ class AccountantMakeOrderFragment : Fragment() {
 
 
     }
+
+    private fun getSuccessData(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false) {
+            activity?.let {
+                UtilKotlin.showSnackMessage(it, successModel?.msg[0])
+                model.responseCodeDataSetter(null) // start details with this data please
+            }
+            Handler().postDelayed(Runnable {
+                activity?.let {
+                    it.finish()
+                }
+            }, 1000)
+        }
+    }
+
     private fun getSelectedProducts(datamodel: Data) {
 
         productsList.clear()
         quantityList.clear()
         productsList?.add(0 , datamodel?.id?:0)
         quantityList.add(0 , datamodel?.selectedQuantity?:1)
-        productClassificationTxt?.text = datamodel?.name?:""
+        productName = datamodel?.name?:""
+        productClassificationTxt?.text = productName
         Log.d("finalSelectedProd" , "id ${datamodel?.id?:0}")
         Log.d("finalSelectedProd" , "quantity ${datamodel?.selectedQuantity?:1}")
 
@@ -205,9 +393,11 @@ class AccountantMakeOrderFragment : Fragment() {
 
     override fun onDestroyView() {
         model.let {
-           // it?.errorMessage?.removeObservers(activity!!)
+            Log.d("destroyCrete", "true")
+
+             it?.errorMessage?.removeObservers(activity!!)
             it?.responseDataCode?.removeObservers(activity!!)
-           // it?.notifyItemSelected?.removeObservers(activity!!)
+            it?.notifyItemSelected?.removeObservers(activity!!)
 
 
         }

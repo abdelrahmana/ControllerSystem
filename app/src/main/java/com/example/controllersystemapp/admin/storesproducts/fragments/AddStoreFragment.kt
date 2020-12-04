@@ -69,7 +69,15 @@ class AddStoreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        productCategoryContainer?.setOnClickListener {
+//        productCategoryContainer?.setOnClickListener {
+//
+//            UtilKotlin.changeFragmentBack(
+//                activity!!, ProductCategoriesSelectFragment(), "productClassification",
+//                null, R.id.frameLayout_direction
+//            )
+//        }
+
+        storeCategoryClassifyCard?.setOnClickListener {
 
             UtilKotlin.changeFragmentBack(
                 activity!!, ProductCategoriesSelectFragment(), "productClassification",
@@ -77,7 +85,7 @@ class AddStoreFragment : Fragment() {
             )
         }
 
-        responsiblePersonContainer?.setOnClickListener {
+        responsiblePersonEditText?.setOnClickListener {
 
             UtilKotlin.changeFragmentBack(
                 activity!!,
@@ -234,8 +242,8 @@ class AddStoreFragment : Fragment() {
                     //model?.setNotifyItemSelected(null) // remove listener please from here too and set it to null
                     Log.d("notifyItem", "id ${modelSelected.id} name ${modelSelected.name}")
                     categoryID = modelSelected.id ?: -1
-                    categoryProdTxt?.setText(modelSelected.name ?: "")
-
+                  //  categoryProdTxt?.setText(modelSelected.name ?: "")
+                    storeCategoryClassifyText?.text = modelSelected.name ?: ""
 
                 }
 
@@ -260,7 +268,8 @@ class AddStoreFragment : Fragment() {
                         if (i != modelSelected.namesList.size - 1)
                             categoriesName += ","
                     }
-                    categoryProdTxt?.setText(categoriesName ?: "")
+                  //  categoryProdTxt?.setText(categoriesName ?: "")
+                    storeCategoryClassifyText?.text = categoriesName ?: ""
 
                 }
                 model?.responseCodeDataSetter(null) // remove listener please from here too and set it to null
@@ -310,6 +319,7 @@ class AddStoreFragment : Fragment() {
         storeNameEdt?.setText("")
         storeAddressEdt?.setText("")
         categoryProdTxt?.setText("")
+        storeCategoryClassifyText?.text = ""
         categoriesList?.clear()
         responsiblePersonEditText?.setText("")
         accountantID = null

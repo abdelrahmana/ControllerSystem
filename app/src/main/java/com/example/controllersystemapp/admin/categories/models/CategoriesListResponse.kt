@@ -9,8 +9,10 @@ data class Data(
     val name: String?,
     val parent: Parent?,
     val parent_id: String?,
-    val products_count: String?
-)
+    val products_count: String?,
+    var isChecked : Boolean = false
+
+    )
 
 data class Parent(
     val id: Int?,

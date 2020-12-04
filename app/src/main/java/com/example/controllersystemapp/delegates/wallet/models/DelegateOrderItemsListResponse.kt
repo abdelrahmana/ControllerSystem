@@ -1,39 +1,24 @@
 package com.example.controllersystemapp.delegates.wallet.models
 
-data class DelegateOrderItemsListResponse(
-    val `data`: List<ItemsData>?
+ data class DelegateOrderItemsListResponse(
+    val `data`: List<DataDelegateOrderItems>?
 )
 
-data class ItemsData(
-    val barcode: String?,
-    val category: ItemsCategory?,
-    val category_id: Int?,
+data class DataDelegateOrderItems(
+    val created_at: String?,
+    val id: Int,
+    val order_id: String?,
+    val price: String?,
+    val product: ProductDelegateOrderItems?,
+    val product_id: String?,
+    val quantity: String?,
+    val updated_at: String?
+)
+
+data class ProductDelegateOrderItems(
     val currency: String?,
-    val description: String?,
     val id: Int?,
     val image: String?,
     val name: String?,
-    val price: String?,
-    val total_quantity: String?,
-    val ware_houses: List<WareHouse>?
-)
-
-data class ItemsCategory(
-    val id: Int?,
-    val name: String?
-)
-
-data class WareHouse(
-    val accountant_id: Int?,
-    val address: String?,
-    val id: Int?,
-    val name: String?,
-    val pivot: Pivot?
-)
-
-data class Pivot(
-    val id: Int?,
-    val product_id: Int?,
-    val quantity: Int?,
-    val warehouse_id: Int?
+    val total_quantity: String?
 )
