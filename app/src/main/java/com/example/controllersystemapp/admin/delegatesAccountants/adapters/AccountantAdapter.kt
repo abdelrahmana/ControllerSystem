@@ -10,7 +10,7 @@ import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantData
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantModel
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import kotlinx.android.synthetic.main.delegate_item.view.*
+import kotlinx.android.synthetic.main.admin_delegate_item.view.*
 
 class AccountantAdapter(
     var context: Context,
@@ -21,7 +21,7 @@ class AccountantAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.delegate_item , parent , false)
+        val view = LayoutInflater.from(context).inflate(R.layout.admin_delegate_item , parent , false)
         return ViewHolder(view)
     }
 
@@ -44,9 +44,9 @@ class AccountantAdapter(
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-            itemView.delegateName.text = accountantModel.name
-            itemView.delegatePhone.text = accountantModel.phone
-            Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.delegateImg)
+            itemView.adminDelegateName?.text = accountantModel.name
+            itemView.adminDelegatePhone?.text = accountantModel.phone
+            Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.adminDelegateImg)
 
 
             itemView.setOnClickListener {

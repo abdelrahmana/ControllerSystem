@@ -55,6 +55,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingBottom="@dimen/_70sdp"
         app:layout_constraintTop_toBottomOf="@+id/topContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +76,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/_70sdp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +93,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.button.MaterialButton
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/addCategoryBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"

@@ -2,42 +2,64 @@ package com.example.controllersystemapp.admin.settings.editprofile
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.admin.settings.editprofile.EditPresenter.editProfile
+import com.example.controllersystemapp.common.login.LoginResponse
+import com.example.controllersystemapp.common.login.User
+import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.SuccessModel
+import com.example.util.ApiConfiguration.WebService
+import com.example.util.PrefsUtil
 import com.example.util.UtilKotlin
+import com.example.util.UtilKotlin.checkOViewsAvaliablity
 import com.example.util.UtilKotlin.showSnackErrorInto
+import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
+import kotlinx.android.synthetic.main.one_photoscolleg_row.view.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Response
 import java.io.IOException
+import java.util.*
 
 class EditProfileFragment : Fragment() {
 
 
     lateinit var rootView: View
-
+    var userModel : User? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        userModel = PrefsUtil.getUserModel(context!!)?:User() // get user model then set it
         rootView = inflater.inflate(R.layout.fragment_edit_profile, container, false)
+        webService = ApiManagerDefault(context!!).apiService
+        progressDialog = UtilKotlin.ProgressDialog(context!!)
         return rootView
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        setUserModelForUsers()
         backProfile?.setOnClickListener {
 
             activity?.supportFragmentManager?.popBackStack()
@@ -55,8 +77,116 @@ class EditProfileFragment : Fragment() {
 
             }
         }
+        saveEditProfile?.setOnClickListener {
+            if (UtilKotlin.checkPermssionGrantedForImageAndFile(
+                    activity!!,
+                    100,
+                    this@EditProfileFragment
+                )
+            ) {
+                submitEditProfile()
+            }
+        }
 
 
+    }
+
+    var webService : WebService?=null
+    private fun submitEditProfile() {
+        if (UtilKotlin.checkAvalibalityOptions(profileNameEdt.text.toString()) == true
+            && UtilKotlin.checkAvalibalityOptions(mobileNameEdt.text.toString()) == true
+            && UtilKotlin.checkAvalibalityOptions(addressEdt.text.toString()) == true
+        ) {
+            val builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+
+            builder.addFormDataPart(
+                "name",
+                ((profileNameEdt.text.toString()))/*.toRequestBody("multipart/form-data".toMediaTypeOrNull())*/
+            )
+            //  builder.addFormDataPart("place_id",((createEditPackageRequest.place_id?:0).toString())/*.toRequestBody("multipart/form-data".toMediaTypeOrNull())*/)
+            builder.addFormDataPart(
+                "long",
+                (userModel?.long
+                    ?: "0.0")/*.toRequestBody("multipart/form-data".toMediaTypeOrNull())*/
+            )
+            builder.addFormDataPart("lat", (userModel?.lat ?: "0.0"))
+            builder.addFormDataPart("enable_notification", 1.toString())
+            if (bitmap != null) {
+                val f = UtilKotlin.getCreatedFileMultiPartFromBitmap(
+                    "image",
+                    bitmap!!,
+                    "jpg",
+                    context!!
+                )
+
+                builder.addFormDataPart(
+                    "image",
+                    f.name,
+                    RequestBody.create("multipart/form-data".toMediaTypeOrNull(), f)
+                )
+            }
+            editProfile(webService!!,ItemListObserver(),builder.build())
+
+        }
+    }
+    var progressDialog : Dialog?=null
+    var disposableObserver : DisposableObserver<Response<LoginResponse>>?=null
+    private fun ItemListObserver(): DisposableObserver<Response<LoginResponse>> {
+
+        disposableObserver= object : DisposableObserver<Response<LoginResponse>>() {
+            override fun onComplete() {
+                progressDialog?.dismiss()
+                dispose()
+            }
+
+            override fun onError(e: Throwable) {
+                UtilKotlin.showSnackErrorInto(activity!!, e.message.toString())
+                progressDialog?.dismiss()
+                dispose()
+            }
+
+            override fun onNext(response: Response<LoginResponse>) {
+                if (response!!.isSuccessful) {
+                    progressDialog?.dismiss()
+                    PrefsUtil.setUserModel(context!!, response.body()?.data?.user)
+                    UtilKotlin.showSnackMessage(activity!!, getString(R.string.updated_successfully))
+                    Handler().postDelayed({
+                        activity?.onBackPressed()
+                    },750)
+                }
+                else
+                {
+                    progressDialog?.dismiss()
+                    if (response.errorBody() != null) {
+                        // val error = PrefsUtil.handleResponseError(response.errorBody(), context!!)
+                        val error = UtilKotlin.getErrorBodyResponse(response.errorBody(), context!!)
+                        UtilKotlin.showSnackErrorInto(activity!!, error)
+                    }
+
+                }
+            }
+        }
+        return disposableObserver!!
+    }
+    private fun setUserModelForUsers() {
+        profileNameEdt?.setText(userModel?.name?:"")
+        mobileNameEdt?.setText(userModel?.phone?:"")
+        Glide.with(context!!).load(userModel?.image?:"").dontAnimate()
+            // .error(R.drawable.no_profile).placeholder(R.drawable.no_profile)
+            .into(profileImg)
+        if (!userModel?.lat.isNullOrEmpty()) {
+            try {
+
+                val address: Address? = Geocoder(context, Locale.getDefault()).getFromLocation(
+                    (userModel?.lat ?: "0.0").toDouble(),
+                    (userModel?.long ?: "0.0").toDouble(), 1
+                )[0]
+                addressEdt?.setText(address?.getAddressLine(0) ?: "") // set address
+            }catch (e:Exception){
+
+            }
+        }
     }
 
     private fun setDialogChooser() {
@@ -81,13 +211,27 @@ class EditProfileFragment : Fragment() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == UtilKotlin.permissionForImageAndFile) {
-            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 setDialogChooser()
 
             } else {
                 showSnackErrorInto(activity, getString(R.string.cant_add_image))
 
             }
+
+        }
+
+        if (requestCode == 100) {
+            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                submitEditProfile()
+
+            } else {
+                showSnackErrorInto(activity, getString(R.string.cannot_edit))
+
+            }
+
         }
     }
 

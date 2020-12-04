@@ -69,6 +69,59 @@ object ClientsPresenter {
     }
 
 
+    fun getClientDetails(webService: WebService, clientId: Int , activity: Activity, model: ViewModelHandleChangeFragmentclass)
+    {
+
+        Log.d("testApi" , "getData")
+        webService.clientDetails(clientId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : DisposableObserver<Response<ClientDetailsResponse>>() {
+                override fun onComplete() {
+
+                    //hideLoader()
+                    //  model.setShowLoader(false)
+                    dispose()
+
+                }
+
+                override fun onNext(response: Response<ClientDetailsResponse>) {
+
+                    if (response.isSuccessful)
+                    {
+                        Log.d("testApi" , "responseSuccess")
+
+                        //hideLoader()
+                        // model.setShowLoader(false)
+                        model.responseCodeDataSetter(response?.body())
+
+                    }
+                    else{
+                        Log.d("testApi" , "responseError")
+                        //model.setShowLoader(false)
+                        model.onError(response.errorBody())
+                    }
+
+
+
+                }
+
+                override fun onError(e: Throwable) {
+                    //hideLoader()
+                    // model.setShowLoader(false)
+                    dispose()
+                    Log.d("testApi" , "responsefaile")
+                    UtilKotlin.showSnackErrorInto(activity!! , e.message.toString())
+                }
+
+
+            })
+
+
+
+    }
+
+
     fun deleteClientPresenter(webService: WebService, clientId : Int , warehouseId : Int? ,activity: Activity, model: ViewModelHandleChangeFragmentclass)
     {
 

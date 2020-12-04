@@ -7,4 +7,12 @@ interface OnRecyclerItemClickListener {
 
     }
 
+    fun adminOptionsClickListener(position: Int) {
+
+    }
+
+    fun acceptOrderClickListener(position: Int) {
+
+    }
+
 }

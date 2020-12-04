@@ -185,7 +185,7 @@ var orderCreateRequest = OrderCreateRequest()
             .addFormDataPart("email", emailAddressEdt?.text.toString())
             .addFormDataPart("delegate_id",delegateId.toString())
             .addFormDataPart("quantity[$0]",
-                "1")
+                quantity)
             .addFormDataPart("products[$0]",
                 categoryID.toString())
 

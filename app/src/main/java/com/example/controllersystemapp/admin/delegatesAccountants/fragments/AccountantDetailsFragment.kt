@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
@@ -18,6 +19,7 @@ import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
+import kotlinx.android.synthetic.main.delegate_item.view.*
 import kotlinx.android.synthetic.main.fragment_accountant_details.*
 
 
@@ -27,6 +29,7 @@ class AccountantDetailsFragment : Fragment() {
     lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
 
+    var accountantId = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,14 +46,16 @@ class AccountantDetailsFragment : Fragment() {
         model = UtilKotlin.declarViewModel(activity)!!
         progressDialog = UtilKotlin.ProgressDialog(context!!)
 
+        accountantId = arguments?.getInt(NameUtils.ACCOUNTANT_ID)?:0
+
         return inflater.inflate(R.layout.fragment_accountant_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        confirmAddAccountantBtn?.visibility = View.GONE
-        spinnerImg?.visibility = View.GONE
+//        confirmAddAccountantBtn?.visibility = View.GONE
+//        spinnerImg?.visibility = View.GONE
 
         backImgAddAccountant?.setOnClickListener {
 
@@ -58,8 +63,30 @@ class AccountantDetailsFragment : Fragment() {
 
         }
 
+        deleteAccountantBtn?.setOnClickListener {
+
+            removeAccountant()
+
+        }
 
         observeData()
+    }
+
+    private fun removeAccountant() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            AccountantPresenter.deleteAccountantPresenter(webService!! ,
+                accountantId , null , activity!! , model)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
+
     }
 
     private fun observeData() {
@@ -76,10 +103,10 @@ class AccountantDetailsFragment : Fragment() {
                     getAccountantData(datamodel)
                 }
 
-//                if (datamodel is SuccessModel) {
-//                    Log.d("testApi", "isForyou")
-//                    successRemove(datamodel)
-//                }
+                if (datamodel is SuccessModel) {
+                    Log.d("testApi", "isForyou")
+                    successRemove(datamodel)
+                }
 
                 model.responseCodeDataSetter(null) // start details with this data please
             }
@@ -106,17 +133,23 @@ class AccountantDetailsFragment : Fragment() {
 
     private fun getAccountantData(accountantDetailsResponse: AccountantDetailsResponse) {
 
-        titleTxt?.text = accountantDetailsResponse?.data?.name?:""
+        accountantDetailsName?.text = accountantDetailsResponse?.data?.name?:""
+        accountantPhoneName?.text = accountantDetailsResponse?.data?.phone?:""
+        accountantDetailsLocation?.text = accountantDetailsResponse?.data?.city?.name?:""
+        accountantDetailsEmail?.text = accountantDetailsResponse?.data?.email?:""
+        Glide.with(context!!).load(accountantDetailsResponse?.data?.image?:"")
+            //.placeholder(R.drawable.image_delivery_item)
+            .dontAnimate().into(accountantDetailsImage)
 
-        nameEdt?.isFocusable = false
-        nameEdt?.setText(accountantDetailsResponse?.data?.name?:"")
+        //nameEdt?.isFocusable = false
+        //nameEdt?.setText(accountantDetailsResponse?.data?.name?:"")
 
-        accountantPhoneEdt?.isFocusable = false
-        accountantPhoneEdt?.setText(accountantDetailsResponse?.data?.phone?:"")
+        //accountantPhoneEdt?.isFocusable = false
+        //accountantPhoneEdt?.setText(accountantDetailsResponse?.data?.phone?:"")
 
-        spinnerImg?.visibility = View.GONE
-        cityEditText?.isFocusable = false
-        cityEditText?.setText(accountantDetailsResponse?.data?.city?.name?:"")
+//        spinnerImg?.visibility = View.GONE
+//        cityEditText?.isFocusable = false
+//        cityEditText?.setText(accountantDetailsResponse?.data?.city?.name?:"")
 
     }
 
@@ -133,7 +166,7 @@ class AccountantDetailsFragment : Fragment() {
             progressDialog?.show()
 
             AccountantPresenter.getAccountantDetails(webService!! ,
-                arguments?.getInt(NameUtils.ACCOUNTANT_ID)?:0 , activity!! , model)
+                accountantId , activity!! , model)
 
         } else {
             progressDialog?.dismiss()
@@ -142,6 +175,27 @@ class AccountantDetailsFragment : Fragment() {
         }
 
 
+
+    }
+
+    private fun successRemove(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            activity?.let {
+                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
+            }
+
+//            productsAdapter.let {
+//                it?.removeItemFromList(removePosition)
+//            }
+//            productsAdapter?.notifyDataSetChanged()
+
+            //requestData()
+            model.responseCodeDataSetter(null) // start details with this data please
+            activity?.supportFragmentManager?.popBackStack()
+
+        }
 
     }
 

@@ -49,6 +49,12 @@ class AdminAdapter(var adminList: ArrayList<Admin>,
 
             itemView.optionIcon?.setOnClickListener {
 
+                onRecyclerItemClickListener.adminOptionsClickListener(adapterPosition)
+
+            }
+
+            itemView.setOnClickListener {
+
                 onRecyclerItemClickListener.onItemClick(adapterPosition)
 
             }

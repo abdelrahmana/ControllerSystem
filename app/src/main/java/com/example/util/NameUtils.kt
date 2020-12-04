@@ -2,6 +2,7 @@ package  com.example.util
 
 object NameUtils {
 
+    val PRODUCT_DETAILS: String? = "product_admin_details"
     val delegateId: String? = "delegate_id_call"
     val orderId: String? = "order_id"
     val orderName: String? = "order_name"
@@ -34,6 +35,14 @@ object NameUtils {
     val SEND_SALES = "sendSales"
     val ACCOUNTANT_SETTINGS = "accountantSettings"
     val DELIVERYSETTING = "delivery"
+
+    val redirectDelegFragmet = "Switch_Delegate_fragment"
+    val SEPCIAL_WALLET = "specialWallet"
+    val DELEGATE_ORDERS = "deleagteOrders"
+    val DELEGATE_MAKE_ORDER = "delegateMakeOrder"
+    val DELEGATE_NoTIFY_REPORTS = "delegateNotifyReports"
+    val DELEGATE_SETTINGS = "deleagteSettings"
+    val DELEGATE_NOTIFICATIONS = "deleagteNotifications"
 
   val WHICHID = "Which_container"
 

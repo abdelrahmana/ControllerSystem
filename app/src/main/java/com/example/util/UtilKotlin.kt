@@ -37,6 +37,7 @@ import com.andrognito.flashbar.anim.FlashAnim
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.example.controllersystemapp.admin.addproduct.AddProductFragment.Companion.GALLERY
+import com.example.controllersystemapp.admin.storesproducts.models.ProductsDetailsResponse
 import com.example.controllersystemapp.common.ContainerActivityForFragment
 import com.example.controllersystemapp.common.login.User
 import com.example.controllersystemapp.common.verficationfragment.ValidationActivity
@@ -505,6 +506,13 @@ object UtilKotlin {
         val obj = gson.fromJson<CallCenterDelegateData>(jso, typeToken) ?: CallCenterDelegateData() //ResponseLogin(Data("", null))
         return obj
 
+    }
+
+    fun getProductDetails(productString: String) : ProductsDetailsResponse?{
+        val gson = Gson()
+        val typeToken = object : TypeToken<ProductsDetailsResponse?>() {}.type
+        val obj = gson.fromJson<ProductsDetailsResponse>(productString, typeToken) ?: ProductsDetailsResponse(null) //ResponseLogin(Data("", null))
+        return obj
     }
 
 }

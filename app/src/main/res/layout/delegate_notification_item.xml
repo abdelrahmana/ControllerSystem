@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:minHeight="@dimen/_150sdp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="5dp"
+    android:layout_marginBottom="14dp"
+    app:cardElevation="5dp"
+    android:layout_marginStart="@dimen/_16sdp"
+    android:layout_marginEnd="@dimen/_16sdp"
+    android:layout_marginTop="@dimen/_2sdp"
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:id="@+id/imgContainer"
+
+            >
+
+            <ImageView
+                android:id="@+id/currentWalletImg"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/notices_reports_unselect" />
+
+            <TextView
+                android:id="@+id/newWalletName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:textAlignment="viewStart"
+                android:text="بلاغ تجهيز"
+                android:fontFamily="@font/cairo_semibold"
+                android:textColor="@color/text_black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/openCloseImage"
+                app:layout_constraintStart_toEndOf="@+id/currentWalletImg"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/newWalletDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:text="١٥  قطعة ايفون"
+                android:fontFamily="@font/cairo_regular"
+                android:textSize="10sp"
+                android:textColor="@color/text_black"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:textAlignment="viewStart"
+                app:layout_constraintEnd_toStartOf="@+id/openCloseImage"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/currentWalletImg"
+                app:layout_constraintTop_toBottomOf="@+id/newWalletName" />
+
+            <ImageView
+                android:layout_margin="@dimen/_2sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/newWalletName"
+                android:id="@+id/openCloseImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_btn_open_info"
+                />
+
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/newwalletCategoryTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="الكترونيات"
+            android:textSize="@dimen/_9ssp"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/_10sdp"
+
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/newSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            app:layout_constraintStart_toEndOf="@+id/newwalletCategoryTxt"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
+            android:text="/"
+            android:textSize="@dimen/_9ssp"
+            android:textColor="@color/black"
+
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/newwalletStoreTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            app:layout_constraintStart_toEndOf="@+id/newSlash"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
+            android:text="مخزن1"
+            android:textSize="@dimen/_9ssp"
+            android:textColor="@color/black"
+
+            />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delegateAcceptNotificationBtn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:gravity="center"
+            android:minWidth="@dimen/_80sdp"
+            android:text="@string/accept"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            app:backgroundTint="@color/green"
+            app:cornerRadius="7dp"
+            app:layout_constraintEnd_toStartOf="@+id/delegateRejectNotificationBtn"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newwalletCategoryTxt"
+            app:layout_constraintVertical_bias="0.428" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delegateRejectNotificationBtn"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:backgroundTint="@color/white"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/login_gray"
+            app:cornerRadius="7dp"
+            android:text="@string/reject"
+            android:textColor="@color/login_gray"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="@dimen/_10ssp"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:minWidth="@dimen/_80sdp"
+            app:layout_constraintStart_toEndOf="@+id/delegateAcceptNotificationBtn"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newwalletCategoryTxt"
+            app:layout_constraintVertical_bias="0.428"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:id="@+id/addressNotificationContainer"
+            app:layout_constraintTop_toBottomOf="@+id/delegateAcceptNotificationBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                app:srcCompat="@drawable/ic_location"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:id="@+id/addressIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/notificationAddress"
+
+                />
+            <TextView
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/ffshamelfamily_sansonebold"
+                android:textColor="@color/textColor"
+                android:textAlignment="viewStart"
+                android:maxLines="2"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/addressIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:id="@+id/notificationAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="الرياض ، عاصمة المملكة العربية السعودية " />
+
+            <TextView
+                android:id="@+id/notificationNameTxt"
+                android:layout_width="0dp"
+                android:layout_height="26dp"
+                android:text="احمد بن صالح الشامي"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/ffshamelfamily_sansonebold"
+                android:textColor="@color/textColor"
+                android:textAlignment="viewStart"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/notificationAddress"
+                app:layout_constraintTop_toBottomOf="@+id/notificationAddress" />
+
+            <TextView
+                android:id="@+id/notificationPhoneTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="+966 00000 0000"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/ffshamelfamily_sansonebold"
+                android:textColor="@color/textColor"
+                android:textAlignment="viewStart"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="@+id/notificationAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/notificationNameTxt"
+                />
+
+            <TextView
+                android:id="@+id/itemMapEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="trose@buzzbean.info"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black_bold"
+                android:textSize="12sp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/notificationAddress"
+                app:layout_constraintTop_toBottomOf="@+id/notificationPhoneTxt"
+                app:layout_constraintVertical_bias="0.28" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/green_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemMapEmail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/totalPriceContainer"
+                android:layout_marginTop="@dimen/_10sdp"
+
+                >
+
+                <TextView
+                    android:textAlignment="viewStart"
+                    android:id="@+id/totalPriceText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_price"
+                    android:textColor="@color/text_green"
+                    android:textSize="14sp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/notificationPrice"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/notificationCurrency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="رس"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="@dimen/_14sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textColor="@color/text_green"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/notificationPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.400"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textColor="@color/text_green"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/totalPriceText"
+                    android:fontFamily="@font/ffshamelfamily_sansonebold"
+                    app:layout_constraintEnd_toStartOf="@+id/notificationCurrency"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</com.google.android.material.card.MaterialCardView>

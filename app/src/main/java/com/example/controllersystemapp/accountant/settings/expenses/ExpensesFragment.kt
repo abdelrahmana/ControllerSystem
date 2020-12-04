@@ -222,7 +222,6 @@ class ExpensesFragment : Fragment() , OnRecyclerItemWithLongClickListener{
             expensesList.addAll(accountantExpensesListResponse?.data)
             accountantExpensesAdapter = AccountantExpensesAdapter(context!! , expensesList , this)
             expenseRecycler?.apply {
-
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
                 adapter = accountantExpensesAdapter

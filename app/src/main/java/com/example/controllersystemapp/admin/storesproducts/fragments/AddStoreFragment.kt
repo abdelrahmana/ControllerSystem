@@ -185,16 +185,13 @@ class AddStoreFragment : Fragment() {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
 
-            Log.d("categoriesSize", "${categoriesList?.size}")
-
+          //  Log.d("categoriesSize", "${categoriesList?.size}")
             val addStoreRequest = AddStoreRequest(
                 storeNameEdt?.text?.toString(),
                 storeAddressEdt?.text?.toString(),
                 accountantID,
                 categoriesList
-
             )
-
             StoresPresenter.addStore(webService!!, addStoreRequest, activity!!, model)
         } else {
             progressDialog?.dismiss()

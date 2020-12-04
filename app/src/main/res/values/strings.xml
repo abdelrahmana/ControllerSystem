@@ -172,7 +172,7 @@
     <string name="new_password_required">تأكيد كلمة المرور مطلوبة</string>
     <string name="confirm_pass_invalid">تأ:يد كلمة المرور غير متطابقة</string>
     <string name="notifications_reports">اشعارات و بلاغات</string>
-    <string name="make_special_order">انشاء طلب خاصة</string>
+    <string name="make_special_order">انشاء طلبية خاصة</string>
     <string name="send_sales">ارسال مبيعات</string>
     <string name="classification">"تصنيف "</string>
     <string name="quantity">الكمية</string>
@@ -211,8 +211,30 @@
     <string name="addNotificaion">اضف اشعار</string>
     <string name="writeMessage">اكتب الرساله</string>
     <string name="choose_delegate">تحديد مندوب</string>
+    <string name="productDetails">تفاصيل المنتجات</string>
+    <string name="quantityD">الكمية:</string>
+    <string name="storeNameD">اسم المخزن:</string>
+    <string name="storeDetails">تفاصيل المخزن</string>
+    <string name="belongD">ذمة:</string>
+    <string name="categoryName">اسم التصنيف:</string>
+    <string name="accounatntDetails">تفاصيل المحاسب</string>
+    <string name="clientsDteails">تفاصيل العميل</string>
+    <string name="adminDetails">تفاصيل الادمن</string>
+    <string name="sepcialWallet">المحفظة الخاصة</string>
+    <string name="current">الحالية</string>
+    <string name="addNew">اضافات جديدة</string>
+    <string name="no_wallet">لا توجد منتجات متاحة في المحفظة</string>
+    <string name="delivery_done">اتمام التوصيل</string>
+    <string name="address_required">العنوان مطلوب</string>
+    <string name="shipping_fee_required">رسوم الشحن مطلوب</string>
+    <string name="no_notifications_reports">"لا توجداشعارات و بلاغات "</string>
+    <string name="under_procedure">تحت الإجراء</string>
     <string name="insert_all_data">تأكد من إدخال جميع البيانات</string>
     <string name="delegate_choose">تحديد مندوب</string>
+    <string name="cannot_edit">لن تتمكن من التعديل</string>
+    <string name="updated_successfully">تم التعديل بنجاح</string>
+    <string name="choose_place">أختر مكان</string>
+    <string name="edit">تعديل</string>
 
 
 </resources>

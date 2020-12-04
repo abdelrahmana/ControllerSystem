@@ -16,10 +16,14 @@ import retrofit2.Response
 object CategoriesPresenter {
 
 
-    fun getCategoriesList(webService: WebService, parentID : Int?, activity: Activity, model: ViewModelHandleChangeFragmentclass)
-    {
+    fun getCategoriesList(
+        webService: WebService,
+        parentID: Int?,
+        activity: Activity,
+        model: ViewModelHandleChangeFragmentclass
+    ) {
 
-        Log.d("testApi" , "getData")
+        Log.d("testApi", "getData")
         webService.categoriesList(parentID)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -34,21 +38,18 @@ object CategoriesPresenter {
 
                 override fun onNext(response: Response<CategoriesListResponse>) {
 
-                    if (response.isSuccessful)
-                    {
-                        Log.d("testApi" , "responseSuccess")
+                    if (response.isSuccessful) {
+                        Log.d("testApi", "responseSuccess")
 
                         //hideLoader()
                         // model.setShowLoader(false)
                         model.responseCodeDataSetter(response?.body())
 
-                    }
-                    else{
-                        Log.d("testApi" , "responseError")
+                    } else {
+                        Log.d("testApi", "responseError")
                         //model.setShowLoader(false)
                         model.onError(response.errorBody())
                     }
-
 
 
                 }
@@ -57,22 +58,26 @@ object CategoriesPresenter {
                     //hideLoader()
                     // model.setShowLoader(false)
                     dispose()
-                    Log.d("testApi" , "responsefaile")
-                    UtilKotlin.showSnackErrorInto(activity!! , e.message.toString())
+                    Log.d("testApi", "responsefaile")
+                    UtilKotlin.showSnackErrorInto(activity!!, e.message.toString())
                 }
 
 
             })
 
 
-
     }
 
 
-    fun deleteCategoryPresenter(webService: WebService, categoryId : Int , warehouseId : Int? ,activity: Activity, model: ViewModelHandleChangeFragmentclass)
-    {
+    fun deleteCategoryPresenter(
+        webService: WebService,
+        categoryId: Int,
+        warehouseId: Int?,
+        activity: Activity,
+        model: ViewModelHandleChangeFragmentclass
+    ) {
 
-        Log.d("testApi" , "getData")
+        Log.d("testApi", "getData")
         webService.deleteCategory(categoryId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -87,21 +92,18 @@ object CategoriesPresenter {
 
                 override fun onNext(response: Response<SuccessModel>) {
 
-                    if (response.isSuccessful)
-                    {
-                        Log.d("testApi" , "responseSuccess")
+                    if (response.isSuccessful) {
+                        Log.d("testApi", "responseSuccess")
 
                         //hideLoader()
                         // model.setShowLoader(false)
                         model.responseCodeDataSetter(response?.body())
 
-                    }
-                    else{
-                        Log.d("testApi" , "responseError")
+                    } else {
+                        Log.d("testApi", "responseError")
                         //model.setShowLoader(false)
                         model.onError(response.errorBody())
                     }
-
 
 
                 }
@@ -110,13 +112,122 @@ object CategoriesPresenter {
                     //hideLoader()
                     // model.setShowLoader(false)
                     dispose()
-                    Log.d("testApi" , "responsefaile")
-                    UtilKotlin.showSnackErrorInto(activity!! , e.message.toString())
+                    Log.d("testApi", "responsefaile")
+                    UtilKotlin.showSnackErrorInto(activity!!, e.message.toString())
                 }
 
 
             })
 
+
+    }
+
+
+    fun addCategory(
+        webService: WebService, categoryName: String,
+        parentID: Int?, activity: Activity, model: ViewModelHandleChangeFragmentclass
+    ) {
+
+        val params: LinkedHashMap<String, Any> = LinkedHashMap()
+        params["name"] = categoryName
+        if (parentID != null)
+            params["parent_id"] = parentID
+
+        webService.addCategory(params)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : DisposableObserver<Response<SuccessModel>>() {
+                override fun onComplete() {
+
+                    //hideLoader()
+                    //  model.setShowLoader(false)
+                    dispose()
+
+                }
+
+                override fun onNext(response: Response<SuccessModel>) {
+
+                    if (response.isSuccessful) {
+                        Log.d("testApi", "responseSuccess")
+
+                        //hideLoader()
+                        // model.setShowLoader(false)
+                        model.responseCodeDataSetter(response?.body())
+
+                    } else {
+                        Log.d("testApi", "responseError")
+                        //model.setShowLoader(false)
+                        model.onError(response.errorBody())
+                    }
+
+
+                }
+
+                override fun onError(e: Throwable) {
+                    //hideLoader()
+                    // model.setShowLoader(false)
+                    dispose()
+                    Log.d("testApi", "responsefaile")
+                    UtilKotlin.showSnackErrorInto(activity!!, e.message.toString())
+                }
+
+
+            })
+
+
+    }
+
+    fun updateCategory(
+        webService: WebService, categoryName: String, categoryId : Int,
+        parentID: Int?, activity: Activity, model: ViewModelHandleChangeFragmentclass
+    ) {
+
+        val params: LinkedHashMap<String, Any> = LinkedHashMap()
+        params["id"] = categoryId
+        params["name"] = categoryName
+        if (parentID != null)
+            params["parent_id"] = parentID
+
+        webService.editCategory(params)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : DisposableObserver<Response<SuccessModel>>() {
+                override fun onComplete() {
+
+                    //hideLoader()
+                    //  model.setShowLoader(false)
+                    dispose()
+
+                }
+
+                override fun onNext(response: Response<SuccessModel>) {
+
+                    if (response.isSuccessful) {
+                        Log.d("testApi", "responseSuccess")
+
+                        //hideLoader()
+                        // model.setShowLoader(false)
+                        model.responseCodeDataSetter(response?.body())
+
+                    } else {
+                        Log.d("testApi", "responseError")
+                        //model.setShowLoader(false)
+                        model.onError(response.errorBody())
+                    }
+
+
+                }
+
+                override fun onError(e: Throwable) {
+                    //hideLoader()
+                    // model.setShowLoader(false)
+                    dispose()
+                    Log.d("testApi", "responsefaile")
+                    UtilKotlin.showSnackErrorInto(activity!!, e.message.toString())
+                }
+
+
+            })
 
 
     }

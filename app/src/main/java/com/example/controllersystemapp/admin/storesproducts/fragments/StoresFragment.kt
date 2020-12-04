@@ -15,6 +15,7 @@ import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.storesproducts.StoresPresenter
+import com.example.controllersystemapp.admin.storesproducts.adapters.StoreDetailsFragment
 import com.example.controllersystemapp.admin.storesproducts.adapters.StoresAdapter
 import com.example.controllersystemapp.admin.storesproducts.models.StoresData
 import com.example.controllersystemapp.admin.storesproducts.models.StoresListResponse
@@ -62,8 +63,8 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(storesRecycler)
+//        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+//        itemTouchHelper.attachToRecyclerView(storesRecycler)
 
 
         observeData()
@@ -72,46 +73,46 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
 
     var removePosition = 0
 
-    var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
-        0,
-        ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-    ) {
-        override fun onMove(
-            recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-            return false
-        }
+//    var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
+//        0,
+//        ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+//    ) {
+//        override fun onMove(
+//            recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+//            return false
+//        }
+//
+//        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int
+//        ) {
+//            //Remove swiped item from list and notify the RecyclerView
+//            val position = viewHolder.adapterPosition
+//
+//            position?.let {
+//                removePosition = it
+//                removeStoreItem(it)
+//
+//            }
+//        }
+//    }
 
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int
-        ) {
-            //Remove swiped item from list and notify the RecyclerView
-            val position = viewHolder.adapterPosition
-
-            position?.let {
-                removePosition = it
-                removeStoreItem(it)
-
-            }
-        }
-    }
-
-    private fun removeStoreItem(position: Int) {
-
-        if (UtilKotlin.isNetworkAvailable(context!!)) {
-            progressDialog?.show()
-
-            StoresPresenter.deleteStorePresenter(webService!! ,
-                storeList[position].id?:-1 ,  activity!! , model)
-
-        } else {
-            progressDialog?.dismiss()
-            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
-
-        }
-
-
-
-
-    }
+//    private fun removeStoreItem(position: Int) {
+//
+//        if (UtilKotlin.isNetworkAvailable(context!!)) {
+//            progressDialog?.show()
+//
+//            StoresPresenter.deleteStorePresenter(webService!! ,
+//                storeList[position].id?:-1 ,  activity!! , model)
+//
+//        } else {
+//            progressDialog?.dismiss()
+//            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+//
+//        }
+//
+//
+//
+//
+//    }
 
 
     private fun observeData() {
@@ -128,10 +129,10 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
                     getStoresData(datamodel)
                 }
 
-                if (datamodel is SuccessModel) {
-                    Log.d("testApi", "isForyou")
-                    successRemove(datamodel)
-                }
+//                if (datamodel is SuccessModel) {
+//                    Log.d("testApi", "isForyou")
+//                    successRemove(datamodel)
+//                }
                 model.responseCodeDataSetter(null) // start details with this data please
             }
 
@@ -156,26 +157,26 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
 
     }
 
-    private fun successRemove(successModel: SuccessModel) {
-
-        if (successModel?.msg?.isNullOrEmpty() == false)
-        {
-            activity?.let {
-                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
-            }
-
-//            productsAdapter.let {
-//                it?.removeItemFromList(removePosition)
+//    private fun successRemove(successModel: SuccessModel) {
+//
+//        if (successModel?.msg?.isNullOrEmpty() == false)
+//        {
+//            activity?.let {
+//                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
 //            }
-//            productsAdapter?.notifyDataSetChanged()
-
-            requestStoreData()
-
-        }
-
-
-
-    }
+//
+////            productsAdapter.let {
+////                it?.removeItemFromList(removePosition)
+////            }
+////            productsAdapter?.notifyDataSetChanged()
+//
+//            requestStoreData()
+//
+//        }
+//
+//
+//
+//    }
 
     override fun onResume() {
         super.onResume()
@@ -235,6 +236,10 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
     override fun onItemClick(position: Int) {
         Log.d("click" , "position $position name ${storeList[position].name}")
 
+        val bundle = Bundle()
+        bundle.putInt(STOREID, storeList[position].id?:0)
+        UtilKotlin.changeFragmentBack(activity!! , StoreDetailsFragment() , "StoreDetailsFragment"  ,
+            bundle , R.id.frameLayout_direction)
     }
 
 
@@ -248,5 +253,10 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
     }
 
 
+    companion object{
+
+        val STOREID = "store_id"
+
+    }
 
 }

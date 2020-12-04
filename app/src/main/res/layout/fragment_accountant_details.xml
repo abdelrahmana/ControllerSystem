@@ -28,7 +28,7 @@
 
         <TextView
             android:id="@+id/titleTxt"
-            android:text=""
+            android:text="@string/accounatntDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -57,301 +57,153 @@
         >
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/accountantNameContainer"
-                android:layout_marginStart="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_24sdp"
-                android:layout_marginTop="@dimen/_14sdp"
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="5dp"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_240sdp"
+                android:id="@+id/accountantDetailsImage"
+                android:scaleType="centerCrop"
+                app:riv_mutate_background="true"
+                android:layout_gravity="center"
+                app:riv_border_width="1dp"
+                app:riv_border_color="@color/orangeBorder"
+                android:layout_marginTop="@dimen/_30sdp"
+                />
+            <View
+                android:id="@+id/viewLine"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_10sdp"
+                android:background="@color/darkOrange"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                >
+                />
 
-                <TextView
-                    android:id="@+id/accountantNameText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/accountant_name"
-                    android:textSize="14sp"
-                    android:textColor="@color/black_bold"
-                    />
-
-                <EditText
-                    android:id="@+id/nameEdt"
-                    android:textAlignment="viewStart"
-                    app:backgroundTint="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/accountant_name"
-                    app:layout_constraintTop_toBottomOf="@+id/accountantNameText"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/accountantPhoneContainer"
-                android:layout_marginStart="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_24sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+            <com.google.android.material.card.MaterialCardView
+                app:cardElevation="5dp"
                 android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/accountantNameContainer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:minHeight="@dimen/_150sdp"
+                style="@style/cardDialog"
+                android:layout_marginBottom="@dimen/_30sdp"
                 >
 
-                <TextView
-                    android:id="@+id/phoneText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/phone_number"
-                    android:textSize="14sp"
-                    android:textColor="@color/black_bold"
-                    />
-
-                <EditText
-                    android:inputType="phone"
-                    android:id="@+id/accountantPhoneEdt"
-                    android:textAlignment="viewStart"
-                    app:backgroundTint="@color/text_grey"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/phone_number"
-                    app:layout_constraintTop_toBottomOf="@+id/phoneText"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
+                    android:layout_height="match_parent"
+                    android:minHeight="@dimen/_150sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/accountantDetailsName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_15ssp"
+                        android:drawableStart="@drawable/ic_username_gray"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:textColor="@color/black_bold"
+                        />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/accountantPhoneName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp"
+                        android:drawableStart="@drawable/ic_phone_call"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:textColor="@color/black_bold"
+                        />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/countryNameContainer"
-                android:layout_marginStart="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_24sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/accountantPhoneContainer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                >
-
-                <TextView
-                    android:id="@+id/countryNameText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/country_name"
-                    android:textSize="14sp"
-                    android:textColor="@color/black_bold"
-                    />
-
-                <ImageView
-                    android:id="@+id/spinnerImg"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/countryNameText"
-                    app:layout_constraintBottom_toBottomOf="@+id/countryNameText"
-                    app:srcCompat="@drawable/ic_drop_down"
-                    />
-
-                <EditText
-                    android:focusable="false"
-                    android:id="@+id/cityEditText"
-                    android:textAlignment="viewStart"
-                    app:backgroundTint="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/country_name"
-                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                    app:layout_constraintTop_toBottomOf="@+id/countryNameText"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
+                    <TextView
+                        android:id="@+id/accountantDetailsLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp"
+                        android:drawableStart="@drawable/ic_shape"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:textColor="@color/black_bold"
+                        />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:visibility="gone"
-                android:id="@+id/passwordContainer"
-                android:layout_marginStart="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_24sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/countryNameContainer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                >
-
-                <TextView
-                    android:id="@+id/passwordText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/passwordText"
-                    android:textSize="14sp"
-                    android:textColor="@color/black_bold"
-                    />
-
-                <EditText
-                    android:inputType="textPassword"
-                    android:id="@+id/accountantPasswordEdt"
-                    android:textAlignment="viewStart"
-                    app:backgroundTint="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/passwordText"
-                    app:layout_constraintTop_toBottomOf="@+id/passwordText"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
+                    <TextView
+                        android:id="@+id/accountantDetailsEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp"
+                        android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:textColor="@color/black_bold"
+                        />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:visibility="gone"
-                android:id="@+id/confirmPasswordContainer"
-                android:layout_marginStart="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_24sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                >
-
-                <TextView
-                    android:id="@+id/confirmPassText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/confirmPasswordOnly"
-                    android:textSize="14sp"
-                    android:textColor="@color/black_bold"
-                    />
-
-                <EditText
-                    android:inputType="textPassword"
-                    android:id="@+id/confirmPassEdt"
-                    android:textAlignment="viewStart"
-                    app:backgroundTint="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/confirmPasswordOnly"
-                    app:layout_constraintTop_toBottomOf="@+id/confirmPassText"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:visibility="gone"
-                android:id="@+id/roleIdContainer"
-                android:layout_marginStart="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_24sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/confirmPasswordContainer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                >
-
-                <TextView
-                    android:id="@+id/roleText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/role"
-                    android:textSize="14sp"
-                    android:textColor="@color/black_bold"
-                    />
-
-                <ImageView
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/roleText"
-                    app:layout_constraintBottom_toBottomOf="@+id/roleText"
-                    app:srcCompat="@drawable/ic_drop_down"
-                    />
-
-                <EditText
-                    android:focusable="false"
-                    android:id="@+id/roleIdEdt"
-                    android:textAlignment="viewStart"
-                    app:backgroundTint="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/role"
-                    app:layout_constraintTop_toBottomOf="@+id/roleText"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
+                </LinearLayout>
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/confirmAddAccountantBtn"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"
+                android:id="@+id/deleteAccountantBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
-                android:layout_marginBottom="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_100sdp"
-                android:gravity="center"
-                android:text="@string/confirmation"
-                android:textAlignment="center"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginBottom="@dimen/_100sdp"
+                app:backgroundTint="@color/logout_red"
+                app:cornerRadius="7dp"
+                android:text="@string/delete"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                app:backgroundTint="@color/orange_color"
-                app:cornerRadius="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                app:layout_constraintTop_toBottomOf="@+id/roleIdContainer"
-                />
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"/>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
 
     </androidx.core.widget.NestedScrollView>
 
