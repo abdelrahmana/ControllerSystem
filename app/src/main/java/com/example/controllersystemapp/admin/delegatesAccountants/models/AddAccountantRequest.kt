@@ -8,6 +8,4 @@ data class AddAccountantRequest (
     var password_confirmation : String?,
     var role_id : Int?,
     var city_id : Int?
-
-
 )

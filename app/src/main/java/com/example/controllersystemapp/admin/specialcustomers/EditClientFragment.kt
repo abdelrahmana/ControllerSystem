@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DoneDialogFragment
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
@@ -18,29 +17,27 @@ import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.Validation
 import com.example.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.fragment_add_customer.*
+import kotlinx.android.synthetic.main.fragment_edit_client.*
 
-class AddCustomerFragment : Fragment() {
+class EditClientFragment : Fragment() {
 
     var webService: WebService? = null
     lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
 
-
+    var clientId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         webService = ApiManagerDefault(context!!).apiService
         model = UtilKotlin.declarViewModel(activity)!!
         progressDialog = UtilKotlin.ProgressDialog(context!!)
 
-        return inflater.inflate(R.layout.fragment_add_customer, container, false)
+        return inflater.inflate(R.layout.fragment_edit_client, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,7 +54,23 @@ class AddCustomerFragment : Fragment() {
 
         }
 
+        setClientDetails()
+
         observeData()
+    }
+
+    private fun setClientDetails() {
+
+        val clientDetailsString = arguments?.getString(NameUtils.ADMIN_CLIENTS_DETAILS)?:""
+        val clientDetails = UtilKotlin.getClientDetails(clientDetailsString)
+
+        clientId = clientDetails?.data?.id?:0
+        clientNameEdt?.setText(clientDetails?.data?.name?:"")
+        clientPhoneEdt?.setText(clientDetails?.data?.phone?:"")
+        clientAddressEdt?.setText(clientDetails?.data?.address?:"")
+        clientEmailEdt?.setText(clientDetails?.data?.email?:"")
+
+
     }
 
     private fun observeData() {
@@ -71,7 +84,7 @@ class AddCustomerFragment : Fragment() {
 
                 if (datamodel is SuccessModel) {
                     Log.d("testApi", "isForyou")
-                    successAdd(datamodel)
+                    successEdit(datamodel)
                 }
 
                 model.responseCodeDataSetter(null) // start details with this data please
@@ -95,7 +108,7 @@ class AddCustomerFragment : Fragment() {
 
     }
 
-    private fun successAdd(successModel: SuccessModel) {
+    private fun successEdit(successModel: SuccessModel) {
 
 
         if (successModel?.msg?.isNullOrEmpty() == false) {
@@ -105,15 +118,17 @@ class AddCustomerFragment : Fragment() {
 
             }
 
-//            UtilKotlin.showSnackMessage(activity , msgtext)
+            UtilKotlin.showSnackMessage(activity , msgtext)
+            model.responseCodeDataSetter(null) // start details with this data please
             Handler().postDelayed(Runnable {
                 activity?.let {
                     it.supportFragmentManager.popBackStack()
                 }
             }, 1000)
 
+//            UtilKotlin.showSnackMessage(activity , msgtext)
 
-          //  resetAllViews()
+         //   resetAllViews()
 
         }
 
@@ -121,16 +136,16 @@ class AddCustomerFragment : Fragment() {
 
     }
 
-    private fun resetAllViews() {
-
-
-        clientNameEdt?.setText("")
-        clientPhoneEdt?.setText("")
-        clientAddressEdt?.setText("")
-        clientEmailEdt?.setText("")
-
-
-    }
+//    private fun resetAllViews() {
+//
+//
+//        clientNameEdt?.setText("")
+//        clientPhoneEdt?.setText("")
+//        clientAddressEdt?.setText("")
+//        clientEmailEdt?.setText("")
+//
+//
+//    }
 
     private fun checkvalidation() {
 
@@ -188,14 +203,14 @@ class AddCustomerFragment : Fragment() {
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
-            val addClientRequest = AddClientRequest(
-                clientNameEdt?.text?.toString(),
-                clientPhoneEdt?.text?.toString(),
-                clientEmailEdt?.text?.toString(),
-                clientAddressEdt?.text?.toString()
-                )
 
-            ClientsPresenter.getAddClient(webService!!, addClientRequest, activity!!, model)
+            val editClientRequest = EditClientRequest(
+                clientId , clientNameEdt?.text?.toString(),
+                clientPhoneEdt?.text?.toString(), clientAddressEdt?.text?.toString(),
+                clientEmailEdt?.text?.toString()
+            )
+
+            ClientsPresenter.getEditClient(webService!!, editClientRequest, activity!!, model)
         } else {
             progressDialog?.dismiss()
             UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
@@ -203,4 +218,6 @@ class AddCustomerFragment : Fragment() {
         }
 
     }
+
+
 }

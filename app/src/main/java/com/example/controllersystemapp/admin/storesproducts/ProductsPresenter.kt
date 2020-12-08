@@ -7,6 +7,7 @@ import com.example.controllersystemapp.admin.storesproducts.models.ProductsListR
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
+import com.example.util.UtilKotlin.checkIfInvalidToken
 import com.example.util.ViewModelHandleChangeFragmentclass
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
@@ -47,6 +48,7 @@ object ProductsPresenter {
                                 Log.d("testApi" , "responseError")
                                 //model.setShowLoader(false)
                                 model.onError(response.errorBody())
+
                             }
 
 

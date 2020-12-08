@@ -12,12 +12,14 @@ import com.example.controllersystemapp.admin.categories.models.CategoriesListRes
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AddAccountantRequest
+import com.example.controllersystemapp.admin.delegatesAccountants.models.EditAccountantRequest
 import com.example.controllersystemapp.admin.settings.admin.AdminDetailsResponse
 import com.example.controllersystemapp.admin.settings.admin.AdminListResponse
 import com.example.controllersystemapp.admin.settings.editpassword.EditPasswordRequest
 import com.example.controllersystemapp.admin.specialcustomers.AddClientRequest
 import com.example.controllersystemapp.admin.specialcustomers.ClientDetailsResponse
 import com.example.controllersystemapp.admin.specialcustomers.ClientsListResponse
+import com.example.controllersystemapp.admin.specialcustomers.EditClientRequest
 import com.example.controllersystemapp.admin.storesproducts.models.*
 import com.example.controllersystemapp.admin.storesproducts.models.AddStoreRequest
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsListResponse
@@ -108,6 +110,9 @@ interface WebService {
     @POST("admin/accountants/create")
     fun addAccountant(@Body addAccountantRequest : AddAccountantRequest): Observable<Response<SuccessModel>>
 
+    @Headers("Accept: application/json")
+    @POST("admin/accountants/edit")
+    fun editAccountant(@Body editAccountantRequest : EditAccountantRequest): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
     @DELETE("admin/accountants/delete")
@@ -145,6 +150,10 @@ interface WebService {
     @POST("admin/admin/create")
     fun addAdmin(@Body addAccountantRequest : AddAccountantRequest): Observable<Response<SuccessModel>>
 
+    @Headers("Accept: application/json")
+    @POST("admin/admin/edit")
+    fun editAdmin(@Body editAccountantRequest: EditAccountantRequest): Observable<Response<SuccessModel>>
+
 
     @Headers("Accept: application/json")
     @GET("admin/clients/list")
@@ -164,6 +173,10 @@ interface WebService {
     @Headers("Accept: application/json")
     @POST("admin/clients/create")
     fun addClient(@Body addClientRequest : AddClientRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @POST("admin/clients/edit")
+    fun editClient(@Body editClientRequest : EditClientRequest): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
     @DELETE("admin/categories/delete")

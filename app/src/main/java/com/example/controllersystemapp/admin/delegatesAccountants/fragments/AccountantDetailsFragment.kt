@@ -13,14 +13,17 @@ import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
+import com.example.controllersystemapp.admin.storesproducts.fragments.EditProductFragment
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.delegate_item.view.*
 import kotlinx.android.synthetic.main.fragment_accountant_details.*
+import kotlinx.android.synthetic.main.sales_item_adapter.*
 
 
 class AccountantDetailsFragment : Fragment() {
@@ -69,6 +72,16 @@ class AccountantDetailsFragment : Fragment() {
 
         }
 
+        editAccountantButton?.setOnClickListener {
+
+            val bundle = Bundle()
+            val accountantDetails = Gson().toJson(accountantResponseDetails)
+            bundle.putString(NameUtils.ACCOUNTANT_ADMIN_DETAILS , accountantDetails)
+            UtilKotlin.changeFragmentBack(activity!! , EditAccountantFragment() , "EditAccountant"  ,
+                bundle , R.id.frameLayout_direction)
+
+        }
+
         observeData()
     }
 
@@ -89,6 +102,7 @@ class AccountantDetailsFragment : Fragment() {
 
     }
 
+    var accountantResponseDetails : AccountantDetailsResponse ? = null
     private fun observeData() {
 
         model.responseDataCode?.observe(activity!!, Observer { datamodel ->
@@ -101,6 +115,8 @@ class AccountantDetailsFragment : Fragment() {
                 if (datamodel is AccountantDetailsResponse) {
                     Log.d("testApi", "isForyou")
                     getAccountantData(datamodel)
+                    accountantResponseDetails = datamodel
+                    editAccountantButton?.isEnabled = true
                 }
 
                 if (datamodel is SuccessModel) {
