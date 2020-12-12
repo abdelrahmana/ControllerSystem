@@ -1,12 +1,11 @@
 package com.example.util.ApiConfiguration
 
 
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.*
 import com.example.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
 import com.example.controllersystemapp.accountant.products.models.AccountantProductsListResponse
 import com.example.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
 import com.example.controllersystemapp.accountant.settings.expenses.AccountantExpensesListResponse
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.AddDelegateCallCenterRequest
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.example.controllersystemapp.accountant.makeorder.models.AccountantMakeOrderRequest
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
@@ -259,6 +258,7 @@ interface WebService {
     fun accountantCategoriesList(@Query("parent_id") parentId : Int? , @Query("name") name : String?):
             Observable<Response<CategoriesListResponse>>
 
+
     @Headers("Accept: application/json")
     @GET("accountant/products/list")
     fun accountantProductsList(@Query("category_id") categoryId : Int? , @Query("name") name : String?):
@@ -268,6 +268,23 @@ interface WebService {
     @Headers("Accept: application/json")
     @POST("accountant/orders/create")
     fun accountantCreateOrder(@Body accountantMakeOrderRequest: AccountantMakeOrderRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @GET("accountant/delegates/details")
+    fun accountantDelegateDetails(@Query("id") delegateId : Int?): Observable<Response<AccountantDelegateDetails>>
+
+    @Headers("Accept: application/json")
+    @GET("accountant/orders/items")
+    fun accDelegateOrderItems(@Query("order_id") order_id : Int?): Observable<Response<AccDelegateOrderItems>>
+
+    @Headers("Accept: application/json")
+    @GET("accountant/orders/item-details")
+    fun accDelegateOrderItemsDetails(@Query("item_id") order_id : Int?): Observable<Response<AccDelegateOrderItemsDetails>>
+
+
+    @Headers("Accept: application/json")
+    @DELETE("accountant/delegates/delete")
+    fun accountantDeleteDelegate(@Query("id") delegateId : Int): Observable<Response<SuccessModel>>
 
 
     //Delegates Api

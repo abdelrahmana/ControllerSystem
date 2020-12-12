@@ -10,15 +10,16 @@ data class Data(
 )
 
 data class CallCenterDelegateData(
-    var city_id: Int?=-1,
+    var city_id: String?="",
     var email: String?="",
-    var enable_notification: Int?=-1,
+    var enable_notification: String?="",
     var id: Int?=0,
     var image: String?="",
     var lat: String?="",
     var long: String?="",
     var name: String?="",
     var phone: String?="",
-    var role_id: Int?=-1,
-    var status: Int?=-1
+    var created_by: String?="",
+    var role_id: String?="",
+    var status: String?=""
 )

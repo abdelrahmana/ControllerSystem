@@ -15,10 +15,10 @@ import com.example.util.ViewModelHandleChangeFragmentclass
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_action_delegates_call.*
+import kotlinx.android.synthetic.main.edit_debts_sheet.*
 
 
-class BottomSheetActions : BottomSheetDialogFragment() {
+class EditDebtsSheet : BottomSheetDialogFragment() {
 
 
     lateinit var model: ViewModelHandleChangeFragmentclass
@@ -30,11 +30,11 @@ class BottomSheetActions : BottomSheetDialogFragment() {
         // Inflate the layout for this fragment
 
 
-        return inflater.inflate(R.layout.fragment_action_delegates_call, container, false)
+        return inflater.inflate(R.layout.edit_debts_sheet, container, false)
     }
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
-        dialog.setContentView(R.layout.fragment_action_delegates_call)
+        dialog.setContentView(R.layout.edit_debts_sheet)
         model = UtilKotlin.declarViewModel(activity)!!
 
         dialog.setOnShowListener {
@@ -68,26 +68,25 @@ class BottomSheetActions : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         // MyUtils.setCorners(view = lang_card!!, topLeft = 60f, topRight = 60f)
 
-        if (arguments?.getBoolean(CallCenterFragment.callCenter,false) != true) // not call center
-        {
-            deleteAdminText.text = getString(R.string.delete_delegate)
-            blockAdminText?.text = getString(R.string.block_delegate)
-        }
-        profilecallDelegate?.setOnClickListener{
-            model.setNotifyItemSelected(1) // edit profile
-            dismiss()
-        }
-        deleteAdminText?.setOnClickListener{
+//        if (arguments?.getBoolean(CallCenterFragment.callCenter,false) != true) // not call center
+//        {
+//            deleteAdminText.text = getString(R.string.delete_delegate)
+//            blockAdminText?.text = getString(R.string.block_delegate)
+//        }
+//        profilecallDelegate?.setOnClickListener{
+//         //   model.setNotifyItemSelected(1) // edit profile
+//            dismiss()
+//        }
+        confirmEditDebtsBtn?.setOnClickListener{
 
             dismiss()
         }
-        blockAdminText?.setOnClickListener{
-            dismiss()
-        }
+
         closeSheet?.setOnClickListener{
-            dismiss()
 
+            dismiss()
         }
+
 
 
     }

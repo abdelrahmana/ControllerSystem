@@ -51,7 +51,7 @@
                 android:text=""
                 android:fontFamily="@font/cairo_semibold"
                 android:textColor="@color/text_black"
-                android:textSize="12sp"
+                android:textSize="@dimen/_10ssp"
                 app:layout_constraintEnd_toStartOf="@+id/quantityLayout"
                 app:layout_constraintStart_toEndOf="@+id/currentWalletImg"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +63,7 @@
                 android:layout_marginStart="@dimen/_8sdp"
                 android:text=""
                 android:fontFamily="@font/cairo_regular"
-                android:textSize="10sp"
+                android:textSize="@dimen/_10ssp"
                 android:textColor="@color/text_black"
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:textAlignment="viewStart"
@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_10ssp"
                     android:textStyle="bold"
                     android:layout_marginEnd="@dimen/_3sdp"
                     android:textColor="@color/black_bold"
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="رس"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/_10ssp"
                     android:layout_marginEnd="@dimen/_13sdp"
                     android:textColor="@color/text_grey"
                    />
@@ -128,7 +128,7 @@
                     android:textColor="@color/text_black"
                     android:fontFamily="@font/ffshamelfamily_sansonebold"
                     android:textStyle="bold"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_10ssp"
                     android:layout_marginEnd="@dimen/_3sdp"
                    />
 
@@ -137,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/piece"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/_10ssp"
                     android:textColor="@color/text_black"
                     android:layout_marginEnd="@dimen/_13sdp"
                     />

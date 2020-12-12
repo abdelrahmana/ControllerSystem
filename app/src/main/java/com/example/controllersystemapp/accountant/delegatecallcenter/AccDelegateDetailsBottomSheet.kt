@@ -3,22 +3,31 @@ package com.example.controllersystemapp.accountant.delegatecallcenter
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
+import androidx.lifecycle.Observer
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.accountant.delegatecallcenter.fragments.CallCenterFragment
+import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
+import com.example.controllersystemapp.admin.settings.admin.AdminListResponse
+import com.example.controllersystemapp.admin.settings.admin.AdminPresenter
+import com.example.util.ApiConfiguration.ApiManagerDefault
+import com.example.util.ApiConfiguration.SuccessModel
+import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils.ADMIN_ID
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_action_delegates_call.*
+import kotlinx.android.synthetic.main.acc_delegate_sheet.*
 
 
-class BottomSheetActions : BottomSheetDialogFragment() {
+class AccDelegateDetailsBottomSheet : BottomSheetDialogFragment() {
 
 
     lateinit var model: ViewModelHandleChangeFragmentclass
@@ -30,11 +39,11 @@ class BottomSheetActions : BottomSheetDialogFragment() {
         // Inflate the layout for this fragment
 
 
-        return inflater.inflate(R.layout.fragment_action_delegates_call, container, false)
+        return inflater.inflate(R.layout.acc_delegate_sheet, container, false)
     }
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
-        dialog.setContentView(R.layout.fragment_action_delegates_call)
+        dialog.setContentView(R.layout.acc_delegate_sheet)
         model = UtilKotlin.declarViewModel(activity)!!
 
         dialog.setOnShowListener {
@@ -68,20 +77,20 @@ class BottomSheetActions : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         // MyUtils.setCorners(view = lang_card!!, topLeft = 60f, topRight = 60f)
 
-        if (arguments?.getBoolean(CallCenterFragment.callCenter,false) != true) // not call center
-        {
-            deleteAdminText.text = getString(R.string.delete_delegate)
-            blockAdminText?.text = getString(R.string.block_delegate)
-        }
-        profilecallDelegate?.setOnClickListener{
-            model.setNotifyItemSelected(1) // edit profile
+//        if (arguments?.getBoolean(CallCenterFragment.callCenter,false) != true) // not call center
+//        {
+//            deleteAdminText.text = getString(R.string.delete_delegate)
+//            blockAdminText?.text = getString(R.string.block_delegate)
+//        }
+        specialMessageDelegate?.setOnClickListener{
+            //model.setNotifyItemSelected(1) // edit profile
             dismiss()
         }
-        deleteAdminText?.setOnClickListener{
-
+        deleteDelegateText?.setOnClickListener{
+            model.setNotifyItemSelected(ACCOUNTANT_REMOVE_DELEGATE) //remove delegate
             dismiss()
         }
-        blockAdminText?.setOnClickListener{
+        blockDelegateText?.setOnClickListener{
             dismiss()
         }
         closeSheet?.setOnClickListener{
@@ -109,7 +118,9 @@ class BottomSheetActions : BottomSheetDialogFragment() {
 
 
 
-
+    companion object{
+        val ACCOUNTANT_REMOVE_DELEGATE = "accountantRemoveDelegate"
+    }
 
 
 

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:behavior_peekHeight="@dimen/_600sdp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    android:id="@+id/lang_card"
+    app:cardBackgroundColor="@color/white"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/closeSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_close_light"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            />
+
+        <LinearLayout
+            android:id="@+id/editCountLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/closeSheet"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="@string/numberof_delivery"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black_bold"
+                android:textSize="@dimen/_11sdp" />
+
+            <EditText
+                android:id="@+id/debtsQuantityEdt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:theme="@style/adding_loginstate"
+                android:textSize="@dimen/_12sdp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:padding="8dp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/strockOrange"
+            app:cardCornerRadius="0dp"
+            app:cardBackgroundColor="@color/cardOrange"
+            android:id="@+id/descCard"
+            android:layout_width="match_parent"
+            android:minHeight="@dimen/_30sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            app:layout_constraintTop_toBottomOf="@+id/editCountLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:minHeight="@dimen/_30sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/_11ssp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:textColor="@color/orange_light"
+                    android:text="@string/editDebtsQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirmEditDebtsBtn"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_24sdp"
+            app:backgroundTint="@color/text_green"
+            app:cornerRadius="7dp"
+            android:text="@string/confirm"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="@dimen/_15sdp"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descCard"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+

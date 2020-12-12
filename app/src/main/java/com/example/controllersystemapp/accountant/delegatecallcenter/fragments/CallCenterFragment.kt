@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.delegatecallcenter
+package com.example.controllersystemapp.accountant.delegatecallcenter.fragments
 
 import android.app.Dialog
 import android.os.Bundle
@@ -10,12 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.delegatecallcenter.BottomSheetActions
 import com.example.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter.getCallCenter
 import com.example.controllersystemapp.accountant.delegatecallcenter.adapters.CallCenterAdapter
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import com.example.controllersystemapp.bottomsheets.AdminBottomSheet
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
@@ -31,8 +31,8 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
     lateinit var callCenterAdapter: CallCenterAdapter
     var callCenterArray = ArrayList<CallCenterDelegateData>()
     lateinit var modelHandleChangeFragmentclass: ViewModelHandleChangeFragmentclass
-    var webService : WebService?=null
-    var progressDialog : Dialog?=null
+    var webService: WebService? = null
+    var progressDialog: Dialog? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,49 +49,59 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
 
-      //  Log.d("back" , "Delegate crested")
+        //  Log.d("back" , "Delegate crested")
 
-        modelHandleChangeFragmentclass.notifyItemSelected?.observe(activity!!, Observer { datamodel ->
+        modelHandleChangeFragmentclass.notifyItemSelected?.observe(
+            activity!!,
+            Observer { datamodel ->
 
-            if (datamodel != null) {
+                if (datamodel != null) {
 
-                if (datamodel ==1) {
+                    if (datamodel == 1) {
 
-                    val bundle = Bundle()
-                    bundle.putString(NameUtils.CURRENT_CALL_CENTER,Gson().toJson(callCenterArray.get(selectedItemPosition)))
+                        val bundle = Bundle()
+                        bundle.putString(
+                            NameUtils.CURRENT_CALL_CENTER,
+                            Gson().toJson(callCenterArray.get(selectedItemPosition))
+                        )
 
-                    UtilKotlin.changeFragmentBack(activity!! ,
-                        EditCallCenterFragment(), "call_center"  , bundle,R.id.redirect_acc_fragments)
+                        UtilKotlin.changeFragmentBack(
+                            activity!!,
+                            EditCallCenterFragment(),
+                            "call_center",
+                            bundle,
+                            R.id.redirect_acc_fragments
+                        )
 
 
+                    }
+
+                    modelHandleChangeFragmentclass.setNotifyItemSelected(null) // start details with this data please
                 }
 
-                modelHandleChangeFragmentclass.setNotifyItemSelected(null) // start details with this data please
-            }
-
-        })
+            })
     }
 
     override fun onResume() {
         super.onResume()
-      //  Log.d("back" , "Delegate Resume")
+        //  Log.d("back" , "Delegate Resume")
         getCallCenter()
 
     }
 
     private fun getCallCenterData() {
 
-      /*  delegatesList.clear()
-        for (i in 0..4)
-        {
-            delegatesList.add(DelegatesModel("احمد حازم" , null , " +966 56784 9876" , i+1))
-        }*/
+        /*  delegatesList.clear()
+          for (i in 0..4)
+          {
+              delegatesList.add(DelegatesModel("احمد حازم" , null , " +966 56784 9876" , i+1))
+          }*/
 
         centerCount?.text = callCenterArray.size.toString()
-        callCenterAdapter = CallCenterAdapter(context!! , callCenterArray , this)
+        callCenterAdapter = CallCenterAdapter(context!!, callCenterArray, this)
         centerRecycler?.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
+            layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
             adapter = callCenterAdapter
         }
 
@@ -102,7 +112,7 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
-            getCallCenter(webService!! , callCenterResponse())
+            getCallCenter(webService!!, callCenterResponse())
         } else {
             progressDialog?.dismiss()
             UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
@@ -112,15 +122,15 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
     }
 
     override fun onDestroyView() {
-      disposableObserver?.dispose()
+        disposableObserver?.dispose()
         modelHandleChangeFragmentclass?.notifyItemSelected?.removeObservers(activity!!)
         super.onDestroyView()
     }
 
-    var disposableObserver : DisposableObserver<Response<CallCenterResponse>>?=null
+    var disposableObserver: DisposableObserver<Response<CallCenterResponse>>? = null
     private fun callCenterResponse(): DisposableObserver<Response<CallCenterResponse>> {
 
-        disposableObserver= object : DisposableObserver<Response<CallCenterResponse>>() {
+        disposableObserver = object : DisposableObserver<Response<CallCenterResponse>>() {
             override fun onComplete() {
                 progressDialog?.dismiss()
                 dispose()
@@ -136,12 +146,10 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
                 if (response!!.isSuccessful) {
                     progressDialog?.dismiss()
                     callCenterArray.clear()
-                    callCenterArray.addAll(response.body()?.data?.list?:ArrayList())
+                    callCenterArray.addAll(response.body()?.data?.list ?: ArrayList())
                     getCallCenterData()
 
-                }
-                else
-                {
+                } else {
                     progressDialog?.dismiss()
                     if (response.errorBody() != null) {
                         // val error = PrefsUtil.handleResponseError(response.errorBody(), context!!)
@@ -157,20 +165,22 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
 
     var selectedItemPosition = 0
     override fun onItemClick(position: Int) {
- selectedItemPosition = position
+        selectedItemPosition = position
         val bundle = Bundle()
         bundle.putBoolean(callCenter, true)
-        val bottomSheetActions = BottomSheetActions()
+        val bottomSheetActions =
+            BottomSheetActions()
         bottomSheetActions.arguments = bundle
         bottomSheetActions.show(activity?.supportFragmentManager!!, "bottomSheetActions")
-    //    Log.d("clickDelegate" , "${delegatesList[position].Id}")
+        //    Log.d("clickDelegate" , "${delegatesList[position].Id}")
 
 //        UtilKotlin.replaceFragmentWithBack(context!!, this, DelegateDetailsFragment(),
 //            null, R.id.frameLayout_direction, 120, false, true)
 
-   //     UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , ""  , null,R.id.frameLayout_direction)
+        //     UtilKotlin.changeFragmentBack(activity!! ,DelegateDetailsFragment() , ""  , null,R.id.frameLayout_direction)
     }
-    companion object{
+
+    companion object {
         val callCenter = "this_is_call_center"
     }
 

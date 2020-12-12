@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.delegatecallcenter
+package com.example.controllersystemapp.accountant.delegatecallcenter.fragments
 
 import android.app.Dialog
 import android.os.Bundle
@@ -8,12 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter.addDelegateApi
-import com.example.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter.getCallCenter
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.AddDelegateCallCenterRequest
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
+import com.example.util.NameUtils.DELEGATE_ROLE_ID
 import com.example.util.PrefsUtil
 import com.example.util.UtilKotlin
 import io.reactivex.observers.DisposableObserver
@@ -64,7 +63,7 @@ class AddDelegateFragment : Fragment() {
             progressDialog?.show()
             addDelegateCallCenterFragment = AddDelegateCallCenterRequest(callCenterEditText.text.toString(),
                 (PrefsUtil.getUserModel(context!!)?.city_id?:"0").toInt(),editTextPassword.text.toString()
-                ,editTextPassword.text.toString(),editTextPhone.text.toString(),(PrefsUtil.getUserModel(context!!)?.role_id?:"0").toInt())
+                ,editTextPassword.text.toString(),editTextPhone.text.toString(), DELEGATE_ROLE_ID)
             addDelegateApi(webService!! , callCenterResponse(),addDelegateCallCenterFragment)
         } else {
             progressDialog?.dismiss()

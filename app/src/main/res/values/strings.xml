@@ -241,6 +241,10 @@
     <string name="edit_accountant">تعديل محاسب</string>
     <string name="edit_admin">تعديل ادمن</string>
     <string name="edit_customer">تعديل عميل</string>
+    <string name="specialMessage">رسالة خاصة</string>
+    <string name="editDebts">تعديل الذمة</string>
+    <string name="editDebtsQuantity">سيتم التعديل علي العدد/الكمية في الذمة</string>
+    <string name="no_orders">لا توجد طلبات متاحه</string>
 
 
 </resources>

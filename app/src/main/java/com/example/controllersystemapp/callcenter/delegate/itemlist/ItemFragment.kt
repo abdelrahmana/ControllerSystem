@@ -10,10 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter
-import com.example.controllersystemapp.accountant.delegatecallcenter.EditDelegateFragment
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
-import com.example.controllersystemapp.admin.delegatesAccountants.adapters.DelegatesAdapter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.callcenter.delegate.DelegatePresenter
 import com.example.controllersystemapp.callcenter.delegate.itemdetails.ItemDetailsFragment
