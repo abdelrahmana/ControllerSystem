@@ -2,8 +2,6 @@ package com.example.controllersystemapp.admin.specialcustomers
 
 import android.app.Activity
 import android.util.Log
-import com.example.controllersystemapp.admin.delegatesAccountants.models.AddAccountantRequest
-import com.example.controllersystemapp.admin.settings.admin.AdminListResponse
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
@@ -16,11 +14,15 @@ import retrofit2.Response
 object ClientsPresenter {
 
 
-    fun getClientsList(webService: WebService, activity: Activity, model: ViewModelHandleChangeFragmentclass)
+    fun getClientsList(
+        webService: WebService,
+        activity: Activity,
+        model: ViewModelHandleChangeFragmentclass,
+        hashMap: HashMap<String, Any>
+    )
     {
 
-        Log.d("testApi" , "getData")
-        webService.clientsList()
+        webService.clientsList(hashMap)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableObserver<Response<ClientsListResponse>>() {

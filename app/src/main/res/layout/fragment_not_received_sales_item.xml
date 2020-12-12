@@ -47,7 +47,7 @@
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:textAlignment="viewStart"
-                android:text="أمر توصيل رقم 135655"
+                android:text="أمر توصيل رقم "
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:fontFamily="@font/cairo_semibold"

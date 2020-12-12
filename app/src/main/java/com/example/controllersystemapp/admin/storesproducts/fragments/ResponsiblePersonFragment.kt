@@ -168,7 +168,7 @@ class ResponsiblePersonFragment : Fragment() , OnRecyclerItemClickListener {
         Log.d("clickRespon" , "$position")
         personName = personList[position].name!!
         personId = personList[position].id!!
-
+        confirmResponsiblePersonBtn.visibility = View.VISIBLE
 
     }
 

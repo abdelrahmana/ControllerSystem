@@ -38,6 +38,7 @@ import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.example.controllersystemapp.admin.addproduct.AddProductFragment.Companion.GALLERY
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsDetailsResponse
+import com.example.controllersystemapp.admin.storesproducts.models.StoreDetailsResponse
 import com.example.controllersystemapp.common.ContainerActivityForFragment
 import com.example.controllersystemapp.common.login.User
 import com.example.controllersystemapp.common.verficationfragment.ValidationActivity
@@ -383,7 +384,25 @@ object UtilKotlin {
 
     }
 
+    fun getFormatedDate(dateZone : String,context: Context,dateOrTime : Boolean=false): String { // return date or time
+        val calendar = Calendar.getInstance()
+        val input =
+            SimpleDateFormat("yyyy-MMMMM-dd'T'HH:mm:ss.SSS'Z'", Locale(getLocalLanguage(context)?:"ar"))
+        val output = SimpleDateFormat("dd/MM/yyyy", Locale(getLocalLanguage(context)?:"ar"))
+        val timeFormatter = SimpleDateFormat("h:mm a", Locale(getLocalLanguage(context)?:"ar"))
+        val parser = SimpleDateFormat("d MMMMM yyyy h:mm a",Locale(getLocalLanguage(context)?:"ar"))
+        var d: Date? = null
+        try {
+            d = input.parse(dateZone)
+        } catch (e: Exception) {
+        }
 
+
+        //        if (dateOrTime) // true date else time
+        return parser.format(d?: Date())
+        // else return  timeFormatter.format(d)
+
+    }
     fun isNetworkAvailable(context: Context): Boolean {
         var netstate = false
         val connectivity = context
@@ -512,6 +531,13 @@ object UtilKotlin {
         val gson = Gson()
         val typeToken = object : TypeToken<ProductsDetailsResponse?>() {}.type
         val obj = gson.fromJson<ProductsDetailsResponse>(productString, typeToken) ?: ProductsDetailsResponse(null) //ResponseLogin(Data("", null))
+        return obj
+    }
+
+    fun getStoreDetails(storeString: String) : StoreDetailsResponse?{
+        val gson = Gson()
+        val typeToken = object : TypeToken<StoreDetailsResponse?>() {}.type
+        val obj = gson.fromJson<StoreDetailsResponse>(storeString, typeToken) ?: StoreDetailsResponse(null) //ResponseLogin(Data("", null))
         return obj
     }
 

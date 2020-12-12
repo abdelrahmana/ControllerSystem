@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.sales.model.Data
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
+import com.example.util.UtilKotlin
+import kotlinx.android.synthetic.main.fragment_not_received_sales_item.view.*
 import kotlinx.android.synthetic.main.fragment_received_sales_item.view.*
 
 
 class ReceivedSalesAdapter(
     var context: Context,
-    var notReceivedSalesList: ArrayList<Any>,
+    var notReceivedSalesList: ArrayList<Data>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<ReceivedSalesAdapter.ViewHolder>(){
 
@@ -47,7 +50,7 @@ class ReceivedSalesAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            productsModel: Any,
+            datamodel: Data,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
@@ -61,7 +64,13 @@ class ReceivedSalesAdapter(
 //            itemView.quantity.text = productsModel.total_quantity
 //            itemView.currancy.text = productsModel.currency
 
+            itemView.notReceivedSalesName?.text = itemView.notReceivedSalesName?.text.toString() + datamodel.order_number?:""
 
+            itemView.notReceivedDelegate?.text = datamodel?.name?:""
+            itemView.notReceivedPrice?.text = datamodel?.total_price?:""
+            itemView.notReceivedSalesQuantity?.text = datamodel?.details?.get(0)?.product?.total_quantity?:""
+            itemView.notReceivedDateTxt?.text = UtilKotlin.getFormatedDate(datamodel?.created_at?:"0",itemView.context)
+            itemView.notReceivedCurrency?.text = datamodel?.currency?:""
 
             itemView.sendAdminBtn.setOnClickListener {
 

@@ -49,7 +49,7 @@ class ResponsiblePersonAdapter(
             if (selctedPosition == adapterPosition)
             {
                 itemView.doneImg.visibility = View.VISIBLE
-                selctedPosition = -1
+              //  selctedPosition = -1
             }
             else{
                 itemView.doneImg.visibility = View.GONE
@@ -77,12 +77,9 @@ class ResponsiblePersonAdapter(
 
 
     }
+    var selctedPosition = -1
 
-    companion object{
 
-        var selctedPosition = -1
-
-    }
 
 
 }

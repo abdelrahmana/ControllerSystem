@@ -237,6 +237,8 @@
     <string name="edit">تعديل</string>
     <string name="max_quantity">الكمية تتعدى الكمية الحالية</string>
     <string name="selectCategoryFirst">اختر تصنيف المنتج اولا</string>
+    <string name="edit_product">تعديل منتج</string>
+    <string name="edit_store">تعديل مخزن</string>
 
 
 </resources>

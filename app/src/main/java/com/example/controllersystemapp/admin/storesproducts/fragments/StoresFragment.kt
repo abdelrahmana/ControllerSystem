@@ -8,24 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.example.controllersystemapp.admin.storesproducts.StoresPresenter
-import com.example.controllersystemapp.admin.storesproducts.adapters.StoreDetailsFragment
 import com.example.controllersystemapp.admin.storesproducts.adapters.StoresAdapter
 import com.example.controllersystemapp.admin.storesproducts.models.StoresData
 import com.example.controllersystemapp.admin.storesproducts.models.StoresListResponse
-import com.example.controllersystemapp.admin.storesproducts.models.StoresModel
 import com.example.util.ApiConfiguration.ApiManagerDefault
-import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.fragment_accountant.*
 import kotlinx.android.synthetic.main.fragment_stores.*
 
 
@@ -238,7 +232,8 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
 
         val bundle = Bundle()
         bundle.putInt(STOREID, storeList[position].id?:0)
-        UtilKotlin.changeFragmentBack(activity!! , StoreDetailsFragment() , "StoreDetailsFragment"  ,
+        UtilKotlin.changeFragmentBack(activity!! ,
+            StoreDetailsFragment(), "StoreDetailsFragment"  ,
             bundle , R.id.frameLayout_direction)
     }
 

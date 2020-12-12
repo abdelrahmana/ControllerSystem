@@ -271,20 +271,21 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:textAlignment="viewStart"
                         android:id="@+id/storeCategoryClassifyText"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:textColor="@color/white"
-                        android:drawableStart="@drawable/ic_side_arrow"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="@string/product_level"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:drawableStart="@drawable/ic_side_arrow"
+                        android:text="@string/product_level"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.545" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

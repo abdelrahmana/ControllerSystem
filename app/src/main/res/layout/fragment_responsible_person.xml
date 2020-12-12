@@ -148,6 +148,7 @@
         android:id="@+id/confirmResponsiblePersonBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
+        android:visibility="gone"
         app:backgroundTint="@color/orange_color"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"

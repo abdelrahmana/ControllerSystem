@@ -8,6 +8,8 @@ import com.example.controllersystemapp.accountant.settings.expenses.AccountantEx
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.AddDelegateCallCenterRequest
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.example.controllersystemapp.accountant.makeorder.models.AccountantMakeOrderRequest
+import com.example.controllersystemapp.accountant.sales.model.ItemListResponses
+import com.example.controllersystemapp.accountant.sales.model.SalesResponse
 import com.example.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
@@ -98,6 +100,8 @@ interface WebService {
     @GET("admin/accountants/list")
     fun accountantsList(): Observable<Response<AccountantListResponse>>
 
+    @GET("accountant/orders/items")
+    fun getItemListAccountant(@QueryMap map : HashMap<String,Any>): Observable<Response<ItemListResponses>>
 
     @Headers("Accept: application/json")
     @GET("list/cities")
@@ -121,6 +125,10 @@ interface WebService {
     @POST("admin/ware-house/create")
     fun addStore(@Body addStoreRequest : AddStoreRequest): Observable<Response<SuccessModel>>
 
+
+    @Headers("Accept: application/json")
+    @POST("admin/ware-house/edit")
+    fun editCurrentStore(@Body addStoreRequest : AddStoreRequest): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
     @DELETE("admin/ware-house/delete")
@@ -148,7 +156,7 @@ interface WebService {
 
     @Headers("Accept: application/json")
     @GET("admin/clients/list")
-    fun clientsList(): Observable<Response<ClientsListResponse>>
+    fun clientsList(@QueryMap hashMap: HashMap<String, Any>?): Observable<Response<ClientsListResponse>>
 
     @Headers("Accept: application/json")
     @GET("admin/clients/details")
@@ -256,7 +264,9 @@ interface WebService {
     @POST("accountant/orders/create")
     fun accountantCreateOrder(@Body accountantMakeOrderRequest: AccountantMakeOrderRequest): Observable<Response<SuccessModel>>
 
-
+    @Headers("Accept: application/json")
+    @GET("accountant/orders/list")
+   suspend fun getSalesList(@Query("status") statusId : Int): Response<SalesResponse>
     //Delegates Api
 
     @Headers("Accept: application/json")
@@ -324,4 +334,7 @@ interface WebService {
     // @Multipart
     @POST("users/update-profile")
     fun editProfileWebService(@Body requestBody : RequestBody): Observable<Response<LoginResponse>>
+
+    @GET("accountant/orders/item-details")
+    fun getAccountantItemDetails(@QueryMap map : HashMap<String,Any>): Observable<Response<ItemDetailsResponse>>
 }

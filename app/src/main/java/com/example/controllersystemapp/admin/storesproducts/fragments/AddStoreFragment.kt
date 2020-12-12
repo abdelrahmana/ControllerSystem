@@ -9,26 +9,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.controllersystemapp.ModelStringID
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.categories.models.Data
-import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
-import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AddAccountantFragment
-import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DoneDialogFragment
-import com.example.controllersystemapp.admin.delegatesAccountants.models.AddAccountantRequest
-import com.example.controllersystemapp.admin.productclassification.FragmentProductclassification
-import com.example.controllersystemapp.admin.productclassification.productsubclassification.FragmentSubProductclassification
 import com.example.controllersystemapp.admin.storesproducts.StoresPresenter
 import com.example.controllersystemapp.admin.storesproducts.models.AddStoreRequest
 import com.example.controllersystemapp.admin.storesproducts.models.NamesIdModel
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
-import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.fragment_add_accountant.*
 import kotlinx.android.synthetic.main.fragment_add_store.*
 import kotlinx.android.synthetic.main.fragment_add_store.confirmAddAccountantBtn
 
@@ -195,12 +186,18 @@ class AddStoreFragment : Fragment() {
 
           //  Log.d("categoriesSize", "${categoriesList?.size}")
             val addStoreRequest = AddStoreRequest(
+                0,
                 storeNameEdt?.text?.toString(),
                 storeAddressEdt?.text?.toString(),
                 accountantID,
                 categoriesList
             )
-            StoresPresenter.addStore(webService!!, addStoreRequest, activity!!, model)
+            StoresPresenter.addStoreOrEdit(
+                webService!!,
+                addStoreRequest,
+                activity!!,
+                model
+            )
         } else {
             progressDialog?.dismiss()
             UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
@@ -210,12 +207,6 @@ class AddStoreFragment : Fragment() {
 
     }
 
-    private fun setData(personName: String) {
-        Log.d("model", "nnnn")
-        Log.d("model", "var $personName")
-
-
-    }
 
     override fun onResume() {
         super.onResume()
@@ -256,9 +247,10 @@ class AddStoreFragment : Fragment() {
                     categoriesList?.clear()
                     var categoriesName = ""
 
-                    for (i in 0 until modelSelected.idList?.size!!) {
+                  /*  for (i in 0 until modelSelected.idList?.size!!) {
                         categoriesList?.add(modelSelected.idList!![i])
-                    }
+                    }*/
+                    categoriesList?.addAll(modelSelected.idList!!) // add all items
 
                     for (i in 0 until modelSelected.namesList?.size!!) {
                         categoriesName += modelSelected.namesList[i]
