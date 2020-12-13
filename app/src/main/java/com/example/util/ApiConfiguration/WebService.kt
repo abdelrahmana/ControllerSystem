@@ -1,6 +1,7 @@
 package com.example.util.ApiConfiguration
 
 
+import com.example.controllersystemapp.accountant.delegatecallcenter.debts.AccountantDebtsListResponse
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.*
 import com.example.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
 import com.example.controllersystemapp.accountant.products.models.AccountantProductsListResponse
@@ -285,6 +286,21 @@ interface WebService {
     @Headers("Accept: application/json")
     @DELETE("accountant/delegates/delete")
     fun accountantDeleteDelegate(@Query("id") delegateId : Int): Observable<Response<SuccessModel>>
+
+
+    @Headers("Accept: application/json")
+    @GET("accountant/debts/list")
+    fun accountantDebtsList(@Query("page") page : Int? , @Query("delegate_id") delegate_id : Int?):
+            Observable<Response<AccountantDebtsListResponse>>
+
+
+    @Headers("Accept: application/json")
+    @POST("accountant/debts/update")
+    fun accountantUpdateDebt(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @DELETE("accountant/debts/delete")
+    fun accountantDeleteDebts(@Query("id") delegateId : Int): Observable<Response<SuccessModel>>
 
 
     //Delegates Api

@@ -77,8 +77,27 @@ class EditDebtsSheet : BottomSheetDialogFragment() {
 //         //   model.setNotifyItemSelected(1) // edit profile
 //            dismiss()
 //        }
-        confirmEditDebtsBtn?.setOnClickListener{
 
+        debtsQuantityEdt?.setText(arguments?.getString(DEBTS_QUANTITY)?:"")
+        confirmEditDebtsBtn?.setOnClickListener{
+            val quantity = debtsQuantityEdt?.text?.toString()?:""
+
+            if (debtsQuantityEdt?.text?.isNullOrBlank() == false && quantity.toInt() >= 1)
+            {
+                model.setNotifyItemSelected(debtsQuantityEdt?.text?.toString())
+                dismiss()
+            }
+            else{
+                UtilKotlin.showSnackErrorInto(activity, getString(R.string.quantityRequired))
+
+            }
+
+
+        }
+
+        deleteDebtsBtn?.setOnClickListener{
+
+            model.setNotifyItemSelected(2) //set listener to delete debts
             dismiss()
         }
 
@@ -109,6 +128,10 @@ class EditDebtsSheet : BottomSheetDialogFragment() {
 
 
 
+    companion object{
+
+        val DEBTS_QUANTITY = "debtsQuantity"
+    }
 
 
 

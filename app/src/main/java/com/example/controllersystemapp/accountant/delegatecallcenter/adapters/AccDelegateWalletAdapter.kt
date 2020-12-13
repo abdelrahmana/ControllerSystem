@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.delegatecallcenter.debts.AccountantDebtsList
 import com.example.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import kotlinx.android.synthetic.main.aac_delegate_wallet_item.view.*
 
 class AccDelegateWalletAdapter(
     var context: Context,
-    var accDelegateWalletList: ArrayList<Any> ,
+    var accDelegateWalletList: ArrayList<AccountantDebtsList>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<AccDelegateWalletAdapter.ViewHolder>(){
 
@@ -37,15 +38,16 @@ class AccDelegateWalletAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            productsModel: Any,
+            accountantDebtsList: AccountantDebtsList,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
 
-//            itemView.walletProdName.text = productsModel.name
-//            itemView.walletProdDesc.text = productsModel.desc
-//            itemView.walletProdPrice.text = productsModel.price
-//            itemView.walletProdQuantity.text = productsModel.quantity.toString()
-//            itemView.walletProdCurrancy.text = productsModel.currancy
+
+            itemView.walletProdName.text = accountantDebtsList.product?.name?:""
+            itemView.statusT.text = accountantDebtsList.status_word?:""
+            itemView.walletProdPrice.text = accountantDebtsList.product?.price?:""
+            itemView.walletProdQuantity.text = accountantDebtsList.quantity?:""
+            itemView.walletProdCurrancy.text = accountantDebtsList.product?.currency?:""
             itemView.editDebtsBtn.setOnClickListener {
 
                 onRecyclerItemClickListener.onItemClick(adapterPosition)

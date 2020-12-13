@@ -20,18 +20,18 @@
             android:id="@+id/closeSheet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:padding="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_close_light"
-            android:layout_marginTop="@dimen/_24sdp"
-            android:layout_marginEnd="@dimen/_24sdp"
-            />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_close_light" />
 
         <LinearLayout
             android:id="@+id/editCountLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_25sdp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +81,7 @@
             android:layout_width="match_parent"
             android:minHeight="@dimen/_30sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_25sdp"
             app:layout_constraintTop_toBottomOf="@+id/editCountLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,8 +122,7 @@
             android:fontFamily="@font/ffshamelfamily_sansonebold"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:layout_marginBottom="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_27sdp"
             app:backgroundTint="@color/text_green"
             app:cornerRadius="7dp"
             android:text="@string/confirm"
@@ -136,8 +135,29 @@
             android:layout_height="@dimen/_45sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descCard"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/deleteDebtsBtn"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_24sdp"
+            app:backgroundTint="@color/logout_red"
+            app:cornerRadius="7dp"
+            android:text="@string/delete"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="@dimen/_15sdp"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmEditDebtsBtn"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
