@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:behavior_peekHeight="@dimen/_600sdp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    android:id="@+id/lang_card"
+    app:cardBackgroundColor="@color/white"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/closeSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_close_light"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/_24sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:id="@+id/specialMessageDelegate"
+            android:layout_marginStart="@dimen/_32sdp"
+            android:textAlignment="viewStart"
+            android:text="@string/specialMessage"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:drawablePadding="@dimen/_16sdp"
+            android:drawableStart="@drawable/ic_email"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/closeSheet"
+
+            />
+
+        <View
+            android:id="@+id/viewSheet2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/black36"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/specialMessageDelegate"
+
+            />
+
+
+        <TextView
+            android:layout_marginTop="@dimen/_24sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:id="@+id/deleteDelegateText"
+            android:layout_marginStart="@dimen/_32sdp"
+            android:drawablePadding="@dimen/_16sdp"
+            android:drawableStart="@drawable/ic_bin"
+            android:textAlignment="viewStart"
+            android:text="@string/delete_delegate"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/specialMessageDelegate"
+
+            />
+
+        <View
+            android:id="@+id/viewSheet"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/black36"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/deleteDelegateText"
+
+            />
+
+
+        <TextView
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_24sdp"
+            android:id="@+id/blockDelegateText"
+            android:layout_marginStart="@dimen/_32sdp"
+            android:drawablePadding="@dimen/_16sdp"
+            android:drawableStart="@drawable/ic_ban"
+            android:textAlignment="viewStart"
+            android:text="@string/block_delegate"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/blockColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewSheet"
+
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+

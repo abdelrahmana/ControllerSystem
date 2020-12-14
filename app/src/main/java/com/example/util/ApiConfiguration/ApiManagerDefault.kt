@@ -83,31 +83,35 @@ class ApiManagerDefault {
         }
     }
 
-/*    fun getCustomErrorInterceptor(context: Context): Interceptor {
+   fun getCustomErrorInterceptor(context: Context): Interceptor {
         return label@ Interceptor { chain: Interceptor.Chain ->
             // forward the request
             val request = chain.request()
             // get the response and check it for response code
             val response = chain.proceed(request)
             when (response.code) {
-                200 -> if (isFakeResponse(response)) return@label getCustomResponse(
-                    request,
-                    context.getString(R.string.html_error),
-                    402
-                ) else return@label response
-                429 -> return@label getCustomResponse(
-                    request,
-                    context.getString(R.string.html_error),
-                    402
-                )
-                404, 503, 500 ->  // open ServerError Activity
-                    MyUtil.showServerErrorDialog(context)
+//                200 -> if (isFakeResponse(response)) return@label getCustomResponse(
+//                    request,
+//                    context.getString(R.string.html_error),
+//                    402
+//                ) else return@label response
+//                429 -> return@label getCustomResponse(
+//                    request,
+//                    context.getString(R.string.html_error),
+//                    402
+//                )
+//                404, 503, 500 ->  // open ServerError Activity
+//                    MyUtil.showServerErrorDialog(context)
                 401 ->  // send user to login page
-                    MyUtil.loginAgain(context)
+                {
+                    Log.d("codee" , "401")
+                    UtilKotlin.localSignOut(context as Activity)
+                }
+
             }
             response
         }
-    }*/
+    }
 
   /*  private fun isFakeResponse(response: Response): Boolean {
         val header = response.headers["Content-Type"]
@@ -120,7 +124,7 @@ class ApiManagerDefault {
                 .followRedirects(false)
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(getAuthInterceptor(context))
-              //  .addInterceptor(getCustomErrorInterceptor(context))
+                .addInterceptor(getCustomErrorInterceptor(context))
                 .readTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
                 .connectTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
@@ -135,7 +139,7 @@ class ApiManagerDefault {
                 .followRedirects(false)
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(getLocalInterceptor(activity.applicationContext))
-                //.addInterceptor(getCustomErrorInterceptor(activity.applicationContext))
+                .addInterceptor(getCustomErrorInterceptor(activity.applicationContext))
                 .readTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
                 .connectTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)

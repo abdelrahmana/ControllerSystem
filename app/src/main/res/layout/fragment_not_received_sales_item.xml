@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="5dp"
+    android:id="@+id/containerNotRecieved"
     android:layout_marginBottom="14dp"
     app:cardElevation="5dp"
     android:layout_marginStart="@dimen/_16sdp"
@@ -153,6 +154,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/acceptNotReceivedSalesBtn"
             android:layout_width="@dimen/_100sdp"
+            android:visibility="gone"
             android:layout_height="@dimen/_35sdp"
             android:gravity="center"
             android:textSize="12sp"

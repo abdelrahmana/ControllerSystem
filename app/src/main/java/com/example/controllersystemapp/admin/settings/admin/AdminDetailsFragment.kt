@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
+import com.example.controllersystemapp.admin.delegatesAccountants.fragments.EditAccountantFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.settings.admin.AdminFragment.Companion.ADMINID
 import com.example.util.ApiConfiguration.ApiManagerDefault
@@ -18,6 +19,7 @@ import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_admin_details.*
 
 class AdminDetailsFragment : Fragment() {
@@ -50,6 +52,14 @@ class AdminDetailsFragment : Fragment() {
 
         }
 
+        editAdminButton?.setOnClickListener {
+
+            val bundle = Bundle()
+            val adminDetailsData = Gson().toJson(adminDetails)
+            bundle.putString(NameUtils.ADMIN_DETAILS , adminDetailsData)
+            UtilKotlin.changeFragmentBack(activity!! , EditAdminFragment() , "EditAdmin"  ,
+                bundle , R.id.frameLayout_direction)
+        }
 
         observeData()
 
@@ -81,6 +91,7 @@ class AdminDetailsFragment : Fragment() {
 
     }
 
+    var adminDetails : AdminDetailsResponse ? = null
     private fun observeData() {
 
         model.responseDataCode?.observe(activity!!, Observer { datamodel ->
@@ -93,6 +104,8 @@ class AdminDetailsFragment : Fragment() {
                 if (datamodel is AdminDetailsResponse) {
                     Log.d("testApi", "isForyou")
                     getAdminData(datamodel)
+                    adminDetails = datamodel
+                    editAdminButton?.isEnabled = true
                 }
 
 //                if (datamodel is SuccessModel) {

@@ -2,7 +2,6 @@ package com.example.util
 
 import android.Manifest
 import android.app.Activity
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -37,10 +36,12 @@ import com.andrognito.flashbar.anim.FlashAnim
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.example.controllersystemapp.admin.addproduct.AddProductFragment.Companion.GALLERY
+import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
+import com.example.controllersystemapp.admin.settings.admin.AdminDetailsResponse
+import com.example.controllersystemapp.admin.specialcustomers.ClientDetailsResponse
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsDetailsResponse
 import com.example.controllersystemapp.admin.storesproducts.models.StoreDetailsResponse
 import com.example.controllersystemapp.common.ContainerActivityForFragment
-import com.example.controllersystemapp.common.login.User
 import com.example.controllersystemapp.common.verficationfragment.ValidationActivity
 import com.example.controllersystemapp.common.verficationfragment.VerficationFragment.Companion.phoneNumberKey
 import com.example.util.ApiConfiguration.ErrorBodyResponse
@@ -49,7 +50,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.loader_layout.*
 import okhttp3.ResponseBody
-import org.json.JSONStringer
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -99,6 +99,16 @@ object UtilKotlin {
         // startActivity(Intent(activity,AuthContainer::class.java))
         context!!.finishAffinity()
     }
+
+    fun checkIfInvalidToken(code : Int,activity: Activity): Boolean {
+        if (code == 401) // invalid token
+        {
+            localSignOut(activity)
+            return true // in invalid
+        }
+        return false // valid
+    }
+
 
     fun performImgPicAction(which: Int, fragment: Fragment?, context: Activity) {
         var intent: Intent?
@@ -538,6 +548,27 @@ object UtilKotlin {
         val gson = Gson()
         val typeToken = object : TypeToken<StoreDetailsResponse?>() {}.type
         val obj = gson.fromJson<StoreDetailsResponse>(storeString, typeToken) ?: StoreDetailsResponse(null) //ResponseLogin(Data("", null))
+        return obj
+    }
+
+    fun getAccountantDetails(accountantString: String) : AccountantDetailsResponse?{
+        val gson = Gson()
+        val typeToken = object : TypeToken<AccountantDetailsResponse?>() {}.type
+        val obj = gson.fromJson<AccountantDetailsResponse>(accountantString, typeToken) ?: AccountantDetailsResponse(null) //ResponseLogin(Data("", null))
+        return obj
+    }
+
+    fun getAdminDetails(adminString: String) : AdminDetailsResponse?{
+        val gson = Gson()
+        val typeToken = object : TypeToken<AdminDetailsResponse?>() {}.type
+        val obj = gson.fromJson<AdminDetailsResponse>(adminString, typeToken) ?: AdminDetailsResponse(null) //ResponseLogin(Data("", null))
+        return obj
+    }
+
+    fun getClientDetails(clientString: String) : ClientDetailsResponse?{
+        val gson = Gson()
+        val typeToken = object : TypeToken<ClientDetailsResponse?>() {}.type
+        val obj = gson.fromJson<ClientDetailsResponse>(clientString, typeToken) ?: ClientDetailsResponse(null) //ResponseLogin(Data("", null))
         return obj
     }
 

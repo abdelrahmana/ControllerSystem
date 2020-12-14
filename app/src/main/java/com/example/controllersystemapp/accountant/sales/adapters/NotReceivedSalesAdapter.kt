@@ -77,7 +77,7 @@ class NotReceivedSalesAdapter(
 
             }
 
-            itemView.acceptNotReceivedSalesBtn.setOnClickListener {
+            itemView.containerNotRecieved.setOnClickListener {
 
                 itemAcceptClickListener.onAcceptClick(adapterPosition)
 

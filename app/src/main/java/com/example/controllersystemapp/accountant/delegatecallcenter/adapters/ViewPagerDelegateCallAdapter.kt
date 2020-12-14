@@ -1,19 +1,11 @@
-package com.example.controllersystemapp.accountant.delegatecallcenter
+package com.example.controllersystemapp.accountant.delegatecallcenter.adapters
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.controllersystemapp.R
-import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AccountantsFragment
-import com.example.controllersystemapp.admin.delegatesAccountants.fragments.AdminAccountantFragment
+import com.example.controllersystemapp.accountant.delegatecallcenter.fragments.CallCenterFragment
 import com.example.controllersystemapp.admin.delegatesAccountants.fragments.DelegatesFragment
 import com.example.util.NameUtils
-import kotlinx.android.synthetic.main.activity_redirect_accountants_fragment.view.*
 
 class ViewPagerDelegateCallAdapter(fragment: Fragment)
     : FragmentStateAdapter(fragment)  {

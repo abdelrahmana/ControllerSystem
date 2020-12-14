@@ -9,7 +9,7 @@ import com.example.controllersystemapp.accountant.products.fragments.AccountantP
 import com.example.controllersystemapp.accountant.sales.fragments.AccountantSalesFragment
 import com.example.controllersystemapp.accountant.settings.AccountantSettingsFragment
 import com.example.controllersystemapp.admin.notification.NotificationFragment
-import com.example.controllersystemapp.accountant.delegatecallcenter.DelegateCallCenterFragment
+import com.example.controllersystemapp.accountant.delegatecallcenter.fragments.DelegateCallCenterFragment
 import com.example.controllersystemapp.common.delivery.DeliveryFragment
 import com.example.util.CommonActivity
 import com.example.util.NameUtils

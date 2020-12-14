@@ -2,6 +2,7 @@ package com.example.controllersystemapp.admin.specialcustomers
 
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -105,8 +106,14 @@ class AddCustomerFragment : Fragment() {
             }
 
 //            UtilKotlin.showSnackMessage(activity , msgtext)
+            Handler().postDelayed(Runnable {
+                activity?.let {
+                    it.supportFragmentManager.popBackStack()
+                }
+            }, 1000)
 
-            resetAllViews()
+
+          //  resetAllViews()
 
         }
 

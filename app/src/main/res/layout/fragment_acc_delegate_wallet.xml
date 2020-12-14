@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.util.NestedScrollPaginationView
+        android:id="@+id/scrollingNestedScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".accountant.delegatecallcenter.fragments.AccDelegateWalletFragment"
+        >
+
+        <LinearLayout
+            android:paddingBottom="@dimen/_24sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:id="@+id/accDelegateWalletRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/_14sdp"
+                />
+
+            <LinearLayout
+                android:id="@+id/noData"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutContainer">
+                <include layout="@layout/no_products" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </com.example.util.NestedScrollPaginationView>
+
+
+
+

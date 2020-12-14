@@ -12,12 +12,14 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.controllersystemapp.R
 import com.example.controllersystemapp.admin.delegatesAccountants.AccountantPresenter
+import com.example.controllersystemapp.admin.delegatesAccountants.fragments.EditAccountantFragment
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
 import com.example.util.NameUtils
 import com.example.util.UtilKotlin
 import com.example.util.ViewModelHandleChangeFragmentclass
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_clients_details.*
 
 
@@ -56,6 +58,13 @@ class ClientsDetailsFragment : Fragment() {
 
         }
 
+        editClientsButton?.setOnClickListener {
+            val bundle = Bundle()
+            val clientsDetails = Gson().toJson(clientDetails)
+            bundle.putString(NameUtils.ADMIN_CLIENTS_DETAILS , clientsDetails)
+            UtilKotlin.changeFragmentBack(activity!! , EditClientFragment() , "EditClient"  ,
+                bundle , R.id.frameLayout_direction)
+        }
         observeData()
 
     }
@@ -101,6 +110,7 @@ class ClientsDetailsFragment : Fragment() {
 
     }
 
+    var clientDetails : ClientDetailsResponse ? = null
     private fun observeData() {
 
 
@@ -114,6 +124,9 @@ class ClientsDetailsFragment : Fragment() {
                 if (datamodel is ClientDetailsResponse) {
                     Log.d("testApi", "isForyou")
                     getClientsDetsilsData(datamodel)
+                    clientDetails = datamodel
+                    editClientsButton?.isEnabled = true
+
                 }
 
                 if (datamodel is SuccessModel) {

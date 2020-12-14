@@ -228,4 +228,56 @@ object ClientsPresenter {
 
 
     }
+
+    fun getEditClient(webService: WebService, editClientRequest: EditClientRequest, activity: Activity, model: ViewModelHandleChangeFragmentclass)
+    {
+
+        Log.d("testApi" , "getData")
+        webService.editClient(editClientRequest)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : DisposableObserver<Response<SuccessModel>>() {
+                override fun onComplete() {
+
+                    //hideLoader()
+                    //  model.setShowLoader(false)
+                    dispose()
+
+                }
+
+                override fun onNext(response: Response<SuccessModel>) {
+
+                    if (response.isSuccessful)
+                    {
+                        Log.d("testApi" , "responseSuccess")
+
+                        //hideLoader()
+                        // model.setShowLoader(false)
+                        model.responseCodeDataSetter(response?.body())
+
+                    }
+                    else{
+                        Log.d("testApi" , "responseError")
+                        //model.setShowLoader(false)
+                        model.onError(response.errorBody())
+                    }
+
+
+
+                }
+
+                override fun onError(e: Throwable) {
+                    //hideLoader()
+                    // model.setShowLoader(false)
+                    dispose()
+                    Log.d("testApi" , "responsefaile")
+                    UtilKotlin.showSnackErrorInto(activity!! , e.message.toString())
+                }
+
+
+            })
+
+
+
+    }
 }

@@ -17,8 +17,6 @@ import com.example.controllersystemapp.common.AuthPresenter
 import com.example.util.ApiConfiguration.ApiManagerDefault
 import com.example.util.ApiConfiguration.SuccessModel
 import com.example.util.ApiConfiguration.WebService
-import com.example.util.PrefsModel
-import com.example.util.PrefsUtil
 import com.example.util.UtilKotlin
 import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.fragment_settings.*

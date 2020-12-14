@@ -1,4 +1,4 @@
-package com.example.controllersystemapp.accountant.delegatecallcenter
+package com.example.controllersystemapp.accountant.delegatecallcenter.fragments
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.controllersystemapp.R
-import com.example.util.NameUtils
+import com.example.controllersystemapp.accountant.delegatecallcenter.adapters.ViewPagerDelegateCallAdapter
 import com.example.util.UtilKotlin
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -41,7 +41,10 @@ class DelegateCallCenterFragment : Fragment() {
         layout_header?.text = getString(R.string.delegate_call_center)
         addAccountantBtn?.visibility = View.VISIBLE
         addAccountantBtn?.text = getString(R.string.add_delegate)
-        viewPagerAdaptor = ViewPagerDelegateCallAdapter(this@DelegateCallCenterFragment)
+        viewPagerAdaptor =
+            ViewPagerDelegateCallAdapter(
+                this@DelegateCallCenterFragment
+            )
         viewPagerDelegatesAccountant?.adapter = viewPagerAdaptor
 
         TabLayoutMediator(delegatesAccountantTab, viewPagerDelegatesAccountant) { tab, position ->
@@ -78,9 +81,11 @@ class DelegateCallCenterFragment : Fragment() {
         //   UtilKotlin.changeFragmentBack(activity!! ,AddAccountantFragment() , "AddAccountant"  , null,R.id.frameLayout_direction)
 
             if (currentSelectedPosition==0)
-                UtilKotlin.changeFragmentBack(activity!! ,AddDelegateFragment() , "AddDelegate" , null,R.id.redirect_acc_fragments)
+                UtilKotlin.changeFragmentBack(activity!! ,
+                    AddDelegateFragment(), "AddDelegate" , null,R.id.redirect_acc_fragments)
             else
-                UtilKotlin.changeFragmentBack(activity!! ,AddCallCenterFragment() , "call_center"  , null,R.id.redirect_acc_fragments)
+                UtilKotlin.changeFragmentBack(activity!! ,
+                    AddCallCenterFragment(), "call_center"  , null,R.id.redirect_acc_fragments)
 
         }
 

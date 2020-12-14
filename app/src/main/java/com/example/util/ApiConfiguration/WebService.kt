@@ -1,12 +1,12 @@
 package com.example.util.ApiConfiguration
 
 
+import com.example.controllersystemapp.accountant.delegatecallcenter.debts.AccountantDebtsListResponse
+import com.example.controllersystemapp.accountant.delegatecallcenter.model.*
 import com.example.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
 import com.example.controllersystemapp.accountant.products.models.AccountantProductsListResponse
 import com.example.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
 import com.example.controllersystemapp.accountant.settings.expenses.AccountantExpensesListResponse
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.AddDelegateCallCenterRequest
-import com.example.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.example.controllersystemapp.accountant.makeorder.models.AccountantMakeOrderRequest
 import com.example.controllersystemapp.accountant.sales.model.ItemListResponses
 import com.example.controllersystemapp.accountant.sales.model.SalesResponse
@@ -14,12 +14,14 @@ import com.example.controllersystemapp.admin.categories.models.CategoriesListRes
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
 import com.example.controllersystemapp.admin.delegatesAccountants.models.AddAccountantRequest
+import com.example.controllersystemapp.admin.delegatesAccountants.models.EditAccountantRequest
 import com.example.controllersystemapp.admin.settings.admin.AdminDetailsResponse
 import com.example.controllersystemapp.admin.settings.admin.AdminListResponse
 import com.example.controllersystemapp.admin.settings.editpassword.EditPasswordRequest
 import com.example.controllersystemapp.admin.specialcustomers.AddClientRequest
 import com.example.controllersystemapp.admin.specialcustomers.ClientDetailsResponse
 import com.example.controllersystemapp.admin.specialcustomers.ClientsListResponse
+import com.example.controllersystemapp.admin.specialcustomers.EditClientRequest
 import com.example.controllersystemapp.admin.storesproducts.models.*
 import com.example.controllersystemapp.admin.storesproducts.models.AddStoreRequest
 import com.example.controllersystemapp.admin.storesproducts.models.ProductsListResponse
@@ -112,6 +114,9 @@ interface WebService {
     @POST("admin/accountants/create")
     fun addAccountant(@Body addAccountantRequest : AddAccountantRequest): Observable<Response<SuccessModel>>
 
+    @Headers("Accept: application/json")
+    @POST("admin/accountants/edit")
+    fun editAccountant(@Body editAccountantRequest : EditAccountantRequest): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
     @DELETE("admin/accountants/delete")
@@ -153,6 +158,10 @@ interface WebService {
     @POST("admin/admin/create")
     fun addAdmin(@Body addAccountantRequest : AddAccountantRequest): Observable<Response<SuccessModel>>
 
+    @Headers("Accept: application/json")
+    @POST("admin/admin/edit")
+    fun editAdmin(@Body editAccountantRequest: EditAccountantRequest): Observable<Response<SuccessModel>>
+
 
     @Headers("Accept: application/json")
     @GET("admin/clients/list")
@@ -172,6 +181,10 @@ interface WebService {
     @Headers("Accept: application/json")
     @POST("admin/clients/create")
     fun addClient(@Body addClientRequest : AddClientRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @POST("admin/clients/edit")
+    fun editClient(@Body editClientRequest : EditClientRequest): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
     @DELETE("admin/categories/delete")
@@ -263,6 +276,39 @@ interface WebService {
     @Headers("Accept: application/json")
     @POST("accountant/orders/create")
     fun accountantCreateOrder(@Body accountantMakeOrderRequest: AccountantMakeOrderRequest): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @GET("accountant/delegates/details")
+    fun accountantDelegateDetails(@Query("id") delegateId : Int?): Observable<Response<AccountantDelegateDetails>>
+
+    @Headers("Accept: application/json")
+    @GET("accountant/orders/items")
+    fun accDelegateOrderItems(@Query("order_id") order_id : Int?): Observable<Response<AccDelegateOrderItems>>
+
+    @Headers("Accept: application/json")
+    @GET("accountant/orders/item-details")
+    fun accDelegateOrderItemsDetails(@Query("item_id") order_id : Int?): Observable<Response<AccDelegateOrderItemsDetails>>
+
+
+    @Headers("Accept: application/json")
+    @DELETE("accountant/delegates/delete")
+    fun accountantDeleteDelegate(@Query("id") delegateId : Int): Observable<Response<SuccessModel>>
+
+
+    @Headers("Accept: application/json")
+    @GET("accountant/debts/list")
+    fun accountantDebtsList(@Query("page") page : Int? , @Query("delegate_id") delegate_id : Int?):
+            Observable<Response<AccountantDebtsListResponse>>
+
+
+    @Headers("Accept: application/json")
+    @POST("accountant/debts/update")
+    fun accountantUpdateDebt(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
+
+    @Headers("Accept: application/json")
+    @DELETE("accountant/debts/delete")
+    fun accountantDeleteDebts(@Query("id") delegateId : Int): Observable<Response<SuccessModel>>
+
 
     @Headers("Accept: application/json")
     @GET("accountant/orders/list")

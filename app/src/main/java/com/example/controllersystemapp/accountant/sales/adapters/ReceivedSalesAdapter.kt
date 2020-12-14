@@ -72,7 +72,7 @@ class ReceivedSalesAdapter(
             itemView.notReceivedDateTxt?.text = UtilKotlin.getFormatedDate(datamodel?.created_at?:"0",itemView.context)
             itemView.notReceivedCurrency?.text = datamodel?.currency?:""
 
-            itemView.sendAdminBtn.setOnClickListener {
+            itemView.containerRecieved.setOnClickListener {
 
                 onRecyclerItemClickListener.onItemClick(adapterPosition)
 

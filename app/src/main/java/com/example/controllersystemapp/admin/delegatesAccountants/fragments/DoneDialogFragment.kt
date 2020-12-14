@@ -26,6 +26,7 @@ class DoneDialogFragment : Fragment() {
 
         closeDialog?.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
+            activity?.supportFragmentManager?.popBackStack()
 
         }
     }

@@ -55,7 +55,9 @@ object NameUtils {
 
     val WHICH_ADD_DETAILS = "whicjAddDetails"
     val ADD_ACCOUNTANT = "addAccountant"
-    val ACCOUNTANT_DETAILS = "accountantDetails"
+    val ACCOUNTANT_ADMIN_DETAILS = "accountantAdminDetails"
+    val ADMIN_DETAILS = "adminDetails"
+    val ADMIN_CLIENTS_DETAILS = "adminClientsDetails"
 
 
     val WHICH_ADD_PRD_STORE = "whichAddProdStore"

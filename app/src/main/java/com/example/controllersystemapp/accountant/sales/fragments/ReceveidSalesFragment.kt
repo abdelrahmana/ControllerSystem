@@ -97,8 +97,6 @@ class ReceveidSalesFragment : Fragment()  , OnRecyclerItemClickListener {
     }
 
     private fun setSalesData(datamodel: SalesResponse) {
-
-
         receivedSalesRecycler?.visibility = View.VISIBLE
         if (datamodel?.data?.isNotEmpty()==true)
         noDataLayout?.visibility = View.GONE
@@ -107,7 +105,8 @@ class ReceveidSalesFragment : Fragment()  , OnRecyclerItemClickListener {
             handleNoDataViews()
             return // no need  to do any thing
         }
-
+        receivedSalesList.clear()
+        receivedSalesList.addAll(datamodel.data?:ArrayList())
         receivedSalesAdapter =
             ReceivedSalesAdapter(
                 context!!,
@@ -128,6 +127,8 @@ class ReceveidSalesFragment : Fragment()  , OnRecyclerItemClickListener {
     override fun onItemClick(position: Int) {
         val bundle = Bundle()
         bundle?.putInt(NameUtils.orderId,receivedSalesList.get(position)?.id?:0)
+        bundle?.putString(NameUtils.orderName,receivedSalesList.get(position)?.name?:"")
+
         UtilKotlin.changeFragmentBack(activity!! ,
             ItemFragments(), ""  ,
             null , R.id.redirect_acc_fragments)

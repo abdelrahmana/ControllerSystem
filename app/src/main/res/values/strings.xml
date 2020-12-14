@@ -237,8 +237,16 @@
     <string name="edit">تعديل</string>
     <string name="max_quantity">الكمية تتعدى الكمية الحالية</string>
     <string name="selectCategoryFirst">اختر تصنيف المنتج اولا</string>
-    <string name="edit_product">تعديل منتج</string>
     <string name="edit_store">تعديل مخزن</string>
+    <string name="edit_product">تعديل منتج</string>
+    <string name="edit_accountant">تعديل محاسب</string>
+    <string name="edit_admin">تعديل ادمن</string>
+    <string name="edit_customer">تعديل عميل</string>
+    <string name="specialMessage">رسالة خاصة</string>
+    <string name="editDebts">تعديل الذمة</string>
+    <string name="editDebtsQuantity">سيتم التعديل علي العدد/الكمية في الذمة</string>
+    <string name="no_orders">لا توجد طلبات متاحه</string>
+    <string name="quantityRequired">ادخل الكمية من فضلك</string>
 
 
 </resources>

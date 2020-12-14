@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/_150sdp"
                 style="@style/cardDialog"
-                android:layout_marginBottom="@dimen/_100sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 >
 
                 <LinearLayout
@@ -171,6 +171,25 @@
             </com.google.android.material.card.MaterialCardView>
 
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editAdminButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="@string/edit"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/orange_color"
+                app:cornerRadius="7dp"
+                />
 
         </LinearLayout>
 
