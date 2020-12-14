@@ -31,6 +31,7 @@ class AccountantHomeActivity : CommonActivity(), View.OnClickListener {
         accountantSpecialOrderCard?.setOnClickListener(this)
         sendSalesCard?.setOnClickListener(this)
         accountantDeliveryCard?.setOnClickListener(this)
+        accountantCreateDebts?.setOnClickListener(this)
 
         //setSingleEvent(gridLayout)
 
@@ -123,6 +124,14 @@ class AccountantHomeActivity : CommonActivity(), View.OnClickListener {
                 startActivity(intent)
             }
 
+            R.id.accountantCreateDebts -> {
+                removeCardSelection()
+                setCardSelection(accountantCreateDebts , accountantCreateDebtsImg , accountantCreateDebtsText ,R.drawable.ic_delivery_selected)
+                val intent = Intent(this , RedirectAccountantsFragmentActivity::class.java)
+                intent.putExtra(NameUtils.redirectAccFragmet, NameUtils.CREATE_DEBTS)
+                startActivity(intent)
+            }
+
 
         }
 
@@ -167,6 +176,10 @@ class AccountantHomeActivity : CommonActivity(), View.OnClickListener {
         accountantDeliveryCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
         accountantDeliveryImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_delivery))
         accountantDeliveryText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
+
+        accountantCreateDebts?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
+        accountantCreateDebtsImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_delivery))
+        accountantCreateDebtsText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
 
     }

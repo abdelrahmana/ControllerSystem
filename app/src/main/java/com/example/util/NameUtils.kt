@@ -36,6 +36,7 @@ object NameUtils {
     val SEND_SALES = "sendSales"
     val ACCOUNTANT_SETTINGS = "accountantSettings"
     val DELIVERYSETTING = "delivery"
+    val CREATE_DEBTS = "createDebts"
 
     val redirectDelegFragmet = "Switch_Delegate_fragment"
     val SEPCIAL_WALLET = "specialWallet"

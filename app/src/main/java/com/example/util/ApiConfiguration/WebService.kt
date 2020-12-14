@@ -309,6 +309,9 @@ interface WebService {
     @DELETE("accountant/debts/delete")
     fun accountantDeleteDebts(@Query("id") delegateId : Int): Observable<Response<SuccessModel>>
 
+    @Headers("Accept: application/json")
+    @POST("accountant/debts/create")
+    fun accountantCreateDebts(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
     @GET("accountant/orders/list")
