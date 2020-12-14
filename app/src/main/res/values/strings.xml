@@ -246,6 +246,8 @@
     <string name="editDebtsQuantity">سيتم التعديل علي العدد/الكمية في الذمة</string>
     <string name="no_orders">لا توجد طلبات متاحه</string>
     <string name="quantityRequired">ادخل الكمية من فضلك</string>
+    <string name="createDebts">انشاء الذمة</string>
+    <string name="delegate_required">تحديد مندوب مطلوب</string>
 
 
 </resources>

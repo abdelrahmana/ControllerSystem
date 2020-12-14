@@ -3,6 +3,7 @@ package com.example.controllersystemapp.accountant.home
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.controllersystemapp.R
+import com.example.controllersystemapp.accountant.createdebts.CreateDebtsFragment
 import com.example.controllersystemapp.accountant.makeorder.fragments.AccountantMakeOrderFragment
 import com.example.controllersystemapp.accountant.noticesandreports.NoticesAndReportsFragment
 import com.example.controllersystemapp.accountant.products.fragments.AccountantProductsFragment
@@ -15,6 +16,7 @@ import com.example.util.CommonActivity
 import com.example.util.NameUtils
 import com.example.util.NameUtils.ACCOUNTANTS_PRODUCTS
 import com.example.util.NameUtils.ACCOUNTANT_SETTINGS
+import com.example.util.NameUtils.CREATE_DEBTS
 import com.example.util.NameUtils.DELIVERYSETTING
 import com.example.util.NameUtils.MAKE_SPECIAL_ORDER
 import com.example.util.NameUtils.NOTICES_AND_REPORTS
@@ -78,6 +80,14 @@ class RedirectAccountantsFragmentActivity : CommonActivity() {
                 bundle.putInt(WHICHID,R.id.redirect_acc_fragments)
                 UtilKotlin.changeFragmentWithBack(this,R.id.redirect_acc_fragments,DeliveryFragment(),bundle)
                // changeFragment(DeliveryFragment(), fragment)
+
+            }
+
+            CREATE_DEBTS-> {
+//                val bundle = Bundle()
+//                bundle.putInt(WHICHID,R.id.redirect_acc_fragments)
+                changeFragment(CreateDebtsFragment(), fragment)
+                // changeFragment(DeliveryFragment(), fragment)
 
             }
         }

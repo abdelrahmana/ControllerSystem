@@ -257,7 +257,7 @@ class AccountantMakeOrderFragment : Fragment() {
                 }
                 if (datamodel is CallCenterDelegateData)
                 {
-                    Log.d("testObserve", "delegate")
+                    Log.d("testObserve", "delegate ${datamodel?.id?:0}")
                     delegateId = datamodel?.id?:0
                     delegateName = datamodel?.name?:""
                     delegateSelectedName?.visibility = View.VISIBLE
