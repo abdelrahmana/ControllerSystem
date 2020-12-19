@@ -263,6 +263,7 @@
                     android:layout_rowWeight="1"
                     app:cardCornerRadius="5dp"
                     android:layout_marginTop="19dp"
+                    android:layout_marginBottom="19dp"
                     android:layout_marginEnd="@dimen/_7sdp"                    >
 
                     <LinearLayout
@@ -308,57 +309,7 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Column 2 -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:id="@+id/deliveryCard"
-                    android:layout_height="133dp"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    app:cardCornerRadius="5dp"
-                    android:layout_marginTop="19dp"
-                    android:layout_marginStart="@dimen/_7sdp"
-                    >
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        >
-
-                        <ImageView
-                            android:id="@+id/deliveryImg"
-                            android:layout_marginTop="12dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_delivery"
-
-                            />
-
-                        <TextView
-                            android:id="@+id/deliveryText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:gravity="center"
-                            android:fontFamily="@font/ffshamelfamily_sansonebold"
-                            android:textStyle="bold"
-                            android:textSize="14sp"
-                            android:textColor="@color/textColor"
-                            android:text="@string/delivery"
-                            android:layout_marginBottom="7dp"
-                            />
-
-
-
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
 
 
                 <!-- Row 3 -->
@@ -428,8 +379,8 @@
                     app:cardCornerRadius="5dp"
                     android:layout_marginTop="19dp"
                     android:layout_marginBottom="19dp"
-                    android:layout_marginStart="@dimen/_7sdp"
-                    >
+                    android:layout_marginEnd="@dimen/_7sdp"
+                >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -487,7 +438,7 @@
                     app:cardCornerRadius="5dp"
                     android:layout_marginTop="19dp"
                     android:layout_marginBottom="19dp"
-                    android:layout_marginEnd="@dimen/_7sdp"                    >
+                    android:layout_marginStart="@dimen/_7sdp"                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -531,7 +482,58 @@
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
+                <!-- Column 2 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:id="@+id/deliveryCard"
+                    android:layout_height="133dp"
+                    android:visibility="gone"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    >
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/deliveryImg"
+                            android:layout_marginTop="12dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_delivery"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/deliveryText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:fontFamily="@font/ffshamelfamily_sansonebold"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="@color/textColor"
+                            android:text="@string/delivery"
+                            android:layout_marginBottom="7dp"
+                            />
+
+
+
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
 
 

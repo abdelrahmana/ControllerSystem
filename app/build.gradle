@@ -5,9 +5,25 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.0"
-
+    bundle {
+        language {
+            // Specifies that the app bundle should not support
+            // configuration APKs for language resources. These
+            // resources are instead packaged with each base and
+            // dynamic feature APK.
+            enableSplit = false
+        }
+    }
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            storeFile file('jks.jks')
+            storePassword '12345678'
+            keyPassword '12345678'
+        }
+    }
     defaultConfig {
-        applicationId "com.example.controllersystemapp"
+        applicationId "com.smartangle.controllersystemapp"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
@@ -30,6 +46,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
         }
     }
     compileOptions {
