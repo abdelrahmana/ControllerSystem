@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.util.NestedScrollPaginationView
+<com.smartangle.util.NestedScrollPaginationView
         android:id="@+id/scrollingNestedScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,7 +43,7 @@
 
         </LinearLayout>
 
-    </com.example.util.NestedScrollPaginationView>
+    </com.smartangle.util.NestedScrollPaginationView>
 
 
 

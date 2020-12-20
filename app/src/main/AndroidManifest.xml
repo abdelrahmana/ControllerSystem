@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.controllersystemapp">
+    package="com.smartangle.controllersystemapp">
 
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
@@ -21,21 +21,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".delegates.activities.RedirecteDelegateActivity"></activity>
-        <activity android:name=".delegates.activities.DelegatesHomeActivity" />
-        <activity android:name=".ViewImagesGalleryActivity" />
-        <activity android:name=".accountant.home.RedirectAccountantsFragmentActivity" />
-        <activity android:name=".accountant.home.AccountantHomeActivity" />
-        <activity android:name=".admin.addproduct.ScanCodeActivity" />
-        <activity android:name=".callcenter.home.CallCenterHome" />
-        <activity android:name=".callcenter.home.RedirectCallCenter" />
-        <activity android:name=".common.MapsActivity"/>
+        <activity android:name="com.smartangle.controllersystemapp.delegates.activities.RedirecteDelegateActivity"></activity>
+        <activity android:name="com.smartangle.controllersystemapp.delegates.activities.DelegatesHomeActivity" />
+        <activity android:name="com.smartangle.controllersystemapp.ViewImagesGalleryActivity" />
+        <activity android:name="com.smartangle.controllersystemapp.accountant.home.RedirectAccountantsFragmentActivity" />
+        <activity android:name="com.smartangle.controllersystemapp.accountant.home.AccountantHomeActivity" />
+        <activity android:name="com.smartangle.controllersystemapp.admin.addproduct.ScanCodeActivity" />
+        <activity android:name="com.smartangle.controllersystemapp.callcenter.home.CallCenterHome" />
+        <activity android:name="com.smartangle.controllersystemapp.callcenter.home.RedirectCallCenter" />
+        <activity android:name="com.smartangle.controllersystemapp.common.MapsActivity"/>
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".SplashActivity">
+        <activity android:name="com.smartangle.controllersystemapp.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,12 +43,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".admin.RedirectFragmentsActivity"
+            android:name="com.smartangle.controllersystemapp.admin.RedirectFragmentsActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".admin.AdminHomeActivity"
+            android:name="com.smartangle.controllersystemapp.admin.AdminHomeActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.smartangle.controllersystemapp.MainActivity">
 
             <!--
                 <intent-filter>
@@ -59,7 +59,7 @@
             -->
         </activity>
         <activity
-            android:name=".common.ContainerActivityForFragment"
+            android:name="com.smartangle.controllersystemapp.common.ContainerActivityForFragment"
             android:windowSoftInputMode="adjustResize">
 
             <!-- <intent-filter> -->
@@ -69,7 +69,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name="com.example.util.CommonActivity" />
+        <activity android:name="com.smartangle.util.CommonActivity" />
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

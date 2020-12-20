@@ -100,7 +100,7 @@
                     android:id="@+id/currancy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="رس"
+                    android:text=""
                     android:textSize="@dimen/_10ssp"
                     android:layout_marginEnd="@dimen/_13sdp"
                     android:textColor="@color/text_grey"
