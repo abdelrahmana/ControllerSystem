@@ -118,11 +118,19 @@ object StoresPresenter {
     }
 
 
-    fun addStore(webService: WebService, addStoreRequest: AddStoreRequest, activity: Activity, model: ViewModelHandleChangeFragmentclass)
+    fun addStoreOrEdit(
+        webService: WebService,
+        addStoreRequest: AddStoreRequest,
+        activity: Activity,
+        model: ViewModelHandleChangeFragmentclass,
+        isForEdit: Boolean=false,
+        idOfCurrentStore: Int = 0
+    )
     {
-
-        Log.d("testApi" , "getData")
-        webService.addStore(addStoreRequest)
+         var webServiceRequest =  webService.addStore(addStoreRequest)
+        if (isForEdit)
+            webServiceRequest =  webService.editCurrentStore(addStoreRequest)
+            webServiceRequest
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableObserver<Response<SuccessModel>>() {

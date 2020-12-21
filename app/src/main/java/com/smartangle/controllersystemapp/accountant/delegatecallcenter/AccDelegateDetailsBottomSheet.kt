@@ -74,6 +74,8 @@ class AccDelegateDetailsBottomSheet : BottomSheetDialogFragment() {
 //        }
         specialMessageDelegate?.setOnClickListener{
             //model.setNotifyItemSelected(1) // edit profile
+            model.setNotifyItemSelected(ACCOUNTANT_MessageDelegate) //remove delegate
+
             dismiss()
         }
         deleteDelegateText?.setOnClickListener{
@@ -110,6 +112,8 @@ class AccDelegateDetailsBottomSheet : BottomSheetDialogFragment() {
 
     companion object{
         val ACCOUNTANT_REMOVE_DELEGATE = "accountantRemoveDelegate"
+        val ACCOUNTANT_MessageDelegate = "messageDelegate"
+
     }
 
 

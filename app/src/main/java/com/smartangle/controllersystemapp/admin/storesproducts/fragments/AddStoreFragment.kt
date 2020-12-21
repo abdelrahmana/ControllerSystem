@@ -186,12 +186,18 @@ class AddStoreFragment : Fragment() {
 
           //  Log.d("categoriesSize", "${categoriesList?.size}")
             val addStoreRequest = AddStoreRequest(
+                0,
                 storeNameEdt?.text?.toString(),
                 storeAddressEdt?.text?.toString(),
                 accountantID,
                 categoriesList
             )
-            StoresPresenter.addStore(webService!!, addStoreRequest, activity!!, model)
+            StoresPresenter.addStoreOrEdit(
+                webService!!,
+                addStoreRequest,
+                activity!!,
+                model
+            )
         } else {
             progressDialog?.dismiss()
             UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
@@ -201,12 +207,6 @@ class AddStoreFragment : Fragment() {
 
     }
 
-    private fun setData(personName: String) {
-        Log.d("model", "nnnn")
-        Log.d("model", "var $personName")
-
-
-    }
 
     override fun onResume() {
         super.onResume()
@@ -247,9 +247,10 @@ class AddStoreFragment : Fragment() {
                     categoriesList?.clear()
                     var categoriesName = ""
 
-                    for (i in 0 until modelSelected.idList?.size!!) {
+                  /*  for (i in 0 until modelSelected.idList?.size!!) {
                         categoriesList?.add(modelSelected.idList!![i])
-                    }
+                    }*/
+                    categoriesList?.addAll(modelSelected.idList!!) // add all items
 
                     for (i in 0 until modelSelected.namesList?.size!!) {
                         categoriesName += modelSelected.namesList[i]

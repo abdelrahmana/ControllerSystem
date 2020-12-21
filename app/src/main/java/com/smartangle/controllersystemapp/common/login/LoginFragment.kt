@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
         progressDialog = UtilKotlin.ProgressDialog(context!!)
         webService = ApiManagerDefault(activity!!).apiService
         model = UtilKotlin.declarViewModel(activity)!!
-       // UtilKotlin.getFirebaseFcmTokenBeforeStart(model)
+        UtilKotlin.getFirebaseFcmTokenBeforeStart(model)
 
 
 
@@ -115,7 +115,7 @@ class LoginFragment : Fragment() {
 
         }
 
-       // setFcmToken() // listener
+        setFcmToken() // listener
 
     }
 
@@ -163,7 +163,7 @@ class LoginFragment : Fragment() {
 
 
     }
-    var fcmToken = "BH3z1BNhcHTvfM_PxF_VoUb0A-Z4QOsklS_8tLGj2FS4lTWHmKFF5DPkR-ZSB3XF-jGpKoLi-IGSml1uyEyyltQ" // default empty
+    var fcmToken = "" // default empty
     private fun setFcmToken() {
         model?.authListnerLiveData?.observe(activity!!, Observer<Any>{ fcmToken->
             if (fcmToken !=null){

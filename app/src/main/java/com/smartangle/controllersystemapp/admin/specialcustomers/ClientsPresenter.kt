@@ -14,11 +14,15 @@ import retrofit2.Response
 object ClientsPresenter {
 
 
-    fun getClientsList(webService: WebService, activity: Activity, model: ViewModelHandleChangeFragmentclass)
+    fun getClientsList(
+        webService: WebService,
+        activity: Activity,
+        model: ViewModelHandleChangeFragmentclass,
+        hashMap: HashMap<String, Any>
+    )
     {
 
-        Log.d("testApi" , "getData")
-        webService.clientsList()
+        webService.clientsList(hashMap)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableObserver<Response<ClientsListResponse>>() {

@@ -294,6 +294,7 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
     companion object{
 
         val ACCOUNTANT_DELEGATE_ID = "accountantDelegateId"
+        val SELECTEDDELEGATE= "selected_in_list"
     }
 
 }

@@ -118,8 +118,7 @@ var authService : WebService?=null
             override fun onNext(response: Response<SuccessModel>) {
                 progressDialog?.dismiss()
 
-                if (response.isSuccessful)
-                {
+
                         if (response.isSuccessful) { // success
 
                             //PrefUtils.setUserToken(context!!, response.body()!!.data.access_token)
@@ -130,7 +129,6 @@ var authService : WebService?=null
 
                             //PrefUtils.setUserToken(context!!, response.body()!!.data.access_token)
                             // PrefUtils.setUserModel(context!!, response.body())
-                            UtilKotlin.localSignOut(activity)
 
                         }/* else {
                         UtilKotlin.showSnackErrorInto(activity!! , response.body()?.content?.message?:"")
@@ -139,9 +137,10 @@ var authService : WebService?=null
                               // MyUtils.showSnackErrorInto(activity!! , error)
                               MyUtils.showDialog(context, erro  r, R.layout.dialog_error)
                 }*/ else {
-                            var error = ""
+                          /*  var error = ""
                                 error = UtilKotlin.getErrorBodyResponse(response.errorBody(), context!!)
-                            UtilKotlin.showSnackErrorInto(activity!! , error)
+                            UtilKotlin.showSnackErrorInto(activity!! , error)*/
+
                             /*  if (response.errorBody() != null) {
                                   val error = MyUtils.handleResponseError(response.errorBody(), context!!)
                                   // MyUtils.showSnackErrorInto(activity!! , error)
@@ -150,8 +149,10 @@ var authService : WebService?=null
                                     }*/
 
                         }
-                    }
-                }
+                UtilKotlin.localSignOut(activity)
+
+            }
+
 
 
         }

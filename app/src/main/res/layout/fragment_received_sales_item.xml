@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="5dp"
+    android:id="@+id/containerRecieved"
     android:layout_marginBottom="14dp"
     app:cardElevation="5dp"
     android:layout_marginStart="@dimen/_16sdp"
@@ -152,6 +153,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sendAdminBtn"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_35sdp"
             android:gravity="center"

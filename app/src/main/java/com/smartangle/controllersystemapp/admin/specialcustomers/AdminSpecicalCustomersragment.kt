@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,7 +50,16 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
 //        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
 //        itemTouchHelper.attachToRecyclerView(specialCustomersRecycler)
 
+        searchTextEdit?.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    getCustomersData()
 
+                    return@OnEditorActionListener true
+                }
+            }
+            return@OnEditorActionListener false
+        })
         backImage?.setOnClickListener {
 
             if (activity?.supportFragmentManager?.backStackEntryCount == 1)
@@ -203,11 +214,12 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
 
     private fun getCustomersData() {
 
-
+        val hashMap = HashMap<String,Any>()
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
-
-            ClientsPresenter.getClientsList(webService!! , activity!! , model)
+             if (searchTextEdit?.text?.isNotEmpty()==true) // if there is search lets search
+                 hashMap.put("name",searchTextEdit?.text.toString())
+            ClientsPresenter.getClientsList(webService!! , activity!! , model,hashMap)
 
         } else {
             progressDialog?.dismiss()

@@ -1,5 +1,6 @@
-package com.smartangle.controllersystemapp.admin.storesproducts.adapters
 
+package com.smartangle.controllersystemapp.admin.storesproducts.adapters
+import com.smartangle.controllersystemapp.admin.storesproducts.fragments.EditStoreFragment
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,8 @@ import com.smartangle.util.ApiConfiguration.SuccessModel
 import com.smartangle.util.ApiConfiguration.WebService
 import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
+import com.smartangle.util.NameUtils
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_store_details.*
 
 class StoreDetailsFragment : Fragment() {
@@ -65,8 +68,16 @@ class StoreDetailsFragment : Fragment() {
         observeData()
 
         getStoreDetailsData()
+        editStroeButton?.setOnClickListener{
+            val bundle = Bundle()
+            var productDetails = Gson().toJson(storeDetailsResponse)
+            bundle.putString(NameUtils.STORE_DETAILS,productDetails)
+            UtilKotlin.changeFragmentBack(activity!! , EditStoreFragment() , "editProudcts"  ,
+                bundle , R.id.frameLayout_direction)
+        }
     }
 
+    var storeDetailsResponse : StoreDetailsResponse?=null
     private fun removeStoreItem() {
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
@@ -104,7 +115,7 @@ class StoreDetailsFragment : Fragment() {
     private fun setStoreDetailsData(storeDetailsResponse: StoreDetailsResponse) {
 
         DetailsStoreNameTxt?.text = storeDetailsResponse?.data?.name?:""
-        DetailsStoreLocationTxt?.text = storeDetailsResponse?.data?.name?:""
+        DetailsStoreLocationTxt?.text = storeDetailsResponse?.data?.address?:""
         DetailsAccNameTxt?.text = storeDetailsResponse?.data?.accountant?.name?:""
 
         setCategoryName(storeDetailsResponse)
@@ -142,6 +153,9 @@ class StoreDetailsFragment : Fragment() {
                 if (datamodel is StoreDetailsResponse) {
                     Log.d("testApi", "isForyou")
                     setStoreDetailsData(datamodel)
+                    editStroeButton?.isEnabled = true
+                    storeDetailsResponse = datamodel
+
                 }
 
                 if (datamodel is SuccessModel) {

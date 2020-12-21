@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".admin.storesproducts.adapters.StoreDetailsFragment">
+    tools:context=".admin.storesproducts.fragments.StoreDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleContainer"
@@ -210,7 +210,26 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editStroeButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="@string/edit"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/orange_color"
+                app:cornerRadius="7dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/deleteStoreBtn"
                 app:layout_constraintStart_toStartOf="parent"
@@ -218,7 +237,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_100sdp"
                 app:backgroundTint="@color/logout_red"
                 app:cornerRadius="7dp"

@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.smartangle.controllersystemapp.R
 import com.smartangle.controllersystemapp.accountant.sales.ItemAcceptClickListener
+import com.smartangle.controllersystemapp.accountant.sales.model.Data
+import com.smartangle.util.UtilKotlin
 import kotlinx.android.synthetic.main.fragment_not_received_sales_item.view.*
 
 
 class NotReceivedSalesAdapter(
     var context: Context,
-    var notReceivedSalesList: ArrayList<Any>,
+    var notReceivedSalesList: ArrayList<Data>,
     var itemAcceptClickListener: ItemAcceptClickListener
 ) :
     RecyclerView.Adapter<NotReceivedSalesAdapter.ViewHolder>(){
@@ -48,7 +50,7 @@ class NotReceivedSalesAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            productsModel: Any,
+            datamodel: Data,
             itemAcceptClickListener: ItemAcceptClickListener
         ) {
 
@@ -62,15 +64,20 @@ class NotReceivedSalesAdapter(
 //            itemView.quantity.text = productsModel.total_quantity
 //            itemView.currancy.text = productsModel.currency
 
+            itemView.notReceivedSalesName?.text = itemView.notReceivedSalesName?.text.toString() + datamodel.order_number?:""
 
-
+            itemView.notReceivedDelegate?.text = datamodel?.name?:""
+            itemView.notReceivedPrice?.text = datamodel?.total_price?:""
+            itemView.notReceivedSalesQuantity?.text = datamodel?.details?.get(0)?.product?.total_quantity?:""
+            itemView.notReceivedDateTxt?.text = UtilKotlin.getFormatedDate(datamodel?.created_at?:"0",itemView.context)
+            itemView.notReceivedCurrency?.text = datamodel?.currency?:""
             itemView.setOnClickListener {
 
                 itemAcceptClickListener.onItemListClick(adapterPosition)
 
             }
 
-            itemView.acceptNotReceivedSalesBtn.setOnClickListener {
+            itemView.containerNotRecieved.setOnClickListener {
 
                 itemAcceptClickListener.onAcceptClick(adapterPosition)
 

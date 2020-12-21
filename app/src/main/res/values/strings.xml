@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Admin Control</string>
+    <string name="app_name">H-Group</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="mobile_number">رقم الهاتف</string>
@@ -237,6 +237,7 @@
     <string name="edit">تعديل</string>
     <string name="max_quantity">الكمية تتعدى الكمية الحالية</string>
     <string name="selectCategoryFirst">اختر تصنيف المنتج اولا</string>
+    <string name="edit_store">تعديل مخزن</string>
     <string name="edit_product">تعديل منتج</string>
     <string name="edit_accountant">تعديل محاسب</string>
     <string name="edit_admin">تعديل ادمن</string>

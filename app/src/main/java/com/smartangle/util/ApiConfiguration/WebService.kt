@@ -3,11 +3,11 @@ package com.smartangle.util.ApiConfiguration
 
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.debts.AccountantDebtsListResponse
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.*
-import com.smartangle.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
 import com.smartangle.controllersystemapp.accountant.products.models.AccountantProductsListResponse
-import com.smartangle.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
 import com.smartangle.controllersystemapp.accountant.settings.expenses.AccountantExpensesListResponse
 import com.smartangle.controllersystemapp.accountant.makeorder.models.AccountantMakeOrderRequest
+import com.smartangle.controllersystemapp.accountant.sales.model.ItemListResponses
+import com.smartangle.controllersystemapp.accountant.sales.model.SalesResponse
 import com.smartangle.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.smartangle.controllersystemapp.admin.delegatesAccountants.models.AccountantDetailsResponse
 import com.smartangle.controllersystemapp.admin.delegatesAccountants.models.AccountantListResponse
@@ -30,6 +30,8 @@ import com.smartangle.controllersystemapp.callcenter.delegate.model.ItemListResp
 import com.smartangle.controllersystemapp.callcenter.delegate.model.OrderResponse
 import com.smartangle.controllersystemapp.callcenter.maketalbya.model.OrderCreateRequest
 import com.smartangle.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.ProductResponse
+import com.smartangle.controllersystemapp.common.chat.model.RequestMessgae
+import com.smartangle.controllersystemapp.common.chat.model.ResponseChatList
 import com.smartangle.controllersystemapp.common.cities.CitiesListResponse
 import com.smartangle.controllersystemapp.common.forgetpassword.model.RequestModelNewPass
 import com.smartangle.controllersystemapp.common.login.LoginRequest
@@ -39,6 +41,11 @@ import com.smartangle.controllersystemapp.delegates.makeorder.model.DelegateProd
 import com.smartangle.controllersystemapp.delegates.wallet.models.DelegateOrderItemDetailsResponse
 import com.smartangle.controllersystemapp.delegates.wallet.models.DelegateOrderItemsListResponse
 import com.smartangle.controllersystemapp.delegates.wallet.models.DelegateOrdersListResponse
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.*
+import com.smartangle.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
+import com.smartangle.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
+import com.smartangle.controllersystemapp.admin.settings.masrufat.ExpensesListResponse
+
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -100,6 +107,8 @@ interface WebService {
     @GET("admin/accountants/list")
     fun accountantsList(): Observable<Response<AccountantListResponse>>
 
+    @GET("accountant/orders/items")
+    fun getItemListAccountant(@QueryMap map : HashMap<String,Any>): Observable<Response<ItemListResponses>>
 
     @Headers("Accept: application/json")
     @GET("list/cities")
@@ -126,6 +135,10 @@ interface WebService {
     @POST("admin/ware-house/create")
     fun addStore(@Body addStoreRequest : AddStoreRequest): Observable<Response<SuccessModel>>
 
+
+    @Headers("Accept: application/json")
+    @POST("admin/ware-house/edit")
+    fun editCurrentStore(@Body addStoreRequest : AddStoreRequest): Observable<Response<SuccessModel>>
 
     @Headers("Accept: application/json")
     @DELETE("admin/ware-house/delete")
@@ -157,7 +170,7 @@ interface WebService {
 
     @Headers("Accept: application/json")
     @GET("admin/clients/list")
-    fun clientsList(): Observable<Response<ClientsListResponse>>
+    fun clientsList(@QueryMap hashMap: HashMap<String, Any>?): Observable<Response<ClientsListResponse>>
 
     @Headers("Accept: application/json")
     @GET("admin/clients/details")
@@ -191,6 +204,9 @@ interface WebService {
     @POST("auth/logout")
     fun loginOut(): Observable<Response<SuccessModel>>
 
+    @Headers("Accept: application/json")
+    @GET("admin/expenses/list")
+    fun adminExpensesList(): Observable<Response<ExpensesListResponse>>
 
     //Accountant Data
 
@@ -259,7 +275,6 @@ interface WebService {
     fun accountantCategoriesList(@Query("parent_id") parentId : Int? , @Query("name") name : String?):
             Observable<Response<CategoriesListResponse>>
 
-
     @Headers("Accept: application/json")
     @GET("accountant/products/list")
     fun accountantProductsList(@Query("category_id") categoryId : Int? , @Query("name") name : String?):
@@ -306,6 +321,9 @@ interface WebService {
     @POST("accountant/debts/create")
     fun accountantCreateDebts(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
 
+    @Headers("Accept: application/json")
+    @GET("accountant/orders/list")
+   suspend fun getSalesList(@Query("status") statusId : Int): Response<SalesResponse>
     //Delegates Api
 
     @Headers("Accept: application/json")
@@ -373,4 +391,12 @@ interface WebService {
     // @Multipart
     @POST("users/update-profile")
     fun editProfileWebService(@Body requestBody : RequestBody): Observable<Response<LoginResponse>>
+
+    @GET("accountant/orders/item-details")
+    fun getAccountantItemDetails(@QueryMap map : HashMap<String,Any>): Observable<Response<ItemDetailsResponse>>
+
+    @POST("chat/send")
+    fun requestPostMessage(@Body requestBody : RequestMessgae): Observable<Response<SuccessModel>>
+    @GET("accountant/orders/item-details")
+    fun getMessagesList(@Query("receiver_id")id:Int): Observable<Response<ResponseChatList>>
 }

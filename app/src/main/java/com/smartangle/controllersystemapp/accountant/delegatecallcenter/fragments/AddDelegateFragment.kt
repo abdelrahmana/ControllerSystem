@@ -44,6 +44,7 @@ class AddDelegateFragment : Fragment() {
         }
         headerText?.text = getString(R.string.add_delegate)
         add?.text = getString(R.string.add_delegate)
+        headerName?.text = getString(R.string.delegate_name)
         add?.setOnClickListener{
             if (UtilKotlin.checkOViewsAvaliablity(callCenterEditText,getString(R.string.name_is_required),activity!!,callCenterError)
                 && UtilKotlin.checkOViewsAvaliablity(editTextPhone,getString(R.string.phone_is_required),activity!!,errorPhone)

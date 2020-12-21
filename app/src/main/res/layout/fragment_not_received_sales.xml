@@ -25,6 +25,7 @@
     <LinearLayout
         android:id="@+id/noDataLayout"
         android:layout_width="match_parent"
+        tools:visibility="visible"
         android:layout_height="match_parent"
         android:visibility="gone">
         <include layout="@layout/no_products" />
