@@ -166,6 +166,8 @@ dependencies {
     implementation 'com.duolingo.open:rtl-viewpager:2.0.0'
     implementation 'com.jsibbold:zoomage:1.3.0'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation "me.leolin:ShortcutBadger:1.1.22@aar"
 
 
 }

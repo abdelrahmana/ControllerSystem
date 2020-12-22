@@ -164,7 +164,7 @@ class LoginFragment : Fragment() {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
             val loginRequest = LoginRequest(phoneNumberEditText?.text?.trim()?.toString() ,
-                password_edit_text?.text?.trim()?.toString() , UtilKotlin.getDeviceId(context!!).toString() , null)
+                password_edit_text?.text?.trim()?.toString() , UtilKotlin.getDeviceId(context!!).toString() )
             AuthPresenter.getLoginResponse(webService!! , loginRequest, logInObserver())
         } else {
             progressDialog?.dismiss()

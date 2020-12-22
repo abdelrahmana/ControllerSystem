@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.smartangle.controllersystemapp.R
+import com.smartangle.controllersystemapp.common.chat.ChatFragment
 import com.smartangle.controllersystemapp.common.login.LoginFragment
 import com.smartangle.util.CommonActivity
 import com.smartangle.util.UtilKotlin
@@ -17,6 +18,10 @@ class ContainerActivityForFragment : CommonActivity() {
        // when(intent.getStringExtra(whichFragment,))
              //UtilKotlin.changeFragment(AddProductFragment(),supportFragmentManager,R.id.container)
        // UtilKotlin.changeFragment(LoginFragment(),supportFragmentManager,R.id.container)
+
+        if (intent?.getBooleanExtra(isThatForChat,false) == true) // default is false
+            UtilKotlin.changeFragmentBack(this , ChatFragment() , "chat_fragment"  , null , R.id.container)
+else
         UtilKotlin.changeFragmentBack(this , LoginFragment() , "LoginFragment"  , null , R.id.container)
 
         //  UtilKotlin.changeFragment(RequestOfferProfileFragment(),supportFragmentManager,R.id.container)
@@ -26,6 +31,7 @@ class ContainerActivityForFragment : CommonActivity() {
     }
     companion object {
         val whichFragment = "current_fragment"
+        val isThatForChat = "is_for_chat"
     }
 
 

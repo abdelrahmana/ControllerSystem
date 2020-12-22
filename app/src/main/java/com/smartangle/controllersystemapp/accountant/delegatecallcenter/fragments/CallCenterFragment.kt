@@ -22,6 +22,9 @@ import com.smartangle.util.NameUtils
 import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import com.google.gson.Gson
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccDelegateDetailsBottomSheet
+import com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.DelegatesFragment
+import com.smartangle.controllersystemapp.common.chat.ChatFragment
 import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.fragment_call_center.*
 import retrofit2.Response
@@ -74,6 +77,12 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
                         )
 
 
+                    }else if(datamodel == AccDelegateDetailsBottomSheet.ACCOUNTANT_MessageDelegate){ // send information to chat fragment
+                        val bundle = Bundle()
+                        bundle.putString(DelegatesFragment.SELECTEDDELEGATE,Gson().toJson(callCenterArray?.get(selectedItemPosition)))
+
+                        UtilKotlin.changeFragmentBack(activity!!,
+                            ChatFragment(),"callCenterList",bundle,R.id.redirect_acc_fragments)
                     }
 
                     modelHandleChangeFragmentclass.setNotifyItemSelected(null) // start details with this data please

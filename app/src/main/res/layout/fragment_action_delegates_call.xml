@@ -59,7 +59,39 @@
             app:layout_constraintTop_toBottomOf="@+id/profilecallDelegate"
 
             />
+        <TextView
+            android:layout_marginTop="@dimen/_24sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:id="@+id/specialMessageDelegate"
+            android:layout_marginStart="@dimen/_32sdp"
+            android:textAlignment="viewStart"
+            android:text="@string/specialMessage"
+            android:fontFamily="@font/ffshamelfamily_sansonebold"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:drawablePadding="@dimen/_16sdp"
+            android:drawableStart="@drawable/ic_email"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewSheet2"
 
+            />
+
+        <View
+            android:id="@+id/viewSheet3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/black36"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/specialMessageDelegate"
+
+            />
 
         <TextView
             android:layout_marginTop="@dimen/_24sdp"
@@ -79,7 +111,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profilecallDelegate"
+            app:layout_constraintTop_toBottomOf="@+id/viewSheet3"
 
             />
 

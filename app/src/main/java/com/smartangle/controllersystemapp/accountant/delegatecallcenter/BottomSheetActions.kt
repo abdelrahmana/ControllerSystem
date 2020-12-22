@@ -15,7 +15,10 @@ import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.acc_delegate_sheet.*
 import kotlinx.android.synthetic.main.fragment_action_delegates_call.*
+import kotlinx.android.synthetic.main.fragment_action_delegates_call.closeSheet
+import kotlinx.android.synthetic.main.fragment_action_delegates_call.specialMessageDelegate
 
 
 class BottomSheetActions : BottomSheetDialogFragment() {
@@ -75,6 +78,11 @@ class BottomSheetActions : BottomSheetDialogFragment() {
         }
         profilecallDelegate?.setOnClickListener{
             model.setNotifyItemSelected(1) // edit profile
+            dismiss()
+        }
+        specialMessageDelegate?.setOnClickListener{
+            //model.setNotifyItemSelected(1) // edit profile
+            model.setNotifyItemSelected(AccDelegateDetailsBottomSheet.ACCOUNTANT_MessageDelegate) //remove delegate
             dismiss()
         }
         deleteAdminText?.setOnClickListener{

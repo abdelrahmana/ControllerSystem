@@ -60,7 +60,7 @@ class ChatFragment : Fragment() {
         setInitialInfoChatAdapter()
         getchatList()
     sendButton?.setOnClickListener{
-        if (UtilKotlin.checkAvalibalityOptions(messageEditText.text)==true)
+        if (UtilKotlin.checkAvalibalityOptions(messageEditText.text.toString())==true)
             postChat()
     }
 
