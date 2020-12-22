@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smartangle.controllersystemapp.R
 import com.smartangle.controllersystemapp.admin.settings.admin.AdminFragment
 import com.smartangle.util.ApiConfiguration.ApiManagerDefault
+import com.smartangle.util.ApiConfiguration.SuccessModel
 import com.smartangle.util.ApiConfiguration.WebService
 import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.fragment_masrufat.*
 
-class MasrufatFragment : Fragment() , ClickAcceptRejectListener {
+class MasrufatFragment : Fragment(), ClickAcceptRejectListener {
 
     lateinit var masrufatAdapter: MasrufatAdapter
     var arrayList = ArrayList<Data>()
@@ -44,11 +45,9 @@ class MasrufatFragment : Fragment() , ClickAcceptRejectListener {
         super.onViewCreated(view, savedInstanceState)
 
         backImageFees?.setOnClickListener {
-            if (activity?.supportFragmentManager?.backStackEntryCount == 1)
-            {
+            if (activity?.supportFragmentManager?.backStackEntryCount == 1) {
                 activity?.finish()
-            }
-            else{
+            } else {
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
@@ -79,10 +78,10 @@ class MasrufatFragment : Fragment() , ClickAcceptRejectListener {
                     getAdminExpensesListData(datamodel)
                 }
 
-//                if (datamodel is SuccessModel) {
-//                    Log.d("testApi", "isForyou")
-//                    successRemove(datamodel)
-//                }
+                if (datamodel is SuccessModel) {
+                    Log.d("testApi", "isForyou")
+                    succesEditResult(datamodel)
+                }
                 model.responseCodeDataSetter(null) // start details with this data please
             }
 
@@ -104,22 +103,43 @@ class MasrufatFragment : Fragment() , ClickAcceptRejectListener {
 
     }
 
+    private fun succesEditResult(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            UtilKotlin.showSnackMessage(activity , successModel?.msg[0])
+
+//            activity?.let {
+//                it.supportFragmentManager.popBackStack()
+//            }
+
+            getDataList()
+
+//            Handler().postDelayed(Runnable {
+//                activity?.let {
+//                    it.supportFragmentManager.popBackStack()
+//                }
+//            }, 1000)
+//
+        }
+
+
+    }
+
     private fun getAdminExpensesListData(expensesListResponse: ExpensesListResponse) {
 
-        if (expensesListResponse?.data?.isNullOrEmpty() == false)
-        {
+        if (expensesListResponse?.data?.isNullOrEmpty() == false) {
             masrufatRecycler?.visibility = View.VISIBLE
             arrayList.clear()
             arrayList.addAll(expensesListResponse?.data)
-            masrufatAdapter = MasrufatAdapter(arrayList , this)
+            masrufatAdapter = MasrufatAdapter(arrayList, this)
             masrufatRecycler?.apply {
                 setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context!! , RecyclerView.VERTICAL , false)
+                layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
                 adapter = masrufatAdapter
             }
 
-        }
-        else{
+        } else {
             masrufatRecycler?.visibility = View.GONE
             noProductData?.visibility = View.VISIBLE
 
@@ -147,19 +167,44 @@ class MasrufatFragment : Fragment() , ClickAcceptRejectListener {
     override fun onItemListClick(position: Int) {
 
         val bundle = Bundle()
-        bundle.putInt(ADMIN_EXPENSES_ID, arrayList[position].id?:0)
+        bundle.putInt(ADMIN_EXPENSES_ID, arrayList[position].id ?: 0)
 
-        UtilKotlin.changeFragmentBack(activity!! ,
-            FeesDetailsFragment(), "FeesDetails" , null,R.id.frameLayout_direction)
+        UtilKotlin.changeFragmentBack(
+            activity!!,
+            FeesDetailsFragment(), "FeesDetails", bundle, R.id.frameLayout_direction
+        )
 
     }
 
     override fun onAcceptClick(position: Int) {
-        Log.d("click" , "accept")
+        Log.d("click", "accept")
+        acceptOrRejectExpenses(1, position)
+    }
+
+    private fun acceptOrRejectExpenses(status: Int, position: Int) {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            AdminExpensesPresenter.adminAcceptOrRejectExpenses(
+                webService!!,
+                arrayList[position].id ?: 0,
+                status,
+                activity!!,
+                model
+            )
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
     }
 
     override fun onRejectClick(position: Int) {
-        Log.d("click" , "reject")
+        Log.d("click", "reject")
+        acceptOrRejectExpenses(2 , position)
     }
 
     override fun onDestroyView() {
@@ -171,7 +216,7 @@ class MasrufatFragment : Fragment() , ClickAcceptRejectListener {
         super.onDestroyView()
     }
 
-    companion object{
+    companion object {
 
         val ADMIN_EXPENSES_ID = "adminExpensesId"
 

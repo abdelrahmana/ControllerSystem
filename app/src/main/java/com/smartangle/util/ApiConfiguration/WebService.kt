@@ -44,6 +44,7 @@ import com.smartangle.controllersystemapp.delegates.wallet.models.DelegateOrders
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.*
 import com.smartangle.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
 import com.smartangle.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
+import com.smartangle.controllersystemapp.admin.settings.masrufat.ExpensesDetailsResponse
 import com.smartangle.controllersystemapp.admin.settings.masrufat.ExpensesListResponse
 
 import io.reactivex.Observable
@@ -207,6 +208,14 @@ interface WebService {
     @Headers("Accept: application/json")
     @GET("admin/expenses/list")
     fun adminExpensesList(): Observable<Response<ExpensesListResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("admin/expenses/details")
+    fun adminExpensesDetails(@Query("id") expensesId : Int?): Observable<Response<ExpensesDetailsResponse>>
+
+    @Headers("Accept: application/json")
+    @POST("admin/expenses/update-accountant-expense")
+    fun adminAcceptOrRejectExpenses(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
 
     //Accountant Data
 

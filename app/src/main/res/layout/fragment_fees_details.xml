@@ -94,7 +94,7 @@
                     android:textAlignment="viewStart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="طلب دفع مرتبات"
+                    android:text=""
                     android:textSize="16sp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
@@ -149,7 +149,7 @@
                     android:textAlignment="viewStart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="20000 ريال"
+                    android:text=""
                     android:textSize="16sp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
@@ -193,10 +193,11 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/expensesDetailsText"
                         android:textAlignment="viewStart"
                         android:textSize="15sp"
                         android:textColor="@color/blackColor"
-                        android:text="دفع مرتبات الخاصه بالعاملين "
+                        android:text=""
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
