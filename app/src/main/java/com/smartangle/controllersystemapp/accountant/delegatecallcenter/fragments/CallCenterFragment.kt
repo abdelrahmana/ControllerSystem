@@ -2,6 +2,7 @@ package com.smartangle.controllersystemapp.accountant.delegatecallcenter.fragmen
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +26,14 @@ import com.google.gson.Gson
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccDelegateDetailsBottomSheet
 import com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.DelegatesFragment
 import com.smartangle.controllersystemapp.common.chat.ChatFragment
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccountantDelegateOrderPresenter
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.BottomSheetActions.Companion.ACCOUNTANT_REMOVE_CALLCENTER
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.AddDelegateCallCenterRequest
+import com.smartangle.util.ApiConfiguration.SuccessModel
+import com.smartangle.util.PrefsUtil
 import io.reactivex.observers.DisposableObserver
+import kotlinx.android.synthetic.main.edit_call_center.*
 import kotlinx.android.synthetic.main.fragment_call_center.*
 import retrofit2.Response
 
@@ -89,12 +97,123 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
                 }
 
             })
+
+        modelHandleChangeFragmentclass.responseDataCode?.observe(activity!!, Observer { datamodel ->
+
+            if (datamodel != null) {
+                progressDialog?.hide()
+
+                if (datamodel == 2) {
+                    Log.d("observeAction", "remove")
+                    removeCallCenter()
+
+                }
+
+                if (datamodel == 3) {
+                    Log.d("observeAction", "remove")
+                    blockCallCenter()
+
+                }
+
+                if (datamodel is SuccessModel) {
+                    Log.d("testApi", "isForyou")
+                    successRemove(datamodel)
+                }
+
+                modelHandleChangeFragmentclass.responseCodeDataSetter(null) // start details with this data please
+            }
+
+        })
+
+
+        modelHandleChangeFragmentclass.errorMessage.observe(activity!! , Observer { error ->
+
+            if (error != null)
+            {
+                progressDialog?.hide()
+                val errorFinal = UtilKotlin.getErrorBodyResponse(error, context!!)
+                UtilKotlin.showSnackErrorInto(activity!!, errorFinal)
+
+                modelHandleChangeFragmentclass.onError(null)
+            }
+
+        })
+    }
+    var editCallCenterDelegate = AddDelegateCallCenterRequest()
+
+    private fun blockCallCenter() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+            editCallCenterDelegate = AddDelegateCallCenterRequest(callCenterArray[selectedItemPosition].name?:"",
+                callCenterArray[selectedItemPosition].city_id?.toInt() ,
+                null , null , callCenterArray[selectedItemPosition].phone?:"",
+                null , callCenterArray[selectedItemPosition].email?:"" ,
+                0 , callCenterArray[selectedItemPosition].id?:0
+            )
+            CallCenterPresnter.editCallCenter(
+                webService!!,
+                callCenterBlockResponse(),
+                editCallCenterDelegate
+            )
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
+
+
+
+    }
+
+    private fun successRemove(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            activity?.let {
+                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
+            }
+            modelHandleChangeFragmentclass.responseCodeDataSetter(null)
+            getCallCenter()
+
+        }
+
+
+
+    }
+
+    private fun removeCallCenter() {
+
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            AccountantDelegateOrderPresenter.accDeleteDelegate(webService!! ,
+                callCenterArray[selectedItemPosition].id?:0 ,  activity!! , modelHandleChangeFragmentclass)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
+
     }
 
     override fun onResume() {
         super.onResume()
         //  Log.d("back" , "Delegate Resume")
         getCallCenter()
+
+        //observeActions()
+
+    }
+
+    private fun observeActions() {
+        Log.d("callCenter" , "observe")
+
+
 
     }
 
@@ -133,6 +252,11 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
     override fun onDestroyView() {
         disposableObserver?.dispose()
         modelHandleChangeFragmentclass?.notifyItemSelected?.removeObservers(activity!!)
+        modelHandleChangeFragmentclass.let {
+            it?.errorMessage?.removeObservers(activity!!)
+            it?.responseDataCode?.removeObservers(activity!!)
+
+        }
         super.onDestroyView()
     }
 
@@ -171,6 +295,51 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
         }
         return disposableObserver!!
     }
+
+
+
+    var disposableBlockObserver : DisposableObserver<Response<SuccessModel>>?=null
+    private fun callCenterBlockResponse(): DisposableObserver<Response<SuccessModel>> {
+
+        disposableBlockObserver = object : DisposableObserver<Response<SuccessModel>>() {
+            override fun onComplete() {
+                progressDialog?.dismiss()
+                dispose()
+            }
+
+            override fun onError(e: Throwable) {
+                UtilKotlin.showSnackErrorInto(activity!!, e.message.toString())
+                progressDialog?.dismiss()
+                dispose()
+            }
+
+            override fun onNext(response: Response<SuccessModel>) {
+                if (response!!.isSuccessful) {
+                    progressDialog?.dismiss()
+
+                    UtilKotlin.showSnackMessage(activity,response.body()?.msg?.get(0)?:getString(R.string.added_successfully))
+                    //activity?.supportFragmentManager?.popBackStack()
+                    getCallCenter()
+
+                }
+                else
+                {
+                    progressDialog?.dismiss()
+                    if (response.errorBody() != null) {
+                        // val error = PrefsUtil.handleResponseError(response.errorBody(), context!!)
+                        val error = UtilKotlin.getErrorBodyResponse(response.errorBody(), context!!)
+                        UtilKotlin.showSnackErrorInto(activity!!, error)
+                    }
+
+                }
+            }
+        }
+        return disposableBlockObserver!!
+    }
+
+
+
+
 
     var selectedItemPosition = 0
     override fun onItemClick(position: Int) {

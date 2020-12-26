@@ -83,6 +83,7 @@ class AccDelegateDetailsBottomSheet : BottomSheetDialogFragment() {
             dismiss()
         }
         blockDelegateText?.setOnClickListener{
+            model.setNotifyItemSelected(ACCOUNTANT_BLOCK_Delegate) //remove delegate
             dismiss()
         }
         closeSheet?.setOnClickListener{
@@ -113,6 +114,7 @@ class AccDelegateDetailsBottomSheet : BottomSheetDialogFragment() {
     companion object{
         val ACCOUNTANT_REMOVE_DELEGATE = "accountantRemoveDelegate"
         val ACCOUNTANT_MessageDelegate = "messageDelegate"
+        val ACCOUNTANT_BLOCK_Delegate = "acountantBlockDelegate"
 
     }
 

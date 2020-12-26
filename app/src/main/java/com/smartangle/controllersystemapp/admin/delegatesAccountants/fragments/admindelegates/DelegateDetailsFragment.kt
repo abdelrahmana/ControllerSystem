@@ -1,4 +1,4 @@
-package com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments
+package com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.admindelegates
 
 import android.graphics.Typeface
 import android.os.Bundle

@@ -224,7 +224,7 @@ class CreateDebtsFragment : Fragment() {
                 }
             }, 1000)
 
-
+            
 
 
         }

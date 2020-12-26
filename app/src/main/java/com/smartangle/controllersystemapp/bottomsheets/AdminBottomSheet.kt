@@ -19,6 +19,8 @@ import com.smartangle.util.NameUtils.ADMIN_ID
 import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccDelegateDetailsBottomSheet
+import com.smartangle.controllersystemapp.admin.delegatesAccountants.models.EditAccountantRequest
 import kotlinx.android.synthetic.main.fragment_admin_bottom_sheet.*
 
 
@@ -57,6 +59,8 @@ class AdminBottomSheet : BottomSheetDialogFragment() {
             //dismiss()
         }
         blockAdminText?.setOnClickListener{
+           // blockAmin()
+            model.setNotifyItemSelected(2) //block Admin
             dismiss()
         }
         closeSheet?.setOnClickListener{
@@ -66,6 +70,27 @@ class AdminBottomSheet : BottomSheetDialogFragment() {
 
         observeData()
     }
+
+//    private fun blockAmin() {
+//
+//
+//        if (UtilKotlin.isNetworkAvailable(context!!)) {
+//            progressDialog?.show()
+//
+//            val editAccountantRequest = EditAccountantRequest(
+//                adminId , adminNameEdt?.text?.toString() , adminMobileEdt?.text?.toString() ,
+//                cityId , adminEmailEdt?.text?.toString() , 0
+//            )
+//
+//            AdminPresenter.getEditAdmin(webService!!, editAccountantRequest, activity!!, model)
+//
+//        } else {
+//            progressDialog?.dismiss()
+//            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+//
+//        }
+//
+//    }
 
     private fun observeData() {
 

@@ -10,21 +10,23 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
 import com.smartangle.controllersystemapp.R
-import com.smartangle.controllersystemapp.accountant.delegatecallcenter.*
-import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccDelegateDetailsBottomSheet.Companion.ACCOUNTANT_MessageDelegate
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccDelegateDetailsBottomSheet
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccDelegateDetailsBottomSheet.Companion.ACCOUNTANT_BLOCK_Delegate
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccDelegateDetailsBottomSheet.Companion.ACCOUNTANT_REMOVE_DELEGATE
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccountantDelegateOrderPresenter
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.CallCenterPresnter
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.fragments.AccDelegateDetailsFragment
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.AddDelegateCallCenterRequest
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.CallCenterDelegateData
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.smartangle.controllersystemapp.admin.delegatesAccountants.adapters.DelegatesAdapter
 import com.smartangle.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
-import com.smartangle.controllersystemapp.common.chat.ChatFragment
 import com.smartangle.util.ApiConfiguration.ApiManagerDefault
 import com.smartangle.util.ApiConfiguration.SuccessModel
 import com.smartangle.util.ApiConfiguration.WebService
 import com.smartangle.util.NameUtils
+import com.smartangle.util.PrefsUtil
 import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import io.reactivex.observers.DisposableObserver
@@ -140,18 +142,47 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 
                    removeDelegate()
 
+                }
+                if (datamodel == ACCOUNTANT_BLOCK_Delegate) {
 
-                }else if(datamodel == ACCOUNTANT_MessageDelegate){ // send information to chat fragment
-                    val bundle = Bundle()
-                    bundle.putString(SELECTEDDELEGATE,Gson().toJson(delegatesList?.get(selectedItemPosition)))
+                    blockDelegate()
 
-                    UtilKotlin.changeFragmentBack(activity!!,ChatFragment(),"delegateList",bundle,R.id.redirect_acc_fragments)
                 }
 
                 modelHandleChangeFragmentclass.setNotifyItemSelected(null) // start details with this data please
             }
 
         })
+
+    }
+    var addDelegateCallCenterFragment = AddDelegateCallCenterRequest()
+
+    private fun blockDelegate() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            addDelegateCallCenterFragment = AddDelegateCallCenterRequest(
+                delegatesList[selectedItemPosition].name?:"",
+                delegatesList[selectedItemPosition].city_id?.toInt()?:0,
+                null, null ,
+                delegatesList[selectedItemPosition].phone?:"",
+                null , delegatesList[selectedItemPosition].email?:"", 0 ,
+                delegatesList[selectedItemPosition].id?:0
+
+            )
+            CallCenterPresnter.editDelegate(
+                webService!!,
+                callCenterResponse(),
+                addDelegateCallCenterFragment
+            )
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
+
 
     }
 
@@ -200,17 +231,49 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 
     }
 
-    var selectedItemPosition = 0
-    override fun onDestroyView() {
-        disposableObserver?.dispose()
-        modelHandleChangeFragmentclass.let {
-            it?.notifyItemSelected.removeObservers(activity!!)
-            it?.errorMessage?.removeObservers(activity!!)
-            it?.responseDataCode?.removeObservers(activity!!)
 
+    var selectedItemPosition = 0
+
+
+    var disposableBlockObserver : DisposableObserver<Response<SuccessModel>>?=null
+    private fun callCenterResponse(): DisposableObserver<Response<SuccessModel>> {
+
+        disposableBlockObserver = object : DisposableObserver<Response<SuccessModel>>() {
+            override fun onComplete() {
+                progressDialog?.dismiss()
+                dispose()
+            }
+
+            override fun onError(e: Throwable) {
+                UtilKotlin.showSnackErrorInto(activity!!, e.message.toString())
+                progressDialog?.dismiss()
+                dispose()
+            }
+
+            override fun onNext(response: Response<SuccessModel>) {
+                if (response!!.isSuccessful) {
+                    progressDialog?.dismiss()
+                    UtilKotlin.showSnackMessage(activity,response.body()?.msg?.get(0)?:getString(R.string.added_successfully))
+                    //activity?.supportFragmentManager?.popBackStack()
+                    getDelegatesList()
+
+                }
+                else
+                {
+                    progressDialog?.dismiss()
+                    if (response.errorBody() != null) {
+                        // val error = PrefsUtil.handleResponseError(response.errorBody(), context!!)
+                        val error = UtilKotlin.getErrorBodyResponse(response.errorBody(), context!!)
+                        UtilKotlin.showSnackErrorInto(activity!!, error)
+                    }
+
+                }
+            }
         }
-        super.onDestroyView()
+        return disposableBlockObserver!!
     }
+
+
 
     var disposableObserver : DisposableObserver<Response<CallCenterResponse>>?=null
     private fun accDelegatesResponse(): DisposableObserver<Response<CallCenterResponse>> {
@@ -303,6 +366,18 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 
         val ACCOUNTANT_DELEGATE_ID = "accountantDelegateId"
         val SELECTEDDELEGATE= "selected_in_list"
+    }
+
+    override fun onDestroyView() {
+        disposableObserver?.dispose()
+        disposableBlockObserver?.dispose()
+        modelHandleChangeFragmentclass.let {
+            it?.notifyItemSelected.removeObservers(activity!!)
+            it?.errorMessage?.removeObservers(activity!!)
+            it?.responseDataCode?.removeObservers(activity!!)
+
+        }
+        super.onDestroyView()
     }
 
 }

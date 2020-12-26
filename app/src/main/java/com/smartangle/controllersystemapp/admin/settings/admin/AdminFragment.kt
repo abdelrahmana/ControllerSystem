@@ -11,6 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.smartangle.controllersystemapp.R
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccDelegateDetailsBottomSheet
+import com.smartangle.controllersystemapp.admin.delegatesAccountants.models.EditAccountantRequest
 import com.smartangle.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.smartangle.controllersystemapp.bottomsheets.AdminBottomSheet
 import com.smartangle.util.ApiConfiguration.ApiManagerDefault
@@ -81,10 +83,10 @@ class AdminFragment : Fragment(), OnRecyclerItemClickListener {
                     getAdminListData(datamodel)
                 }
 
-//                if (datamodel is SuccessModel) {
-//                    Log.d("testApi", "isForyou")
-//                    successRemove(datamodel)
-//                }
+                if (datamodel is SuccessModel) {
+                    Log.d("testApi", "isForyou")
+                    successRemove(datamodel)
+                }
                 model.responseCodeDataSetter(null) // start details with this data please
             }
 
@@ -117,10 +119,72 @@ class AdminFragment : Fragment(), OnRecyclerItemClickListener {
 
         })
 
+        model.notifyItemSelected?.observe(activity!!, Observer { datamodel ->
+
+            if (datamodel != null) {
+
+
+                if (datamodel == 2) {
+
+                    blockAdmin()
+
+                }
+
+
+                model.setNotifyItemSelected(null) // start details with this data please
+            }
+
+        })
+
+
+    }
+
+    private fun blockAdmin() {
+
+        if (UtilKotlin.isNetworkAvailable(context!!)) {
+            progressDialog?.show()
+
+            val editAccountantRequest = EditAccountantRequest(
+                adminList[selectedItemPosition].id?:0 ,
+                adminList[selectedItemPosition].name?:"" ,
+                adminList[selectedItemPosition].phone?:"",
+                adminList[selectedItemPosition].city_id?.toInt(),
+                adminList[selectedItemPosition].email?:"",
+                0
+            )
+
+            AdminPresenter.getEditAdmin(webService!!, editAccountantRequest, activity!!, model)
+
+        } else {
+            progressDialog?.dismiss()
+            UtilKotlin.showSnackErrorInto(activity, getString(R.string.no_connect))
+
+        }
 
     }
 
     private fun successRemove(successModel: SuccessModel) {
+
+        if (successModel?.msg?.isNullOrEmpty() == false)
+        {
+            activity?.let {
+                UtilKotlin.showSnackMessage(it,successModel?.msg[0])
+            }
+
+//            productsAdapter.let {
+//                it?.removeItemFromList(removePosition)
+//            }
+//            productsAdapter?.notifyDataSetChanged()
+
+            getAdminData()
+
+//            model.responseCodeDataSetter(null) // start details with this data please
+//            activity?.supportFragmentManager?.popBackStack()
+
+        }
+
+
+
 
     }
 
@@ -171,7 +235,11 @@ class AdminFragment : Fragment(), OnRecyclerItemClickListener {
 
     }
 
+    var selectedItemPosition = 0
+
+
     override fun onItemClick(position: Int) {
+
 
         val bundle = Bundle()
         bundle.putInt(ADMINID, adminList[position].id?:0)
@@ -186,6 +254,8 @@ class AdminFragment : Fragment(), OnRecyclerItemClickListener {
     override fun adminOptionsClickListener(position: Int) {
 
         Log.d("click", "admin")
+        selectedItemPosition = position
+
         val bundle = Bundle()
         bundle.putInt(ADMIN_ID, adminList.get(position).id ?: 0)
         val adminBottomSheet = AdminBottomSheet.newInstance()
@@ -199,6 +269,7 @@ class AdminFragment : Fragment(), OnRecyclerItemClickListener {
             it?.errorMessage?.removeObservers(activity!!)
             it?.responseDataCode?.removeObservers(activity!!)
             it?.stringDataVar?.removeObservers(activity!!)
+            it?.notifyItemSelected?.removeObservers(activity!!)
 
         }
         super.onDestroyView()

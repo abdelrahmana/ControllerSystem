@@ -8,7 +8,7 @@ import com.smartangle.controllersystemapp.R
 import kotlinx.android.synthetic.main.masrufat_item.view.*
 
 class MasrufatAdapter(
-    var arrayList: ArrayList<Any>,
+    var arrayList: ArrayList<Data>,
     var onRecyclerItemClickListener: ClickAcceptRejectListener) :
     RecyclerView.Adapter<MasrufatAdapter.ViewHolder>(){
 
@@ -34,13 +34,16 @@ class MasrufatAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            accountantModel: Any,
+            accountantModel: Data,
             onRecyclerItemClickListener: ClickAcceptRejectListener
         ) {
 
-//            itemView.delegateName.text = accountantModel.name
-//            itemView.delegatePhone.text = accountantModel.phone
-           // Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.delegateImg)
+            itemView.masrufatName.text = accountantModel.title?:""
+            itemView.feesPhone.text = accountantModel.details?:""
+            itemView.feesPrice.text = accountantModel.price?:""
+           // itemView.feesCurrancy.text = accountantModel.cur?:""
+
+            // Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.delegateImg)
 
 
             itemView.setOnClickListener {

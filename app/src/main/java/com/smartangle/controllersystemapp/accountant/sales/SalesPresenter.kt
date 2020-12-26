@@ -34,7 +34,7 @@ object SalesPresenter {
                 }
             }catch (e:Exception){
                 UtilKotlin.showSnackErrorInto(activity,e.message.toString())
-           //     model.onError(e.message.toString()) // this is onfaliure method
+                //     model.onError(e.message.toString()) // this is onfaliure method
             }
             return@async callResponse?.body()
         }.await()

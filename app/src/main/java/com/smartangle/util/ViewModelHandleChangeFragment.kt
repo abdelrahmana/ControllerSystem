@@ -12,6 +12,7 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     var notifyChangeFragment = MutableLiveData<Int>()
     var errorMessage = MutableLiveData<ResponseBody>()
     var stringErrorMessage = MutableLiveData<String>()
+    var authListnerLiveData = MutableLiveData<Any>() //make it what ever you need
 
     // handle the back of fragments within activty
     var handleClickBack = MutableLiveData<Boolean>()
@@ -29,6 +30,11 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     fun setShowLoader(boolean: Boolean?)
     {
         showLoader.postValue(boolean)
+    }
+
+    fun setObjectData(responseBody : Any?) { // lets use this to send object overall application to listeners
+
+        this.authListnerLiveData.value= responseBody
     }
     var stringNameData = MutableLiveData<ModelStringID>()
 

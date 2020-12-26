@@ -3,9 +3,7 @@ package com.smartangle.util.ApiConfiguration
 
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.debts.AccountantDebtsListResponse
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.*
-import com.smartangle.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
 import com.smartangle.controllersystemapp.accountant.products.models.AccountantProductsListResponse
-import com.smartangle.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
 import com.smartangle.controllersystemapp.accountant.settings.expenses.AccountantExpensesListResponse
 import com.smartangle.controllersystemapp.accountant.makeorder.models.AccountantMakeOrderRequest
 import com.smartangle.controllersystemapp.accountant.sales.model.ItemListResponses
@@ -43,6 +41,13 @@ import com.smartangle.controllersystemapp.delegates.makeorder.model.DelegateProd
 import com.smartangle.controllersystemapp.delegates.wallet.models.DelegateOrderItemDetailsResponse
 import com.smartangle.controllersystemapp.delegates.wallet.models.DelegateOrderItemsListResponse
 import com.smartangle.controllersystemapp.delegates.wallet.models.DelegateOrdersListResponse
+import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.*
+import com.smartangle.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
+import com.smartangle.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
+import com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.admindelegates.model.DelegateListResponse
+import com.smartangle.controllersystemapp.admin.settings.masrufat.ExpensesDetailsResponse
+import com.smartangle.controllersystemapp.admin.settings.masrufat.ExpensesListResponse
+
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -201,6 +206,17 @@ interface WebService {
     @POST("auth/logout")
     fun loginOut(): Observable<Response<SuccessModel>>
 
+    @Headers("Accept: application/json")
+    @GET("admin/expenses/list")
+    fun adminExpensesList(): Observable<Response<ExpensesListResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("admin/expenses/details")
+    fun adminExpensesDetails(@Query("id") expensesId : Int?): Observable<Response<ExpensesDetailsResponse>>
+
+    @Headers("Accept: application/json")
+    @POST("admin/expenses/update-accountant-expense")
+    fun adminAcceptOrRejectExpenses(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
 
     //Accountant Data
 
@@ -393,4 +409,8 @@ interface WebService {
     fun requestPostMessage(@Body requestBody : RequestMessgae): Observable<Response<SuccessModel>>
     @GET("accountant/orders/item-details")
     fun getMessagesList(@Query("receiver_id")id:Int): Observable<Response<ResponseChatList>>
+
+    @Headers("Accept: application/json")
+    @GET("accountant/delegates/list")
+    fun getDelegatesAdmin(@Query("page") page : Int): Observable<Response<DelegateListResponse>>
 }

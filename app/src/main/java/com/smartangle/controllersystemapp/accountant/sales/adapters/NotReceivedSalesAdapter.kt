@@ -64,7 +64,7 @@ class NotReceivedSalesAdapter(
 //            itemView.quantity.text = productsModel.total_quantity
 //            itemView.currancy.text = productsModel.currency
 
-               itemView.notReceivedSalesName?.text = itemView.notReceivedSalesName?.text.toString() + datamodel.order_number?:""
+            itemView.notReceivedSalesName?.text = itemView.notReceivedSalesName?.text.toString() + datamodel.order_number?:""
 
             itemView.notReceivedDelegate?.text = datamodel?.name?:""
             itemView.notReceivedPrice?.text = datamodel?.total_price?:""

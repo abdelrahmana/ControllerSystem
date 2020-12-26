@@ -73,7 +73,8 @@ class EditCallCenterFragment : Fragment() {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
             editCallCenterDelegate = AddDelegateCallCenterRequest(name = callCenterEditText.text.toString(),
-                city_id = (PrefsUtil.getUserModel(context!!)?.city_id?:"0").toInt(),phone = editTextPhone.text.toString(),id = callCenterObject?.id?:0,
+                city_id = (PrefsUtil.getUserModel(context!!)?.city_id?:"0").toInt(),
+                phone = editTextPhone.text.toString(),id = callCenterObject?.id?:0,
                 email = editTextEmail.text.toString())
             CallCenterPresnter.editCallCenter(
                 webService!!,

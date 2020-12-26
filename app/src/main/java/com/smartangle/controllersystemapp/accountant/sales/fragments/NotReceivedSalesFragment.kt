@@ -59,8 +59,8 @@ class NotReceivedSalesFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getSalesData()
-         observeData()
-     //   handleNoDataViews()
+        observeData()
+        //   handleNoDataViews()
 
     }
 
@@ -75,7 +75,7 @@ class NotReceivedSalesFragment : Fragment(),
         super.onResume()
 
 
-      //  setSalesData()
+        //  setSalesData()
 
     }
 
@@ -83,7 +83,7 @@ class NotReceivedSalesFragment : Fragment(),
 
         notReceivedSalesRecycler?.visibility = View.VISIBLE
         if (datamodel?.data?.isNotEmpty()==true)
-        noDataLayout?.visibility = View.GONE
+            noDataLayout?.visibility = View.GONE
         else {
             noDataLayout?.visibility = View.VISIBLE
             handleNoDataViews()
@@ -92,10 +92,10 @@ class NotReceivedSalesFragment : Fragment(),
 
         notReceivedSalesList.clear()
         notReceivedSalesList.addAll(datamodel.data?:ArrayList())
-    /*    for (i in 0..5)
-        {
-            notReceivedSalesList.add("")
-        }*/
+        /*    for (i in 0..5)
+            {
+                notReceivedSalesList.add("")
+            }*/
 
         notReceivedSalesAdapter =
             NotReceivedSalesAdapter(

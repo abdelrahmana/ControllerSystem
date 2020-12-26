@@ -3,6 +3,7 @@ package com.smartangle.controllersystemapp.accountant.delegatecallcenter
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -86,10 +87,12 @@ class BottomSheetActions : BottomSheetDialogFragment() {
             dismiss()
         }
         deleteAdminText?.setOnClickListener{
-
+            Log.d("callCenter" , "dlete")
+            model.responseCodeDataSetter(2) //remove callCenter
             dismiss()
         }
         blockAdminText?.setOnClickListener{
+            model.responseCodeDataSetter(3) //block callCenter
             dismiss()
         }
         closeSheet?.setOnClickListener{
@@ -118,7 +121,12 @@ class BottomSheetActions : BottomSheetDialogFragment() {
 
 
 
+    companion object{
+        val ACCOUNTANT_REMOVE_CALLCENTER = "accountantRemoveCallCenter"
+        val ACCOUNTANT_Message_CALLCENTER = "messageCallCenter"
+        val ACCOUNTANT_BLOCK_CALLCENTER = "acountantBlockCallCenter"
 
+    }
 
 
 }

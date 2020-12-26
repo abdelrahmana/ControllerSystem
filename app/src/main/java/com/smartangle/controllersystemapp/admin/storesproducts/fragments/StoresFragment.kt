@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smartangle.controllersystemapp.R
 import com.smartangle.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.smartangle.controllersystemapp.admin.storesproducts.StoresPresenter
+import com.smartangle.controllersystemapp.admin.storesproducts.adapters.StoreDetailsFragment
 import com.smartangle.controllersystemapp.admin.storesproducts.adapters.StoresAdapter
 import com.smartangle.controllersystemapp.admin.storesproducts.models.StoresData
 import com.smartangle.controllersystemapp.admin.storesproducts.models.StoresListResponse
@@ -232,8 +233,7 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
 
         val bundle = Bundle()
         bundle.putInt(STOREID, storeList[position].id?:0)
-        UtilKotlin.changeFragmentBack(activity!! ,
-            StoreDetailsFragment(), "StoreDetailsFragment"  ,
+        UtilKotlin.changeFragmentBack(activity!! , StoreDetailsFragment() , "StoreDetailsFragment"  ,
             bundle , R.id.frameLayout_direction)
     }
 

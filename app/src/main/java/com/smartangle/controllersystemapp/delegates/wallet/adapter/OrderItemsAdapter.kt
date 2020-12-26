@@ -66,14 +66,14 @@ class OrderItemsAdapter(
 
 
             itemView.currentWalletName.text = orderWallet?.product?.name?:""
-            //itemView.currentWalletDesc.text = orderWallet?.description?:""
+            itemView.currentWalletDesc.text = orderWallet?.product?.description?:""
             itemView.price.text = orderWallet?.price?:""
             itemView.currancy.text = orderWallet?.product?.currency?:""
             itemView.quantity.text = orderWallet?.quantity?:""
             itemView.slash?.visibility = View.GONE
 //            if (orderWallet?.category == null || orderWallet?.ware_houses.isNullOrEmpty())
 //                itemView.slash?.visibility = View.GONE
-//            itemView.walletCategoryTxt?.text = orderWallet?.category?.name?:""
+            itemView.walletCategoryTxt?.text = orderWallet?.product?.category?.name?:""
 //            if (orderWallet?.ware_houses.isNullOrEmpty() == false)
 //            {
 //                itemView.walletStoreTxt?.text = orderWallet?.ware_houses?.get(0)?.name?:""

@@ -46,6 +46,9 @@ import com.smartangle.controllersystemapp.common.verficationfragment.ValidationA
 import com.smartangle.controllersystemapp.common.verficationfragment.VerficationFragment.Companion.phoneNumberKey
 import com.smartangle.util.ApiConfiguration.ErrorBodyResponse
 import com.smartangle.util.PrefsUtil.getSharedPrefs
+import com.google.android.gms.tasks.Task
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.loader_layout.*
@@ -570,6 +573,21 @@ object UtilKotlin {
         val typeToken = object : TypeToken<ClientDetailsResponse?>() {}.type
         val obj = gson.fromJson<ClientDetailsResponse>(clientString, typeToken) ?: ClientDetailsResponse(null) //ResponseLogin(Data("", null))
         return obj
+    }
+
+
+    fun getFirebaseFcmTokenBeforeStart(viewModelHandleChangeFragmentclass: ViewModelHandleChangeFragmentclass) {
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { task: Task<InstanceIdResult> ->
+            if (!task.isSuccessful) {
+                viewModelHandleChangeFragmentclass.setObjectData("")
+            } else { // Get new Instance ID token
+                val token = task.result!!.token
+                viewModelHandleChangeFragmentclass.setObjectData(token)
+
+                // Log and toast
+                // Log.d("", "");
+            }
+        }
     }
 
 }

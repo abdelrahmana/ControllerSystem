@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.smartangle.controllersystemapp.R
 import com.smartangle.controllersystemapp.accountant.home.AccountantHomeActivity
 import com.smartangle.controllersystemapp.admin.AdminHomeActivity
@@ -17,6 +18,7 @@ import com.smartangle.controllersystemapp.callcenter.home.CallCenterHome
 import com.smartangle.controllersystemapp.common.AuthPresenter
 import com.smartangle.controllersystemapp.common.forgetpassword.ForgetPassword
 import com.smartangle.controllersystemapp.delegates.activities.DelegatesHomeActivity
+import com.smartangle.util.*
 import com.smartangle.util.ApiConfiguration.ApiManagerDefault
 import com.smartangle.util.ApiConfiguration.WebService
 import com.smartangle.util.NameUtils
@@ -39,6 +41,7 @@ class LoginFragment : Fragment() {
     var webService: WebService? = null
     var ischeck = false
 
+    lateinit var model: ViewModelHandleChangeFragmentclass
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +56,9 @@ class LoginFragment : Fragment() {
         rootView = inflater.inflate(R.layout.fragment_login, container, false)
         progressDialog = UtilKotlin.ProgressDialog(context!!)
         webService = ApiManagerDefault(activity!!).apiService
+        model = UtilKotlin.declarViewModel(activity)!!
+        UtilKotlin.getFirebaseFcmTokenBeforeStart(model)
+
 
 
         return rootView
@@ -112,6 +118,9 @@ class LoginFragment : Fragment() {
 
 
         }
+
+        setFcmToken() // listener
+
     }
 
     private fun checkValidation() {
@@ -158,13 +167,26 @@ class LoginFragment : Fragment() {
 
 
     }
+    var fcmToken = "" // default empty
+    private fun setFcmToken() {
+        model?.authListnerLiveData?.observe(activity!!, Observer<Any>{ fcmToken->
+            if (fcmToken !=null){
+                if (fcmToken is String){
+                    this.fcmToken = fcmToken
+                }
+                // when result is coming
+                // here we should set every thing related to this details activity
+                //     model?.setObjectData(null)
+            }
+        })
+    }
 
     private fun makeLoginLogic() {
 
         if (UtilKotlin.isNetworkAvailable(context!!)) {
             progressDialog?.show()
             val loginRequest = LoginRequest(phoneNumberEditText?.text?.trim()?.toString() ,
-                password_edit_text?.text?.trim()?.toString() , UtilKotlin.getDeviceId(context!!).toString() )
+                password_edit_text?.text?.trim()?.toString() , UtilKotlin.getDeviceId(context!!).toString() , fcmToken)
             AuthPresenter.getLoginResponse(webService!! , loginRequest, logInObserver())
         } else {
             progressDialog?.dismiss()

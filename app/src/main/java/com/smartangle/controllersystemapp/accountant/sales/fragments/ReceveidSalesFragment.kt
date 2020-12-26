@@ -59,7 +59,7 @@ class ReceveidSalesFragment : Fragment()  , OnRecyclerItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         getSalesData()
         observeData()
-      //  handleNoDataViews()
+        //  handleNoDataViews()
 
     }
     var callCortinues : Job?=null
@@ -97,7 +97,7 @@ class ReceveidSalesFragment : Fragment()  , OnRecyclerItemClickListener {
     private fun setSalesData(datamodel: SalesResponse) {
         receivedSalesRecycler?.visibility = View.VISIBLE
         if (datamodel?.data?.isNotEmpty()==true)
-        noDataLayout?.visibility = View.GONE
+            noDataLayout?.visibility = View.GONE
         else {
             noDataLayout?.visibility = View.VISIBLE
             handleNoDataViews()

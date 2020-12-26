@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".admin.delegatesAccountants.fragments.DelegateDetailsFragment">
+    tools:context=".admin.delegatesAccountants.fragments.admindelegates.DelegateDetailsFragment">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:background="@color/white"
         android:id="@+id/coordinatorID"

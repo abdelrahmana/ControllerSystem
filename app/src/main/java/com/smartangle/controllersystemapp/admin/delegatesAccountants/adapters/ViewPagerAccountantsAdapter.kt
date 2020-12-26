@@ -2,7 +2,7 @@ package com.smartangle.controllersystemapp.admin.delegatesAccountants.adapters
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.AccountantsFragment
-import com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.AdminDelegatesFragment
+import com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.admindelegates.AdminDelegatesFragment
 
 class ViewPagerAccountantsAdapter(fragment: Fragment)
     : FragmentStateAdapter(fragment)  {
@@ -17,7 +17,8 @@ class ViewPagerAccountantsAdapter(fragment: Fragment)
     override fun createFragment(position: Int): Fragment {
         when (position) {
                 0 ->
-                    fragment = AdminDelegatesFragment()
+                    fragment =
+                        AdminDelegatesFragment()
                         //DelegatesFragment()
                 1 ->
                     fragment =
