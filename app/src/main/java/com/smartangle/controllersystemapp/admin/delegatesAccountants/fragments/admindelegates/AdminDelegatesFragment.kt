@@ -86,6 +86,8 @@ class AdminDelegatesFragment : Fragment(), OnRecyclerItemClickListener {
     }
     override fun onResume() {
         super.onResume()
+        delegatesList.clear()
+
         getDelegatesList()
     }
     private fun getDelegatesList() {
@@ -119,7 +121,7 @@ class AdminDelegatesFragment : Fragment(), OnRecyclerItemClickListener {
                     progressDialog?.dismiss()
                     //delegatesList.clear()
                     //delegatesList.addAll(response.body()?.data?.list?:ArrayList())
-                     adminDelegatesAdapter.updateData(response.body()?.data?.list?.data?:ArrayList())
+                    adminDelegatesAdapter.updateData(response.body()?.data?.list?:ArrayList())
                     getDeleagtesData()
 
                 }
@@ -160,7 +162,15 @@ class AdminDelegatesFragment : Fragment(), OnRecyclerItemClickListener {
     override fun onItemClick(position: Int) {
         val bundle = Bundle()
         bundle.putInt(NameUtils.WHICHID, R.id.frameLayout_direction)
+        bundle.putInt(ADMIN_DELEGATE_ID, delegatesList[position].id?:0)
+
         UtilKotlin.changeFragmentBack(activity!!,
             DelegateDetailsFragment(), "", bundle, R.id.frameLayout_direction)
+    }
+
+    companion object{
+
+        val ADMIN_DELEGATE_ID = "adminDelegateId"
+
     }
 }

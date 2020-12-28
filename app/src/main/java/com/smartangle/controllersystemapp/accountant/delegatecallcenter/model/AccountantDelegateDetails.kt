@@ -1,6 +1,6 @@
 package com.smartangle.controllersystemapp.accountant.delegatecallcenter.model
 
-data class AccountantDelegateDetails(
+ data class AccountantDelegateDetails(
     val `data`: DataAccDelegateDetails?
 )
 
@@ -12,9 +12,9 @@ data class DataAccDelegateDetails(
     val email: String?,
     val enable_notification: String?,
     val id: Int?,
-    val image: String?,
-    val lat: Any?,
-    val long: Any?,
+    val image: String,
+    val lat: String?,
+    val long: String?,
     val name: String?,
     val phone: String?,
     val role_id: String?,
@@ -33,6 +33,7 @@ data class DelegateOrder(
     val created_by: String?,
     val currency: String?,
     val delegate_id: String?,
+    val details: List<Detail>?,
     val email: String?,
     val id: Int?,
     val name: String?,
@@ -43,4 +44,18 @@ data class DelegateOrder(
     val status_word: String?,
     val total_price: String?,
     val updated_at: String?
+)
+
+data class Detail(
+    val id: Int?,
+    val order_id: String?,
+    val product: ProductDelegateDetails?,
+    val product_id: String?
+)
+
+data class ProductDelegateDetails(
+    val currency: String?,
+    val id: Int?,
+    val name: String?,
+    val total_quantity: String?
 )

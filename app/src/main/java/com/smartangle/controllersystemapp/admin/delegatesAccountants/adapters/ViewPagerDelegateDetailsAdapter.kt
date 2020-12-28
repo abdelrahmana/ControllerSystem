@@ -5,7 +5,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.*
 import com.smartangle.util.NameUtils
 
-class ViewPagerDelegateDetailsAdapter(fragment: Fragment, var id: Int)
+class ViewPagerDelegateDetailsAdapter(fragment: Fragment, var id: Int , var delegateId: Int)
     : FragmentStateAdapter(fragment) {
 
 
@@ -19,6 +19,8 @@ class ViewPagerDelegateDetailsAdapter(fragment: Fragment, var id: Int)
     override fun createFragment(position: Int): Fragment {
         val bundle = Bundle()
         bundle.putInt(NameUtils.WHICHID,id)
+        bundle.putInt(ADMIN_DELEGATE_DETAILS_ID , delegateId)
+
         when(position)
         {
             0 -> fragment =  DelegatesOrdersFragment().also { it.arguments = bundle }
@@ -64,6 +66,8 @@ class ViewPagerDelegateDetailsAdapter(fragment: Fragment, var id: Int)
          }
      }*/
     companion object {
+
+        val ADMIN_DELEGATE_DETAILS_ID = "adminDelegateDetailsId"
 
 
         @kotlin.jvm.JvmField

@@ -19,4 +19,13 @@
         />
 
 
+    <LinearLayout
+        android:id="@+id/noOrdersDataAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <include layout="@layout/no_products" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

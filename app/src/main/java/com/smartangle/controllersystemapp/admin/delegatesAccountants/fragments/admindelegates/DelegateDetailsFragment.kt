@@ -12,6 +12,7 @@ import com.smartangle.controllersystemapp.admin.delegatesAccountants.adapters.Vi
 import com.smartangle.util.NameUtils
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.admindelegates.AdminDelegatesFragment.Companion.ADMIN_DELEGATE_ID
 import kotlinx.android.synthetic.main.fragment_delegate_details.*
 
 
@@ -32,12 +33,12 @@ class DelegateDetailsFragment : Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewPagerAdaptor = ViewPagerDelegateDetailsAdapter(this@DelegateDetailsFragment,
-            arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
+            arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction ,
+        arguments?.getInt(ADMIN_DELEGATE_ID, 0)?:0)
         viewPagerDelegatesDetails?.adapter = viewPagerAdaptor
 
         TabLayoutMediator(delegatesDetailsTab, viewPagerDelegatesDetails) { tab, position ->

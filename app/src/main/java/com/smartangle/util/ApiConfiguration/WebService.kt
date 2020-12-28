@@ -218,6 +218,12 @@ interface WebService {
     @POST("admin/expenses/update-accountant-expense")
     fun adminAcceptOrRejectExpenses(@Body hashMap: HashMap<String,Any>?): Observable<Response<SuccessModel>>
 
+
+    @Headers("Accept: application/json")
+    @GET("accountant/delegates/details")
+    fun adminDelegateDetails(@Query("id") delegateId : Int?): Observable<Response<AccountantDelegateDetails>>
+
+
     //Accountant Data
 
 //    @Headers("Accept: application/json")
@@ -407,10 +413,11 @@ interface WebService {
 
     @POST("chat/send")
     fun requestPostMessage(@Body requestBody : RequestMessgae): Observable<Response<SuccessModel>>
-    @GET("accountant/orders/item-details")
+
+    @GET("chat/list")
     fun getMessagesList(@Query("receiver_id")id:Int): Observable<Response<ResponseChatList>>
 
     @Headers("Accept: application/json")
-    @GET("accountant/delegates/list")
+    @GET("admin/delegates/list")
     fun getDelegatesAdmin(@Query("page") page : Int): Observable<Response<DelegateListResponse>>
 }

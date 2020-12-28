@@ -6,7 +6,7 @@ data class DelegateListResponse(
 
 data class Data(
     var count: Int?,
-    var list: List?
+    var list: ArrayList<DataBean>?
 )
 
 data class List(

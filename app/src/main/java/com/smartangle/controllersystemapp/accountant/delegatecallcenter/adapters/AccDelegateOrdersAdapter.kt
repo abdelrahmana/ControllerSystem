@@ -47,6 +47,10 @@ class AccDelegateOrdersAdapter(
             itemView.orderPrice.text = delegateOrder.total_price?:""
             itemView.orderCurrancy.text = delegateOrder.currency?:""
            // itemView.orderQuantity.text = delegateOrder.quantity.toString()
+            if (delegateOrder?.details?.isNullOrEmpty() == false)
+            {
+                itemView.orderName.text = delegateOrder?.details?.get(0)?.product?.name?:""
+            }
 //
 //
 //            if (productsModel.isSelected == 0)
