@@ -1,5 +1,4 @@
-package com.waysgroup.atyabalsaeed.notification
-
+package com.smartangle.controllersystemapp.common.notification
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager

@@ -3,6 +3,7 @@ package com.smartangle.controllersystemapp
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import com.smartangle.controllersystemapp.accountant.home.AccountantHomeActivity
 import com.smartangle.controllersystemapp.admin.AdminHomeActivity
 import com.smartangle.controllersystemapp.callcenter.home.CallCenterHome
@@ -26,6 +27,8 @@ class SplashActivity : CommonActivity(){
 
             if (PrefsUtil.isLoggedIn(this))
             {
+                Log.d("logged","yes")
+
                 if (PrefsUtil.getUserModel(this)?.role_id.equals("1"))
                 {
                     startActivity(Intent(this , AdminHomeActivity::class.java))
@@ -50,6 +53,8 @@ class SplashActivity : CommonActivity(){
 
             }
             else{
+                Log.d("logged","No")
+
                 startActivity(Intent(this , ContainerActivityForFragment::class.java))
                 finish()
 
