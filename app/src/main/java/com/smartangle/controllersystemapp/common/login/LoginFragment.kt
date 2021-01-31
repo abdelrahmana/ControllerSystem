@@ -120,7 +120,6 @@ class LoginFragment : Fragment() {
         }
 
         setFcmToken() // listener
-
     }
 
     private fun checkValidation() {

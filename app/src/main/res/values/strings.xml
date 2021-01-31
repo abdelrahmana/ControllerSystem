@@ -170,7 +170,7 @@
     <string name="code">Please enter the verification code</string>
     <string name="phone_is_required">رقم الهاتف مطلوب</string>
     <string name="new_password_required">تأكيد كلمة المرور مطلوبة</string>
-    <string name="confirm_pass_invalid">تأ:يد كلمة المرور غير متطابقة</string>
+    <string name="confirm_pass_invalid">تأكيد كلمة المرور غير متطابقة</string>
     <string name="notifications_reports">اشعارات و بلاغات</string>
     <string name="make_special_order">انشاء طلبية خاصة</string>
     <string name="send_sales">ارسال مبيعات</string>

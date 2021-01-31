@@ -94,6 +94,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/customerSelectText"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
