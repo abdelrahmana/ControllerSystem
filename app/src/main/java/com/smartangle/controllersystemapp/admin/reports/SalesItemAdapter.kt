@@ -1,15 +1,16 @@
 package com.photonect.photographerapp.notificationphotographer.DonePackgae
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.smartangle.controllersystemapp.R
+import com.smartangle.controllersystemapp.admin.reports.model.Data
+import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.sales_item_adapter.view.*
 
 class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
-                       val arrayListOfTutorials:ArrayList<Any>//this method is returning the view for each item in the list
+                       val arrayListOfTutorials:ArrayList<Data>//this method is returning the view for each item in the list
 ) : RecyclerView.Adapter<SalesItemAdapter.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,11 +37,15 @@ class SalesItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
 
 
         fun bindItems(
-            itemData: Any,
+            itemData: Data,
             /*model: ViewModelData,*/
-            arrayListOffersValues: ArrayList<Any>
+            arrayListOffersValues: ArrayList<Data>
         ) {
-
+            itemView.deliveryNumberText?.append(" "+itemData.order_number?:"")
+            itemView.rsomText?.text = itemData?.total_price?:""
+            itemView.nameTextView?.text = itemData.name?:""
+            itemView.date?.text = UtilKotlin.getFormatedDate(itemData.created_at?:"",itemView.context)
+            itemView.piecesTextView?.text =  itemData.details?.get(0)?.product?.total_quantity?:""
             /*   itemView.costText.text = itemData.modelCost
                 if (itemData.modelStatus==myOrdersModel.doneOrder) {
                     itemView.statusOfOrder.setTextColor(ContextCompat.getColor(itemView.context,R.color.green))

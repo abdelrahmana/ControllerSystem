@@ -31,7 +31,23 @@ import com.smartangle.util.NameUtils
 import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import io.reactivex.observers.DisposableObserver
+import kotlinx.android.synthetic.main.fragment_add_product.*
 import kotlinx.android.synthetic.main.fragment_edit_product.*
+import kotlinx.android.synthetic.main.fragment_edit_product.addProdClassifyTxt
+import kotlinx.android.synthetic.main.fragment_edit_product.addProductButton
+import kotlinx.android.synthetic.main.fragment_edit_product.backButton
+import kotlinx.android.synthetic.main.fragment_edit_product.barCodeTxt
+import kotlinx.android.synthetic.main.fragment_edit_product.describeProductEditText
+import kotlinx.android.synthetic.main.fragment_edit_product.imagesListRecycler
+import kotlinx.android.synthetic.main.fragment_edit_product.materialProduct
+import kotlinx.android.synthetic.main.fragment_edit_product.materialSave
+import kotlinx.android.synthetic.main.fragment_edit_product.openCamLayout
+import kotlinx.android.synthetic.main.fragment_edit_product.openGalleryLayout
+import kotlinx.android.synthetic.main.fragment_edit_product.openScanCamera
+import kotlinx.android.synthetic.main.fragment_edit_product.priceEditText
+import kotlinx.android.synthetic.main.fragment_edit_product.priceEditTextSale
+import kotlinx.android.synthetic.main.fragment_edit_product.productNameEditText
+import kotlinx.android.synthetic.main.fragment_edit_product.storeClassificationTxt
 import retrofit2.Response
 import java.io.IOException
 
@@ -229,7 +245,10 @@ class EditProductFragment : Fragment() {
             errorMessage += getString(R.string.price_required)
             errorMessage += "\n"
         }
-
+        if (priceEditTextSale.text.isNullOrBlank()) {
+            errorMessage += getString(R.string.price_sale_required)
+            errorMessage += "\n"
+        }
         if (barCode == null || barCode == "") {
             errorMessage += getString(R.string.barecode_required)
             errorMessage += "\n"
@@ -495,7 +514,7 @@ class EditProductFragment : Fragment() {
             }
             val addProductRequest = AddProductRequest(
                 productNameEditText?.text?.toString(),
-                describeProductEditText?.text?.toString(), priceEditText?.text?.toString(), barCode,
+                describeProductEditText?.text?.toString(), priceEditText?.text?.toString(),priceEditTextSale?.text.toString(), barCode,
                 categoryID, quantityList, warehouse_id, productList
             )
 

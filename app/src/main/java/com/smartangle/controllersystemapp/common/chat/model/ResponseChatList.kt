@@ -13,21 +13,21 @@ data class Message(
     var id: Int?,
     var message: String?,
     var `receiver`: Receiver?,
-    var receiver_id: Int?,
+    var receiver_id: String?,
     var sender: Sender?,
-    var sender_id: Int?,
-    var type: String?, // if type == sender it's related to me  else if type is reciever it's related to the other person who sent the text
+    var sender_id: String?,
+    var type: String?,
     var updated_at: String?
 )
 
-data class Receiver( // may be me or other person
+data class Receiver(
     var id: Int?,
     var image: String?,
     var name: String?,
     var warehouse_id: Any?
 )
 
-data class Sender( // may be me or other person
+data class Sender(
     var id: Int?,
     var image: String?,
     var name: String?,

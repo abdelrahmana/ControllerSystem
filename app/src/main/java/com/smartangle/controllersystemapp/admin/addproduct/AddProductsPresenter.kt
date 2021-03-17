@@ -95,6 +95,8 @@ object AddProductsPresenter {
             .addFormDataPart("name", addProductRequest?.name.toString())
             .addFormDataPart("description", addProductRequest?.description.toString())
             .addFormDataPart("price", addProductRequest?.price.toString())
+            .addFormDataPart("main_price", addProductRequest?.main_price.toString())
+
             .addFormDataPart("barcode", addProductRequest?.barcode.toString())
             .addFormDataPart("category_id", addProductRequest?.category_id.toString())
 

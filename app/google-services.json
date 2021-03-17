@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "416122831523-6m697d9acn9i8m5ko6v1n6vie0jcmn5d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartangle.controllersystemapp",
+            "certificate_hash": "08f065c9777f2182a611628ee85d3f35ab6b6197"
+          }
+        },
+        {
+          "client_id": "416122831523-krpbmjlj4il4v52juj3kblshjs530pfa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartangle.controllersystemapp",
+            "certificate_hash": "a008dfc2879eebce978f021627b782a9635f8d24"
+          }
+        },
+        {
           "client_id": "416122831523-6ghm2rnce19o0f8j6dlkdf7rngjnf9ql.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +46,13 @@
             {
               "client_id": "416122831523-6ghm2rnce19o0f8j6dlkdf7rngjnf9ql.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "416122831523-6onueoo9vaibhbk6u4pua4mon24b61ra.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smartangle.admincontrol"
+              }
             }
           ]
         }

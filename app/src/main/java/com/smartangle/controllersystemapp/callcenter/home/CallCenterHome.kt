@@ -11,6 +11,9 @@ import com.smartangle.util.CommonActivity
 import com.smartangle.util.NameUtils
 import com.smartangle.util.PrefsUtil
 import com.google.android.material.card.MaterialCardView
+import com.google.gson.Gson
+import com.smartangle.controllersystemapp.common.ContainerActivityForFragment
+import com.smartangle.util.UtilKotlin
 import kotlinx.android.synthetic.main.call_center_home.*
 
 class CallCenterHome : CommonActivity(), View.OnClickListener {
@@ -72,6 +75,16 @@ class CallCenterHome : CommonActivity(), View.OnClickListener {
                 startActivity(intent)
             }
 
+            R.id.chatCard-> {
+                removeCardSelection()
+                setCardSelection(chatCard , chatImage , chatText ,R.drawable.ic_email)
+                //startActivity(Intent(this , AdminSpecialCustomersActivity::class.java))
+                val intent = Intent(this , ContainerActivityForFragment::class.java)
+                intent.putExtra(ContainerActivityForFragment.isThatForChat, true)
+                intent.putExtra(NameUtils.other_info, Gson().toJson(PrefsUtil.getUserModel(this)?.creator))
+                startActivity(intent)
+            }
+
 
         }
 
@@ -99,7 +112,8 @@ class CallCenterHome : CommonActivity(), View.OnClickListener {
         makeOrderImg?.setImageDrawable(ContextCompat.getDrawable(this , R.drawable.ic_product_store))
         makeOrderText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
-
+        chatCard?.setBackgroundColor(ContextCompat.getColor(this , R.color.white))
+        chatText?.setTextColor(ContextCompat.getColor(this , R.color.textColor))
 
     }
 }

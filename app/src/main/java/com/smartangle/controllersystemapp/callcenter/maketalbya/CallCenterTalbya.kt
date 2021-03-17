@@ -18,7 +18,7 @@ import com.smartangle.controllersystemapp.admin.addproduct.ScanCodeActivity
 import com.smartangle.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.SCANERESULT
 import com.smartangle.controllersystemapp.admin.addproduct.ScanCodeActivity.Companion.scanCode
 import com.smartangle.controllersystemapp.admin.productclassification.FragmentProductclassification
-import com.smartangle.controllersystemapp.admin.productclassification.FragmentProductclassificationCenter
+import com.smartangle.controllersystemapp.callcenter.maketalbya.productclassification.FragmentProductclassificationCenter
 import com.smartangle.controllersystemapp.callcenter.maketalbya.model.OrderCreateRequest
 import com.smartangle.controllersystemapp.callcenter.responsibledelegate.ResponsibleDelegateFragment
 import com.smartangle.util.ApiConfiguration.ApiManagerDefault
@@ -36,8 +36,8 @@ import retrofit2.Response
 class CallCenterTalbya : Fragment() {
 
     var webService: WebService? = null
-    lateinit var model: ViewModelHandleChangeFragmentclass
     lateinit var progressDialog : Dialog
+    lateinit var model: ViewModelHandleChangeFragmentclass
 
     var categoryID = 0
     var quantity : String = "0"
@@ -104,7 +104,8 @@ var orderCreateRequest = OrderCreateRequest()
             val bundle = Bundle()
             bundle.putInt(NameUtils.WHICH_ADD_PRD_STORE, /*R.id.redirect_acc_fragments*/
                 arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction)
-            bundle.putBoolean(FragmentProductclassification.ISCALLCENTER, /*R.id.redirect_acc_fragments*/
+            bundle.putBoolean(
+                FragmentProductclassification.ISCALLCENTER, /*R.id.redirect_acc_fragments*/
                 true)
             UtilKotlin.changeFragmentBack(activity!! , FragmentProductclassificationCenter() , "productClassification"  ,
                 bundle ,arguments?.getInt(NameUtils.WHICHID,R.id.frameLayout_direction)?:R.id.frameLayout_direction /*R.id.redirect_acc_fragments*/)
@@ -169,7 +170,7 @@ var orderCreateRequest = OrderCreateRequest()
         orderCreateRequest.quantity?.add(quantity.toInt())
         orderCreateRequest.address = addressEdt?.text.toString()
         orderCreateRequest.shipment_cost = orderShoppingFeeEdt?.text.toString()
-        orderCreateRequest.delegate_id = 0
+        orderCreateRequest.delegate_id = delegateId
         orderCreateRequest.name = recipientNameEdt?.text.toString()
         orderCreateRequest.phone = mobileNumberEdt?.text.toString()
         orderCreateRequest.email = emailAddressEdt?.text.toString()

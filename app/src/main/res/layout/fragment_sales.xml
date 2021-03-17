@@ -48,6 +48,7 @@
             />
 
         <TextView
+            android:id="@+id/header"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_18sdp"
             android:text="@string/sales"
@@ -88,6 +89,7 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_30sdp"
+        android:visibility="gone"
         android:layout_marginBottom="@dimen/_8sdp"
         app:backgroundTint="@color/orange_color"
         app:cornerRadius="7dp"

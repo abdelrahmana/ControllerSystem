@@ -14,7 +14,8 @@ data class Data(
     val name: String?,
     val price: String?,
     val total_quantity: String?,
-    val ware_houses: List<WareHouse>?
+    val ware_houses: List<WareHouse>?,
+    var totalSelectedProduct : String?="0"
 )
 
 data class WareHouse(

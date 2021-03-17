@@ -68,7 +68,7 @@ class ChatAdapter(
                 itemView.recieverImage.visibility = View.VISIBLE
                 Glide.with(itemView.context).load(itemData.sender?.image)
                     .error(R.drawable.ic_username).into(itemView.recieverImage)
-                itemView.matrialMessage?.setBackgroundColor(ContextCompat.getColor( itemView.context , R.color.gray))
+                itemView.matrialMessage?.setCardBackgroundColor(ContextCompat.getColor( itemView.context , R.color.gray))
                 itemView.message?.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
             }
 

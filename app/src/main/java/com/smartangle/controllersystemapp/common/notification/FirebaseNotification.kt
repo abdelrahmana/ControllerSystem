@@ -13,28 +13,31 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.google.gson.Gson
 import com.smartangle.controllersystemapp.R
 import com.smartangle.controllersystemapp.SplashActivity
 import com.smartangle.controllersystemapp.common.ContainerActivityForFragment
+import com.smartangle.controllersystemapp.common.chat.ChatFragment.Companion.MY_TRIGGER
+import com.smartangle.util.LocalGson
+import com.smartangle.util.LocalGson.getMessageSenderModel
+import com.smartangle.util.NameUtils
 import com.smartangle.util.PrefsUtil
 import me.leolin.shortcutbadger.ShortcutBadger
-
-
 class FirebaseNotification : FirebaseMessagingService() {
     private val sharedPrefs: SharedPreferences? = null
     override fun onMessageReceived(remoteMessage: RemoteMessage) { //  Timber.e(body.toString());
-        if (remoteMessage.notification != null) { //      Timber.e("Message Notification Body: " + remoteMessage.getNotification().toString());
+     //   if (remoteMessage.notification != null) { //      Timber.e("Message Notification Body: " + remoteMessage.getNotification().toString());
           //if (remoteMessage.data.size > 0 && remoteMessage.data.containsKey("type")) { // TODO: 2019-12-05 this should open notifications Activity
               val notificationType =
-                  (remoteMessage.data[notificationType]?:0).toString()
+                  (remoteMessage.data[notificationType]?:"notification").toString()
               //    openNotificationNow(notificationType, remoteMessage)
-              convertDataToNotification(remoteMessage, notificationType.toInt())
+              convertDataToNotification(remoteMessage, notificationType)
        //   }
             /*   } else { // TODO: 2019-12-05 this creates a new notification and opens the splash
                    handleDeepLink(0, remoteMessage)
                }*/
             //       EventBus.getDefault().post(new DrawerActivity.NotificationEvent(1));
-        }
+      //  }
     }
 
   /*  private fun openNotificationNow(notificationType: Int, remoteMessage: RemoteMessage) { // Timber.e("notification type : " + notificationType);
@@ -42,12 +45,18 @@ class FirebaseNotification : FirebaseMessagingService() {
         convertDataToNotification(remoteMessage, notificationType)
     }*/
 
-    private fun convertDataToNotification(remoteMessage: RemoteMessage, notificationType: Int) {
+    private fun convertDataToNotification(remoteMessage: RemoteMessage, notificationType: String) {
         var intent: Intent? = null
             if (PrefsUtil.isLoggedIn(applicationContext)) {
             // TODO: 2019-12-05 user is logged in and should open his messages or notifications page
-            if (notificationType == 1) {  // this is chatting
-                intent = Intent(this, ContainerActivityForFragment::class.java).putExtra(ContainerActivityForFragment.isThatForChat,true)
+            if (notificationType == notificationChat) {  // this is chatting
+                intent = Intent(MY_TRIGGER)
+                val messageData = LocalGson.getMessageSenderModel(remoteMessage.data?.toString())
+                intent.putExtra(NameUtils.other_info,Gson().toJson(messageData?.message_information?.sender))
+                sendBroadcast(intent)
+                intent = Intent(this, ContainerActivityForFragment::class.java)
+                    .putExtra(ContainerActivityForFragment.isThatForChat,true)
+                .putExtra(NameUtils.other_info,Gson().toJson(messageData?.message_information?.sender))
             }
             else {
                 // not logged in go to splach
@@ -75,8 +84,8 @@ class FirebaseNotification : FirebaseMessagingService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { //    builder.setSmallIcon(R.drawable.test_nn);
             //   builder.setColor(getResources().getColor(R.color.app_color));
             builder.setSmallIcon(R.drawable.logo) // this should change to notification
-            builder.setContentTitle(remoteMessage.notification!!.title)
-            builder.setContentText(remoteMessage.notification!!.body)
+            builder.setContentTitle(remoteMessage.notification?.title?:"رسالة جديدة")
+            builder.setContentText(remoteMessage.notification?.body?:"")
             builder.setSound(soundUri)
             builder.setAutoCancel(true)
             builder.setContentIntent(pendingIntent).priority = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) NotificationManager.IMPORTANCE_HIGH else Notification.PRIORITY_MAX
@@ -87,8 +96,8 @@ class FirebaseNotification : FirebaseMessagingService() {
             notificationManagerCompat.notify( /*Notification_base_id + 1*/System.currentTimeMillis().toInt(), builder.build())
         } else { // notification.setSmallIcon(R.drawable.icon);
             builder.setSmallIcon(R.drawable.logo)
-            builder.setContentTitle(remoteMessage.notification!!.title)
-            builder.setContentText(remoteMessage.notification!!.body)
+            builder.setContentTitle(remoteMessage.notification?.title?:"رسالة جديدة")
+            builder.setContentText(remoteMessage.notification?.body?:"")
             builder.setSound(soundUri)
             builder.setAutoCancel(true)
             builder.setContentIntent(pendingIntent).priority = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) NotificationManager.IMPORTANCE_HIGH else Notification.PRIORITY_MAX
@@ -135,7 +144,9 @@ class FirebaseNotification : FirebaseMessagingService() {
     companion object {
         val channel_name = "H_Group"
         val channel_description = "H_Description"
-            val notificationType = "TYPE"
         val default_notification_channel_id = "105"
+        val notificationType = "type_notification"
+
+        val notificationChat = "chat"
     }
 }

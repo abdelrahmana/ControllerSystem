@@ -12,6 +12,7 @@ import com.smartangle.controllersystemapp.admin.reports.SalesFragment
 import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import com.photonect.photographerapp.notificationphotographer.DonePackgae.SalesAdapterContainer
+import com.smartangle.controllersystemapp.admin.reports.purchasereports.PurchaseReportFragment
 import kotlinx.android.synthetic.main.fragment_reports_container.*
 
 
@@ -51,10 +52,9 @@ class ReportContainerFragment : Fragment() {
     }
     var salesItemAdapter : SalesAdapterContainer?=null
     private fun setRecycleViewData() {
-        val arrayList = ArrayList<Any>()
-        arrayList.add("")
-        arrayList.add("")
-        arrayList.add("")
+        val arrayList = ArrayList<String>()
+        arrayList.add("تقارير المدفوعات")
+        arrayList.add("تقارير البيع")
         salesItemAdapter = SalesAdapterContainer(model,arrayList)
         UtilKotlin.setRecycleView(reportsRecycleView,salesItemAdapter!!,
             RecyclerView.VERTICAL,context!!, null, true)
@@ -64,13 +64,16 @@ class ReportContainerFragment : Fragment() {
     fun setViewModelListener() {
         model?.notifyItemSelected?.observe(activity!!, Observer<Any> { modelSelected ->
             if (modelSelected != null) { // if null here so it's new service with no any data
-                if (modelSelected is Any) {
+                if (modelSelected is Int) {
                     // if (modelSelected.isItCurrent) {
                     // initSlider(modelSelected.pictures)
                     // }
                     val bundle = Bundle()
+                    if (modelSelected == 0)
+                        UtilKotlin.changeFragmentBack(activity!! , PurchaseReportFragment() , "purchaseFragment"  , null,R.id.frameLayout_direction)
                     //     bundle.putInt(EXITENCEIDPACKAGE,availableServiceList.get(position).id?:-1)
                     //UtilKotlin.changeFragmentWithBack(activity!! , R.id.container , SalesFragment() , bundle)
+                        else if(modelSelected == 1)
                     UtilKotlin.changeFragmentBack(activity!! , SalesFragment() , "SalesFragment"  , null,R.id.frameLayout_direction)
 
                 }

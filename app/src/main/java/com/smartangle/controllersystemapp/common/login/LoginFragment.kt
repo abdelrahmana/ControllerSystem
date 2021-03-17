@@ -63,7 +63,19 @@ class LoginFragment : Fragment() {
 
         return rootView
     }
-
+    var fcmToken = "" // default empty
+    private fun setFcmToken() {
+        model?.authListnerLiveData?.observe(activity!!, Observer<Any>{ fcmToken->
+            if (fcmToken !=null){
+                if (fcmToken is String){
+                    this.fcmToken = fcmToken
+                }
+                // when result is coming
+                // here we should set every thing related to this details activity
+                //     model?.setObjectData(null)
+            }
+        })
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -167,19 +179,7 @@ class LoginFragment : Fragment() {
 
 
     }
-    var fcmToken = "" // default empty
-    private fun setFcmToken() {
-        model?.authListnerLiveData?.observe(activity!!, Observer<Any>{ fcmToken->
-            if (fcmToken !=null){
-                if (fcmToken is String){
-                    this.fcmToken = fcmToken
-                }
-                // when result is coming
-                // here we should set every thing related to this details activity
-                //     model?.setObjectData(null)
-            }
-        })
-    }
+
 
     private fun makeLoginLogic() {
 

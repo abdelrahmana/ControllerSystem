@@ -459,7 +459,58 @@
                 app:layout_constraintTop_toBottomOf="@+id/priceEditText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_marginTop="@dimen/_15sdp"
+            android:textSize="@dimen/_12sdp"
+            android:text="@string/price_sale"
+            android:textColor="@color/black"
+            android:textAlignment="viewStart"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containerPriceSale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            >
+        <!-- android:drawableStart="@drawable/ic_person_icon"-->
+        <EditText
+            android:id="@+id/priceEditTextSale"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:theme="@style/adding_loginstate"
+            android:textSize="@dimen/_12sdp"
+            android:hint="@string/price"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:padding="8dp"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+
+
+        <TextView
+            android:visibility="gone"
+            android:drawableStart="@drawable/ic_error_input"
+            android:drawablePadding="@dimen/_5sdp"
+            android:id="@+id/errorPriceSale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:textColor="@color/error_color"
+            app:layout_constraintStart_toStartOf="@+id/priceEditTextSale"
+            app:layout_constraintTop_toBottomOf="@+id/priceEditTextSale" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:layout_marginTop="@dimen/_15sdp"
             android:textColor="@color/login_gray"

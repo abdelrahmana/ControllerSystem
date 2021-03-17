@@ -19,6 +19,7 @@ import com.smartangle.controllersystemapp.admin.storesproducts.models.StoresData
 import com.smartangle.controllersystemapp.admin.storesproducts.models.StoresListResponse
 import com.smartangle.util.ApiConfiguration.ApiManagerDefault
 import com.smartangle.util.ApiConfiguration.WebService
+import com.smartangle.util.NameUtils
 import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.fragment_stores.*
@@ -229,12 +230,16 @@ class StoresFragment : Fragment() , OnRecyclerItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Log.d("click" , "position $position name ${storeList[position].name}")
-
+        if(arguments?.getBoolean(NameUtils.FORADMINORDER,false)==true){
+            model?.setNotfityStore(storeList.get(position))
+            activity?.supportFragmentManager?.popBackStack()
+            }
+        else {
         val bundle = Bundle()
         bundle.putInt(STOREID, storeList[position].id?:0)
         UtilKotlin.changeFragmentBack(activity!! , StoreDetailsFragment() , "StoreDetailsFragment"  ,
             bundle , R.id.frameLayout_direction)
+        }
     }
 
 

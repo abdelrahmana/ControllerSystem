@@ -94,6 +94,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/clientId"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
@@ -105,7 +106,45 @@
                     android:layout_height="wrap_content"/>
 
             </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_marginTop="@dimen/_23sdp"
+                android:textSize="14sp"
+                android:text="@string/store"
+                android:textColor="@color/black_bold"
+                android:textAlignment="viewStart"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
+            <com.google.android.material.card.MaterialCardView
+                app:layout_constraintTop_toBottomOf="@+id/description_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/storeCard"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:minHeight="@dimen/_32sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@color/orange_color"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/warehouse"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:drawableStart="@drawable/ic_side_arrow"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="@string/store"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.card.MaterialCardView>
 
 
             <TextView
@@ -135,6 +174,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/productClassificationTxt"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
@@ -148,44 +188,7 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <TextView
-                android:layout_marginTop="@dimen/_23sdp"
-                android:textSize="14sp"
-                android:text="@string/store"
-                android:textColor="@color/black_bold"
-                android:textAlignment="viewStart"
-                android:layout_marginStart="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_24sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
-            <com.google.android.material.card.MaterialCardView
-                app:layout_constraintTop_toBottomOf="@+id/description_text"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/storeCard"
-                android:layout_margin="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:minHeight="@dimen/_32sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                app:cardCornerRadius="5dp"
-                app:cardBackgroundColor="@color/orange_color"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
-                    android:drawableStart="@drawable/ic_side_arrow"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="@string/store"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            </com.google.android.material.card.MaterialCardView>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -265,6 +268,7 @@
 
 
             <TextView
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:textColor="@color/login_gray"
                 android:layout_marginStart="32dp"
@@ -290,6 +294,7 @@
                 app:cardCornerRadius="15dp"
                 android:layout_gravity="center"
                 app:strokeColor="@color/light_gray"
+                android:visibility="gone"
                 app:strokeWidth="1dp"
                 android:layout_marginTop="@dimen/_13sdp"
                 app:cardBackgroundColor="@color/white"
@@ -327,6 +332,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_marginTop="50dp"
+                android:visibility="gone"
                 android:id="@+id/creditorCheckContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -404,6 +410,7 @@
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="30dp"
                 android:id="@+id/cashCheckContainer"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_24sdp"
@@ -436,7 +443,17 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+            <CheckBox
+                app:layout_constraintTop_toBottomOf="@+id/containerTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/Widget.App.CheckBox"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:text="@string/choose_delegate"
+                android:textStyle="bold"
+                android:textColor="@color/add_product_gray"
+                android:id="@+id/selectDelegate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
 
