@@ -11,7 +11,10 @@ import com.smartangle.util.CommonActivity
 import com.smartangle.util.NameUtils
 import com.smartangle.util.PrefsUtil
 import com.google.android.material.card.MaterialCardView
+import com.google.gson.Gson
+import com.smartangle.controllersystemapp.common.ContainerActivityForFragment
 import kotlinx.android.synthetic.main.activity_delegates_home.*
+
 
 
 class DelegatesHomeActivity : CommonActivity() , View.OnClickListener{
@@ -25,7 +28,7 @@ class DelegatesHomeActivity : CommonActivity() , View.OnClickListener{
         //delegateOrdersCard?.setOnClickListener(this)
         notificationReportsCard?.setOnClickListener(this)
         makeOrderDelegateCard?.setOnClickListener(this)
-
+        chatClled?.setOnClickListener(this)
 
         //setSingleEvent(gridLayout)
 
@@ -95,7 +98,15 @@ class DelegatesHomeActivity : CommonActivity() , View.OnClickListener{
                 startActivity(intent)
             }
 
-
+            R.id.chatClled-> {
+                removeCardSelection()
+                setCardSelection(chatCardDelegate , chatImage , chatText ,R.drawable.ic_email)
+                //startActivity(Intent(this , AdminSpecialCustomersActivity::class.java))
+                val intent = Intent(this , ContainerActivityForFragment::class.java)
+                intent.putExtra(ContainerActivityForFragment.isThatForChat, true)
+                intent.putExtra(NameUtils.other_info, Gson().toJson(PrefsUtil.getUserModel(this)?.creator))
+                startActivity(intent)
+            }
         }
 
 

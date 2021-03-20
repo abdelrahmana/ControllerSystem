@@ -1,4 +1,4 @@
-package com.smartangle.controllersystemapp.admin.productclassification.lastsubcategory
+package com.smartangle.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productclassification.lastsubcategory
 
 import android.view.LayoutInflater
 import android.view.View

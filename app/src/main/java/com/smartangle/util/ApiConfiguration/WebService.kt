@@ -45,6 +45,9 @@ import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.*
 import com.smartangle.controllersystemapp.accountant.products.models.AccountantProdDetailsResponse
 import com.smartangle.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
 import com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.admindelegates.model.DelegateListResponse
+import com.smartangle.controllersystemapp.admin.makeorders.model.OrderCreateRequestAdmin
+import com.smartangle.controllersystemapp.admin.reports.model.PurchaseResponse
+import com.smartangle.controllersystemapp.admin.reports.model.SalesReportResponse
 import com.smartangle.controllersystemapp.admin.settings.masrufat.ExpensesDetailsResponse
 import com.smartangle.controllersystemapp.admin.settings.masrufat.ExpensesListResponse
 
@@ -68,6 +71,13 @@ interface WebService {
     @Headers("Accept: application/json")
     @GET("admin/products/details")
     fun productDetails(@Query("id") productId : Int?): Observable<Response<ProductsDetailsResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("admin/reports/sales/get")
+    fun getSalesResponse(@QueryMap hashMap : HashMap<String,Any>): Observable<Response<SalesReportResponse>>
+    @Headers("Accept: application/json")
+    @GET("admin/reports/purchases/get")
+    fun getPurchaseResponse(@QueryMap hashMap : HashMap<String,Any>): Observable<Response<PurchaseResponse>>
 
     @Headers("Accept: application/json")
     @POST("admin/products/create")
@@ -414,10 +424,15 @@ interface WebService {
     @POST("chat/send")
     fun requestPostMessage(@Body requestBody : RequestMessgae): Observable<Response<SuccessModel>>
 
+    @Headers("Accept: application/json")
     @GET("chat/list")
     fun getMessagesList(@Query("receiver_id")id:Int): Observable<Response<ResponseChatList>>
 
     @Headers("Accept: application/json")
     @GET("admin/delegates/list")
     fun getDelegatesAdmin(@Query("page") page : Int): Observable<Response<DelegateListResponse>>
+
+    @Headers("Accept: application/json")
+    @POST("admin/orders/create")
+    fun postOrderAdmin(@Body orderCreateRequest: OrderCreateRequestAdmin): Observable<Response<SuccessModelV2>>
 }

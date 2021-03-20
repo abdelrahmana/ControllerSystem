@@ -249,6 +249,12 @@
     <string name="quantityRequired">ادخل الكمية من فضلك</string>
     <string name="createDebts">انشاء الذمة</string>
     <string name="delegate_required">تحديد مندوب مطلوب</string>
+    <string name="purchase">تقارير المدفوعات</string>
+    <string name="chat">رسالة خاصة</string>
+    <string name="warehouse_needed_first">من فضلك أختر مخزن أولاً</string>
+    <string name="price_sale">سعر البيع</string>
+    <string name="price_sale_required">سعر البيع مطلوب</string>
+    <string name="google_map_key">AIzaSyB2icldfwCyBhPaT7mcQrqb74fQXM86HlY</string>
 
 
 </resources>

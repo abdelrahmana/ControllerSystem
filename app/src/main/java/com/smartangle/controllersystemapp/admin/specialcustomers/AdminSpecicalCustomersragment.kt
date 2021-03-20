@@ -16,6 +16,7 @@ import com.smartangle.controllersystemapp.R
 import com.smartangle.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
 import com.smartangle.util.ApiConfiguration.ApiManagerDefault
 import com.smartangle.util.ApiConfiguration.WebService
+import com.smartangle.util.NameUtils
 import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.fragment_admin_specical_customersragment.*
@@ -46,6 +47,8 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(arguments?.getBoolean(NameUtils.FORADMINORDER,false)==true)
+            addCustomerBtn?.visibility =View.GONE
 
 //        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
 //        itemTouchHelper.attachToRecyclerView(specialCustomersRecycler)
@@ -230,14 +233,22 @@ class AdminSpecicalCustomersragment : Fragment() , OnRecyclerItemClickListener{
     }
 
     override fun onItemClick(position: Int) {
+        if (arguments?.getBoolean(NameUtils.FORADMINORDER, false) == true){
+        model?.setNotifyItemSelectedClient(customerList.get(position))
+            activity?.supportFragmentManager?.popBackStack()
+        }
+    else {
+            val bundle = Bundle()
+            bundle.putInt(CLIENT_ID, customerList[position].id ?: 0)
 
-        Log.d("click" , "customers")
-        val bundle = Bundle()
-        bundle.putInt(CLIENT_ID, customerList[position].id?:0)
-
-        UtilKotlin.changeFragmentBack(activity!! ,
-            ClientsDetailsFragment() , "ClientsDetailsFragment"  , bundle,R.id.frameLayout_direction)
-
+            UtilKotlin.changeFragmentBack(
+                activity!!,
+                ClientsDetailsFragment(),
+                "ClientsDetailsFragment",
+                bundle,
+                R.id.frameLayout_direction
+            )
+        }
 
     }
 

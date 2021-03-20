@@ -208,6 +208,10 @@ class AddProductFragment : Fragment() {
             errorMessage += getString(R.string.price_required)
             errorMessage += "\n"
         }
+        if (priceEditTextSale.text.isNullOrBlank()) {
+            errorMessage += getString(R.string.price_sale_required)
+            errorMessage += "\n"
+        }
 
         if (barCode == null || barCode == "") {
             errorMessage += getString(R.string.barecode_required)
@@ -417,7 +421,7 @@ class AddProductFragment : Fragment() {
         Log.d("barcod", "bar $barCode")
         val addProductRequest = AddProductRequest(
             productNameEditText?.text?.toString(),
-            describeProductEditText?.text?.toString(), priceEditText?.text?.toString(), barCode,
+            describeProductEditText?.text?.toString(), priceEditText?.text?.toString(),priceEditTextSale?.text.toString(), barCode,
             categoryID, quantityList, warehouse_id, productImagesList
         )
      //   AddProductsPresenter.getAddProduct(webService!!, addProductRequest, activity!!, model)

@@ -1,5 +1,4 @@
-package com.smartangle.controllersystemapp.admin.productclassification.lastsubcategory
-
+package com.smartangle.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smartangle.controllersystemapp.R
 import com.smartangle.controllersystemapp.admin.productclassification.FragmentProductclassification
 import com.smartangle.controllersystemapp.admin.productclassification.FragmentProductclassification.Companion.SUB_PARENT_NAME
+import com.smartangle.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productclassification.lastsubcategory.LastSubProductAdaptorCenter
 import com.smartangle.controllersystemapp.callcenter.maketalbya.CategoriesPresenterCallCenter
 import com.smartangle.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.Datas
 import com.smartangle.controllersystemapp.callcenter.maketalbya.productclassification.lastsubcategory.productmodel.ProductResponse

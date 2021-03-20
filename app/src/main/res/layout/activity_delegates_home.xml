@@ -306,12 +306,13 @@
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
                     app:cardCornerRadius="5dp"
+                    android:layout_marginBottom="19dp"
                     android:layout_marginTop="19dp"
                     android:layout_marginEnd="@dimen/_7sdp"                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="133dp"
                         android:orientation="vertical"
                         android:gravity="center_vertical|center"
                         android:layout_marginEnd="@dimen/_10sdp"
@@ -355,7 +356,60 @@
 
 
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/chatCardDelegate"
+                    android:layout_width="0dp"
+                    android:layout_height="133dp"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginBottom="19dp"
+                    android:layout_rowWeight="1"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginEnd="@dimen/_7sdp"
 
+                    >
+                    <LinearLayout
+                        android:id="@+id/chatClled"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/chatImage"
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="50dp"
+                            android:tint="@color/black"
+                            android:layout_height="50dp"
+                            app:srcCompat="@drawable/ic_email"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/chatText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:fontFamily="@font/ffshamelfamily_sansonebold"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="@color/textColor"
+                            android:text="@string/chat"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="10dp"
+                            />
+
+
+
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <!-- Row 3 -->

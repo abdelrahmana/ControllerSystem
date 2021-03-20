@@ -1,6 +1,10 @@
 package com.smartangle.controllersystemapp.common.chat
 
 import android.app.Dialog
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -26,6 +30,7 @@ import com.smartangle.util.ApiConfiguration.WebService
 import com.smartangle.util.NameUtils
 import com.smartangle.util.PrefsUtil
 import com.smartangle.util.UtilKotlin
+import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -37,8 +42,20 @@ class ChatFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
     }
+    inner class CustomReceiver(/*var viewModel  : ViewModelHandleChangeFragmentclass*/) : BroadcastReceiver() {
 
+        override fun onReceive(context: Context?, intent: Intent) {
+            // Toast.makeText(activity,"onRecieve comes  ", Toast.LENGTH_LONG).show()
+
+          //  val userId: Int = intent.getIntExtra(NameUtils.user_id,0)?:0
+           // if (infoOfReciever?.id==userId)
+            infoOfReciever=UtilKotlin.getDelegateCallCenter(intent.getStringExtra(NameUtils.other_info)?:"")
+            getchatList(false)
+            // onMessageEvent(MessageEvent(lat,long))
+        }
+    }
     var chatAdapter : ChatAdapter?=null
+    var receiver : CustomReceiver?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +64,8 @@ class ChatFragment : Fragment() {
         progressDialog = UtilKotlin.ProgressDialog(activity!!)
         webService = ApiManagerDefault(context!!).apiService
         // Inflate the layout for this fragment
+        receiver = CustomReceiver()
+        activity!!.registerReceiver(receiver,IntentFilter(MY_TRIGGER))
         return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 
@@ -75,9 +94,9 @@ class ChatFragment : Fragment() {
     }
     var progressDialog: Dialog?=null
     var webService : WebService?=null
-    private fun getchatList() {
-
+    private fun getchatList(showProgressDialog : Boolean =true) {
         if (UtilKotlin.isNetworkAvailable(context!!)) {
+            if (showProgressDialog)
             progressDialog?.show()
             ChatPresenter.listMessages(webService!! , infoOfReciever?.id?:0, getChatObserver())
         } else {
@@ -107,7 +126,9 @@ class ChatFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        activity?.unregisterReceiver(receiver)
         getChatObserver().dispose()
+        postChatObserver().dispose()
         super.onDestroyView()
     }
     private fun postChatObserver(): DisposableObserver<Response<SuccessModel>> {
@@ -142,7 +163,6 @@ class ChatFragment : Fragment() {
             }
         }
     }
-
     private fun getChatObserver(): DisposableObserver<Response<ResponseChatList>> {
 
         return object : DisposableObserver<Response<ResponseChatList>>() {
@@ -161,7 +181,9 @@ class ChatFragment : Fragment() {
                 progressDialog?.dismiss()
 
                 if (response!!.isSuccessful) {
+                    chatAdapter?.arrayList?.clear()
                     chatAdapter?.updateData(response.body()?.data?.messages?:ArrayList())
+                    chatList?.smoothScrollToPosition(((chatAdapter?.arrayList?.size)?:1)-1)
 
                 }
                 else
@@ -179,11 +201,16 @@ class ChatFragment : Fragment() {
     fun buildMeAsMessageSender(m: String){ // then add to my recycleview
          // build model before update recycle view with new message
         var message = com.smartangle.controllersystemapp.common.chat.model.Message("",PrefsUtil.getUserModel(context!!)?.id?:0,m,
-            Receiver(infoOfReciever?.id?:0,infoOfReciever?.image?:"",infoOfReciever?.name?:"",""),infoOfReciever?.id?:0,
+            Receiver(infoOfReciever?.id?:0,infoOfReciever?.image?:"",infoOfReciever?.name?:"",""),(infoOfReciever?.id?:0).toString(),
             Sender(PrefsUtil.getUserModel(context!!)?.id?:0,PrefsUtil.getUserModel(context!!)?.image?:"",
-                PrefsUtil.getUserModel(context!!)?.name?:"",""),PrefsUtil.getUserModel(context!!)?.id?:0,"sender","")
+                PrefsUtil.getUserModel(context!!)?.name?:"",""),(PrefsUtil.getUserModel(context!!)?.id?:0).toString(),"sender","")
 
         chatAdapter?.updateData(ArrayList<com.smartangle.controllersystemapp.common.chat.model.Message>().also{it.add(message)}) // update current list
      messageEditText?.setText("")
+        chatList?.smoothScrollToPosition(((chatAdapter?.arrayList?.size)?:1)-1)
     }
+
+companion object {
+    val MY_TRIGGER = "trigger"
+}
 }

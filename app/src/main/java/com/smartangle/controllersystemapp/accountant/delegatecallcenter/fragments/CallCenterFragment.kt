@@ -85,7 +85,7 @@ class CallCenterFragment : Fragment(), OnRecyclerItemClickListener {
                         )
 
 
-                    }else if(datamodel == AccDelegateDetailsBottomSheet.ACCOUNTANT_MessageDelegate){ // send information to chat fragment
+                    }else if(datamodel == AccDelegateDetailsBottomSheet.ACCOUNTANT_MessageDelegate){ // send information to chat fragment inside accountant
                         val bundle = Bundle()
                         bundle.putString(DelegatesFragment.SELECTEDDELEGATE,Gson().toJson(callCenterArray?.get(selectedItemPosition)))
 

@@ -1,4 +1,4 @@
-package com.smartangle.controllersystemapp.admin.productclassification
+package com.smartangle.controllersystemapp.callcenter.maketalbya.productclassification
 
 import android.app.Dialog
 import android.os.Bundle
@@ -12,14 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smartangle.controllersystemapp.R
 import com.smartangle.controllersystemapp.admin.categories.models.CategoriesListResponse
 import com.smartangle.controllersystemapp.admin.categories.models.Data
-import com.smartangle.controllersystemapp.admin.productclassification.productsubclassification.FragmentSubProductclassificationCenter
+import com.smartangle.controllersystemapp.callcenter.maketalbya.productclassification.productsubclassification.FragmentSubProductclassificationCenter
 import com.smartangle.controllersystemapp.callcenter.maketalbya.CategoriesPresenterCallCenter
 import com.smartangle.util.ApiConfiguration.ApiManagerDefault
 import com.smartangle.util.ApiConfiguration.WebService
 import com.smartangle.util.NameUtils.WHICH_ADD_PRD_STORE
 import com.smartangle.util.UtilKotlin
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
-import com.photonect.photographerapp.notificationphotographer.DonePackgae.ProductClassificationAdaptorCenter
 import kotlinx.android.synthetic.main.fragment_product_classification.*
 
 class FragmentProductclassificationCenter : Fragment() {

@@ -9,7 +9,7 @@ import com.smartangle.util.ViewModelHandleChangeFragmentclass
 import kotlinx.android.synthetic.main.sales_container_item.view.*
 
 class SalesAdapterContainer(val modelData: ViewModelHandleChangeFragmentclass,
-                            val arrayListOfTutorials:ArrayList<Any>//this method is returning the view for each item in the list
+                            val arrayListOfTutorials:ArrayList<String>//this method is returning the view for each item in the list
 ) : RecyclerView.Adapter<SalesAdapterContainer.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,11 +37,12 @@ class SalesAdapterContainer(val modelData: ViewModelHandleChangeFragmentclass,
 
 
         fun bindItems(
-            itemData: Any,
+            itemData: String,
             /*model: ViewModelData,*/
-            arrayListOffersValues: ArrayList<Any>
+            arrayListOffersValues: ArrayList<String>
         ) {
 
+            itemView.reportId.text = itemData
             /*   itemView.costText.text = itemData.modelCost
                 if (itemData.modelStatus==myOrdersModel.doneOrder) {
                     itemView.statusOfOrder.setTextColor(ContextCompat.getColor(itemView.context,R.color.green))
@@ -70,7 +71,7 @@ class SalesAdapterContainer(val modelData: ViewModelHandleChangeFragmentclass,
 
          private fun onItemClicked(model: ViewModelHandleChangeFragmentclass,position: Int) {
               // send this item please
-              model.setNotifyItemSelected(arrayListOfTutorials.get(position)?:"") // update sign up fragment please
+              model.setNotifyItemSelected(position) // update sign up fragment please
 
 
           }

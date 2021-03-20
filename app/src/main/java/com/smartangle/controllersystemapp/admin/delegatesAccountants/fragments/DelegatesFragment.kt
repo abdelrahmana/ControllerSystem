@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.smartangle.controllersystemapp.R
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccDelegateDetailsBottomSheet
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.AccDelegateDetailsBottomSheet.Companion.ACCOUNTANT_BLOCK_Delegate
@@ -22,6 +23,7 @@ import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.Ca
 import com.smartangle.controllersystemapp.accountant.delegatecallcenter.model.CallCenterResponse
 import com.smartangle.controllersystemapp.admin.delegatesAccountants.adapters.DelegatesAdapter
 import com.smartangle.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
+import com.smartangle.controllersystemapp.common.chat.ChatFragment
 import com.smartangle.util.ApiConfiguration.ApiManagerDefault
 import com.smartangle.util.ApiConfiguration.SuccessModel
 import com.smartangle.util.ApiConfiguration.WebService
@@ -147,6 +149,13 @@ class DelegatesFragment : Fragment(), OnRecyclerItemClickListener {
 
                     blockDelegate()
 
+                }
+                else if(datamodel == AccDelegateDetailsBottomSheet.ACCOUNTANT_MessageDelegate){ // send information to chat fragment
+                    val bundle = Bundle()
+                    bundle.putString(SELECTEDDELEGATE, Gson().toJson(delegatesList?.get(selectedItemPosition)))
+
+                    UtilKotlin.changeFragmentBack(activity!!,
+                        ChatFragment(),"callCenterList",bundle,R.id.redirect_acc_fragments) // inside accountant
                 }
 
                 modelHandleChangeFragmentclass.setNotifyItemSelected(null) // start details with this data please

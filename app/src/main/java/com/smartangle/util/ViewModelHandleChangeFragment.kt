@@ -13,6 +13,7 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     var errorMessage = MutableLiveData<ResponseBody>()
     var stringErrorMessage = MutableLiveData<String>()
     var authListnerLiveData = MutableLiveData<Any>() //make it what ever you need
+    var notifyStoreFragment = MutableLiveData<Any>() //make it what ever you need
 
     // handle the back of fragments within activty
     var handleClickBack = MutableLiveData<Boolean>()
@@ -45,6 +46,8 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     var responseDataCode = MutableLiveData<Any>() // lets make this generic to use it with all apis
     var notifyItemSelected = MutableLiveData<Any>() // lets make this for sharing data overall application
 
+    var notifyItemSelectedClient = MutableLiveData<Any>() // lets make this for sharing data overall application
+
     fun setStringData(modelStringID: ModelStringID?) {
         this.stringNameData.value = modelStringID
     }
@@ -52,7 +55,9 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
     fun setStringVar(stringDataVar: String?) {
         this.stringDataVar.postValue(stringDataVar)
     }
-
+    fun setNotfityStore(item: Any?) {
+        this.notifyStoreFragment.postValue(item)
+    }
     fun setUpdateOrDelete(stringDataVar: String?) {
         this.updateOrDelete.postValue(stringDataVar)
     }
@@ -71,7 +76,10 @@ class ViewModelHandleChangeFragmentclass  : ViewModel() {
 
         this.intIdData.value = intIdData
     }
+    fun setNotifyItemSelectedClient(responseBody : Any?) { // lets post this to our listener places
 
+        this.notifyItemSelectedClient.value =responseBody
+    }
     fun onError(onError: ResponseBody?) {
         errorMessage.postValue(onError)
     }

@@ -31,9 +31,7 @@
         <activity android:name="com.smartangle.controllersystemapp.callcenter.home.RedirectCallCenter" />
         <activity android:name="com.smartangle.controllersystemapp.common.MapsActivity"/>
 
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
+
 
         <activity android:name="com.smartangle.controllersystemapp.SplashActivity">
             <intent-filter>
@@ -70,12 +68,23 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name="com.smartangle.util.CommonActivity" />
+
+        <receiver
+            android:name=".common.chat.ChatFragment$CustomReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+
+        </receiver>
         <service
             android:name=".common.notification.FirebaseNotification">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_map_key" />
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
