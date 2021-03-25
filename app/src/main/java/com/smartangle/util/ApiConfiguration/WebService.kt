@@ -50,6 +50,9 @@ import com.smartangle.controllersystemapp.admin.reports.model.PurchaseResponse
 import com.smartangle.controllersystemapp.admin.reports.model.SalesReportResponse
 import com.smartangle.controllersystemapp.admin.settings.masrufat.ExpensesDetailsResponse
 import com.smartangle.controllersystemapp.admin.settings.masrufat.ExpensesListResponse
+import com.smartangle.controllersystemapp.common.delivery.AdminOrderItemDetailsResponse
+import com.smartangle.controllersystemapp.common.delivery.AdminOrderItemsResponse
+import com.smartangle.controllersystemapp.common.delivery.AdminOrdersListResponse
 
 import io.reactivex.Observable
 import okhttp3.RequestBody
@@ -118,6 +121,24 @@ interface WebService {
     @Headers("Accept: application/json")
     @GET("admin/accountants/list")
     fun accountantsList(): Observable<Response<AccountantListResponse>>
+
+
+    @Headers("Accept: application/json")
+    @GET("admin/orders/creator/list")
+    fun adminOrdersList(@Query("status") status : Int): Observable<Response<AdminOrdersListResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("admin/orders/creator/items")
+    fun adminOrderItems(@Query("order_id") order_id : Int?): Observable<Response<AdminOrderItemsResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("admin/orders/creator/item-details")
+    fun adminOrderItemsDetails(@Query("item_id") item_id : Int?): Observable<Response<AdminOrderItemDetailsResponse>>
+
+//    @Headers("Accept: application/json")
+//    @GET("delegate/orders/list")
+//    fun delegateOrdersList(@Query("status") status : Int): Observable<Response<DelegateOrdersListResponse>>
+
 
     @GET("accountant/orders/items")
     fun getItemListAccountant(@QueryMap map : HashMap<String,Any>): Observable<Response<ItemListResponses>>

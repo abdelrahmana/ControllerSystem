@@ -5,15 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.smartangle.controllersystemapp.R
+import com.smartangle.controllersystemapp.common.delivery.Data
 import com.smartangle.util.ViewModelHandleChangeFragmentclass
-import kotlinx.android.synthetic.main.delivery_item_adapter.view.*
+import kotlinx.android.synthetic.main.admin_order_list.view.*
 
 class DeliveryItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
-                          val arrayListOfTutorials:ArrayList<Any>//this method is returning the view for each item in the list
+                          val arrayListOfTutorials:ArrayList<Data>//this method is returning the view for each item in the list
 ) : RecyclerView.Adapter<DeliveryItemAdapter.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.delivery_item_adapter, parent, false)
+        //R.layout.delivery_item_adapter
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.admin_order_list, parent, false)
         return ViewHolder(v)
     }
 
@@ -37,10 +39,23 @@ class DeliveryItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
 
 
         fun bindItems(
-            itemData: Any,
+            itemData: Data,
             /*model: ViewModelData,*/
-            arrayListOffersValues: ArrayList<Any>
+            arrayListOffersValues: ArrayList<Data>
         ) {
+
+            itemView.newWalletName.text = " أمر تجهيز رقم ${itemData?.order_number}"
+            itemView.newOrderPrice.text = itemData?.total_price?:""
+            itemView.newOrderCurrency.text = itemData?.currency?:""
+            // itemView.walletStoreTxt?.text = orderWallet?.currency?:""
+            if (itemData?.details?.isNullOrEmpty() == false)
+            {
+                itemView.newWalletDesc.text = itemData?.details?.get(0)?.product?.name?:""
+                itemView.newOrderQuantity.text = (itemData?.details?.get(0)?.quantity?:0).toString()?:""
+                //itemView.newwalletCategoryTxt?.text = itemData?.details?.get(0)?.product?.category?.name?:""
+            }
+//            itemView.newSlash?.visibility = View.GONE
+//            itemView.newwalletStoreTxt?.visibility = View.GONE
 
             /*   itemView.costText.text = itemData.modelCost
                 if (itemData.modelStatus==myOrdersModel.doneOrder) {
@@ -59,7 +74,7 @@ class DeliveryItemAdapter(val modelData: ViewModelHandleChangeFragmentclass,
                   itemView.divider.visibility = View.GONE
               }*/
 
-            itemView.cardContainer.setOnClickListener{
+            itemView.setOnClickListener{
 
                   onItemClicked(modelData,adapterPosition) // go to details please
               }
