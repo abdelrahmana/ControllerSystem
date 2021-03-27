@@ -46,6 +46,7 @@ import com.smartangle.controllersystemapp.accountant.products.models.AccountantP
 import com.smartangle.controllersystemapp.accountant.settings.expenses.AccountantExpensesDetailsResponse
 import com.smartangle.controllersystemapp.admin.delegatesAccountants.fragments.admindelegates.model.DelegateListResponse
 import com.smartangle.controllersystemapp.admin.makeorders.model.OrderCreateRequestAdmin
+import com.smartangle.controllersystemapp.admin.notification.NotificationResponse
 import com.smartangle.controllersystemapp.admin.reports.model.PurchaseResponse
 import com.smartangle.controllersystemapp.admin.reports.model.SalesReportResponse
 import com.smartangle.controllersystemapp.admin.settings.masrufat.ExpensesDetailsResponse
@@ -444,6 +445,9 @@ interface WebService {
 
     @POST("chat/send")
     fun requestPostMessage(@Body requestBody : RequestMessgae): Observable<Response<SuccessModel>>
+
+    @GET("auth/user/notification/all")
+    fun getNotificationApi(): Observable<Response<NotificationResponse>>
 
     @Headers("Accept: application/json")
     @GET("chat/list")

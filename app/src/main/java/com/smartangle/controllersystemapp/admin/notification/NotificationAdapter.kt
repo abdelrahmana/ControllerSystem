@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.smartangle.controllersystemapp.R
 import com.smartangle.controllersystemapp.admin.interfaces.OnRecyclerItemClickListener
+import com.smartangle.util.UtilKotlin
+import kotlinx.android.synthetic.main.notification_item.view.*
 
 class NotificationAdapter(
-    var notificationList: ArrayList<Any>,
+    var notificationList: ArrayList<Data>,
     var onRecyclerItemClickListener: OnRecyclerItemClickListener) :
     RecyclerView.Adapter<NotificationAdapter.ViewHolder>(){
 
@@ -34,20 +36,23 @@ class NotificationAdapter(
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView)
     {
         fun bindView(
-            accountantModel: Any,
+            notification: Data,
             onRecyclerItemClickListener: OnRecyclerItemClickListener
         ) {
+
+            itemView.notificationName?.text = notification.text?:""
+            itemView.notificationDetails?.text =UtilKotlin.getFormatedDate(notification.created_at?:"",itemView.context!!)
 
 //            itemView.delegateName.text = accountantModel.name
 //            itemView.delegatePhone.text = accountantModel.phone
            // Glide.with(itemView.context!!).load(accountantModel.image).into(itemView.delegateImg)
 
 
-            itemView.setOnClickListener {
+        /*    itemView.setOnClickListener {
 
                 onRecyclerItemClickListener.onItemClick(adapterPosition)
 
-            }
+            }*/
 
 
 

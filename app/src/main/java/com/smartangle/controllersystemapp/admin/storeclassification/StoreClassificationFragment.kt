@@ -174,7 +174,6 @@ class StoreClassificationFragment : Fragment() , OnStoreSelcteClickListener {
 
         })
 
-
         model.errorMessage.observe(activity!!, Observer { error ->
 
             if (error != null) {
@@ -237,10 +236,10 @@ class StoreClassificationFragment : Fragment() , OnStoreSelcteClickListener {
         addProductButton?.visibility = View.VISIBLE
         storesIdList.clear()
 
-        if (storedAdapter?.getSelected()?.size?:0 > 0) {
+        if (storedAdapter?.getSelected()?.size?:0 > 0) { // get selected item
             for (i in 0 until storedAdapter?.getSelected()?.size!!) {
                 storesIdList.add(storedAdapter?.getSelected()?.get(i)?.id?:0)
-               // quantityList.add(storedAdapter?.getSelected()?.get(i)?.quantity?:0)
+                quantityList.add(storedAdapter?.getSelected()?.get(i)?.quantity?:0)
             }
 
         } else {

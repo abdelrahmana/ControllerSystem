@@ -1,5 +1,6 @@
 package com.smartangle.util
 
+import com.smartangle.controllersystemapp.admin.notification.NotificationResponse
 import com.smartangle.controllersystemapp.admin.settings.editpassword.EditPasswordRequest
 import com.smartangle.util.ApiConfiguration.SuccessModel
 import com.smartangle.util.ApiConfiguration.WebService
@@ -14,6 +15,18 @@ object CommonPresenter {
     {
 
         webService.changePassword(changePass)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(callCenterObserver)
+
+
+
+    }
+
+    fun getNotificationList(webService: WebService, callCenterObserver: DisposableObserver<Response<NotificationResponse>>)
+    {
+
+        webService.getNotificationApi()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(callCenterObserver)
