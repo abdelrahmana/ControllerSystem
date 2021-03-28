@@ -12,3 +12,8 @@
 /captures
 .externalNativeBuild
 .cxx
+# IntelliJ
+.idea
+*.ipr
+*.iml
+*.iws
